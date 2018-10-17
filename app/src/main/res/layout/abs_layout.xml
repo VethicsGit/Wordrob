@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    android:paddingTop="15dp"
+    android:paddingBottom="15dp"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="20dp"
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content">
+
+        <ImageView
+            android:id="@+id/abs_icon"
+            android:layout_gravity="center"
+            android:layout_width = "15dp"
+            android:layout_height = "15dp"
+            android:src="@mipmap/categories"/>
+
+       <TextView android:autoSizeTextType="uniform"
+            android:id="@+id/abs_name"
+            android:layout_width = "match_parent"
+            android:textAllCaps="true"
+            android:layout_marginStart="20dp"
+            android:layout_height = "wrap_content"
+            android:textSize="@dimen/Login_text_size"
+            android:text="Categories"
+            android:textColor="@color/colorAccent"
+            />
+
+    </LinearLayout>
+</LinearLayout>

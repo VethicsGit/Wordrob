@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android = "http://schemas.android.com/apk/res/android"
+    xmlns:app = "http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id = "@+id/action_categories"
+        android:orderInCategory = "100"
+        android:icon="@mipmap/categories"
+        android:title="Categories"
+        />
+    <item
+        android:id = "@+id/action_designers"
+        android:orderInCategory = "100"
+        android:icon="@mipmap/designers"
+        android:title="Designers"
+         />
+    <item
+        android:orderInCategory = "100"
+        android:title=""
+        android:id = "@+id/action_home"
+        android:icon="@mipmap/home_arc"
+        />
+
+    <item
+        android:id = "@+id/action_favorite"
+        android:orderInCategory = "100"
+        android:icon="@mipmap/favourite"
+        android:title="Favorite"
+         />
+    <item
+        android:id = "@+id/action_notification"
+        android:orderInCategory = "100"
+        android:icon="@mipmap/notification"
+        android:title="Notification"
+         />
+</menu>

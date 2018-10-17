@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name = "Login_image_padding">8dp</dimen>
+    <dimen name = "Login_text_size">12dp</dimen>
+    <dimen name = "Login_btn_size">18dp</dimen>
+</resources>

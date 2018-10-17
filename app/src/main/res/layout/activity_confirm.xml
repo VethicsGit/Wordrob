@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+    android:layout_width = "match_parent"
+    android:layout_height = "match_parent"
+    android:focusable = "true"
+    android:focusableInTouchMode = "true"
+    android:orientation = "vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:id = "@+id/appbar"
+
+        android:layout_width = "match_parent"
+        android:layout_height = "?attr/actionBarSize"
+        android:background = "@drawable/drop_shadow"
+        android:elevation = "5dp">
+
+        <android.support.v7.widget.Toolbar
+            android:id = "@+id/toolbar"
+            android:layout_width = "match_parent"
+            android:layout_height = "?attr/actionBarSize"
+            android:layout_gravity = "center"
+            android:background = "?attr/colorPrimary"
+            android:gravity = "center">
+
+            <RelativeLayout
+                android:layout_width = "match_parent"
+                android:layout_height = "wrap_content"
+                android:layout_margin = "20dp">
+
+                <ImageView
+                    android:id = "@+id/confirm_back"
+                    android:layout_width = "20dp"
+                    android:layout_height = "20dp"
+                    android:src = "@mipmap/arrow_left" />
+
+                <TextView
+                    android:id = "@+id/confirm_title"
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    android:layout_centerInParent = "true"
+                    android:autoSizeMinTextSize = "15dp"
+                    android:autoSizeTextType = "uniform"
+                    android:gravity = "center"
+                    android:text = "Confirm"
+                    android:textAllCaps = "true"
+                    android:textColor = "@color/colorAccent"
+                    android:textSize = "15dp"
+                    android:textStyle = "bold" />
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView xmlns:android = "http://schemas.android.com/apk/res/android"
+        xmlns:app = "http://schemas.android.com/apk/res-auto"
+        xmlns:tools = "http://schemas.android.com/tools"
+        android:layout_width = "match_parent"
+        android:layout_height = "match_parent"
+        tools:context = "com.pro.wardrobe.Activity.Confirm">
+
+        <LinearLayout
+            android:layout_width = "match_parent"
+            android:layout_height = "match_parent"
+            android:layout_margin = "10dp"
+            android:orientation = "vertical">
+
+
+            <android.support.v7.widget.CardView
+                android:layout_width = "match_parent"
+                android:layout_height = "wrap_content"
+                android:layout_marginBottom = "20dp"
+                android:layout_marginEnd = "20dp"
+                android:layout_marginStart = "20dp"
+                android:layout_marginTop = "20dp"
+                android:baselineAligned = "false"
+                android:padding = "10dp"
+                app:cardCornerRadius = "10dp"
+                app:cardElevation = "5dp">
+
+
+                <LinearLayout
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    android:layout_margin = "20dp"
+                    android:orientation = "vertical">
+
+                    <TextView
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_gravity = "start"
+                        android:layout_marginBottom = "20dp"
+                        android:layout_marginStart = "5dp"
+                        android:autoSizeTextType = "uniform"
+                        android:text = "Booking Details"
+                        android:textColor = "@color/colorAccent"
+                        android:textSize = "12dp" />
+
+                    <RelativeLayout
+                        android:layout_width = "match_parent"
+                        android:layout_height = "wrap_content"
+                        android:padding = "5dp">
+
+                        <TextView
+                            android:layout_width = "wrap_content"
+                            android:layout_height = "wrap_content"
+                            android:layout_gravity = "start"
+                            android:autoSizeTextType = "uniform"
+                            android:text = "Lipsy Crown T-shirt"
+                            android:textColor = "@color/colorAccent"
+                            android:textSize = "12dp"
+                            android:textStyle = "bold" />
+
+                        <TextView
+                            android:layout_width = "wrap_content"
+                            android:layout_height = "wrap_content"
+                            android:layout_alignParentRight = "true"
+                            android:layout_gravity = "start"
+                            android:autoSizeTextType = "uniform"
+                            android:text = "84 QAR"
+                            android:textColor = "@color/colorAccent"
+                            android:textSize = "12dp"
+                            android:textStyle = "bold" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width = "match_parent"
+                        android:layout_height = "wrap_content"
+                        android:padding = "5dp">
+
+                        <TextView
+                            android:layout_width = "wrap_content"
+                            android:layout_height = "wrap_content"
+                            android:layout_gravity = "start"
+                            android:autoSizeTextType = "uniform"
+                            android:text = "Lipsy Crown T-shirt"
+                            android:textColor = "@color/colorAccent"
+                            android:textSize = "12dp"
+                            android:textStyle = "bold" />
+
+                        <TextView
+                            android:layout_width = "wrap_content"
+                            android:layout_height = "wrap_content"
+                            android:layout_alignParentRight = "true"
+                            android:layout_gravity = "start"
+                            android:autoSizeTextType = "uniform"
+                            android:text = "45 QAR"
+                            android:textColor = "@color/colorAccent"
+                            android:textSize = "12dp"
+                            android:textStyle = "bold" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width = "match_parent"
+                        android:layout_height = "wrap_content"
+                        android:padding = "5dp">
+
+                        <TextView
+                            android:layout_width = "wrap_content"
+                            android:layout_height = "wrap_content"
+                            android:layout_gravity = "start"
+                            android:autoSizeTextType = "uniform"
+                            android:text = "Lipsy Crown T-shirt"
+                            android:textColor = "@color/colorAccent"
+                            android:textSize = "12dp"
+                            android:textStyle = "bold" />
+
+                        <TextView
+                            android:layout_width = "wrap_content"
+                            android:layout_height = "wrap_content"
+                            android:layout_alignParentRight = "true"
+                            android:layout_gravity = "start"
+                            android:autoSizeTextType = "uniform"
+                            android:text = "84 QAR"
+                            android:textColor = "@color/colorAccent"
+                            android:textSize = "12dp"
+                            android:textStyle = "bold" />
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width = "match_parent"
+                        android:layout_height = "1dp"
+                        android:layout_marginTop = "5dp"
+                        android:background = "#D3D5DD" />
+
+                    <RelativeLayout
+                        android:layout_width = "match_parent"
+                        android:layout_height = "wrap_content"
+                        android:padding = "5dp">
+
+                        <TextView
+                            android:layout_width = "wrap_content"
+                            android:layout_height = "wrap_content"
+                            android:layout_gravity = "start"
+                            android:autoSizeTextType = "uniform"
+                            android:text = "Subtotal: "
+                            android:textColor = "@color/colorAccent"
+                            android:textSize = "12dp"
+                            android:textStyle = "bold" />
+
+                        <TextView
+                            android:layout_width = "wrap_content"
+                            android:layout_height = "wrap_content"
+                            android:layout_alignParentRight = "true"
+                            android:layout_gravity = "start"
+                            android:autoSizeTextType = "uniform"
+                            android:text = "213 QAR"
+                            android:textColor = "@color/colorAccent"
+                            android:textSize = "12dp"
+                            android:textStyle = "bold" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width = "match_parent"
+                        android:layout_height = "wrap_content"
+                        android:padding = "5dp">
+
+                        <TextView
+                            android:layout_width = "wrap_content"
+                            android:layout_height = "wrap_content"
+                            android:layout_gravity = "start"
+                            android:autoSizeTextType = "uniform"
+                            android:text = "Shipping &amp; Return: "
+                            android:textColor = "@color/colorAccent"
+                            android:textSize = "12dp"
+                            android:textStyle = "bold" />
+
+                        <TextView
+                            android:layout_width = "wrap_content"
+                            android:layout_height = "wrap_content"
+                            android:layout_alignParentRight = "true"
+                            android:layout_gravity = "start"
+                            android:autoSizeTextType = "uniform"
+                            android:text = "Free"
+                            android:textColor = "@color/colorfree"
+                            android:textSize = "12dp"
+                            android:textStyle = "bold" />
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width = "match_parent"
+                        android:layout_height = "1dp"
+                        android:layout_marginTop = "5dp"
+                        android:background = "#D3D5DD" />
+
+                    <RelativeLayout
+                        android:layout_width = "match_parent"
+                        android:layout_height = "wrap_content"
+                        android:padding = "5dp">
+
+                        <TextView
+                            android:layout_width = "wrap_content"
+                            android:layout_height = "wrap_content"
+                            android:layout_gravity = "start"
+                            android:autoSizeTextType = "uniform"
+                            android:text = "Total: "
+                            android:textColor = "@color/colorAccent"
+                            android:textSize = "12dp"
+                            android:textStyle = "bold" />
+
+                        <TextView
+                            android:layout_width = "wrap_content"
+                            android:layout_height = "wrap_content"
+                            android:layout_alignParentRight = "true"
+                            android:layout_gravity = "start"
+                            android:autoSizeTextType = "uniform"
+                            android:text = "213 QAR"
+                            android:textColor = "@color/colorAccent"
+                            android:textSize = "12dp"
+                            android:textStyle = "bold" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:layout_width = "match_parent"
+                android:layout_height = "wrap_content"
+                android:layout_marginBottom = "20dp"
+                android:layout_marginEnd = "20dp"
+                android:layout_marginStart = "20dp"
+                android:baselineAligned = "false"
+                android:padding = "10dp"
+                app:cardCornerRadius = "10dp"
+                app:cardElevation = "5dp">
+
+
+                <RelativeLayout
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    android:layout_margin = "20dp"
+                    android:orientation = "vertical">
+
+                    <TextView
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_gravity = "start"
+                        android:autoSizeTextType = "uniform"
+                        android:text = "Cash on Delivery"
+                        android:textColor = "@color/colorgraytxt"
+                        android:textSize = "12dp" />
+
+                    <ImageView
+                        android:layout_width = "15dp"
+                        android:layout_height = "15dp"
+                        android:layout_alignParentRight = "true"
+                        android:src = "@mipmap/right_sign" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:layout_width = "match_parent"
+                android:layout_height = "wrap_content"
+                android:layout_marginBottom = "20dp"
+                android:layout_marginEnd = "20dp"
+                android:layout_marginStart = "20dp"
+                android:baselineAligned = "false"
+                android:padding = "10dp"
+                app:cardCornerRadius = "10dp"
+                app:cardElevation = "5dp">
+
+                <LinearLayout
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    android:layout_margin = "20dp"
+                    android:orientation = "vertical">
+
+                    <TextView
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_gravity = "start"
+                        android:layout_marginBottom = "20dp"
+                        android:layout_marginStart = "5dp"
+                        android:autoSizeTextType = "uniform"
+                        android:text = "Billing Address"
+                        android:textColor = "@color/colorgraytxt"
+                        android:textSize = "12dp"
+                        android:textStyle = "bold" />
+
+
+                    <RelativeLayout
+                        android:layout_width = "match_parent"
+                        android:layout_height = "wrap_content">
+
+                        <TextView
+                            android:layout_width = "wrap_content"
+                            android:layout_height = "wrap_content"
+                            android:layout_gravity = "start"
+                            android:layout_marginStart = "5dp"
+                            android:autoSizeTextType = "uniform"
+                            android:text = "PO Box : 00000\nphone: +91745265 4455\nEmail: ancv@email.com"
+                            android:textColor = "@color/colorgraytxt"
+                            android:textSize = "12dp" />
+
+                        <ImageView
+                            android:layout_width = "15dp"
+                            android:layout_height = "match_parent"
+                            android:layout_alignParentRight = "true"
+                            android:src = "@mipmap/right_sign" />
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width = "match_parent"
+                android:layout_height = "wrap_content"
+                android:layout_marginBottom = "20dp"
+                android:layout_marginEnd = "20dp"
+                android:layout_marginStart = "20dp"
+                android:baselineAligned = "false"
+                android:padding = "10dp"
+                app:cardCornerRadius = "10dp"
+                app:cardElevation = "5dp">
+
+                <LinearLayout
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    android:layout_margin = "20dp"
+                    android:orientation = "vertical">
+
+                    <TextView
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_gravity = "start"
+                        android:layout_marginBottom = "20dp"
+                        android:layout_marginStart = "5dp"
+                        android:autoSizeTextType = "uniform"
+                        android:text = "Shipping Address"
+                        android:textColor = "@color/colorgraytxt"
+                        android:textSize = "12dp"
+                        android:textStyle = "bold" />
+
+
+                    <RelativeLayout
+                        android:layout_width = "match_parent"
+                        android:layout_height = "wrap_content">
+
+                        <TextView
+                            android:layout_width = "wrap_content"
+                            android:layout_height = "wrap_content"
+                            android:layout_gravity = "start"
+                            android:layout_marginStart = "5dp"
+                            android:autoSizeTextType = "uniform"
+                            android:text = "PO Box : 00000\nphone: +91745265 4455\nEmail: ancv@email.com"
+                            android:textColor = "@color/colorgraytxt"
+                            android:textSize = "12dp" />
+
+                        <ImageView
+                            android:layout_width = "15dp"
+                            android:layout_height = "match_parent"
+                            android:layout_alignParentRight = "true"
+                            android:src = "@mipmap/right_sign" />
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+            <Button
+                android:id = "@+id/confirm_btn_placeorder"
+                android:layout_width = "match_parent"
+                android:layout_height = "wrap_content"
+                android:layout_marginBottom = "20dp"
+                android:layout_marginEnd = "20dp"
+                android:layout_marginStart = "20dp"
+                android:layout_marginTop = "35dp"
+                android:background = "@drawable/login_btn_round_corner"
+                android:text = "place order"
+                android:textColor = "@color/colorPrimary"
+                android:textSize = "@dimen/Login_btn_size" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
+

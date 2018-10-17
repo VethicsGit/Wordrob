@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.daimajia.swipe.SwipeLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+
+    xmlns:card_view = "http://schemas.android.com/tools"
+    android:layout_width = "match_parent"
+    android:layout_height = "wrap_content"
+    xmlns:app = "http://schemas.android.com/apk/res-auto"
+    android:layout_margin = "10dp">
+    <LinearLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+        xmlns:app = "http://schemas.android.com/apk/res-auto"
+        xmlns:card_view = "http://schemas.android.com/tools"
+        android:layout_width = "wrap_content"
+        android:layout_height = "130dp"
+        app:cardCornerRadius = "15dp"
+        app:cardElevation = "5dp"
+
+        app:contentPadding = "0dp"
+        card_view:cardPreventCornerOverlap = "false">
+
+
+        <LinearLayout
+            android:layout_width = "100dp"
+            android:layout_height = "130dp"
+            android:layout_gravity = "center"
+            android:background = "@drawable/mybag_red" >
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="end"
+                android:layout_width = "match_parent"
+                android:layout_height = "match_parent" >
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/heart_white120"
+                    android:layout_width = "30dp"
+                    android:layout_height = "30dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width = "match_parent"
+                android:layout_height = "match_parent" >
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/delete_white120"
+
+                    android:layout_width = "30dp"
+                    android:layout_height = "30dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width = "match_parent"
+        android:layout_height = "130dp"
+        app:cardCornerRadius = "10dp"
+        app:cardElevation = "5dp">
+
+        <LinearLayout
+            android:background="@drawable/white_round_background"
+            android:layout_width = "match_parent"
+            android:layout_height = "match_parent"
+            android:orientation = "horizontal"
+            android:weightSum = "10">
+
+            <LinearLayout
+                android:layout_width = "match_parent"
+                android:layout_height = "match_parent"
+                android:layout_weight = "7">
+
+                <android.support.v7.widget.CardView
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    android:layout_gravity = "center_vertical"
+                    app:cardCornerRadius = "10dp">
+
+                    <ImageView
+                        android:layout_width = "match_parent"
+                        android:layout_height = "match_parent"
+                        android:scaleType="centerCrop"
+                        android:src = "@drawable/order_detail" />
+
+                </android.support.v7.widget.CardView>
+
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width = "match_parent"
+                android:layout_height = "match_parent"
+                android:layout_weight = "3">
+
+                <LinearLayout
+                    android:layout_width = "match_parent"
+                    android:layout_height = "match_parent"
+                    android:layout_marginStart = "10dp"
+                    android:gravity = "center_vertical"
+                    android:orientation = "vertical">
+
+                    <TextView android:autoSizeTextType="uniform"
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_centerInParent = "true"
+                        android:layout_gravity = "start"
+                        android:text = "Lipsy Crown T-shirt"
+                        android:textColor = "@color/colorAccent"
+                        android:textSize = "15dp"
+                        android:textStyle = "bold" />
+
+                    <TextView android:autoSizeTextType="uniform"
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_centerInParent = "true"
+                        android:layout_gravity = "start"
+                        android:text = "clothing &amp; passion"
+                        android:textColor = "#cdcdcd"
+                        android:textSize = "12dp" />
+
+                    <TextView android:autoSizeTextType="uniform"
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_centerInParent = "true"
+                        android:layout_gravity = "start"
+                        android:text = "84 QAR"
+                        android:textColor = "@color/colorAccent"
+                        android:textSize = "15dp"
+                        android:textStyle = "bold" />
+
+                    <LinearLayout
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content">
+
+                        <ImageView
+                            android:layout_width = "15dp"
+                            android:layout_height = "20dp"
+                            android:src = "@mipmap/red_dot" />
+
+                        <TextView android:autoSizeTextType="uniform"
+                            android:layout_width = "wrap_content"
+                            android:layout_height = "wrap_content"
+                            android:layout_centerInParent = "true"
+                            android:layout_gravity = "center"
+                            android:layout_marginStart = "5dp"
+                            android:gravity = "center"
+                            android:text = "Express Delivery"
+                            android:textColor = "#cdcdcd"
+                            android:textSize = "8dp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:layout_alignParentRight = "true"
+                    android:layout_centerInParent = "true"
+                    android:layout_marginRight = "10dp"
+                    android:gravity = "center_vertical"
+                    android:orientation = "vertical">
+
+                    <ImageView
+                        android:layout_width = "30dp"
+                        android:layout_height = "30dp"
+                        android:layout_gravity = "center"
+                        android:layout_weight = "1"
+                        android:padding = "8dp"
+                        android:src = "@mipmap/plus"
+
+                        />
+
+                    <LinearLayout
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_gravity = "center"
+                        android:layout_weight = "1"
+                        android:gravity = "center"
+                        android:orientation = "vertical"
+                        android:padding = "5dp">
+
+                        <TextView
+                            android:layout_width = "wrap_content"
+                            android:layout_height = "wrap_content"
+                            android:layout_weight = "1"
+                            android:autoSizeTextType = "uniform"
+                            android:background = "@drawable/blue_round_background"
+                            android:gravity = "center"
+                            android:padding = "7dp"
+                            android:text = "02"
+                            android:textColor = "@color/colorPrimary"
+                            android:textSize = "15dp"
+                            android:textStyle = "bold" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width = "30dp"
+                        android:layout_height = "30dp"
+                        android:layout_gravity = "center"
+                        android:layout_weight = "1"
+                        android:padding = "8dp"
+                        android:src = "@mipmap/minus" />
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</com.daimajia.swipe.SwipeLayout>

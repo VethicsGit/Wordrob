@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout android:focusable = "true"
+    android:focusableInTouchMode = "true"
+    android:layout_width = "match_parent"
+    android:layout_height = "match_parent"
+    android:orientation = "vertical"
+    xmlns:android = "http://schemas.android.com/apk/res/android">
+        <android.support.design.widget.AppBarLayout
+            android:id = "@+id/appbar"
+
+            android:background="@drawable/drop_shadow"
+            android:layout_width = "match_parent"
+            android:layout_height = "?attr/actionBarSize"
+            android:elevation = "5dp">
+
+        <android.support.v7.widget.Toolbar
+            android:id = "@+id/toolbar"
+            android:layout_width = "match_parent"
+            android:layout_height = "?attr/actionBarSize"
+            android:layout_gravity = "center"
+            android:background = "?attr/colorPrimary"
+            android:gravity = "center">
+        <RelativeLayout
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content"
+            android:layout_margin = "20dp">
+
+            <ImageView
+                android:id = "@+id/shipping_back"
+                android:layout_width = "20dp"
+                android:layout_height = "20dp"
+                android:src = "@mipmap/arrow_left" />
+
+           <TextView android:autoSizeTextType="uniform"
+                android:id = "@+id/shipping_title"
+                android:layout_width = "match_parent"
+               android:gravity="center"
+                android:layout_height = "wrap_content"
+                android:layout_centerInParent = "true"
+                android:text = "Shipping"
+                android:textAllCaps = "true"
+               android:textSize="15dp"
+                android:textColor = "@color/colorAccent"
+                android:autoSizeMinTextSize = "15dp"
+                android:textStyle = "bold" />
+
+        </RelativeLayout>
+
+        </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.AppBarLayout>
+
+    <ScrollView
+        xmlns:app = "http://schemas.android.com/apk/res-auto"
+        xmlns:tools = "http://schemas.android.com/tools"
+        android:layout_width = "match_parent"
+        android:layout_height = "match_parent"
+        android:fillViewport = "true"
+        tools:context = ".Activity.Shipping">
+        <LinearLayout android:focusable = "true"
+            android:focusableInTouchMode = "true"
+            android:layout_width = "match_parent"
+            android:layout_height = "match_parent"
+            android:orientation = "vertical">
+        <android.support.v7.widget.CardView
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content"
+            android:layout_marginBottom = "20dp"
+            android:baselineAligned = "false"
+            android:padding = "10dp"
+            android:layout_margin="15dp"
+            app:cardCornerRadius = "10dp"
+            app:cardElevation = "5dp">
+
+            <LinearLayout
+                android:layout_width = "match_parent"
+                android:layout_height = "wrap_content"
+                android:layout_margin = "25dp"
+                android:orientation = "vertical">
+
+                <LinearLayout
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content">
+
+                    <EditText
+                        android:layout_width = "match_parent"
+                        android:layout_height = "wrap_content"
+                        android:layout_marginEnd = "5dp"
+                        android:layout_weight = "1"
+                        android:hint = "  First Name"
+                        android:inputType = "text"
+                        android:singleLine = "true"
+                        android:textSize = "12dp" />
+
+                    <EditText
+                        android:layout_width = "match_parent"
+                        android:layout_height = "wrap_content"
+                        android:layout_marginStart = "5dp"
+                        android:layout_weight = "1"
+                        android:hint = "  Last Name"
+                        android:inputType = "text"
+                        android:singleLine = "true"
+                        android:textSize = "12dp" />
+
+
+                </LinearLayout>
+
+                <EditText
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    android:layout_marginTop = "10dp"
+                    android:layout_weight = "1"
+                    android:hint = "  Phone Number"
+                    android:inputType = "number"
+                    android:maxLength = "10"
+                    android:singleLine = "true"
+                    android:textSize = "12dp" />
+
+                <Spinner
+                    android:id="@+id/shipping_country_spn"
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    android:layout_marginTop = "10dp"
+                    style="@style/mySpinnerItemStyle"
+                    android:entries = "@array/Country" />
+
+                <View
+                    android:layout_width = "match_parent"
+                    android:layout_height = "1dp"
+                    android:layout_marginEnd = "3dp"
+                    android:layout_marginStart = "3dp"
+                    android:background = "#1a1a1a" />
+
+                <LinearLayout
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    android:layout_marginTop = "10dp">
+
+                    <EditText
+                        android:layout_width = "match_parent"
+                        android:layout_height = "wrap_content"
+                        android:layout_marginEnd = "5dp"
+                        android:layout_weight = "1"
+                        android:hint = "  City"
+                        android:inputType = "text"
+                        android:singleLine = "true"
+                        android:textSize = "12dp" />
+
+                    <LinearLayout
+                        android:layout_width = "match_parent"
+                        android:layout_height = "match_parent"
+                        android:layout_weight = "1"
+                        android:orientation = "vertical">
+
+                        <Spinner
+                            style = "@style/mySpinnerItemStyle"
+                            android:layout_width = "match_parent"
+                            android:layout_height = "wrap_content"
+                            android:layout_marginTop = "4dp"
+android:id="@+id/shipping_region_spn"
+                            android:entries = "@array/region" />
+
+                        <View
+                            android:layout_width = "match_parent"
+                            android:layout_height = "1dp"
+                            android:layout_marginEnd = "3dp"
+                            android:layout_marginStart = "3dp"
+                            android:background = "#1a1a1a" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <EditText
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    android:layout_marginTop = "10dp"
+                    android:layout_weight = "1"
+                    android:hint = "  Address 1"
+                    android:inputType = "text"
+                    android:singleLine = "true"
+                    android:textSize = "12dp" />
+
+                <RelativeLayout
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    android:layout_marginTop = "25dp">
+
+                    <ImageView
+                        android:layout_width = "20dp"
+                        android:layout_height = "20dp"
+                        android:src = "@mipmap/location" />
+
+                   <TextView android:autoSizeTextType="uniform"
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_marginStart = "30dp"
+                        android:text = "Pick up Location from Map"
+                        android:textStyle="bold"
+                        />
+                    <ImageView
+                        android:layout_width = "20dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_height = "20dp"
+                        android:src = "@drawable/ic_chevron_right" />
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        android:layout_marginBottom = "20dp"
+        android:baselineAligned = "false"
+        android:padding = "10dp"
+        android:layout_margin="15dp"
+        app:cardCornerRadius = "10dp"
+        app:cardElevation = "5dp">
+
+    <LinearLayout
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        android:layout_marginTop = "15dp"
+        android:layout_marginBottom = "15dp"
+        android:gravity="center_vertical"
+        android:layout_gravity="center_vertical"
+        android:orientation = "horizontal">
+
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content"
+            android:layout_marginStart = "20dp"
+            android:autoSizeTextType = "uniform"
+            android:gravity = "start"
+            android:layout_centerInParent="true"
+            android:layout_alignParentStart="true"
+            android:text = "Billing Address same as Shipping Address"
+            android:textStyle = "bold" />
+
+        <com.suke.widget.SwitchButton
+            android:id = "@+id/setting_switch_push"
+            app:sb_checked="true"
+            android:layout_weight="5"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content"
+            android:layout_alignParentRight = "true"
+            app:ball_press_color = "#ffffff"
+            android:foregroundGravity="center_vertical"
+            app:ball_release_color = "#ffffff"
+            app:base_press_color = "#4FD266"
+            app:base_release_color = "#8F8F8F" />
+    </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+        <Button
+            android:id = "@+id/shipping_btn_next"
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content"
+            android:layout_margin = "15dp"
+            android:background = "@drawable/login_btn_round_corner"
+            android:text = "next"
+            android:textColor = "@color/colorPrimary"
+            android:textSize = "@dimen/Login_btn_size" />
+        </LinearLayout>
+    </ScrollView>
+    </LinearLayout>
+

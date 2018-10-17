@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_weight = "1"
+    android:orientation = "vertical"
+    android:layout_width = "match_parent"
+    android:id="@+id/prodlist_item_root"
+    android:layout_height = "wrap_content"
+    xmlns:android = "http://schemas.android.com/apk/res/android"
+    xmlns:app = "http://schemas.android.com/apk/res-auto">
+    <android.support.v7.widget.CardView
+        android:layout_width = "match_parent"
+
+        android:layout_margin="5dp"
+        android:layout_height = "wrap_content"
+        app:cardCornerRadius = "10dp">
+        <ImageView
+            android:layout_width = "match_parent"
+            android:layout_height = "170dp"
+            android:scaleType = "centerCrop"
+            android:src = "@drawable/product_thumb" />
+        <FrameLayout
+            android:layout_width = "match_parent"
+            android:layout_height = "match_parent">
+
+
+
+            <RelativeLayout
+                android:layout_width = "match_parent"
+                android:layout_height = "match_parent">
+
+                <ImageView
+                    android:layout_margin="10dp"
+                    android:layout_width = "20dp"
+                    android:layout_height = "20dp"
+                    android:src="@mipmap/favourite"
+                    />
+
+            </RelativeLayout>
+
+        </FrameLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <RelativeLayout
+        android:id="@+id/prolist_relative"
+        android:layout_marginBottom="10dp"
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content">
+
+   <LinearLayout
+       android:layout_marginStart="10dp"
+       android:orientation="vertical"
+       android:layout_width = "match_parent"
+       android:layout_height = "wrap_content">
+
+
+
+    <TextView android:autoSizeTextType="uniform"
+        android:id="@+id/prolist_title"
+        android:layout_gravity="start"
+        android:layout_width = "wrap_content"
+        android:layout_height = "wrap_content"
+        android:layout_centerInParent = "true"
+        android:text = "Lipsy Crown T-shirt"
+        android:layout_alignParentStart="true"
+        android:textColor = "@color/colorAccent"
+        android:textSize = "12dp"
+        android:textStyle = "bold" />
+    <TextView android:autoSizeTextType="uniform"
+        android:id="@+id/prolist_desc"
+        android:layout_below="@+id/prolist_title"
+        android:layout_width = "wrap_content"
+        android:layout_height = "wrap_content"
+        android:layout_centerInParent = "true"
+        android:text = "clothing &amp; passion"
+        android:textColor = "@color/colorgraytxt"
+        android:textSize = "10dp"
+        />
+   </LinearLayout>
+    <TextView android:autoSizeTextType="uniform"
+        android:layout_gravity="center"
+        android:layout_width = "wrap_content"
+        android:id="@+id/prolist_price"
+        android:layout_height = "wrap_content"
+        android:layout_centerInParent = "true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:text = "84 QAR"
+        android:textColor = "@color/colorAccent"
+        android:textSize = "12dp"
+        />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_marginBottom="10dp"
+        android:id="@+id/prolist_linear"
+        android:orientation="vertical"
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content">
+        <TextView android:autoSizeTextType="uniform"
+            android:layout_gravity="center"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:layout_centerInParent = "true"
+            android:text = "Lipsy Crown T-shirt"
+            android:textColor = "@color/colorAccent"
+            android:textSize = "12dp"
+            android:textStyle = "bold" />
+        <TextView android:autoSizeTextType="uniform"
+            android:layout_gravity="center"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:layout_centerInParent = "true"
+            android:text = "clothing &amp; passion"
+            android:textColor = "#cdcdcd"
+            android:textSize = "10dp"
+            />
+        <TextView android:autoSizeTextType="uniform"
+            android:layout_gravity="center"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:layout_centerInParent = "true"
+            android:text = "84 QAR"
+            android:textColor = "@color/colorAccent"
+            android:textSize = "12dp"
+            />
+    </LinearLayout>
+</LinearLayout>

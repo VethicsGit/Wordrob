@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android = "http://schemas.android.com/apk/res/android"
+    xmlns:app = "http://schemas.android.com/apk/res-auto"
+    android:layout_width = "match_parent"
+    android:fillViewport = "true"
+    android:layout_height = "match_parent">
+
+    <LinearLayout
+        android:layout_width = "match_parent"
+        android:layout_height = "match_parent"
+        android:background = "@drawable/white_pattern"
+        android:fitsSystemWindows = "true"
+        android:orientation = "vertical">
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content"
+            app:cardElevation = "5dp">
+
+            <LinearLayout
+                android:layout_marginStart = "20dp"
+                android:layout_marginTop = "20dp"
+                android:layout_width = "match_parent"
+                android:layout_height = "wrap_content"
+                android:orientation = "vertical"
+                android:padding = "10dp">
+
+               <TextView android:autoSizeTextType="uniform"
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:layout_centerInParent = "true"
+                    android:layout_marginTop = "10dp"
+                    android:text = "Account"
+                    android:textColor = "@color/colorAccent"
+                    android:textSize = "12dp"
+                    android:textStyle = "bold" />
+
+                <RelativeLayout
+                    android:id="@+id/setting_profile"
+                    android:gravity="center_vertical"
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    android:layout_marginTop = "10dp">
+
+                    <LinearLayout
+                        android:layout_width = "match_parent"
+                        android:layout_height = "wrap_content"
+                        android:orientation = "horizontal"
+                        android:padding = "10dp">
+
+                        <ImageView
+                            android:layout_width = "25dp"
+                            android:layout_height = "25dp"
+                            android:padding = "5dp"
+                            android:src = "@mipmap/username" />
+
+                       <TextView android:autoSizeTextType="uniform"
+                            android:layout_width = "wrap_content"
+                            android:layout_height = "wrap_content"
+                            android:layout_centerInParent = "true"
+                            android:layout_gravity = "center_vertical"
+                            android:layout_marginStart = "20dp"
+                            android:text = "Your Profile"
+                            android:textColor = "#999999"
+                            android:textSize = "12dp" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width = "35dp"
+                        android:layout_height = "wrap_content"
+
+                        android:layout_alignParentRight = "true"
+                        android:padding = "5dp"
+                        android:src = "@drawable/ic_chevron_right" />
+                </RelativeLayout>
+                <View
+                    android:layout_width = "match_parent"
+                    android:layout_height = "0.5dp"
+                    android:background = "@color/colorgray" />
+                <RelativeLayout
+                    android:id="@+id/setting_change_pwd"
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    android:layout_marginTop = "10dp">
+
+                    <LinearLayout
+                        android:layout_width = "match_parent"
+                        android:layout_height = "wrap_content"
+                        android:orientation = "horizontal"
+                        android:padding = "10dp">
+
+                        <ImageView
+                            android:layout_width = "25dp"
+                            android:layout_height = "25dp"
+                            android:padding = "5dp"
+                            android:src = "@mipmap/mail" />
+
+                       <TextView android:autoSizeTextType="uniform"
+                            android:layout_width = "wrap_content"
+                            android:layout_height = "wrap_content"
+                            android:layout_centerInParent = "true"
+                            android:layout_gravity = "center_vertical"
+                            android:layout_marginStart = "20dp"
+                            android:text = "Change Pasword"
+                            android:textColor = "#999999"
+                            android:textSize = "12dp" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width = "35dp"
+                        android:layout_height = "wrap_content"
+                        android:layout_alignParentRight = "true"
+                        android:padding = "5dp"
+                        android:src = "@drawable/ic_chevron_right" />
+                </RelativeLayout>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content"
+            android:layout_marginTop="10dp"
+            app:cardElevation = "5dp">
+
+            <LinearLayout
+                android:layout_marginStart = "20dp"
+                android:layout_width = "match_parent"
+                android:layout_height = "wrap_content"
+                android:orientation = "vertical"
+                android:padding = "10dp">
+
+               <TextView android:autoSizeTextType="uniform"
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:layout_centerInParent = "true"
+                    android:layout_marginTop = "10dp"
+                    android:text = "Your Notification"
+                    android:textColor = "@color/colorAccent"
+                    android:textSize = "12dp"
+                    android:textStyle = "bold" />
+
+                <RelativeLayout
+                    android:gravity="center_vertical"
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    android:layout_marginTop = "10dp">
+
+                    <LinearLayout
+                        android:layout_width = "match_parent"
+                        android:layout_height = "wrap_content"
+                        android:orientation = "horizontal"
+                        android:padding = "10dp">
+
+                        <ImageView
+                            android:layout_width = "25dp"
+                            android:layout_height = "25dp"
+                            android:padding = "5dp"
+                            android:src = "@mipmap/notification" />
+
+                       <TextView android:autoSizeTextType="uniform"
+                            android:layout_width = "wrap_content"
+                            android:layout_height = "wrap_content"
+                            android:layout_centerInParent = "true"
+                            android:layout_gravity = "center_vertical"
+                            android:layout_marginStart = "20dp"
+                            android:text = "Push Notification"
+                            android:textColor = "#999999"
+                            android:textSize = "12dp" />
+
+                    </LinearLayout>
+
+                    <!--<com.github.glomadrian.materialanimatedswitch.MaterialAnimatedSwitch-->
+                    <com.suke.widget.SwitchButton
+                        android:id = "@+id/setting_switch_push"
+app:sb_checked="true"
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_alignParentRight = "true"
+                        app:ball_press_color = "#ffffff"
+                        android:foregroundGravity="center_vertical"
+                        app:ball_release_color = "#ffffff"
+                        app:base_press_color = "#4FD266"
+                        app:base_release_color = "#8F8F8F" />
+                </RelativeLayout>
+                <View
+                    android:layout_width = "match_parent"
+                    android:layout_height = "0.5dp"
+                    android:background = "@color/colorgray" />
+                <RelativeLayout
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    android:layout_marginTop = "10dp">
+
+                    <LinearLayout
+                        android:layout_width = "match_parent"
+                        android:layout_height = "wrap_content"
+                        android:orientation = "horizontal"
+                        android:padding = "10dp">
+
+                        <ImageView
+                            android:layout_width = "25dp"
+                            android:layout_height = "25dp"
+                            android:padding = "5dp"
+                            android:src = "@mipmap/stock_alert" />
+
+                       <TextView android:autoSizeTextType="uniform"
+                            android:layout_width = "wrap_content"
+                            android:layout_height = "wrap_content"
+                            android:layout_centerInParent = "true"
+                            android:layout_gravity = "center_vertical"
+                            android:layout_marginStart = "20dp"
+                            android:text = "Back in stock Alert"
+                            android:textColor = "#999999"
+                            android:textSize = "12dp" />
+
+                    </LinearLayout>
+
+                    <com.suke.widget.SwitchButton
+                        android:id = "@+id/setting_switch_backinstock"
+                        android:layout_width="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_height="wrap_content"
+                        app:base_release_color="#8F8F8F"
+                        app:base_press_color="#4FD266"
+                        app:ball_release_color="#ffffff"
+                        app:ball_press_color="#ffffff"
+                        />
+                </RelativeLayout>
+                <View
+                    android:layout_width = "match_parent"
+                    android:layout_height = "0.5dp"
+                    android:background = "@color/colorgray" />
+                <RelativeLayout
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    android:layout_marginTop = "10dp">
+
+                    <LinearLayout
+                        android:layout_width = "match_parent"
+                        android:layout_height = "wrap_content"
+                        android:orientation = "horizontal"
+                        android:padding = "10dp">
+
+                        <ImageView
+                            android:layout_width = "25dp"
+                            android:layout_height = "25dp"
+                            android:padding = "5dp"
+                            android:src = "@mipmap/promotions" />
+
+                       <TextView android:autoSizeTextType="uniform"
+                            android:layout_width = "wrap_content"
+                            android:layout_height = "wrap_content"
+                            android:layout_centerInParent = "true"
+                            android:layout_gravity = "center_vertical"
+                            android:layout_marginStart = "20dp"
+                            android:text = "Promotion"
+                            android:textColor = "#999999"
+                            android:textSize = "12dp" />
+
+                    </LinearLayout>
+
+                    <com.suke.widget.SwitchButton
+                            android:id = "@+id/setting_switch_promotions"
+                        android:layout_width="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_height="wrap_content"
+                        app:base_release_color="#8F8F8F"
+                        app:base_press_color="#4FD266"
+                        app:ball_release_color="#ffffff"
+                        app:ball_press_color="#ffffff"
+                        />
+                </RelativeLayout>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            app:cardElevation = "5dp">
+
+            <LinearLayout
+                android:layout_marginStart = "20dp"
+                android:layout_width = "match_parent"
+                android:layout_height = "wrap_content"
+                android:orientation = "vertical"
+                android:padding = "10dp">
+
+               <TextView android:autoSizeTextType="uniform"
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:layout_centerInParent = "true"
+                    android:layout_marginTop = "10dp"
+                    android:text = "Help &amp; Privacy"
+                    android:textColor = "@color/colorAccent"
+                    android:textSize = "12dp"
+                    android:textStyle = "bold" />
+
+                <RelativeLayout
+                    android:id="@+id/setting_help"
+                    android:gravity="center_vertical"
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    android:layout_marginTop = "10dp">
+
+                    <LinearLayout
+                        android:layout_width = "match_parent"
+                        android:layout_height = "wrap_content"
+                        android:orientation = "horizontal"
+                        android:padding = "10dp">
+
+                        <ImageView
+                            android:layout_width = "25dp"
+                            android:layout_height = "25dp"
+                            android:padding = "5dp"
+                            android:src = "@mipmap/helps_faqs" />
+
+                       <TextView android:autoSizeTextType="uniform"
+                            android:layout_width = "wrap_content"
+                            android:layout_height = "wrap_content"
+                            android:layout_centerInParent = "true"
+                            android:layout_gravity = "center_vertical"
+                            android:layout_marginStart = "20dp"
+                            android:text = "Helps &amp; FAQ's"
+                            android:textColor = "#999999"
+                            android:textSize = "12dp" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width = "35dp"
+                        android:layout_height = "wrap_content"
+
+                        android:layout_alignParentRight = "true"
+                        android:padding = "5dp"
+                        android:src = "@drawable/ic_chevron_right" />
+                </RelativeLayout>
+                <View
+                    android:layout_width = "match_parent"
+                    android:layout_height = "0.5dp"
+                    android:background = "@color/colorgray" />
+                <RelativeLayout
+                    android:id="@+id/setting_terms"
+                    android:gravity="center_vertical"
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    android:layout_marginTop = "10dp">
+
+                    <LinearLayout
+                        android:layout_width = "match_parent"
+                        android:layout_height = "wrap_content"
+                        android:orientation = "horizontal"
+                        android:padding = "10dp">
+
+                        <ImageView
+                            android:layout_width = "25dp"
+                            android:layout_height = "25dp"
+                            android:padding = "5dp"
+                            android:src = "@mipmap/trems_conditions" />
+
+                       <TextView android:autoSizeTextType="uniform"
+                            android:layout_width = "wrap_content"
+                            android:layout_height = "wrap_content"
+                            android:layout_centerInParent = "true"
+                            android:layout_gravity = "center_vertical"
+                            android:layout_marginStart = "20dp"
+                            android:text = "Terms &amp; Conditions"
+                            android:textColor = "#999999"
+                            android:textSize = "12dp" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width = "35dp"
+                        android:layout_height = "wrap_content"
+
+                        android:layout_alignParentRight = "true"
+                        android:padding = "5dp"
+                        android:src = "@drawable/ic_chevron_right" />
+                </RelativeLayout>
+                <View
+                    android:layout_width = "match_parent"
+                    android:layout_height = "0.5dp"
+                    android:background = "@color/colorgray" />
+                <RelativeLayout
+                    android:id="@+id/setting_privacy"
+                    android:gravity="center_vertical"
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    android:layout_marginTop = "10dp">
+
+                    <LinearLayout
+                        android:layout_width = "match_parent"
+                        android:layout_height = "wrap_content"
+                        android:orientation = "horizontal"
+                        android:padding = "10dp">
+
+                        <ImageView
+                            android:layout_width = "25dp"
+                            android:layout_height = "25dp"
+                            android:padding = "5dp"
+                            android:src = "@mipmap/privacy_policyd" />
+
+                       <TextView android:autoSizeTextType="uniform"
+                            android:layout_width = "wrap_content"
+                            android:layout_height = "wrap_content"
+                            android:layout_centerInParent = "true"
+                            android:layout_gravity = "center_vertical"
+                            android:layout_marginStart = "20dp"
+                            android:text = "Privacy Policy"
+                            android:textColor = "#999999"
+                            android:textSize = "12dp" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width = "35dp"
+                        android:layout_height = "wrap_content"
+
+                        android:layout_alignParentRight = "true"
+                        android:padding = "5dp"
+                        android:src = "@drawable/ic_chevron_right" />
+                </RelativeLayout>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+
+    </LinearLayout>
+
+</ScrollView>

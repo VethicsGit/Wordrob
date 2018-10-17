@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width = "match_parent"
+    android:layout_height = "wrap_content"
+    xmlns:app = "http://schemas.android.com/apk/res-auto"
+    android:orientation = "vertical"
+    xmlns:android = "http://schemas.android.com/apk/res/android">
+
+    <android.support.v7.widget.CardView
+        android:layout_width = "match_parent"
+        android:layout_height = "170dp"
+        android:layout_margin = "5dp"
+        app:cardCornerRadius = "10dp"
+        app:elevation = "5dp">
+
+        <FrameLayout
+            android:layout_gravity="center"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content">
+
+            <ImageView
+                android:id="@+id/item_designers_main_image"
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:layout_gravity="center"
+                android:scaleType="fitCenter"
+                android:padding="30dp"
+                 />
+
+       <!--     <RelativeLayout
+                android:layout_width = "match_parent"
+                android:layout_height = "match_parent">
+
+                <ImageView
+                    android:layout_width = "20dp"
+                    android:layout_height = "20dp"
+                    android:layout_margin = "10dp"
+                    android:src = "@mipmap/favourite" />
+
+            </RelativeLayout>-->
+
+        </FrameLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+</RelativeLayout>

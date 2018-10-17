@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android = "http://schemas.android.com/apk/res/android"
+    xmlns:app = "http://schemas.android.com/apk/res-auto"
+    android:layout_width = "match_parent"
+    android:layout_height = "match_parent"
+    android:background = "@drawable/white_pattern"
+    android:fillViewport = "true">
+
+
+    <LinearLayout
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        android:layout_margin = "15dp"
+        android:orientation = "vertical">
+
+        <!--<LinearLayout
+            android:orientation="horizontal"
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content">
+
+            <ImageView
+                android:layout_width = "30dp"
+                android:layout_height = "30dp"
+                android:src = "@mipmap/reset_password2" />
+
+
+            <android.support.v7.widget.RecyclerView
+            android:id="@+id/homefrag_recyclerview"
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content"/>
+
+        </LinearLayout>-->
+
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/home_horizontal_view"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_width = "match_parent"
+            android:layout_height = "30dp"/>
+        <android.support.v7.widget.CardView
+            android:layout_width = "match_parent"
+
+            android:layout_height = "wrap_content"
+            app:cardCornerRadius = "10dp">
+
+            <FrameLayout
+                android:layout_width = "match_parent"
+                android:layout_height = "match_parent">
+
+                <ImageView
+                    android:layout_width = "match_parent"
+                    android:layout_height = "match_parent"
+                    android:scaleType = "centerCrop"
+                    android:src = "@drawable/first_page" />
+
+                <RelativeLayout
+                    android:layout_width = "match_parent"
+                    android:layout_height = "match_parent">
+
+
+                </RelativeLayout>
+
+            </FrameLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <RelativeLayout
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content"
+            android:padding = "10dp">
+
+            <TextView
+                android:layout_width = "wrap_content"
+
+                android:layout_height = "wrap_content"
+                android:autoSizeTextType = "uniform"
+                android:text = "Latest Collection"
+                android:textColor = "@color/colorAccent"
+                android:textSize = "12dp" />
+
+            <TextView
+                android:id = "@+id/home_viewmore"
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:layout_alignParentRight = "true"
+                android:autoSizeTextType = "uniform"
+                android:text = "View All"
+                android:textColor = "@color/colorpurple"
+                android:textSize = "12dp"
+                android:textStyle = "bold" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id = "@+id/products_layout"
+            android:layout_width = "match_parent"
+            android:layout_height = "match_parent"
+            android:layout_marginBottom = "20dp"
+            android:orientation = "vertical">
+
+            <LinearLayout
+                android:layout_marginBottom="10dp"
+                android:layout_width = "match_parent"
+                android:layout_height = "wrap_content">
+
+                <LinearLayout
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    android:layout_weight = "1"
+                    android:orientation = "vertical">
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width = "match_parent"
+
+                        android:layout_height = "wrap_content"
+                        android:layout_margin = "5dp"
+                        app:cardCornerRadius = "10dp">
+
+                        <FrameLayout
+                            android:layout_width = "match_parent"
+                            android:layout_height = "match_parent">
+
+                            <ImageView
+                                android:layout_width = "match_parent"
+                                android:layout_height = "170dp"
+                                android:scaleType = "centerCrop"
+                                android:src = "@drawable/product_thumb" />
+
+                            <RelativeLayout
+                                android:layout_width = "match_parent"
+                                android:layout_height = "match_parent">
+
+                                <ImageView
+                                    android:layout_width = "20dp"
+                                    android:layout_height = "20dp"
+                                    android:layout_margin = "10dp"
+                                    android:src = "@mipmap/favourite" />
+
+                            </RelativeLayout>
+
+                        </FrameLayout>
+
+                    </android.support.v7.widget.CardView>
+
+                    <TextView
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_centerInParent = "true"
+                        android:layout_gravity = "center"
+                        android:autoSizeTextType = "uniform"
+                        android:text = "Lipsy Crown T-shirt"
+                        android:textColor = "@color/colorAccent"
+                        android:textSize = "12dp"
+                        android:textStyle = "bold" />
+
+                    <TextView
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_centerInParent = "true"
+                        android:layout_gravity = "center"
+                        android:autoSizeTextType = "uniform"
+                        android:text = "clothing &amp; passion"
+                        android:textColor = "#cdcdcd"
+                        android:textSize = "10dp" />
+
+                    <TextView
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_centerInParent = "true"
+                        android:layout_gravity = "center"
+                        android:autoSizeTextType = "uniform"
+                        android:text = "84 QAR"
+                        android:textStyle="bold"
+                        android:textColor = "@color/colorAccent"
+                        android:textSize = "12dp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    android:layout_weight = "1"
+                    android:orientation = "vertical">
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width = "match_parent"
+                        android:layout_height = "wrap_content"
+                        android:layout_margin = "5dp"
+                        android:layout_weight = "1"
+                        app:cardCornerRadius = "10dp">
+
+                        <FrameLayout
+                            android:layout_width = "match_parent"
+                            android:layout_height = "match_parent">
+
+                            <ImageView
+                                android:layout_width = "match_parent"
+                                android:layout_height = "170dp"
+                                android:scaleType = "centerCrop"
+                                android:src = "@drawable/wardrobe_listing" />
+
+                            <RelativeLayout
+                                android:layout_width = "match_parent"
+                                android:layout_height = "match_parent">
+
+                                <ImageView
+                                    android:layout_width = "20dp"
+                                    android:layout_height = "20dp"
+                                    android:layout_margin = "10dp"
+                                    android:src = "@mipmap/favourite" />
+                            </RelativeLayout>
+
+                        </FrameLayout>
+
+                    </android.support.v7.widget.CardView>
+
+                    <TextView
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_centerInParent = "true"
+                        android:layout_gravity = "center"
+                        android:autoSizeTextType = "uniform"
+                        android:text = "Lipsy Crown T-shirt"
+                        android:textColor = "@color/colorAccent"
+                        android:textSize = "12dp"
+                        android:textStyle = "bold" />
+
+                    <TextView
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_centerInParent = "true"
+                        android:layout_gravity = "center"
+                        android:autoSizeTextType = "uniform"
+                        android:text = "clothing &amp; passion"
+                        android:textColor = "#cdcdcd"
+                        android:textSize = "10dp" />
+
+                    <TextView
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_centerInParent = "true"
+                        android:layout_gravity = "center"
+                        android:autoSizeTextType = "uniform"
+                        android:text = "84 QAR"
+                        android:textStyle="bold"
+                        android:textColor = "@color/colorAccent"
+                        android:textSize = "12dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:layout_width = "match_parent"
+                android:layout_height = "wrap_content">
+
+                <LinearLayout
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    android:layout_weight = "1"
+                    android:orientation = "vertical">
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width = "match_parent"
+
+                        android:layout_height = "wrap_content"
+                        android:layout_margin = "5dp"
+                        app:cardCornerRadius = "10dp">
+
+                        <FrameLayout
+                            android:layout_width = "match_parent"
+                            android:layout_height = "match_parent">
+
+                            <ImageView
+                                android:layout_width = "match_parent"
+                                android:layout_height = "170dp"
+                                android:scaleType = "centerCrop"
+                                android:src = "@drawable/wardrobe_listing" />
+
+                            <RelativeLayout
+                                android:layout_width = "match_parent"
+                                android:layout_height = "match_parent">
+
+                                <ImageView
+                                    android:layout_width = "20dp"
+                                    android:layout_height = "20dp"
+                                    android:layout_margin = "10dp"
+                                    android:src = "@mipmap/favourite" />
+
+                            </RelativeLayout>
+
+                        </FrameLayout>
+
+                    </android.support.v7.widget.CardView>
+
+                    <TextView
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_centerInParent = "true"
+                        android:layout_gravity = "center"
+                        android:autoSizeTextType = "uniform"
+                        android:text = "Lipsy Crown T-shirt"
+                        android:textColor = "@color/colorAccent"
+                        android:textSize = "12dp"
+                        android:textStyle = "bold" />
+
+                    <TextView
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_centerInParent = "true"
+                        android:layout_gravity = "center"
+                        android:autoSizeTextType = "uniform"
+                        android:text = "clothing &amp; passion"
+                        android:textColor = "#cdcdcd"
+                        android:textSize = "10dp" />
+
+                    <TextView
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_centerInParent = "true"
+                        android:layout_gravity = "center"
+                        android:autoSizeTextType = "uniform"
+                        android:text = "84 QAR"
+                        android:textStyle="bold"
+                        android:textColor = "@color/colorAccent"
+                        android:textSize = "12dp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    android:layout_weight = "1"
+                    android:orientation = "vertical">
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width = "match_parent"
+                        android:layout_height = "wrap_content"
+                        android:layout_margin = "5dp"
+                        android:layout_weight = "1"
+                        app:cardCornerRadius = "10dp">
+
+                        <FrameLayout
+                            android:layout_width = "match_parent"
+                            android:layout_height = "match_parent">
+
+                            <ImageView
+                                android:layout_width = "match_parent"
+                                android:layout_height = "170dp"
+                                android:scaleType = "centerCrop"
+                                android:src = "@drawable/product_thumb" />
+
+                            <RelativeLayout
+                                android:layout_width = "match_parent"
+                                android:layout_height = "match_parent">
+
+                                <ImageView
+                                    android:layout_width = "20dp"
+                                    android:layout_height = "20dp"
+                                    android:layout_margin = "10dp"
+                                    android:src = "@mipmap/favourite" />
+                            </RelativeLayout>
+
+                        </FrameLayout>
+
+                    </android.support.v7.widget.CardView>
+
+                    <TextView
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_centerInParent = "true"
+                        android:layout_gravity = "center"
+                        android:autoSizeTextType = "uniform"
+                        android:text = "Lipsy Crown T-shirt"
+                        android:textColor = "@color/colorAccent"
+                        android:textSize = "12dp"
+                        android:textStyle = "bold" />
+
+                    <TextView
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_centerInParent = "true"
+                        android:layout_gravity = "center"
+                        android:autoSizeTextType = "uniform"
+                        android:text = "clothing &amp; passion"
+                        android:textColor = "#cdcdcd"
+                        android:textSize = "10dp" />
+
+                    <TextView
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_centerInParent = "true"
+                        android:layout_gravity = "center"
+                        android:autoSizeTextType = "uniform"
+                        android:text = "84 QAR"
+                        android:textStyle="bold"
+                        android:textColor = "@color/colorAccent"
+                        android:textSize = "12dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</ScrollView>

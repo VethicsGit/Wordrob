@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+    <LinearLayout
+        xmlns:android = "http://schemas.android.com/apk/res/android"
+        android:layout_width = "match_parent"
+        android:layout_height = "match_parent"
+        android:background = "@color/colorPrimary"
+        android:fitsSystemWindows = "true"
+        android:orientation = "vertical">
+        <android.support.design.widget.AppBarLayout
+            android:id = "@+id/appbar"
+
+            android:layout_width = "match_parent"
+            android:layout_height = "?attr/actionBarSize"
+            android:background = "@drawable/drop_shadow"
+            android:elevation = "5dp">
+
+        <android.support.v7.widget.Toolbar
+            android:id = "@+id/toolbar"
+            android:layout_width = "match_parent"
+            android:layout_height = "?attr/actionBarSize"
+            android:layout_gravity = "center"
+            android:background = "?attr/colorPrimary"
+            android:gravity = "center">
+        <RelativeLayout
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content"
+            android:layout_margin = "20dp">
+
+            <ImageView
+                android:id = "@+id/faq_back"
+                android:layout_width = "20dp"
+                android:layout_height = "20dp"
+                android:src = "@mipmap/arrow_left" />
+
+           <TextView android:autoSizeTextType="uniform"
+                android:id = "@+id/faq_title"
+                android:layout_width = "match_parent"
+                android:layout_height = "wrap_content"
+                android:layout_centerInParent = "true"
+               android:gravity="center"
+                android:text = "helps &amp; faq's"
+                android:textAllCaps = "true"
+                android:textColor = "@color/colorAccent"
+               android:autoSizeMinTextSize="15dp"
+                android:textStyle = "bold" />
+
+        </RelativeLayout>
+        </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.AppBarLayout>
+
+    <ScrollView xmlns:android = "http://schemas.android.com/apk/res/android"
+        xmlns:app = "http://schemas.android.com/apk/res-auto"
+        xmlns:tools = "http://schemas.android.com/tools"
+        android:layout_width = "match_parent"
+        android:layout_height = "match_parent"
+        android:fillViewport = "true"
+        tools:context = ".Activity.FAQs">
+        <FrameLayout
+            android:layout_width = "match_parent"
+            android:layout_height = "match_parent"
+            android:fitsSystemWindows = "true">
+
+            <ImageView
+                android:layout_width = "match_parent"
+                android:layout_height = "200dp"
+                android:scaleType = "fitXY"
+                android:src = "@drawable/terms_n_condition" />
+
+            <RelativeLayout
+                android:layout_width = "match_parent"
+                android:layout_height = "200dp">
+
+                <LinearLayout
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:layout_centerInParent = "true"
+                    android:orientation = "vertical">
+
+
+                   <TextView android:autoSizeTextType="uniform"
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_gravity = "center"
+                        android:text = "How Can We Help?"
+                        android:textColor = "@color/colorPrimary"
+                        android:textSize = "15dp" />
+
+                   <TextView android:autoSizeTextType="uniform"
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_gravity = "center"
+                        android:text = "Find a answer to frequently asked questions"
+                        android:textColor = "@color/colorPrimary"
+
+                        android:textSize = "13dp" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+
+                android:layout_width = "match_parent"
+                android:layout_height = "wrap_content"
+                android:layout_marginEnd = "30dp"
+                android:layout_marginStart = "30dp"
+                android:layout_marginTop = "170dp"
+                android:paddingBottom="15dp"
+                android:orientation = "vertical">
+
+                <android.support.v7.widget.CardView
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    app:cardCornerRadius = "10dp"
+                    app:cardElevation = "5dp">
+
+
+                    <RelativeLayout
+                        android:layout_width = "match_parent"
+                        android:layout_height = "wrap_content">
+
+                       <TextView android:autoSizeTextType="uniform"
+                            android:layout_width = "match_parent"
+                            android:layout_height = "wrap_content"
+                            android:layout_margin = "10dp"
+                            android:text = "Ask a Question?"
+                            android:textColor = "#CDCDCD  "
+                            android:textSize = "15dp" />
+
+                        <ImageView
+                            android:layout_width = "30dp"
+                            android:layout_height = "40dp"
+                            android:layout_alignParentRight = "true"
+                            android:layout_marginRight = "15dp"
+                            android:padding = "8dp"
+                            android:src = "@mipmap/arrow_right" />
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+
+
+               <TextView android:autoSizeTextType="uniform"
+android:layout_marginBottom="15dp"
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:layout_gravity = "center"
+                    android:layout_marginTop = "15dp"
+                    android:gravity = "center"
+                    android:text = "Top Questions!"
+                    android:textColor = "@color/colorAccent"
+                    android:textSize = "18dp"
+                    android:textStyle = "bold" />
+
+                <android.support.v7.widget.CardView
+                    android:layout_margin="10dp"
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    app:cardCornerRadius = "10dp"
+                    app:cardElevation = "5dp">
+
+                    <LinearLayout
+                        android:layout_width = "match_parent"
+                        android:layout_height = "wrap_content"
+                        android:layout_margin = "10dp"
+                        android:orientation = "horizontal">
+
+                        <LinearLayout
+                            android:layout_weight="1"
+                            android:layout_width = "match_parent"
+                            android:layout_height = "wrap_content"
+                            android:orientation = "vertical">
+
+                           <TextView android:autoSizeTextType="uniform"
+                                android:layout_width = "match_parent"
+                                android:layout_height = "wrap_content"
+                                android:text = "What kind of customer service you offer?"
+                                android:textStyle = "bold" />
+
+                           <TextView android:autoSizeTextType="uniform"
+                                android:layout_width = "match_parent"
+                                android:layout_height = "wrap_content"
+                                android:text = "What kind of customer service you offer?"
+                                android:textColor = "#CDCDCD"
+                                android:textSize = "@dimen/Login_text_size"
+                                />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width = "30dp"
+                            android:layout_height = "30dp"
+                            android:layout_alignParentRight = "true"
+                            android:layout_marginRight = "10dp"
+                            android:padding = "8dp"
+                            android:src = "@mipmap/arrow_down" />
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+                <android.support.v7.widget.CardView
+                    android:layout_margin="10dp"
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    app:cardCornerRadius = "10dp"
+                    app:cardElevation = "5dp">
+
+                    <LinearLayout
+                        android:layout_width = "match_parent"
+                        android:layout_height = "wrap_content"
+                        android:layout_margin = "10dp"
+                        android:orientation = "horizontal">
+
+                        <LinearLayout
+                            android:layout_weight="1"
+                            android:layout_width = "match_parent"
+                            android:layout_height = "wrap_content"
+                            android:orientation = "vertical">
+
+                            <TextView android:autoSizeTextType="uniform"
+                                android:layout_width = "match_parent"
+                                android:layout_height = "wrap_content"
+                                android:text = "What kind of customer service you offer?"
+                                android:textStyle = "bold" />
+
+                            <TextView android:autoSizeTextType="uniform"
+                                android:layout_width = "match_parent"
+                                android:layout_height = "wrap_content"
+                                android:text = "What kind of customer service you offer?"
+                                android:textColor = "#CDCDCD"
+                                android:textSize = "@dimen/Login_text_size"
+                                />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width = "30dp"
+                            android:layout_height = "30dp"
+                            android:layout_alignParentRight = "true"
+                            android:layout_marginRight = "10dp"
+                            android:padding = "8dp"
+                            android:src = "@mipmap/arrow_down" />
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+                <android.support.v7.widget.CardView
+                    android:layout_margin="10dp"
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    app:cardCornerRadius = "10dp"
+                    app:cardElevation = "5dp">
+
+                    <LinearLayout
+                        android:layout_width = "match_parent"
+                        android:layout_height = "wrap_content"
+                        android:layout_margin = "10dp"
+                        android:orientation = "horizontal">
+
+                        <LinearLayout
+                            android:layout_weight="1"
+                            android:layout_width = "match_parent"
+                            android:layout_height = "wrap_content"
+                            android:orientation = "vertical">
+
+                            <TextView android:autoSizeTextType="uniform"
+                                android:layout_width = "match_parent"
+                                android:layout_height = "wrap_content"
+                                android:text = "What kind of customer service you offer?"
+                                android:textStyle = "bold" />
+
+                            <TextView android:autoSizeTextType="uniform"
+                                android:layout_width = "match_parent"
+                                android:layout_height = "wrap_content"
+                                android:text = "What kind of customer service you offer?"
+                                android:textColor = "#CDCDCD"
+                                android:textSize = "@dimen/Login_text_size"
+                                />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width = "30dp"
+                            android:layout_height = "30dp"
+                            android:layout_alignParentRight = "true"
+                            android:layout_marginRight = "10dp"
+                            android:padding = "8dp"
+                            android:src = "@mipmap/arrow_down" />
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+                <android.support.v7.widget.CardView
+                    android:layout_margin="10dp"
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    app:cardCornerRadius = "10dp"
+                    app:cardElevation = "5dp">
+
+                    <LinearLayout
+                        android:layout_width = "match_parent"
+                        android:layout_height = "wrap_content"
+                        android:layout_margin = "10dp"
+                        android:orientation = "horizontal">
+
+                        <LinearLayout
+                            android:layout_weight="1"
+                            android:layout_width = "match_parent"
+                            android:layout_height = "wrap_content"
+                            android:orientation = "vertical">
+
+                            <TextView android:autoSizeTextType="uniform"
+                                android:layout_width = "match_parent"
+                                android:layout_height = "wrap_content"
+                                android:text = "What kind of customer service you offer?"
+                                android:textStyle = "bold" />
+
+                            <TextView android:autoSizeTextType="uniform"
+                                android:layout_width = "match_parent"
+                                android:layout_height = "wrap_content"
+                                android:text = "What kind of customer service you offer?"
+                                android:textColor = "#CDCDCD"
+                                android:textSize = "@dimen/Login_text_size"
+                                />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width = "30dp"
+                            android:layout_height = "30dp"
+                            android:layout_alignParentRight = "true"
+                            android:layout_marginRight = "10dp"
+                            android:padding = "8dp"
+                            android:src = "@mipmap/arrow_down" />
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+                <android.support.v7.widget.CardView
+                    android:layout_margin="10dp"
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    app:cardCornerRadius = "10dp"
+                    app:cardElevation = "5dp">
+
+                    <LinearLayout
+                        android:layout_width = "match_parent"
+                        android:layout_height = "wrap_content"
+                        android:layout_margin = "10dp"
+                        android:orientation = "horizontal">
+
+                        <LinearLayout
+                            android:layout_weight="1"
+                            android:layout_width = "match_parent"
+                            android:layout_height = "wrap_content"
+                            android:orientation = "vertical">
+
+                            <TextView android:autoSizeTextType="uniform"
+                                android:layout_width = "match_parent"
+                                android:layout_height = "wrap_content"
+                                android:text = "What kind of customer service you offer?"
+                                android:textStyle = "bold" />
+
+                            <TextView android:autoSizeTextType="uniform"
+                                android:layout_width = "match_parent"
+                                android:layout_height = "wrap_content"
+                                android:text = "What kind of customer service you offer?"
+                                android:textColor = "#CDCDCD"
+                                android:textSize = "@dimen/Login_text_size"
+                                />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width = "30dp"
+                            android:layout_height = "30dp"
+                            android:layout_alignParentRight = "true"
+                            android:layout_marginRight = "10dp"
+                            android:padding = "8dp"
+                            android:src = "@mipmap/arrow_down" />
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+
+
+            </LinearLayout>
+
+
+        </FrameLayout>
+    </ScrollView>
+
+    </LinearLayout>
+

@@ -1,0 +1,29 @@
+<resources>
+    <string name = "app_name">Wardrobe</string>
+    <string name = "title_activity_dashboard">Dashboard</string>
+    <string name = "navigation_drawer_open">Open navigation drawer</string>
+    <string name = "navigation_drawer_close">Close navigation drawer</string>
+    <string name = "nav_header_title">Android Studio</string>
+    <string name = "nav_header_subtitle">android.studio@android.com</string>
+    <string name = "nav_header_desc">Navigation header</string>
+    <string name = "action_settings">Settings</string>
+    <string name="facebook_app_id">653347028399642</string>
+    <string name="fb_login_protocol_scheme">fb653347028399642</string>
+
+    <array name = "Country">
+        <item>Country</item>
+    </array>
+    <array name = "region">
+        <item>Region</item>
+    </array>
+    <array name = "payment">
+        <item>credit Card</item>
+    </array>
+    <array name = "category">
+        <item>Kaftans &amp; Abayas</item>
+    </array>
+    <array name = "size">
+        <item>Select size</item>
+    </array>
+
+</resources>

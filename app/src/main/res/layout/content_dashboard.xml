@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+    xmlns:app = "http://schemas.android.com/apk/res-auto"
+    xmlns:tools = "http://schemas.android.com/tools"
+    android:layout_width = "match_parent"
+    android:layout_height = "match_parent"
+    android:background = "@color/colorPrimary"
+    android:orientation = "vertical"
+    app:layout_behavior = "@string/appbar_scrolling_view_behavior"
+    tools:context = ".Activity.Dashboard"
+    tools:showIn = "@layout/app_bar_dashboard">
+
+    <LinearLayout
+        android:id = "@+id/viewpager"
+        android:layout_width = "match_parent"
+        android:layout_height = "match_parent"
+        android:layout_weight = "1"
+        android:orientation = "vertical" />
+
+<RelativeLayout
+    android:layout_width = "match_parent"
+    android:layout_height = "wrap_content">
+
+    <ImageView
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        android:scaleType = "fitXY"
+        android:src = "@drawable/tab_bg" />
+    <LinearLayout
+
+        android:layout_marginBottom="10dp"
+
+
+
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        android:orientation = "horizontal">
+
+        <LinearLayout
+            android:id="@+id/bottom_nav_categories"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content">
+
+            <ImageView
+                android:id="@+id/bottom_nav_cat_img"
+                android:layout_gravity="center"
+                android:layout_width = "30dp"
+                android:layout_height = "30dp"
+                android:padding="2dp"
+                android:src="@mipmap/categories"/>
+
+            <TextView
+                android:id="@+id/bottom_nav_cat_text"
+                android:layout_width = "match_parent"
+                android:layout_height = "wrap_content"
+                android:textSize="8dp"
+                android:text="CATEGORIES"
+                android:textColor="@color/colorAccent"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/bottom_nav_designer"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content">
+
+            <ImageView
+                android:id="@+id/bottom_nav_des_img"
+                android:layout_gravity="center"
+                android:layout_width = "30dp"
+                android:layout_height = "30dp"
+                android:padding="2dp"
+                android:src="@mipmap/designers"/>
+
+            <TextView
+                android:id="@+id/bottom_nav_des_text"
+                android:layout_width = "match_parent"
+                android:layout_height = "wrap_content"
+                android:textSize="8dp"
+                android:text="DESIGNERS"
+                android:textColor="@color/colorAccent"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:id="@+id/bottom_nav_home"
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content">
+
+            <ImageView
+                android:id="@+id/bottom_nav_hom_img"
+                android:layout_gravity="center"
+                android:layout_width = "wrap_content"
+                android:layout_height = "50dp"
+
+                android:src="@drawable/home"/>
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/bottom_nav_favorites"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content">
+
+            <ImageView
+
+                android:id="@+id/bottom_nav_fav_img"
+                android:layout_gravity="center"
+                android:layout_width = "30dp"
+                android:layout_height = "30dp"
+                android:padding="2dp"
+                android:src="@mipmap/favourite"/>
+
+            <TextView
+                android:id="@+id/bottom_nav_fav_text"
+                android:layout_width = "match_parent"
+                android:layout_height = "wrap_content"
+                android:textSize="8dp"
+                android:text="FAVORITES"
+                android:textColor="@color/colorAccent"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/bottom_nav_notification"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content">
+
+            <ImageView
+                android:id="@+id/bottom_nav_not_img"
+                android:layout_gravity="center"
+                android:layout_width = "30dp"
+                android:layout_height = "30dp"
+                android:padding="2dp"
+                android:src="@mipmap/notification"/>
+
+            <TextView
+                android:id="@+id/bottom_nav_not_text"
+                android:layout_width = "match_parent"
+                android:layout_height = "wrap_content"
+                android:textSize="8dp"
+                android:text="NOTIFICATIONS"
+                android:singleLine="true"
+                android:textColor="@color/colorAccent"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>
+
+    <FrameLayout
+        android:id = "@+id/bottom_nav"
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        android:layout_alignParentBottom = "true"
+        android:layout_gravity = "center"
+        android:visibility="gone"
+        android:gravity = "center"
+        android:orientation = "vertical">
+
+
+        <ImageView
+            android:layout_width = "match_parent"
+            android:layout_height = "match_parent"
+            android:scaleType = "fitXY"
+            android:src = "@drawable/tab_bg" />
+
+
+        <!--   <android.support.v7.widget.CardView
+               android:id = "@+id/bottom_nav"
+               android:layout_width = "match_parent"
+               android:layout_height = "wrap_content"
+   android:layout_gravity="bottom"
+               android:layout_marginTop = "10dp"
+               android:padding = "15dp"
+               android:translationZ = "10dp"
+
+               app:cardElevation = "10dp">-->
+
+        <RelativeLayout
+
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content">
+
+
+            <com.volcaniccoder.bottomify.BottomifyNavigationView
+                android:id = "@+id/bottomify_nav"
+                android:layout_width = "match_parent"
+                android:layout_height = "wrap_content"
+                android:layout_gravity = "bottom"
+                android:gravity = "bottom"
+                android:minHeight = "40dp"
+                android:orientation = "horizontal"
+                app:active_color = "@color/bottomifyActiveColor"
+                app:animation_duration = "300"
+                app:item_padding = "4dp"
+                app:item_text_size = "10sp"
+                app:menu = "@menu/bottom_nav"
+                app:passive_color = "@color/colorAccent"
+                app:pressed_color = "@color/bottomifyActiveColor"
+                app:scale_percent = "5" />
+
+            <LinearLayout
+                android:id = "@+id/dashboard_arc_layout"
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:layout_centerInParent = "true"
+                android:layout_gravity = "center"
+                android:gravity = "center"
+                android:visibility = "gone">
+
+
+                <ImageView
+                    android:id = "@+id/dashboard_arc"
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:src = "@mipmap/home_arc" />
+            </LinearLayout>
+        </RelativeLayout>
+        <!--</android.support.v7.widget.CardView>-->
+
+
+    </FrameLayout>
+</LinearLayout>

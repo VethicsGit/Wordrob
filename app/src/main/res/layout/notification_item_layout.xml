@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+    android:layout_width = "match_parent"
+    android:layout_height = "wrap_content"
+    android:orientation = "vertical">
+
+    <TextView
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        android:layout_gravity = "center"
+        android:layout_marginTop = "15dp"
+        android:gravity = "start"
+        android:paddingEnd = "20dp"
+        android:paddingStart = "20dp"
+        android:text = "Congratulations! You confirm the email verification"
+        android:textColor = "@color/colorAccent"
+        android:maxLines="2"
+        android:textSize = "15dp" />
+
+    <TextView
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        android:layout_gravity = "center"
+        android:layout_marginTop = "15dp"
+        android:gravity = "end"
+        android:paddingEnd = "20dp"
+        android:paddingStart = "20dp"
+        android:text = "20 minutes ago."
+        android:textColor = "@color/colorAccent"
+        android:textSize = "13dp" />
+
+    <View
+        android:layout_width = "match_parent"
+        android:layout_height = "1dp"
+        android:layout_marginTop = "5dp"
+        android:background = "#bdbdbd" />
+
+</LinearLayout>

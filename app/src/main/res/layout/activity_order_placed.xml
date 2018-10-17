@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+    <LinearLayout
+        xmlns:android = "http://schemas.android.com/apk/res/android"
+        android:layout_width = "match_parent"
+        android:layout_height = "match_parent"
+        android:focusable = "true"
+        android:focusableInTouchMode = "true"
+        android:orientation = "vertical">
+        <android.support.design.widget.AppBarLayout
+            android:id = "@+id/appbar"
+
+            android:background="@drawable/drop_shadow"
+            android:layout_width = "match_parent"
+            android:layout_height = "?attr/actionBarSize"
+            android:elevation = "5dp">
+
+        <android.support.v7.widget.Toolbar
+            android:id = "@+id/toolbar"
+            android:layout_width = "match_parent"
+            android:layout_height = "?attr/actionBarSize"
+            android:layout_gravity = "center"
+            android:background = "?attr/colorPrimary"
+            android:gravity = "center">
+        <RelativeLayout
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content"
+            android:layout_margin = "20dp">
+            <ImageView
+                android:id = "@+id/placeorder_back"
+                android:layout_width = "20dp"
+                android:layout_height = "20dp"
+                android:src = "@mipmap/arrow_left" />
+
+           <TextView android:autoSizeTextType="uniform"
+                android:id = "@+id/orderplaced_title"
+               android:layout_width = "match_parent"
+               android:gravity="center"
+                android:layout_height = "wrap_content"
+                android:layout_centerInParent = "true"
+                android:text = "Order Placed"
+                android:textAllCaps = "true"
+                android:textColor = "@color/colorAccent"
+               android:autoSizeMinTextSize="15dp"
+                android:textStyle = "bold" />
+
+        </RelativeLayout>
+
+        </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.AppBarLayout>
+
+        <ScrollView xmlns:android = "http://schemas.android.com/apk/res/android"
+            xmlns:app = "http://schemas.android.com/apk/res-auto"
+            xmlns:tools = "http://schemas.android.com/tools"
+            android:layout_width = "match_parent"
+            android:layout_height = "match_parent"
+            android:fillViewport="true"
+            tools:context = ".Activity.OrderPlaced">
+        <LinearLayout
+            android:layout_width = "match_parent"
+            android:layout_height = "match_parent"
+            android:layout_margin = "20dp"
+            android:orientation = "vertical">
+        <ImageView
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:minWidth="220dp"
+            android:padding="30dp"
+            android:minHeight="220dp"
+            android:src="@mipmap/completed"/>
+
+           <TextView android:autoSizeTextType="uniform"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:gravity = "center_vertical"
+                android:text = "Payment Completed"
+                android:textColor = "#24205A"
+                android:textSize = "18dp"
+                android:textStyle="bold"
+                />
+
+           <TextView android:autoSizeTextType="uniform"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:gravity = "center"
+                android:text = "Congratulations your order placed successfully\nyour order code is #XD4532"
+
+                android:textColor = "@color/colorgraytxt"
+                android:textSize = "10dp"
+                />
+
+            <RelativeLayout
+                android:layout_width = "match_parent"
+                android:layout_height = "match_parent">
+
+                <Button
+                    android:layout_alignParentBottom="true"
+                    android:id = "@+id/orderplaced_btn_continue"
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    android:layout_marginTop = "15dp"
+                    android:background = "@drawable/login_btn_round_corner"
+                    android:text = "continue shopping"
+                    android:textColor = "@color/colorPrimary"
+                    android:textSize = "@dimen/Login_btn_size" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        </ScrollView>
+    </LinearLayout>
+

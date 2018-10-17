@@ -1,0 +1,731 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+    xmlns:app = "http://schemas.android.com/apk/res-auto"
+    android:layout_width = "match_parent"
+    android:layout_height = "wrap_content"
+    android:focusable = "true"
+    android:focusableInTouchMode = "true"
+    android:orientation = "vertical">
+
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width = "match_parent"
+        android:layout_height = "?attr/actionBarSize"
+        app:elevation = "0dp">
+
+        <android.support.v7.widget.Toolbar
+            android:id = "@+id/toolbar"
+            android:layout_width = "match_parent"
+            android:layout_height = "?attr/actionBarSize"
+            android:background = "?attr/colorPrimary">
+
+            <RelativeLayout
+                android:layout_width = "match_parent"
+                android:layout_height = "wrap_content">
+
+                <ImageView
+                    android:id = "@+id/prodetails_back"
+                    android:layout_width = "20dp"
+                    android:layout_height = "20dp"
+                    android:layout_alignParentStart = "true"
+                    android:layout_centerInParent = "true"
+                    android:layout_margin = "10dp"
+                    android:src = "@mipmap/arrow_left" />
+
+                <TextView
+                    android:id = "@+id/prodetails_title"
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    android:layout_centerInParent = "true"
+                    android:autoSizeMinTextSize = "15dp"
+                    android:autoSizeTextType = "uniform"
+                    android:gravity = "center"
+                    android:text = "Lipsy Crown T-shirt"
+                    android:textAllCaps = "true"
+                    android:textColor = "@color/colorAccent"
+                    android:textStyle = "bold" />
+
+                <LinearLayout
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "match_parent"
+                    android:layout_alignParentRight = "true"
+                    android:layout_marginRight = "10dp"
+                    android:gravity = "center">
+
+                    <ImageView
+                        android:layout_width = "25dp"
+                        android:layout_height = "25dp"
+                        android:layout_marginRight = "3dp"
+                        android:layout_weight = "1"
+                        android:src = "@mipmap/search" />
+
+                    <ImageView
+                        android:id = "@+id/prodetails_Mybag"
+                        android:layout_width = "25dp"
+                        android:layout_height = "25dp"
+                        android:layout_marginLeft = "3dp"
+                        android:layout_weight = "1"
+                        android:src = "@mipmap/bag" />
+
+
+                </LinearLayout>
+            </RelativeLayout>
+
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+
+
+    <!--  <RelativeLayout
+          android:layout_width = "match_parent"
+          android:layout_height = "match_parent">
+      <RelativeLayout
+          android:layout_centerInParent="true"
+          android:layout_width = "match_parent"
+          android:layout_height = "match_parent">
+          <TextView
+              android:id = "@+id/title"
+              android:layout_width = "match_parent"
+              android:gravity="center"
+              android:layout_height = "match_parent"
+              android:layout_centerInParent = "true"
+              android:autoSizeMinTextSize = "18dp"
+              android:autoSizeTextType = "uniform"
+              android:text = "Wardrobe"
+              android:textAllCaps = "true"
+              android:textColor = "@color/colorAccent"
+              android:textSize = "15dp"
+              android:textStyle = "bold" />
+      </RelativeLayout>
+
+      <RelativeLayout
+          android:id="@+id/sidebar_toolbar"
+          android:layout_centerInParent="true"
+          android:layout_width = "match_parent"
+          android:layout_height = "match_parent">
+
+
+
+          <ImageView
+              android:id = "@+id/dashboard_toggle"
+              android:layout_width = "20dp"
+              android:layout_height = "20dp"
+              android:layout_alignParentStart="true"
+              android:layout_centerInParent="true"
+              android:layout_margin = "10dp"
+              android:src = "@mipmap/menu_toggle" />
+
+          <LinearLayout
+              android:layout_width = "wrap_content"
+              android:layout_height = "wrap_content"
+              android:layout_alignParentRight = "true"
+              android:layout_centerInParent = "true"
+              android:layout_marginRight = "10dp"
+              android:gravity = "center">
+
+              <ImageView
+                  android:id = "@+id/dashboard_search"
+                  android:layout_width = "25dp"
+                  android:layout_height = "25dp"
+                  android:layout_marginRight = "3dp"
+                  android:layout_weight = "1"
+                  android:src = "@mipmap/search" />
+
+              <ImageView
+                  android:id = "@+id/dashboard_Mybag"
+                  android:layout_width = "25dp"
+                  android:layout_height = "25dp"
+                  android:layout_marginLeft = "3dp"
+                  android:layout_weight = "1"
+                  android:src = "@mipmap/bag" />
+
+
+          </LinearLayout>
+
+      </RelativeLayout>
+      <RelativeLayout
+          android:id="@+id/bottomnav_toolbar"
+          android:layout_width = "match_parent"
+          android:layout_height = "match_parent">
+
+          <ImageView
+              android:id = "@+id/bottomnav_toolbar_back"
+              android:layout_width = "20dp"
+              android:layout_height = "20dp"
+              android:layout_margin = "10dp"
+              android:src = "@mipmap/arrow_left" />
+
+
+      </RelativeLayout>
+      </RelativeLayout>-->
+    <ScrollView xmlns:android = "http://schemas.android.com/apk/res/android"
+        xmlns:app = "http://schemas.android.com/apk/res-auto"
+        xmlns:card_view = "http://schemas.android.com/tools"
+        android:layout_width = "match_parent"
+        android:layout_height = "match_parent"
+        android:background = "@drawable/white_pattern">
+
+        <LinearLayout
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content"
+            android:focusable = "true"
+            android:focusableInTouchMode = "true"
+            android:orientation = "vertical">
+
+            <android.support.v7.widget.CardView
+                android:layout_width = "match_parent"
+                android:layout_height = "wrap_content"
+                app:cardElevation = "8dp">
+                <!--<FrameLayout
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    android:elevation = "20dp"
+                    android:outlineProvider = "bounds">-->
+
+                <FrameLayout
+                    android:layout_width = "match_parent"
+                    android:layout_height = "match_parent"
+                    android:background = "#00737f" />
+
+                <LinearLayout
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    android:background = "#ffffff"
+                    android:orientation = "vertical">
+
+                    <FrameLayout
+                        android:layout_width = "match_parent"
+                        android:layout_height = "match_parent">
+
+                        <ImageView
+                            android:layout_width = "match_parent"
+                            android:layout_height = "170dp"
+                            android:scaleType = "centerCrop"
+                            android:src = "@drawable/wardrobe_detail" />
+
+                        <RelativeLayout
+                            android:layout_width = "match_parent"
+                            android:layout_height = "match_parent">
+
+                            <ImageView
+                                android:layout_width = "20dp"
+                                android:layout_height = "20dp"
+                                android:layout_margin = "10dp"
+                                android:src = "@mipmap/favourite" />
+
+                        </RelativeLayout>
+
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:layout_width = "match_parent"
+                        android:layout_height = "wrap_content"
+                        android:orientation = "horizontal"
+                        android:padding = "15dp">
+
+                     <!--   <android.support.v7.widget.AppCompatSpinner
+                            android:id = "@+id/prodetails_selectcolor"
+                            style = "@style/mySpinnerItemStyle"
+                            android:layout_width = "match_parent"
+                            android:layout_height = "wrap_content"
+                            android:layout_gravity = "center"
+                            android:layout_weight = "1"
+                            android:gravity = "center" />-->
+
+
+
+                        <RelativeLayout
+                            android:layout_width = "match_parent"
+                android:layout_weight="1"
+                            android:layout_height = "wrap_content">
+                        <LinearLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+                            android:id="@+id/prodetails_selectcolor"
+                            android:layout_width = "match_parent"
+                            android:layout_weight="1"
+                            android:layout_height = "wrap_content"
+                            android:padding="10dp"
+                            >
+
+                            <ImageView
+                                android:id="@+id/selectcolor_icon"
+                                android:layout_width = "20dp"
+                                android:layout_height = "20dp"
+                                android:layout_marginRight="10dp"
+                                android:src = "@drawable/tags_rounded_corners" />
+
+                            <CheckedTextView android:autoSizeTextType="uniform"
+                                android:layout_width = "wrap_content"
+                                android:layout_height = "wrap_content"
+                                android:textColor="#000000"
+                                android:text = "Select Color" />
+
+                        </LinearLayout>
+                            <ImageView
+                                android:id="@+id/prodetails_selectcolor_icon"
+                                android:layout_width = "20dp"
+                                android:layout_height = "20dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerInParent="true"
+                                android:src = "@drawable/ic_expand_less_black_24dp" />
+                        </RelativeLayout>
+
+                        <!--<android.support.v7.widget.AppCompatSpinner-->
+                        <RelativeLayout
+                            android:layout_width = "match_parent"
+                            android:layout_weight="1"
+                            android:layout_height = "match_parent">
+                        <TextView
+                            android:id="@+id/prodetails_selectsizelayout"
+                            style = "@style/mySpinnerItemStyle"
+                            android:layout_width = "match_parent"
+                            android:layout_height = "match_parent"
+                            android:layout_gravity = "center"
+                            android:text="Select Size"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="15dp"
+                            android:layout_weight = "1"
+                            android:entries = "@array/size"
+                            android:gravity = "center" />
+                            <ImageView
+                                android:id="@+id/prodetails_selectsize_icon"
+                                android:layout_width = "20dp"
+                                android:layout_height = "20dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerInParent="true"
+                                android:src = "@drawable/ic_expand_less_black_24dp" />
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+android:id="@+id/prodetails_togglelayout"
+                        android:visibility="gone"
+                        android:layout_width = "match_parent"
+                        android:layout_height = "wrap_content"
+                        android:orientation = "horizontal">
+<!--
+                        <ScrollView
+                            android:visibility="gone"
+                            android:id="@+id/prodetails_colorlayout_root"
+                            android:layout_width = "match_parent"
+                            android:layout_height = "wrap_content">-->
+                        <android.support.v7.widget.RecyclerView
+                            android:visibility="gone" android:id="@+id/prodetails_colorlayout"
+                            android:layout_width = "match_parent"
+                            android:layout_height = "wrap_content"
+                            android:orientation = "horizontal"
+                            android:padding = "15dp"/>
+                        <!--</ScrollView>-->
+                        <LinearLayout
+                            android:id="@+id/prodetails_sizelayout"
+                            android:layout_width = "match_parent"
+                            android:layout_height = "wrap_content"
+                            android:orientation = "horizontal"
+                            android:padding = "15dp">
+
+                            <LinearLayout
+                                android:layout_width = "match_parent"
+                                android:layout_height = "wrap_content"
+                                android:layout_weight = "1"
+                                android:orientation = "horizontal">
+
+                                <TextView
+                                    android:layout_width = "match_parent"
+                                    android:layout_height = "wrap_content"
+                                    android:layout_gravity = "center"
+                                    android:layout_weight = "1"
+                                    android:autoSizeTextType = "uniform"
+                                    android:gravity = "center"
+                                    android:text = "Length"
+                                    android:textColor = "@color/colorAccent" />
+
+                                <EditText
+                                    android:id = "@+id/prodetails_length"
+                                    android:layout_width = "match_parent"
+                                    android:layout_height = "wrap_content"
+                                    android:layout_weight = "1"
+                                    android:background = "@drawable/edittext_gray_border"
+                                    android:inputType = "numberDecimal"
+                                    android:padding = "5dp"
+                                    android:singleLine = "true"></EditText>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width = "match_parent"
+                                android:layout_height = "wrap_content"
+                                android:layout_weight = "1">
+
+                                <TextView
+                                    android:layout_width = "match_parent"
+                                    android:layout_height = "wrap_content"
+                                    android:layout_gravity = "center"
+                                    android:layout_weight = "1"
+                                    android:autoSizeTextType = "uniform"
+                                    android:gravity = "center"
+                                    android:text = "Hips"
+                                    android:textColor = "@color/colorAccent" />
+
+
+                                <EditText
+                                    android:id = "@+id/prodetails_hips"
+                                    android:layout_width = "match_parent"
+                                    android:layout_height = "wrap_content"
+                                    android:layout_weight = "1"
+                                    android:background = "@drawable/edittext_gray_border"
+                                    android:inputType = "numberDecimal"
+                                    android:padding = "5dp"
+                                    android:singleLine = "true"></EditText>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <FrameLayout
+                android:layout_width = "match_parent"
+                android:layout_height = "wrap_content"
+                android:visibility = "gone">
+
+
+                <ImageView
+                    android:layout_width = "match_parent"
+                    android:layout_height = "8dp"
+                    android:background = "@drawable/shadow" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width = "match_parent"
+                android:layout_height = "wrap_content"
+                android:layout_marginTop = "30dp"
+                android:orientation = "vertical">
+
+                <TextView
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:layout_centerInParent = "true"
+                    android:layout_gravity = "center"
+                    android:autoSizeTextType = "uniform"
+                    android:text = "Lipsy Crown T-shirt"
+                    android:textColor = "@color/colorAccent"
+                    android:textSize = "18dp"
+                    android:textStyle = "bold" />
+
+                <TextView
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:layout_centerInParent = "true"
+                    android:layout_gravity = "center"
+                    android:autoSizeTextType = "uniform"
+                    android:text = "clothing &amp; passion"
+                    android:textColor = "#cdcdcd"
+                    android:textSize = "12dp" />
+
+                <TextView
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:layout_centerInParent = "true"
+                    android:layout_gravity = "center"
+                    android:autoSizeTextType = "uniform"
+                    android:text = "84 QAR"
+                    android:textColor = "@color/colorAccent"
+                    android:textSize = "13dp" />
+
+                <android.support.v7.widget.AppCompatRatingBar
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "40dp"
+                    android:layout_gravity = "center"
+                    android:layout_marginBottom = "-10dp"
+                    android:layout_marginTop = "-10dp"
+                    android:isIndicator = "true"
+                    android:numStars = "5"
+                    android:rating = "3.5"
+
+                    android:scaleX = "0.5"
+                    android:scaleY = "0.5"
+                    android:theme = "@style/RatingBar" />
+
+                <TextView
+                    android:id = "@+id/prodetails_rating"
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:layout_centerInParent = "true"
+                    android:layout_gravity = "center"
+                    android:autoSizeTextType = "uniform"
+                    android:text = "36 Reviews"
+                    android:textColor = "#cdcdcd"
+                    android:textSize = "12dp" />
+
+
+                <LinearLayout
+
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    android:layout_marginEnd = "30dp"
+                    android:layout_marginStart = "30dp"
+                    android:layout_marginTop = "20dp"
+                    android:orientation = "vertical">
+
+                    <View
+                        android:layout_width = "match_parent"
+                        android:layout_height = "1dp"
+                        android:layout_marginTop = "5dp"
+                        android:background = "#D3D5DD" />
+
+                    <TextView
+                        android:id = "@+id/submit_review"
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_centerInParent = "true"
+                        android:layout_gravity = "center"
+                        android:layout_margin = "10dp"
+                        android:autoSizeTextType = "uniform"
+                        android:text = "Usually delivered in 7-8 days"
+                        android:textColor = "@color/colorAccent"
+                        android:textSize = "15dp" />
+
+                    <View
+                        android:layout_width = "match_parent"
+                        android:layout_height = "1dp"
+                        android:background = "#D3D5DD" />
+
+                    <TextView
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_centerInParent = "true"
+                        android:layout_gravity = "center"
+                        android:layout_margin = "10dp"
+                        android:autoSizeTextType = "uniform"
+                        android:text = "Extra cost for delivery within 3 days"
+                        android:textColor = "@color/colorAccent"
+                        android:textSize = "15dp" />
+
+                    <View
+                        android:layout_width = "match_parent"
+                        android:layout_height = "1dp"
+                        android:background = "#D3D5DD" />
+
+                    <TextView
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_centerInParent = "true"
+                        android:layout_gravity = "center"
+                        android:layout_marginTop = "25dp"
+                        android:autoSizeTextType = "uniform"
+                        android:text = "Description"
+                        android:textAllCaps = "true"
+                        android:textColor = "@color/colorAccent"
+                        android:textSize = "18dp"
+                        android:textStyle = "bold" />
+
+                    <TextView
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_centerInParent = "true"
+                        android:layout_gravity = "center"
+                        android:layout_marginTop = "25dp"
+                        android:autoSizeTextType = "uniform"
+                        android:gravity = "center"
+                        android:text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer too"
+                        android:textColor = "@color/colorAccent"
+                        android:textSize = "10dp" />
+
+                    <Button
+                        android:id = "@+id/prodetails_addtobag"
+                        android:layout_width = "match_parent"
+                        android:layout_height = "wrap_content"
+                        android:layout_marginTop = "30dp"
+                        android:background = "@drawable/login_btn_round_corner"
+                        android:text = "Add to bag"
+                        android:textAllCaps = "true"
+                        android:textColor = "@color/colorPrimary"
+                        android:textSize = "@dimen/Login_btn_size" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    android:layout_margin = "20dp"
+                    android:padding = "10dp">
+
+                    <TextView
+                        android:layout_width = "wrap_content"
+
+                        android:layout_height = "wrap_content"
+                        android:autoSizeTextType = "uniform"
+                        android:text = "You May Also Like"
+                        android:textColor = "@color/colorAccent"
+                        android:textSize = "12dp" />
+
+                    <TextView
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_alignParentRight = "true"
+                        android:autoSizeTextType = "uniform"
+                        android:text = "View All"
+                        android:textColor = "@color/colorpurple"
+                        android:textSize = "12dp"
+                        android:textStyle = "bold" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    android:layout_marginBottom = "20dp"
+                    android:layout_marginEnd = "20dp"
+                    android:layout_marginStart = "20dp">
+
+                    <LinearLayout
+                        android:layout_width = "match_parent"
+                        android:layout_height = "wrap_content"
+                        android:layout_weight = "1"
+                        android:orientation = "vertical">
+
+                        <android.support.v7.widget.CardView
+                            android:layout_width = "match_parent"
+
+                            android:layout_height = "wrap_content"
+                            android:layout_margin = "5dp"
+                            app:cardCornerRadius = "10dp">
+
+                            <FrameLayout
+                                android:layout_width = "match_parent"
+                                android:layout_height = "match_parent">
+
+                                <ImageView
+                                    android:layout_width = "match_parent"
+                                    android:layout_height = "170dp"
+                                    android:scaleType = "centerCrop"
+                                    android:src = "@drawable/product_thumb" />
+
+                                <RelativeLayout
+                                    android:layout_width = "match_parent"
+                                    android:layout_height = "match_parent">
+
+                                    <ImageView
+                                        android:layout_width = "20dp"
+                                        android:layout_height = "20dp"
+                                        android:layout_margin = "10dp"
+                                        android:src = "@mipmap/favourite" />
+
+                                </RelativeLayout>
+
+                            </FrameLayout>
+
+                        </android.support.v7.widget.CardView>
+
+                        <TextView
+                            android:layout_width = "wrap_content"
+                            android:layout_height = "wrap_content"
+                            android:layout_centerInParent = "true"
+                            android:layout_gravity = "center"
+                            android:autoSizeTextType = "uniform"
+                            android:text = "Lipsy Crown T-shirt"
+                            android:textColor = "@color/colorAccent"
+                            android:textSize = "12dp"
+                            android:textStyle = "bold" />
+
+                        <TextView
+                            android:layout_width = "wrap_content"
+                            android:layout_height = "wrap_content"
+                            android:layout_centerInParent = "true"
+                            android:layout_gravity = "center"
+                            android:autoSizeTextType = "uniform"
+                            android:text = "clothing &amp; passion"
+                            android:textColor = "#cdcdcd"
+                            android:textSize = "10dp" />
+
+                        <TextView
+                            android:layout_width = "wrap_content"
+                            android:layout_height = "wrap_content"
+                            android:layout_centerInParent = "true"
+                            android:layout_gravity = "center"
+                            android:autoSizeTextType = "uniform"
+                            android:text = "84 QAR"
+                            android:textColor = "@color/colorAccent"
+                            android:textSize = "12dp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width = "match_parent"
+                        android:layout_height = "wrap_content"
+                        android:layout_weight = "1"
+                        android:orientation = "vertical">
+
+                        <android.support.v7.widget.CardView
+                            android:layout_width = "match_parent"
+                            android:layout_height = "wrap_content"
+                            android:layout_margin = "5dp"
+                            android:layout_weight = "1"
+                            app:cardCornerRadius = "10dp">
+
+                            <FrameLayout
+                                android:layout_width = "match_parent"
+                                android:layout_height = "match_parent">
+
+                                <ImageView
+                                    android:layout_width = "match_parent"
+                                    android:layout_height = "170dp"
+                                    android:scaleType = "centerCrop"
+                                    android:src = "@drawable/wardrobe_listing" />
+
+                                <RelativeLayout
+                                    android:layout_width = "match_parent"
+                                    android:layout_height = "match_parent">
+
+                                    <ImageView
+                                        android:layout_width = "20dp"
+                                        android:layout_height = "20dp"
+                                        android:layout_margin = "10dp"
+                                        android:src = "@mipmap/favourite" />
+                                </RelativeLayout>
+
+                            </FrameLayout>
+
+                        </android.support.v7.widget.CardView>
+
+                        <TextView
+                            android:layout_width = "wrap_content"
+                            android:layout_height = "wrap_content"
+                            android:layout_centerInParent = "true"
+                            android:layout_gravity = "center"
+                            android:autoSizeTextType = "uniform"
+                            android:text = "Lipsy Crown T-shirt"
+                            android:textColor = "@color/colorAccent"
+                            android:textSize = "12dp"
+                            android:textStyle = "bold" />
+
+                        <TextView
+                            android:layout_width = "wrap_content"
+                            android:layout_height = "wrap_content"
+                            android:layout_centerInParent = "true"
+                            android:layout_gravity = "center"
+                            android:autoSizeTextType = "uniform"
+                            android:text = "clothing &amp; passion"
+                            android:textColor = "#cdcdcd"
+                            android:textSize = "10dp" />
+
+                        <TextView
+                            android:layout_width = "wrap_content"
+                            android:layout_height = "wrap_content"
+                            android:layout_centerInParent = "true"
+                            android:layout_gravity = "center"
+                            android:autoSizeTextType = "uniform"
+                            android:text = "84 QAR"
+                            android:textColor = "@color/colorAccent"
+                            android:textSize = "12dp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
+

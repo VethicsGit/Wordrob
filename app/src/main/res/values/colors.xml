@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name = "colorPrimary">#ffffff</color>
+    <color name = "colorPrimaryDark">#ffffff</color>
+    <color name = "colorAccent">#383051</color>
+    <color name = "colorTransparent">#00000000</color>
+    <color name = "colorfbborder">#38559B</color>
+    <color name = "colorgreen">#4ED164</color>
+    <color name = "colorgray">#cdcdcd</color>
+    <color name = "colorfree">#F66161</color>
+    <color name = "colorgraytxt">#666666</color>
+    <color name = "colorseleced">#cfaa42</color>
+    <color name = "colorpurple">#8C7EDF</color>
+    <color name = "colorwhitetransparent">#11ffffff</color>
+</resources>

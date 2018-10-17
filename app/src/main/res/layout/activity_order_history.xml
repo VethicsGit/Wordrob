@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android = "http://schemas.android.com/apk/res/android"
+    xmlns:app = "http://schemas.android.com/apk/res-auto"
+    xmlns:tools = "http://schemas.android.com/tools"
+    android:layout_width = "match_parent"
+    android:layout_height = "match_parent"
+    tools:context = ".Activity.Favorite">
+
+    <LinearLayout
+        android:layout_width = "match_parent"
+        android:layout_height = "match_parent"
+        android:focusable = "true"
+        android:focusableInTouchMode = "true"
+        android:orientation = "vertical">
+
+<!--        <RelativeLayout
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content"
+            android:layout_margin = "20dp">
+
+            <ImageView
+                android:id = "@+id/orderhistory_back"
+                android:layout_width = "20dp"
+                android:layout_height = "20dp"
+                android:src = "@mipmap/arrow_left" />
+
+           <TextView android:autoSizeTextType="uniform"
+                android:id = "@+id/orderhistory_title"
+               android:layout_width = "match_parent"
+               android:gravity="center"
+                android:layout_height = "wrap_content"
+                android:layout_centerInParent = "true"
+                android:text = "Order History"
+                android:textAllCaps = "true"
+                android:textColor = "@color/colorAccent"
+               android:autoSizeMinTextSize="15dp"
+                android:textStyle = "bold" />
+
+        </RelativeLayout>-->
+
+        <android.support.v7.widget.CardView
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content"
+            android:layout_marginBottom = "20dp"
+            android:padding = "15dp"
+            android:layout_margin="15dp"
+            app:cardCornerRadius = "10dp"
+            app:cardElevation = "5dp">
+
+            <LinearLayout
+                android:layout_width = "match_parent"
+                android:layout_height = "match_parent"
+                android:layout_margin = "10dp"
+                android:orientation = "vertical">
+
+                <RelativeLayout
+                    android:layout_width = "match_parent"
+                    android:layout_height = "match_parent"
+                    android:orientation = "horizontal">
+
+                    <LinearLayout
+                        android:layout_margin="10dp"
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content">
+
+                       <TextView android:autoSizeTextType="uniform"
+                            android:layout_width = "wrap_content"
+                            android:layout_height = "wrap_content"
+                            android:layout_centerInParent = "true"
+                            android:layout_gravity = "start"
+                            android:text = "Order Id :"
+                            android:textColor = "@color/colorAccent"
+                            android:textSize = "12dp"
+                            android:textStyle = "bold" />
+
+                       <TextView android:autoSizeTextType="uniform"
+                            android:layout_width = "wrap_content"
+                            android:layout_height = "wrap_content"
+                            android:layout_centerInParent = "true"
+                            android:layout_gravity = "start"
+                            android:layout_marginStart = "10dp"
+                            android:text = "#3421XC000"
+                            android:textColor = "@color/colorAccent"
+                            android:textSize = "12dp" />
+                    </LinearLayout>
+
+                   <TextView android:autoSizeTextType="uniform"
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_alignParentRight = "true"
+                        android:layout_centerInParent = "true"
+                        android:layout_gravity = "start"
+                        android:layout_marginRight = "10dp"
+                        android:text = "Processing"
+                        android:textColor = "@color/colorgreen"
+                        android:textSize = "12dp"
+                        android:textStyle = "bold" />
+
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width = "match_parent"
+                    android:layout_height = "match_parent"
+                    android:orientation = "horizontal"
+                    android:weightSum = "10">
+
+                    <LinearLayout
+                        android:layout_width = "match_parent"
+                        android:layout_height = "match_parent"
+                        android:layout_weight = "7">
+
+                        <android.support.v7.widget.CardView
+                            android:layout_width = "match_parent"
+                            android:layout_height = "wrap_content"
+                            android:layout_gravity = "center_vertical"
+                            app:cardCornerRadius = "10dp">
+
+                            <ImageView
+                                android:layout_width = "match_parent"
+                                android:layout_height = "match_parent"
+                                android:src = "@drawable/order_detail" />
+
+                        </android.support.v7.widget.CardView>
+
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width = "match_parent"
+                        android:layout_height = "match_parent"
+                        android:layout_weight = "3">
+
+                        <LinearLayout
+                            android:layout_width = "match_parent"
+                            android:layout_height = "match_parent"
+                            android:layout_marginStart = "10dp"
+                            android:gravity = "center_vertical"
+                            android:orientation = "vertical">
+
+                           <TextView android:autoSizeTextType="uniform"
+                                android:layout_width = "wrap_content"
+                                android:layout_height = "wrap_content"
+                                android:layout_centerInParent = "true"
+                                android:layout_gravity = "start"
+                                android:text = "Lipsy Crown T-shirt"
+                                android:textColor = "@color/colorAccent"
+                                android:textSize = "18dp"
+                                android:textStyle = "bold" />
+
+                           <TextView android:autoSizeTextType="uniform"
+                                android:layout_width = "wrap_content"
+                                android:layout_height = "wrap_content"
+                                android:layout_centerInParent = "true"
+                                android:layout_gravity = "start"
+                                android:text = "clothing &amp; passion"
+                                android:textColor = "#cdcdcd"
+                                android:textSize = "12dp" />
+
+                           <LinearLayout
+                               android:layout_width = "wrap_content"
+                               android:layout_height = "wrap_content">
+                               <TextView android:autoSizeTextType="uniform"
+                                android:layout_width = "wrap_content"
+                                android:layout_height = "wrap_content"
+                                android:layout_centerInParent = "true"
+                                android:layout_gravity = "start"
+                                android:text = "Quantity "
+                                android:textColor = "#cdcdcd"
+                                android:textSize = "12dp" />
+                               <TextView android:autoSizeTextType="uniform"
+                                android:layout_width = "wrap_content"
+                                android:layout_height = "wrap_content"
+                                android:layout_centerInParent = "true"
+                                android:layout_gravity = "start"
+                                android:text = "12"
+                                android:textColor = "@color/colorAccent"
+                                android:textSize = "12dp" />
+                           </LinearLayout>
+                            <TextView android:autoSizeTextType="uniform"
+                                android:layout_width = "wrap_content"
+                                android:layout_height = "wrap_content"
+                                android:layout_centerInParent = "true"
+                                android:layout_gravity = "start"
+                                android:text = "84 QAR"
+                                android:textColor = "@color/colorAccent"
+                                android:textSize = "15dp"
+                                android:textStyle = "bold" />
+
+
+                        </LinearLayout>
+
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="20dp"
+                    android:layout_width = "match_parent"
+                    android:layout_height = "match_parent"
+                    android:orientation = "horizontal"
+                    android:weightSum = "10">
+
+                    <LinearLayout
+                        android:layout_width = "match_parent"
+                        android:layout_height = "match_parent"
+                        android:layout_weight = "7">
+
+                        <android.support.v7.widget.CardView
+                            android:layout_width = "match_parent"
+                            android:layout_height = "wrap_content"
+                            android:layout_gravity = "center_vertical"
+                            app:cardCornerRadius = "10dp">
+
+                            <ImageView
+                                android:layout_width = "match_parent"
+                                android:layout_height = "match_parent"
+                                android:src = "@drawable/order_detail" />
+
+                        </android.support.v7.widget.CardView>
+
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width = "match_parent"
+                        android:layout_height = "match_parent"
+                        android:layout_weight = "3">
+
+                        <LinearLayout
+                            android:layout_width = "match_parent"
+                            android:layout_height = "match_parent"
+                            android:layout_marginStart = "10dp"
+                            android:gravity = "center_vertical"
+                            android:orientation = "vertical">
+
+                            <TextView android:autoSizeTextType="uniform"
+                                android:layout_width = "wrap_content"
+                                android:layout_height = "wrap_content"
+                                android:layout_centerInParent = "true"
+                                android:layout_gravity = "start"
+                                android:text = "Lipsy Crown T-shirt"
+                                android:textColor = "@color/colorAccent"
+                                android:textSize = "18dp"
+                                android:textStyle = "bold" />
+
+                            <TextView android:autoSizeTextType="uniform"
+                                android:layout_width = "wrap_content"
+                                android:layout_height = "wrap_content"
+                                android:layout_centerInParent = "true"
+                                android:layout_gravity = "start"
+                                android:text = "clothing &amp; passion"
+                                android:textColor = "#cdcdcd"
+                                android:textSize = "12dp" />
+                            <LinearLayout
+                                android:layout_width = "wrap_content"
+                                android:layout_height = "wrap_content">
+                                <TextView android:autoSizeTextType="uniform"
+                                    android:layout_width = "wrap_content"
+                                    android:layout_height = "wrap_content"
+                                    android:layout_centerInParent = "true"
+                                    android:layout_gravity = "start"
+                                    android:text = "Quantity "
+                                    android:textColor = "#cdcdcd"
+                                    android:textSize = "12dp" />
+                                <TextView android:autoSizeTextType="uniform"
+                                    android:layout_width = "wrap_content"
+                                    android:layout_height = "wrap_content"
+                                    android:layout_centerInParent = "true"
+                                    android:layout_gravity = "start"
+                                    android:text = "12"
+                                    android:textColor = "@color/colorAccent"
+                                    android:textSize = "12dp" />
+                            </LinearLayout>
+                            <TextView android:autoSizeTextType="uniform"
+                                android:layout_width = "wrap_content"
+                                android:layout_height = "wrap_content"
+                                android:layout_centerInParent = "true"
+                                android:layout_gravity = "start"
+                                android:text = "84 QAR"
+                                android:textColor = "@color/colorAccent"
+                                android:textSize = "15dp"
+                                android:textStyle = "bold" />
+
+
+                        </LinearLayout>
+
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width = "match_parent"
+                    android:layout_height = "1dp"
+                    android:layout_marginBottom = "10dp"
+                    android:layout_marginTop = "10dp"
+                    android:background = "#cdcdcd" />
+
+
+                <RelativeLayout
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    android:orientation = "horizontal">
+
+                   <TextView android:autoSizeTextType="uniform"
+                        android:layout_weight="1"
+
+                        android:layout_width = "match_parent"
+                        android:layout_height = "match_parent"
+                        android:layout_gravity = "center_vertical"
+                        android:gravity="center_vertical"
+                       android:layout_centerInParent="true"
+                        android:text = "15 February 2018 10:15 am"
+                        android:textColor = "#000000"
+                        android:textSize = "12dp" />
+
+
+                    <Button
+                        android:layout_alignParentRight="true"
+                        android:id="@+id/mybag_promo_btn"
+                        android:layout_width = "100dp"
+                        android:layout_height = "30dp"
+                        android:layout_gravity = "center_vertical"
+                        android:background = "@drawable/login_btn_round_corner"
+                        android:text = "Checkout"
+                        android:textColor = "@color/colorPrimary"
+                        android:textSize = "12dp" />
+                </RelativeLayout>
+            </LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content"
+            android:layout_marginBottom = "20dp"
+            android:padding = "15dp"
+            android:layout_margin="15dp"
+            app:cardCornerRadius = "10dp"
+            app:cardElevation = "5dp">
+
+            <LinearLayout
+                android:layout_width = "match_parent"
+                android:layout_height = "match_parent"
+                android:layout_margin = "10dp"
+                android:orientation = "vertical">
+
+                <RelativeLayout
+                    android:layout_width = "match_parent"
+                    android:layout_height = "match_parent"
+                    android:orientation = "horizontal">
+
+                    <LinearLayout
+                        android:layout_margin="10dp"
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content">
+
+                       <TextView android:autoSizeTextType="uniform"
+                            android:layout_width = "wrap_content"
+                            android:layout_height = "wrap_content"
+                            android:layout_centerInParent = "true"
+                            android:layout_gravity = "start"
+                            android:text = "Order Id :"
+                            android:textColor = "@color/colorAccent"
+                            android:textSize = "12dp"
+                            android:textStyle = "bold" />
+
+                       <TextView android:autoSizeTextType="uniform"
+                            android:layout_width = "wrap_content"
+                            android:layout_height = "wrap_content"
+                            android:layout_centerInParent = "true"
+                            android:layout_gravity = "start"
+                            android:layout_marginStart = "10dp"
+                            android:text = "#3421XC000"
+                            android:textColor = "@color/colorAccent"
+                            android:textSize = "12dp" />
+                    </LinearLayout>
+
+                   <TextView android:autoSizeTextType="uniform"
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_alignParentRight = "true"
+                        android:layout_centerInParent = "true"
+                        android:layout_gravity = "start"
+                        android:layout_marginRight = "10dp"
+                        android:text = "Delivered"
+                        android:textColor = "@color/colorgreen"
+                        android:textSize = "12dp"
+                        android:textStyle = "bold" />
+
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width = "match_parent"
+                    android:layout_height = "match_parent"
+                    android:orientation = "horizontal"
+                    android:weightSum = "10">
+
+                    <LinearLayout
+                        android:layout_width = "match_parent"
+                        android:layout_height = "match_parent"
+                        android:layout_weight = "7">
+
+                        <android.support.v7.widget.CardView
+                            android:layout_width = "match_parent"
+                            android:layout_height = "wrap_content"
+                            android:layout_gravity = "center_vertical"
+                            app:cardCornerRadius = "10dp">
+
+                            <ImageView
+                                android:layout_width = "match_parent"
+                                android:layout_height = "match_parent"
+                                android:src = "@drawable/order_detail" />
+
+                        </android.support.v7.widget.CardView>
+
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width = "match_parent"
+                        android:layout_height = "match_parent"
+                        android:layout_weight = "3">
+
+                        <LinearLayout
+                            android:layout_width = "match_parent"
+                            android:layout_height = "match_parent"
+                            android:layout_marginStart = "10dp"
+                            android:gravity = "center_vertical"
+                            android:orientation = "vertical">
+
+                           <TextView android:autoSizeTextType="uniform"
+                                android:layout_width = "wrap_content"
+                                android:layout_height = "wrap_content"
+                                android:layout_centerInParent = "true"
+                                android:layout_gravity = "start"
+                                android:text = "Lipsy Crown T-shirt"
+                                android:textColor = "@color/colorAccent"
+                                android:textSize = "18dp"
+                                android:textStyle = "bold" />
+
+                           <TextView android:autoSizeTextType="uniform"
+                                android:layout_width = "wrap_content"
+                                android:layout_height = "wrap_content"
+                                android:layout_centerInParent = "true"
+                                android:layout_gravity = "start"
+                                android:text = "clothing &amp; passion"
+                                android:textColor = "#cdcdcd"
+                                android:textSize = "12dp" />
+                            <LinearLayout
+                                android:layout_width = "wrap_content"
+                                android:layout_height = "wrap_content">
+                                <TextView android:autoSizeTextType="uniform"
+                                    android:layout_width = "wrap_content"
+                                    android:layout_height = "wrap_content"
+                                    android:layout_centerInParent = "true"
+                                    android:layout_gravity = "start"
+                                    android:text = "Quantity "
+                                    android:textColor = "#cdcdcd"
+                                    android:textSize = "12dp" />
+                                <TextView android:autoSizeTextType="uniform"
+                                    android:layout_width = "wrap_content"
+                                    android:layout_height = "wrap_content"
+                                    android:layout_centerInParent = "true"
+                                    android:layout_gravity = "start"
+                                    android:text = "12"
+                                    android:textColor = "@color/colorAccent"
+                                    android:textSize = "12dp" />
+                            </LinearLayout>
+                           <TextView android:autoSizeTextType="uniform"
+                                android:layout_width = "wrap_content"
+                                android:layout_height = "wrap_content"
+                                android:layout_centerInParent = "true"
+                                android:layout_gravity = "start"
+                                android:text = "84 QAR"
+                                android:textColor = "@color/colorAccent"
+                                android:textSize = "15dp"
+                                android:textStyle = "bold" />
+
+
+                        </LinearLayout>
+
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width = "match_parent"
+                    android:layout_height = "1dp"
+                    android:layout_marginBottom = "10dp"
+                    android:layout_marginTop = "10dp"
+                    android:background = "#cdcdcd" />
+
+
+                <RelativeLayout
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    android:orientation = "horizontal">
+
+                   <TextView android:autoSizeTextType="uniform"
+                        android:layout_weight="1"
+                        android:layout_width = "match_parent"
+                        android:layout_height = "match_parent"
+                        android:layout_gravity = "center_vertical"
+                        android:gravity="center_vertical"
+                        android:text = "15 February 2018 10:15 am"
+                        android:textColor = "#000000"
+                       android:layout_centerInParent="true"
+                        android:textSize = "12dp" />
+                    <Button
+                        android:layout_alignParentRight="true"
+                        android:id="@+id/mybag_promo_btn"
+                        android:layout_width = "100dp"
+                        android:layout_height = "30dp"
+                        android:layout_gravity = "center_vertical"
+                        android:background = "@drawable/login_btn_round_corner"
+                        android:text = "Checkout"
+                        android:textColor = "@color/colorPrimary"
+                        android:textSize = "12dp" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+
+    </LinearLayout>
+</ScrollView>
+
