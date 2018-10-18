@@ -165,7 +165,7 @@ public interface APIInterface {
     Call<ProductDetailResponse> product_detail(
             @Field("user_id") String user_id,
             @Field("product_id") String product_id,
-            @Field("Authorization") String token
+            @Header("Authorization") String token
     );
 
 }

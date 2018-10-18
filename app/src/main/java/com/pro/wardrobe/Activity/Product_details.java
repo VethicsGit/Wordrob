@@ -41,6 +41,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.pro.wardrobe.ApiHelper.APIClient;
 import com.pro.wardrobe.ApiHelper.APIInterface;
 import com.pro.wardrobe.ApiResponse.ProductDetailResponse.ProductDetail;
@@ -120,7 +124,9 @@ public class Product_details extends AppCompatActivity {
 
 
         Intent intent=getIntent();
+        if (intent.hasExtra("product_id"))
         product_id=intent.getStringExtra("product_id");
+
 
         final SharedPreferences preferences = getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
 
@@ -129,33 +135,36 @@ public class Product_details extends AppCompatActivity {
         Call<ProductDetailResponse>call=apiInterface.product_detail(preferences.getString("user_id",""),product_id,preferences.getString("token",""));
         call.enqueue(new Callback<ProductDetailResponse>() {
             @Override
-            public void onResponse(Call<ProductDetailResponse> call, Response<ProductDetailResponse> response) {
+            public void onResponse(@NonNull Call<ProductDetailResponse> call, @NonNull Response<ProductDetailResponse> response) {
 
+                Gson gson = new GsonBuilder().create();
+                String myCustomArray = gson.toJson(response).toString();
+//                String obj=new JsonObject().get(response.toString()).getAsString();
+                Log.e("details_Response ",myCustomArray.toString());
                 ProductDetailResponse productDetailResponse=response.body();
                 List<com.pro.wardrobe.ApiResponse.ProductDetailResponse.Response>responses=productDetailResponse.getResponse();
 
-                for (int i =0;i<responses.size();i++)
-                {
-                    com.pro.wardrobe.ApiResponse.ProductDetailResponse.Response response1=responses.get(i);
 
+                    com.pro.wardrobe.ApiResponse.ProductDetailResponse.Response response1=responses.get(0);
+Log.e("details_status",response1.getStatus());
                     if (response1.getStatus().equals("true"))
                     {
                         List<ProductDetail>productDetails=response1.getProductDetails();
+                        Toast.makeText(getApplicationContext(), "product id" + product_id, Toast.LENGTH_SHORT).show();
 
-                        for (int j=0;j<productDetails.size();i++)
-                        {
-                            ProductDetail productDetail=productDetails.get(i);
+                            ProductDetail productDetail=productDetails.get(0);
                             Glide.with(getApplicationContext()).load(productDetail.getImage()).into(product_detail_img);
 
                             product_detail_title.setText(productDetail.getTitle());
                             product_detail_category.setText(productDetail.getCategoryName());
                             product_detail_price.setText(productDetail.getPrice());
                         }
-                    }
+                        else Toast.makeText(Product_details.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+
 
                 }
 
-            }
+
 
             @Override
             public void onFailure(Call<ProductDetailResponse> call, Throwable t) {
