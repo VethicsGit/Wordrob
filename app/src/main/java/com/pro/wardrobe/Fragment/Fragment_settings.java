@@ -18,7 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pro.wardrobe.Activity.Dashboard;
-import com.pro.wardrobe.Activity.Favorite;
 import com.pro.wardrobe.ApiHelper.APIClient;
 import com.pro.wardrobe.ApiHelper.APIInterface;
 import com.pro.wardrobe.ApiResponse.ProfileResponse.ProfileResponse;
@@ -27,7 +26,6 @@ import com.pro.wardrobe.Activity.FAQs;
 import com.pro.wardrobe.Activity.PrivacyPolicy;
 import com.pro.wardrobe.Activity.Profile;
 import com.pro.wardrobe.Activity.ResetPassword;
-import com.pro.wardrobe.Activity.SignUp;
 import com.pro.wardrobe.Activity.TermsAndCondition;
 import com.pro.wardrobe.R;
 

@@ -1,5 +1,7 @@
-package com.pro.wardrobe.Activity;
+package com.pro.wardrobe.Fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,10 +19,21 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.pro.wardrobe.Activity.Dashboard;
 import com.pro.wardrobe.Adapter.Favorite_adapter;
+import com.pro.wardrobe.ApiHelper.APIClient;
+import com.pro.wardrobe.ApiHelper.APIInterface;
+import com.pro.wardrobe.ApiResponse.FavoriteProductListResponse.FavProductList;
+import com.pro.wardrobe.ApiResponse.FavoriteProductListResponse.FavoritieProductListResponse;
 import com.pro.wardrobe.Extra.SwipeController;
 import com.pro.wardrobe.Extra.SwipeControllerActions;
 import com.pro.wardrobe.R;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Favorite extends Fragment {
 
@@ -57,9 +70,37 @@ public class Favorite extends Fragment {
                 swipeController.onDraw(c);
             }
         });*/
+        final SharedPreferences preferences = getActivity().getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
 
-        Favorite_adapter favorite_adapter=new Favorite_adapter(getActivity());
-        favorite_recyclar.setAdapter(favorite_adapter);
+
+        APIInterface apiInterface= APIClient.getClient().create(APIInterface.class);
+        Call<FavoritieProductListResponse>call=apiInterface.fav_product_list(preferences.getString("user_id",""),preferences.getString("token",""));
+        call.enqueue(new Callback<FavoritieProductListResponse>() {
+            @Override
+            public void onResponse(Call<FavoritieProductListResponse> call, Response<FavoritieProductListResponse> response) {
+
+                FavoritieProductListResponse favoritieProductListResponse = response.body();
+                List<com.pro.wardrobe.ApiResponse.FavoriteProductListResponse.Response> responses = favoritieProductListResponse.getResponse();
+
+
+                for (int i = 0; i < responses.size(); i++) {
+                    com.pro.wardrobe.ApiResponse.FavoriteProductListResponse.Response response1 = responses.get(i);
+
+                    if (response1.getStatus().equals("true")) {
+                        List<FavProductList> favProductLists = response1.getFavProductList();
+
+                        Favorite_adapter favorite_adapter = new Favorite_adapter(favProductLists, getContext());
+                        favorite_recyclar.setAdapter(favorite_adapter);
+
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<FavoritieProductListResponse> call, Throwable t) {
+
+            }
+        });
+
 
 
 

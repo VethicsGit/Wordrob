@@ -477,6 +477,7 @@ android:padding="30dp"
             android:id="@+id/designer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:text="Designer"/>
 
         <TextView
@@ -484,6 +485,7 @@ android:padding="30dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
+            android:textStyle="bold"
             android:layout_alignParentRight="true"
              android:text="View All"/>
 

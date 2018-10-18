@@ -7,6 +7,7 @@ import com.pro.wardrobe.ApiResponse.ContactUsResponse.ContactUsResponse;
 import com.pro.wardrobe.ApiResponse.CountryResponse.CountryResponse;
 import com.pro.wardrobe.ApiResponse.DesignerCategoryResponse.Designercategory;
 import com.pro.wardrobe.ApiResponse.DesignerListResponse.Designerimages;
+import com.pro.wardrobe.ApiResponse.FavoriteProductListResponse.FavoritieProductListResponse;
 import com.pro.wardrobe.ApiResponse.ForgotPassResponse.ForgotPassResponse;
 import com.pro.wardrobe.ApiResponse.LoginResponse.LoginResponse;
 import com.pro.wardrobe.ApiResponse.PrivacyPolicyResponse.PrivacyPolicyResponse;
@@ -138,6 +139,13 @@ public interface APIInterface {
             @Field("user_id") String user_id,
             @Header("Authorization")String token
 
+    );
+
+    @FormUrlEncoded
+    @POST("fav_product_list")
+    Call<FavoritieProductListResponse>fav_product_list(
+            @Field("user_id") String user_id,
+            @Header("Authorization") String token
     );
 
 }
