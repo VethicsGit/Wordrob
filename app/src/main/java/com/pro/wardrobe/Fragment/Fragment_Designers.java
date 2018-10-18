@@ -116,7 +116,7 @@ public class Fragment_Designers extends Fragment {
                 startActivity(i);
             }
         });
-        fatchcategory();
+        fatchcategory("");
 
         home_horizontal_view=view.findViewById(R.id.designer_horizontal_view);
 //        final horizontalScrollAdapter adapter1=new horizontalScrollAdapter(cates,getActivity());
@@ -162,7 +162,7 @@ public class Fragment_Designers extends Fragment {
         viewall.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                fatchcategory();
+                fatchcategory("");
             }
         });
 
@@ -238,7 +238,7 @@ public class Fragment_Designers extends Fragment {
                         });*/
 
 
-                        horizontalScrollAdapter= new horizontalScrollAdapter(productTypeLists,getContext());
+                        horizontalScrollAdapter= new horizontalScrollAdapter(productTypeLists,getContext(),designers_recyclarview);
                         home_horizontal_view.setAdapter(horizontalScrollAdapter);
 
                     }
@@ -274,7 +274,7 @@ public class Fragment_Designers extends Fragment {
             @Override
             public boolean onClose() {
 
-                fatchcategory();
+                fatchcategory("");
                 return false;
             }
         };
@@ -302,7 +302,7 @@ public class Fragment_Designers extends Fragment {
 
 
 
-    private void fatchcategory() {
+    private void fatchcategory(String pro_id) {
 
 
         Bundle argumnents= getArguments();
@@ -315,7 +315,7 @@ public class Fragment_Designers extends Fragment {
 
         final SharedPreferences preferences = getActivity().getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
 
-        Call<Designerimages>call1=apiInterface.design_list(preferences.getString("user_id",""),"0",product_id
+        Call<Designerimages>call1=apiInterface.design_list(preferences.getString("user_id",""),"0",pro_id
                 ,preferences.getString("token",""));
         call1.enqueue(new Callback<Designerimages>() {
 
