@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.pro.wardrobe.ApiResponse.DesignerListResponse.VendorList;
@@ -48,7 +49,7 @@ public class Designers_Recyclarview_adapter extends RecyclerView.Adapter<ViewHol
 
     @SuppressLint("CheckResult")
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
 
 
 
@@ -57,10 +58,13 @@ public class Designers_Recyclarview_adapter extends RecyclerView.Adapter<ViewHol
                 .load(vendorList.getProfilePic())
                 .into(viewHolder.item_designers_main_image);
 
+        viewHolder.vendor_id.setText(vendorList.getVendorId());
+
         viewHolder.item_designers_main_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i=new Intent(context,Fragment_product_list.class);
+                i.putExtra("vendor_id",viewHolder.vendor_id.getText().toString());
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(i);
             }
@@ -120,9 +124,11 @@ public class Designers_Recyclarview_adapter extends RecyclerView.Adapter<ViewHol
 
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView item_designers_main_image;
+        TextView vendor_id;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             item_designers_main_image=itemView.findViewById(R.id.item_designers_main_image);
+            vendor_id=itemView.findViewById(R.id.vendor_id);
         }
     }
 /*

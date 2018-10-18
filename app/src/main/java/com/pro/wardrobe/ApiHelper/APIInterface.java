@@ -11,6 +11,7 @@ import com.pro.wardrobe.ApiResponse.FavoriteProductListResponse.FavoritieProduct
 import com.pro.wardrobe.ApiResponse.ForgotPassResponse.ForgotPassResponse;
 import com.pro.wardrobe.ApiResponse.LoginResponse.LoginResponse;
 import com.pro.wardrobe.ApiResponse.PrivacyPolicyResponse.PrivacyPolicyResponse;
+import com.pro.wardrobe.ApiResponse.ProductListResponse.ProductListResponse;
 import com.pro.wardrobe.ApiResponse.ProfileResponse.ProfileResponse;
 import com.pro.wardrobe.ApiResponse.Signup_Response.SignupResponse;
 import com.pro.wardrobe.ApiResponse.TermsResponse.TermsResponse;
@@ -19,7 +20,6 @@ import com.pro.wardrobe.ApiResponse.UpdateDeviceTokenResponse.UpdateDeviceTokenR
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 
@@ -147,5 +147,14 @@ public interface APIInterface {
             @Field("user_id") String user_id,
             @Header("Authorization") String token
     );
+
+
+    @FormUrlEncoded
+    @POST("product_list")
+    Call<ProductListResponse> product_list(
+            @Field("user_id") String user_id,
+            @Field("offset") String offset,
+            @Field("vendor_id") String vendor_id,
+            @Header("Authorization") String token);
 
 }

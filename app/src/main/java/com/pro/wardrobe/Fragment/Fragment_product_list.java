@@ -1,31 +1,34 @@
 package com.pro.wardrobe.Fragment;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.pro.wardrobe.Activity.Activty_MyBag;
-import com.pro.wardrobe.Activity.Dashboard;
 import com.pro.wardrobe.Activity.Filter;
-import com.pro.wardrobe.Activity.Product_details;
-import com.pro.wardrobe.Adapter.Designers_Recyclarview_adapter;
 import com.pro.wardrobe.Adapter.ProductList_Adapter;
+import com.pro.wardrobe.ApiHelper.APIClient;
+import com.pro.wardrobe.ApiHelper.APIInterface;
+import com.pro.wardrobe.ApiResponse.ProductListResponse.ProductList;
+import com.pro.wardrobe.ApiResponse.ProductListResponse.ProductListResponse;
 import com.pro.wardrobe.R;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Fragment_product_list extends AppCompatActivity {
 
@@ -34,6 +37,7 @@ public class Fragment_product_list extends AppCompatActivity {
     ImageView designers_grid_filter;
     RecyclerView prolist_recycler;
     TextView title,prolist_title;
+    String vendor_id;
 
     public Fragment_product_list() {
     }
@@ -51,7 +55,7 @@ public class Fragment_product_list extends AppCompatActivity {
         designers_list_filter = findViewById(R.id.product_list_filter);
         designers_grid_filter = findViewById(R.id.product_grid_filter);
         prolist_title = findViewById(R.id.prolist_title);
-        Typeface facebold =Typeface.createFromAsset(getAssets(),
+        Typeface facebold = Typeface.createFromAsset(getAssets(),
                 "Philosopher_Bold.ttf");
         prolist_title.setTypeface(facebold);
 
@@ -93,28 +97,76 @@ public class Fragment_product_list extends AppCompatActivity {
         final GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
 
         prolist_recycler.setLayoutManager(gridLayoutManager);
-        ProductList_Adapter adapter = new ProductList_Adapter(getApplicationContext(), 0);
+      /*  ProductList_Adapter adapter = new ProductList_Adapter(getApplicationContext(), 0);
         prolist_recycler.setAdapter(adapter);
-
+*/
         prolist_recycler.setNestedScrollingEnabled(false);
 
         designers_grid_filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 prolist_recycler.setLayoutManager(gridLayoutManager);
-                ProductList_Adapter adapter = new ProductList_Adapter(getApplicationContext(), 0);
+               /* ProductList_Adapter adapter = new ProductList_Adapter(getApplicationContext(), 0);
                 prolist_recycler.setAdapter(adapter);
+                */
             }
         });
         designers_list_filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 prolist_recycler.setLayoutManager(manager);
-                ProductList_Adapter adapter = new ProductList_Adapter(getApplicationContext(), 1);
+               /* ProductList_Adapter adapter = new ProductList_Adapter(getApplicationContext(), 1);
                 prolist_recycler.setAdapter(adapter);
+                */
             }
         });
-    }
+
+
+        Intent intent = getIntent();
+        vendor_id = intent.getStringExtra("vendor_id");
+
+
+        final SharedPreferences preferences = getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
+
+
+        APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
+        Call<ProductListResponse> call = apiInterface.product_list(preferences.getString("user_id", ""), "0",vendor_id, preferences.getString("token", ""));
+
+
+        call.enqueue(new Callback<ProductListResponse>() {
+            @Override
+            public void onResponse(Call<ProductListResponse> call, Response<ProductListResponse> response) {
+
+                    ProductListResponse productListResponse=response.body();
+                    List<com.pro.wardrobe.ApiResponse.ProductListResponse.Response>responses=productListResponse.getResponse();
+
+                    for (int i=0;i<responses.size();i++)
+                    {
+                        com.pro.wardrobe.ApiResponse.ProductListResponse.Response response1=responses.get(i);
+
+
+                        if (response1.getStatus().equals("true"))
+                        {
+                            List<ProductList>productLists=response1.getProductList();
+
+
+
+                            ProductList_Adapter productList_adapter=new ProductList_Adapter(productLists,getApplicationContext());
+                            prolist_recycler.setAdapter(productList_adapter);
+
+
+                        }
+                    }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<ProductListResponse> call, Throwable t) {
+
+            }
+        });
+
 /*
     @Nullable
     @Override
@@ -167,4 +219,5 @@ public class Fragment_product_list extends AppCompatActivity {
 
         return view;
     }*/
+    }
 }

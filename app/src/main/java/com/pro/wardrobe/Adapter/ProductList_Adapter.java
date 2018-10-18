@@ -11,19 +11,31 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.pro.wardrobe.Activity.Product_details;
+import com.pro.wardrobe.ApiResponse.ProductListResponse.ProductList;
 import com.pro.wardrobe.R;
+
+import java.util.List;
 
 public class ProductList_Adapter extends RecyclerView.Adapter<ProductList_Adapter.ViewHolder> {
 
     Context context;
+    List<ProductList> productLists;
     int formation;
 
-    public ProductList_Adapter(Context context,int formation) {
+   /* public ProductList_Adapter(Context context,int formation) {
         this.context = context;
         this.formation=formation;
+    }*/
+
+    public ProductList_Adapter(List<ProductList> productLists, Context applicationContext) {
+
+
+        this.context=applicationContext;
+        this.productLists=productLists;
     }
 
     @NonNull
@@ -36,6 +48,16 @@ public class ProductList_Adapter extends RecyclerView.Adapter<ProductList_Adapte
     @SuppressLint("CheckResult")
     @Override
     public void onBindViewHolder(@NonNull ProductList_Adapter.ViewHolder viewHolder, int i) {
+
+
+        ProductList productList=productLists.get(i);
+        Glide.with(context).load(productList.getImage()).into(viewHolder.product_list_img);
+        viewHolder.product_list_title.setText(productList.getTitle());
+        viewHolder.product_list_category.setText(productList.getCategoryName());
+        viewHolder.product_list_price.setText(productList.getPrice());
+
+
+
 
         if (formation==0){
             viewHolder.prolist_relative.setVisibility(View.GONE);
@@ -55,11 +77,13 @@ public class ProductList_Adapter extends RecyclerView.Adapter<ProductList_Adapte
 
     @Override
     public int getItemCount() {
-        return 15;
+        return productLists.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView item_designers_main_image;
+        ImageView item_designers_main_image,product_list_img;
+        TextView product_list_title,product_list_category,product_list_price;
+
         LinearLayout prolist_linear;
         RelativeLayout prolist_relative;
         LinearLayout prodlist_item_root;
@@ -69,6 +93,11 @@ public class ProductList_Adapter extends RecyclerView.Adapter<ProductList_Adapte
             prolist_linear=itemView.findViewById(R.id.prolist_linear);
             prolist_relative=itemView.findViewById(R.id.prolist_relative);
             prodlist_item_root=itemView.findViewById(R.id.prodlist_item_root);
+
+            product_list_img=itemView.findViewById(R.id.product_list_img);
+            product_list_title=itemView.findViewById(R.id.product_list_title);
+            product_list_category=itemView.findViewById(R.id.product_list_category);
+            product_list_price=itemView.findViewById(R.id.product_list_price);
         }
     }
 }
