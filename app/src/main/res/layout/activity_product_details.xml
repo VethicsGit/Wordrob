@@ -199,6 +199,7 @@
                         android:layout_height = "match_parent">
 
                         <ImageView
+                            android:id="@+id/product_detail_img"
                             android:layout_width = "match_parent"
                             android:layout_height = "170dp"
                             android:scaleType = "centerCrop"
@@ -209,6 +210,7 @@
                             android:layout_height = "match_parent">
 
                             <ImageView
+
                                 android:layout_width = "20dp"
                                 android:layout_height = "20dp"
                                 android:layout_margin = "10dp"
@@ -406,6 +408,7 @@ android:id="@+id/prodetails_togglelayout"
                 android:orientation = "vertical">
 
                 <TextView
+                    android:id="@+id/product_detail_title"
                     android:layout_width = "wrap_content"
                     android:layout_height = "wrap_content"
                     android:layout_centerInParent = "true"
@@ -417,6 +420,7 @@ android:id="@+id/prodetails_togglelayout"
                     android:textStyle = "bold" />
 
                 <TextView
+                    android:id="@+id/product_detail_category"
                     android:layout_width = "wrap_content"
                     android:layout_height = "wrap_content"
                     android:layout_centerInParent = "true"
@@ -425,8 +429,13 @@ android:id="@+id/prodetails_togglelayout"
                     android:text = "clothing &amp; passion"
                     android:textColor = "#cdcdcd"
                     android:textSize = "12dp" />
+                <LinearLayout
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/product_detail_price"
                     android:layout_width = "wrap_content"
                     android:layout_height = "wrap_content"
                     android:layout_centerInParent = "true"
@@ -435,6 +444,12 @@ android:id="@+id/prodetails_togglelayout"
                     android:text = "84 QAR"
                     android:textColor = "@color/colorAccent"
                     android:textSize = "13dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="  QAR"/>
+                </LinearLayout>
 
                 <android.support.v7.widget.AppCompatRatingBar
                     android:layout_width = "wrap_content"

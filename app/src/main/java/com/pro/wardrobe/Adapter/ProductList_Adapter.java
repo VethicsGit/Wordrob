@@ -47,7 +47,7 @@ public class ProductList_Adapter extends RecyclerView.Adapter<ProductList_Adapte
 
     @SuppressLint("CheckResult")
     @Override
-    public void onBindViewHolder(@NonNull ProductList_Adapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull final ProductList_Adapter.ViewHolder viewHolder, int i) {
 
 
         ProductList productList=productLists.get(i);
@@ -55,6 +55,7 @@ public class ProductList_Adapter extends RecyclerView.Adapter<ProductList_Adapte
         viewHolder.product_list_title.setText(productList.getTitle());
         viewHolder.product_list_category.setText(productList.getCategoryName());
         viewHolder.product_list_price.setText(productList.getPrice());
+        viewHolder.product_id.setText(productList.getProductId());
 
 
 
@@ -69,6 +70,7 @@ public class ProductList_Adapter extends RecyclerView.Adapter<ProductList_Adapte
             @Override
             public void onClick(View view) {
                 Intent i=new Intent(context, Product_details.class);
+                i.putExtra("product_id",viewHolder.product_id.getText().toString());
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(i);
             }
@@ -82,7 +84,7 @@ public class ProductList_Adapter extends RecyclerView.Adapter<ProductList_Adapte
 
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView item_designers_main_image,product_list_img;
-        TextView product_list_title,product_list_category,product_list_price;
+        TextView product_list_title,product_list_category,product_list_price,product_id;
 
         LinearLayout prolist_linear;
         RelativeLayout prolist_relative;
@@ -98,6 +100,7 @@ public class ProductList_Adapter extends RecyclerView.Adapter<ProductList_Adapte
             product_list_title=itemView.findViewById(R.id.product_list_title);
             product_list_category=itemView.findViewById(R.id.product_list_category);
             product_list_price=itemView.findViewById(R.id.product_list_price);
+            product_id=itemView.findViewById(R.id.product_id);
         }
     }
 }

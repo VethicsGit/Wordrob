@@ -11,6 +11,7 @@ import com.pro.wardrobe.ApiResponse.FavoriteProductListResponse.FavoritieProduct
 import com.pro.wardrobe.ApiResponse.ForgotPassResponse.ForgotPassResponse;
 import com.pro.wardrobe.ApiResponse.LoginResponse.LoginResponse;
 import com.pro.wardrobe.ApiResponse.PrivacyPolicyResponse.PrivacyPolicyResponse;
+import com.pro.wardrobe.ApiResponse.ProductDetailResponse.ProductDetailResponse;
 import com.pro.wardrobe.ApiResponse.ProductListResponse.ProductListResponse;
 import com.pro.wardrobe.ApiResponse.ProfileResponse.ProfileResponse;
 import com.pro.wardrobe.ApiResponse.Signup_Response.SignupResponse;
@@ -156,5 +157,14 @@ public interface APIInterface {
             @Field("offset") String offset,
             @Field("vendor_id") String vendor_id,
             @Header("Authorization") String token);
+
+
+    @FormUrlEncoded
+    @POST("product_details")
+    Call<ProductDetailResponse> product_detail(
+            @Field("user_id") String user_id,
+            @Field("product_id") String product_id,
+            @Field("Authorization") String token
+    );
 
 }

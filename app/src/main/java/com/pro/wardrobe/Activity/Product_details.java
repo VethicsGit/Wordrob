@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.LightingColorFilter;
 import android.graphics.drawable.GradientDrawable;
@@ -39,10 +40,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.pro.wardrobe.ApiHelper.APIClient;
 import com.pro.wardrobe.ApiHelper.APIInterface;
+import com.pro.wardrobe.ApiResponse.ProductDetailResponse.ProductDetail;
+import com.pro.wardrobe.ApiResponse.ProductDetailResponse.ProductDetailResponse;
+import com.pro.wardrobe.ApiResponse.ProductListResponse.ProductListResponse;
 import com.pro.wardrobe.Fragment.Reviews;
 import com.pro.wardrobe.R;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -56,6 +63,9 @@ public class Product_details extends AppCompatActivity {
     EditText prodetails_length;
     EditText prodetails_hips;
     APIInterface apiInterface;
+    String product_id;
+    TextView product_detail_title,product_detail_category,product_detail_price;
+    ImageView product_detail_img;
     //Spinner prodetails_selectcolor;
     int position = -1;
     TextView title, prodetails_selectsizelayout;
@@ -93,6 +103,12 @@ public class Product_details extends AppCompatActivity {
         prodetails_selectcolor = findViewById(R.id.prodetails_selectcolor);
         prodetails_colorlayout = findViewById(R.id.prodetails_colorlayout);
 
+
+        product_detail_img=findViewById(R.id.product_detail_img);
+        product_detail_title=findViewById(R.id.product_detail_title);
+        product_detail_category=findViewById(R.id.product_detail_category);
+        product_detail_price=findViewById(R.id.product_detail_price);
+
         LinearLayoutManager manager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         prodetails_colorlayout.setLayoutManager(manager);
 
@@ -101,6 +117,52 @@ public class Product_details extends AppCompatActivity {
         prodetails_selectsize_icon = findViewById(R.id.prodetails_selectsize_icon);
         prodetails_selectcolor_icon = findViewById(R.id.prodetails_selectcolor_icon);
         selectcolor_icon = findViewById(R.id.selectcolor_icon);
+
+
+        Intent intent=getIntent();
+        product_id=intent.getStringExtra("product_id");
+
+        final SharedPreferences preferences = getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
+
+
+        APIInterface apiInterface= APIClient.getClient().create(APIInterface.class);
+        Call<ProductDetailResponse>call=apiInterface.product_detail(preferences.getString("user_id",""),product_id,preferences.getString("token",""));
+        call.enqueue(new Callback<ProductDetailResponse>() {
+            @Override
+            public void onResponse(Call<ProductDetailResponse> call, Response<ProductDetailResponse> response) {
+
+                ProductDetailResponse productDetailResponse=response.body();
+                List<com.pro.wardrobe.ApiResponse.ProductDetailResponse.Response>responses=productDetailResponse.getResponse();
+
+                for (int i =0;i<responses.size();i++)
+                {
+                    com.pro.wardrobe.ApiResponse.ProductDetailResponse.Response response1=responses.get(i);
+
+                    if (response1.getStatus().equals("true"))
+                    {
+                        List<ProductDetail>productDetails=response1.getProductDetails();
+
+                        for (int j=0;j<productDetails.size();i++)
+                        {
+                            ProductDetail productDetail=productDetails.get(i);
+                            Glide.with(getApplicationContext()).load(productDetail.getImage()).into(product_detail_img);
+
+                            product_detail_title.setText(productDetail.getTitle());
+                            product_detail_category.setText(productDetail.getCategoryName());
+                            product_detail_price.setText(productDetail.getPrice());
+                        }
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ProductDetailResponse> call, Throwable t) {
+
+            }
+        });
+
 
 
       /*  HorizontalScrollView sv = new HorizontalScrollView(this);
