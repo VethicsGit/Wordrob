@@ -68,7 +68,7 @@ public class Product_details extends AppCompatActivity {
     EditText prodetails_hips;
     APIInterface apiInterface;
     String product_id;
-    TextView product_detail_title,product_detail_category,product_detail_price;
+    TextView product_detail_title,product_detail_category,product_detail_price,product_detail_desc;
     ImageView product_detail_img;
     //Spinner prodetails_selectcolor;
     int position = -1;
@@ -106,7 +106,7 @@ public class Product_details extends AppCompatActivity {
         prodetails_togglelayout = findViewById(R.id.prodetails_togglelayout);
         prodetails_selectcolor = findViewById(R.id.prodetails_selectcolor);
         prodetails_colorlayout = findViewById(R.id.prodetails_colorlayout);
-
+        product_detail_desc=findViewById(R.id.product_detail_desc);
 
         product_detail_img=findViewById(R.id.product_detail_img);
         product_detail_title=findViewById(R.id.product_detail_title);
@@ -150,7 +150,7 @@ Log.e("details_status",response1.getStatus());
                     if (response1.getStatus().equals("true"))
                     {
                         List<ProductDetail>productDetails=response1.getProductDetails();
-                        Toast.makeText(getApplicationContext(), "product id" + product_id, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(), "product id" + product_id, Toast.LENGTH_SHORT).show();
 
                             ProductDetail productDetail=productDetails.get(0);
                             Glide.with(getApplicationContext()).load(productDetail.getImage()).into(product_detail_img);
@@ -158,6 +158,7 @@ Log.e("details_status",response1.getStatus());
                             product_detail_title.setText(productDetail.getTitle());
                             product_detail_category.setText(productDetail.getCategoryName());
                             product_detail_price.setText(productDetail.getPrice());
+                            product_detail_desc.setText(productDetail.getDescription());
                         }
                         else Toast.makeText(Product_details.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
 
