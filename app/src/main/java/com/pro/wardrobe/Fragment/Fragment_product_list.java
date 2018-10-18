@@ -38,6 +38,7 @@ public class Fragment_product_list extends AppCompatActivity {
     RecyclerView prolist_recycler;
     TextView title,prolist_title;
     String vendor_id;
+    String category_id;
 
     public Fragment_product_list() {
     }
@@ -46,6 +47,8 @@ public class Fragment_product_list extends AppCompatActivity {
     public Fragment_product_list(TextView title) {
         this.title = title;
     }
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,6 +65,15 @@ public class Fragment_product_list extends AppCompatActivity {
         ImageView mybag = findViewById(R.id.prolist_Mybag);
         ImageView dashboard_search = findViewById(R.id.prolist_search);
         ImageView dashboard_back = findViewById(R.id.prolist_back);
+
+        if (getIntent().hasExtra("category_id")){
+            category_id=getIntent().getStringExtra("category_id");
+        }
+
+        if (getIntent().hasExtra("vendor_id")){
+            vendor_id=getIntent().getStringExtra("vendor_id");
+        }
+
 
         dashboard_search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,7 +142,7 @@ public class Fragment_product_list extends AppCompatActivity {
 
 
         APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
-        Call<ProductListResponse> call = apiInterface.product_list(preferences.getString("user_id", ""), "0",vendor_id, preferences.getString("token", ""));
+        Call<ProductListResponse> call = apiInterface.product_list(preferences.getString("user_id", ""), "0",category_id,vendor_id, preferences.getString("token", ""));
 
 
         call.enqueue(new Callback<ProductListResponse>() {

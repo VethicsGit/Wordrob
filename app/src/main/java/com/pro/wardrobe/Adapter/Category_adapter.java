@@ -50,7 +50,7 @@ public class Category_adapter extends RecyclerView.Adapter<Category_adapter.View
 
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
 
         CategoryList category=categories.get(i);
         final int itemType = getItemViewType(i);
@@ -62,17 +62,20 @@ public class Category_adapter extends RecyclerView.Adapter<Category_adapter.View
         if (itemType==Item_odd){
             viewHolder.right_texted.setVisibility(View.GONE);
             viewHolder.left_txt.setText(category.getCategoryName());
+//            viewHolder.left_txt_id.setText(category.getCategoryId());
 
         }else {
             viewHolder.left_texted.setVisibility(View.GONE);
             viewHolder.right_txt.setText(category.getCategoryName());
         }
+        viewHolder.right_text_id.setText(category.getCategoryId());
 
         viewHolder.category_item_root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i=new Intent(context,Fragment_product_list.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                i.putExtra("category_id",viewHolder.right_text_id.getText().toString());
                 context.startActivity(i);
             }
         });
@@ -88,7 +91,9 @@ public class Category_adapter extends RecyclerView.Adapter<Category_adapter.View
         CardView left_texted;
         CardView right_texted;
         TextView left_txt;
+//        TextView left_txt_id;
         TextView right_txt;
+        TextView right_text_id;
         LinearLayout category_item_root;
 
         public ViewHolder(@NonNull View itemView) {
@@ -97,7 +102,9 @@ public class Category_adapter extends RecyclerView.Adapter<Category_adapter.View
                     left_texted =itemView.findViewById(R.id.left_texted);
                     right_texted=itemView.findViewById(R.id.right_texted);
                     left_txt=itemView.findViewById(R.id.left_txt);
+//                    left_txt_id=itemView.findViewById(R.id.left_txt_id);
                     right_txt=itemView.findViewById(R.id.right_text);
+                    right_text_id=itemView.findViewById(R.id.right_text_id);
             category_item_root=itemView.findViewById(R.id.category_item_root);
         }
     }

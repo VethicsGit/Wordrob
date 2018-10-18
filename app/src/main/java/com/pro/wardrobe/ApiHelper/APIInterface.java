@@ -155,6 +155,7 @@ public interface APIInterface {
     Call<ProductListResponse> product_list(
             @Field("user_id") String user_id,
             @Field("offset") String offset,
+            @Field("category_id") String category_id,
             @Field("vendor_id") String vendor_id,
             @Header("Authorization") String token);
 
