@@ -1,5 +1,6 @@
 package com.pro.wardrobe.ApiHelper;
 
+import com.pro.wardrobe.ApiResponse.AddToFavorite.AddToFavorite;
 import com.pro.wardrobe.ApiResponse.AddbannerResponse.Addbanner;
 import com.pro.wardrobe.ApiResponse.CateListResponse.CatelistResponse;
 import com.pro.wardrobe.ApiResponse.ChangePassResponse.ChangePassResponse;
@@ -14,6 +15,7 @@ import com.pro.wardrobe.ApiResponse.PrivacyPolicyResponse.PrivacyPolicyResponse;
 import com.pro.wardrobe.ApiResponse.ProductDetailResponse.ProductDetailResponse;
 import com.pro.wardrobe.ApiResponse.ProductListResponse.ProductListResponse;
 import com.pro.wardrobe.ApiResponse.ProfileResponse.ProfileResponse;
+import com.pro.wardrobe.ApiResponse.RemoveToFavorite.RemoveToFavorite;
 import com.pro.wardrobe.ApiResponse.Signup_Response.SignupResponse;
 import com.pro.wardrobe.ApiResponse.TermsResponse.TermsResponse;
 import com.pro.wardrobe.ApiResponse.UpdateDeviceTokenResponse.UpdateDeviceTokenResponse;
@@ -168,4 +170,19 @@ public interface APIInterface {
             @Header("Authorization") String token
     );
 
+    @FormUrlEncoded
+    @POST("add_to_fav_product")
+    Call<AddToFavorite>add_fav(
+      @Field("user_id")String user_id,
+      @Field("product_id")String product_id,
+      @Header("Authorization") String token
+    );
+
+    @FormUrlEncoded
+    @POST("remove_from_fav_product")
+    Call<RemoveToFavorite>remove_fav(
+    @Field("user_id")String user_id,
+    @Field("product_id")String product_id,
+    @Header("Authorization") String token
+            );
 }
