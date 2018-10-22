@@ -159,6 +159,7 @@ Log.e("details_status",response1.getStatus());
                             product_detail_category.setText(productDetail.getCategoryName());
                             product_detail_price.setText(productDetail.getPrice());
                             product_detail_desc.setText(productDetail.getDescription());
+                        prodetails_rating.setText(productDetail.getRatingCount());
                         }
                         else Toast.makeText(Product_details.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
 
