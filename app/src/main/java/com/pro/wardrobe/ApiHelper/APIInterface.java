@@ -164,6 +164,19 @@ public interface APIInterface {
             @Field("vendor_id") String vendor_id,
             @Header("Authorization") String token);
 
+    @FormUrlEncoded
+    @POST("product_list")
+    Call<ProductListResponse> product_list_filter(
+            @Field("user_id") String user_id,
+            @Field("offset") String offset,
+            @Field("category_id") String category_id,
+            @Field("vendor_id") String vendor_id,
+            @Field("min_price") String min_price,
+            @Field("max_price") String max_price,
+            @Field("color_ids") String color_ids,
+            @Field("size_ids") String size_ids,
+            @Header("Authorization") String token);
+
 
     @FormUrlEncoded
     @POST("product_details")
@@ -195,6 +208,7 @@ public interface APIInterface {
             @Header("Authorization") String Authorization
                       );
 
+    @FormUrlEncoded
     @POST("add_to_fav_product")
     Call<AddToFavorite>add_fav(
       @Field("user_id")String user_id,

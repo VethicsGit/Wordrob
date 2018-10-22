@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -25,6 +26,9 @@ import com.pro.wardrobe.ApiHelper.APIInterface;
 import com.pro.wardrobe.ApiResponse.ProductListResponse.ProductList;
 import com.pro.wardrobe.ApiResponse.ProductListResponse.ProductListResponse;
 import com.pro.wardrobe.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -142,46 +146,9 @@ public class Fragment_product_list extends AppCompatActivity {
         vendor_id = intent.getStringExtra("vendor_id");
 
 
-        final SharedPreferences preferences = getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
-
-
-        APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
-        Call<ProductListResponse> call = apiInterface.product_list(preferences.getString("user_id", ""), "0",category_id,vendor_id, preferences.getString("token", ""));
-
-
-        call.enqueue(new Callback<ProductListResponse>() {
-            @Override
-            public void onResponse(Call<ProductListResponse> call, Response<ProductListResponse> response) {
-
-                    ProductListResponse productListResponse=response.body();
-                    List<com.pro.wardrobe.ApiResponse.ProductListResponse.Response>responses=productListResponse.getResponse();
-
-                    for (int i=0;i<responses.size();i++)
-                    {
-                        com.pro.wardrobe.ApiResponse.ProductListResponse.Response response1=responses.get(i);
-
-
-                        if (response1.getStatus().equals("true"))
-                        {
-                            List<ProductList>productLists=response1.getProductList();
-
-
-
-                            ProductList_Adapter productList_adapter=new ProductList_Adapter(productLists,getApplicationContext());
-                            prolist_recycler.setAdapter(productList_adapter);
-
-
-                        }
-                    }
-
-
-            }
-
-            @Override
-            public void onFailure(Call<ProductListResponse> call, Throwable t) {
-
-            }
-        });
+        preferences = getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
+        apiInterface = APIClient.getClient().create(APIInterface.class);
+apiCll();
 
 /*
     @Nullable
@@ -235,6 +202,53 @@ public class Fragment_product_list extends AppCompatActivity {
 
         return view;
     }*/
+
+    }
+
+    SharedPreferences preferences;
+    APIInterface apiInterface;
+    public void apiCll(){
+
+
+
+
+        Call<ProductListResponse> call = apiInterface.product_list(preferences.getString("user_id", ""), "0",category_id,vendor_id, preferences.getString("token", ""));
+
+
+        call.enqueue(new Callback<ProductListResponse>() {
+            @Override
+            public void onResponse(Call<ProductListResponse> call, Response<ProductListResponse> response) {
+
+                ProductListResponse productListResponse=response.body();
+                List<com.pro.wardrobe.ApiResponse.ProductListResponse.Response>responses=productListResponse.getResponse();
+
+                for (int i=0;i<responses.size();i++)
+                {
+                    com.pro.wardrobe.ApiResponse.ProductListResponse.Response response1=responses.get(i);
+
+
+                    if (response1.getStatus().equals("true"))
+                    {
+                        List<ProductList>productLists=response1.getProductList();
+
+
+
+                        ProductList_Adapter productList_adapter=new ProductList_Adapter(productLists,getApplicationContext(),new Fragment_product_list());
+                        prolist_recycler.setAdapter(productList_adapter);
+
+
+                    }
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<ProductListResponse> call, Throwable t) {
+
+            }
+        });
+
     }
 
     @Override
@@ -243,7 +257,52 @@ public class Fragment_product_list extends AppCompatActivity {
         if (requestCode == 1) {
             if(resultCode == Activity.RESULT_OK){
                 String result=data.getStringExtra("result");
-                Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+
+                try {
+                    JSONObject obj=new JSONObject(result);
+
+                    final SharedPreferences preferences = getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
+
+
+                    APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
+                    Call<ProductListResponse> call = apiInterface.product_list_filter(preferences.getString("user_id", ""), "0",category_id,vendor_id, obj.getString("minprice"), obj.getString("maxprice"), obj.getString("colorid"), obj.getString("sizeid"),preferences.getString("token", ""));
+
+
+                    call.enqueue(new Callback<ProductListResponse>() {
+                        @Override
+                        public void onResponse(@NonNull Call<ProductListResponse> call, @NonNull Response<ProductListResponse> response) {
+                            ProductListResponse productListResponse=response.body();
+                            List<com.pro.wardrobe.ApiResponse.ProductListResponse.Response>responses=productListResponse.getResponse();
+
+                            for (int i=0;i<responses.size();i++)
+                            {
+                                com.pro.wardrobe.ApiResponse.ProductListResponse.Response response1=responses.get(i);
+
+
+                                if (response1.getStatus().equals("true"))
+                                {
+                                    List<ProductList>productLists=response1.getProductList();
+
+
+
+                                    ProductList_Adapter productList_adapter=new ProductList_Adapter(productLists,getApplicationContext(),new Fragment_product_list());
+                                    prolist_recycler.setAdapter(productList_adapter);
+
+
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(@NonNull Call<ProductListResponse> call, @NonNull Throwable t) {
+
+                        }
+                    });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result

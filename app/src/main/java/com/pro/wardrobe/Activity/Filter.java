@@ -29,6 +29,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.JsonObject;
 import com.innovattic.rangeseekbar.RangeSeekBar;
 import com.pro.wardrobe.ApiHelper.APIClient;
 import com.pro.wardrobe.ApiHelper.APIInterface;
@@ -41,6 +42,8 @@ import com.pro.wardrobe.ApiResponse.SizeListResponse.SizeList;
 import com.pro.wardrobe.R;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -85,7 +88,7 @@ public class Filter extends AppCompatActivity {
 
 Button filter_btn_apply;
 
-String fil_color,fil_size;
+String fil_color="",fil_size="",fil_minprice="",fil_maxprice="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,8 +128,26 @@ String fil_color,fil_size;
         filter_btn_apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                JSONObject obj=new JSONObject();
+              {
+                    try {
+//                        if (!fil_color.isEmpty())
+                        obj.put("colorid",fil_color);
+//                        if (!fil_size.isEmpty())
+                        obj.put("sizeid",fil_size);
+//                        if (!fil_minprice.isEmpty())
+                        obj.put("minprice",fil_minprice);
+//                        if (!fil_maxprice.isEmpty())
+                        obj.put("maxprice",fil_maxprice);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+
                 Intent returnIntent = new Intent();
-                returnIntent.putExtra("result","Yes");
+                returnIntent.putExtra("result",obj.toString());
                 setResult(Activity.RESULT_OK,returnIntent);
                 finish();
             }
@@ -184,6 +205,7 @@ String fil_color,fil_size;
                         tQty.setLayoutParams(paramstqty);
                         tQty.setTextColor(Color.BLACK);
                         tQty.setText(siz.getSize());
+                        tQty.setTag(siz.getSizeId());
                         layout1.addView(tQty);
 
                         layout.setOnClickListener(new View.OnClickListener() {
@@ -191,6 +213,7 @@ String fil_color,fil_size;
                             public void onClick(View view) {
                                 layout1.setBackground(getResources().getDrawable(R.drawable.login_facebook_blue_border));
                                 tQty.setTextColor(Color.parseColor("#ffffff"));
+                                fil_size=tQty.getTag().toString();
                             }
                         });
 
@@ -301,6 +324,9 @@ String fil_color,fil_size;
                             filter_minRange.setText((i) + " QAR");
                             filter_maxRange.setText((i1) + " QAR");
 
+                            fil_minprice=filter_minRange.getText().toString();
+                            fil_maxprice=filter_maxRange.getText().toString();
+
                         }
                     });
 
@@ -357,6 +383,7 @@ else Toast.makeText(Filter.this, "Something went WRONG..!", Toast.LENGTH_SHORT).
             gD.setShape(GradientDrawable.OVAL);
             gD.setStroke(1, Color.parseColor("#ffffff"));
             gD.setSize(62, 62);
+            viewHolder.colorpicker_tv.setText(colors.getColorId());
 
             viewHolder.colorpicker_imageView.setBackground(gD);
 
@@ -367,6 +394,7 @@ else Toast.makeText(Filter.this, "Something went WRONG..!", Toast.LENGTH_SHORT).
                     viewHolder.colorpicker_imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_done_black_24dp));
                    /* prodetails_togglelayout.setVisibility(View.GONE);
                     selectcolor_icon.setImageDrawable(gD);*/
+                   fil_color=viewHolder.colorpicker_tv.getText().toString();
                     notifyDataSetChanged();
                 }
             });
@@ -384,10 +412,12 @@ else Toast.makeText(Filter.this, "Something went WRONG..!", Toast.LENGTH_SHORT).
 
         public class ViewHolder extends RecyclerView.ViewHolder {
             ImageView colorpicker_imageView;
+            TextView colorpicker_tv;
 
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
                 colorpicker_imageView = itemView.findViewById(R.id.colorpicker_imageView);
+                colorpicker_tv = itemView.findViewById(R.id.colorpicker_tv);
             }
         }
     }

@@ -12,7 +12,8 @@
         android:layout_marginRight="10dp"
         android:src = "@drawable/tags_rounded_corners" />
 
-   <CheckedTextView android:autoSizeTextType="uniform"
+   <TextView android:autoSizeTextType="uniform"
+       android:id="@+id/colorpicker_tv"
        android:visibility="gone"
         android:layout_width = "wrap_content"
         android:layout_height = "wrap_content"
