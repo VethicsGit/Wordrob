@@ -1,6 +1,9 @@
 package com.pro.wardrobe.Activity;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.ShapeDrawable;
@@ -12,62 +15,90 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.telecom.Call;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.innovattic.rangeseekbar.RangeSeekBar;
+import com.pro.wardrobe.ApiHelper.APIClient;
+import com.pro.wardrobe.ApiHelper.APIInterface;
+import com.pro.wardrobe.ApiResponse.ColorListResponse.ColorList;
+import com.pro.wardrobe.ApiResponse.ColorListResponse.ResponseColorList;
+import com.pro.wardrobe.ApiResponse.PriceRangeResponse.MinMaxPriceRange;
+import com.pro.wardrobe.ApiResponse.PriceRangeResponse.ResponsePriceRange;
+import com.pro.wardrobe.ApiResponse.SizeListResponse.ResponseSizeList;
+import com.pro.wardrobe.ApiResponse.SizeListResponse.SizeList;
 import com.pro.wardrobe.R;
 
 import org.json.JSONArray;
+
+import java.util.List;
+
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Filter extends AppCompatActivity {
 
     RangeSeekBar seekBar;
     TextView filter_minRange, filter_maxRange;
 
-    int minRnage = 50;
-    int maxRnage = 350;
+//    int minRnage = 50;
+//    int maxRnage = 350;
 
     LinearLayout filter_size_layout;
     RecyclerView filter_color_layout,filter_catelist;
     CardView filter_catelist_card,filter_cate_card;
 
-    String[] size=new String[]{
+    /*String[] size=new String[]{
             "XS",
             "S",
             "M",
             "L",
             "XL",
             "2XL"
-    };
+    };*/
 
-    String[] color=new String[]{
-            "#F44336",
+    List<SizeList> size;
+
+   List<ColorList> colorStr;
+
+    /*=new String[]{
+         *//*   "#F44336",
             "#E91E63",
             "#7B1FA2",
             "#3949AB",
             "#00897B",
-            "#C0CA33",
-    };
+            "#C0CA33",*//*
+    };*/
 
     ImageView filter_back;
 
+Button filter_btn_apply;
+
+String fil_color,fil_size;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_filter);
+            setContentView(R.layout.activity_filter);
+        this.setFinishOnTouchOutside(false);
+
+        getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
         seekBar = findViewById(R.id.rangeSeekBar);
         filter_back = findViewById(R.id.filter_back);
-        seekBar.setMax(300);
-        seekBar.setMinRange(50);
+        filter_btn_apply= findViewById(R.id.filter_btn_apply);
+//        seekBar.setMax(300);
+//        seekBar.setMinRange(50);
 
         filter_minRange = findViewById(R.id.filter_minRange);
         filter_maxRange = findViewById(R.id.filter_maxRange);
@@ -90,56 +121,93 @@ public class Filter extends AppCompatActivity {
             }
         });
 
+
+        filter_btn_apply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent returnIntent = new Intent();
+                returnIntent.putExtra("result","Yes");
+                setResult(Activity.RESULT_OK,returnIntent);
+                finish();
+            }
+        });
+
         LinearLayoutManager manager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         LinearLayoutManager manager1 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         filter_catelist.setLayoutManager(manager1);
         filter_color_layout.setLayoutManager(manager);
 
-        filter_color_layout.setAdapter(new FiltercolorPickerAdapter(getApplicationContext()));
+        colorListToArray();
 
-        for(int i=0;i<size.length;i++){
-            final LinearLayout layout=new LinearLayout(getApplicationContext());
-            LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT,1);
+        final SharedPreferences preferences = getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
+        APIInterface apiInterface= APIClient.getClient().create(APIInterface.class);
+        retrofit2.Call<ResponseSizeList> call=apiInterface.size_list(preferences.getString("user_id",""),preferences.getString("token",""));
+        call.enqueue(new Callback<ResponseSizeList>() {
+            @Override
+            public void onResponse(@NonNull retrofit2.Call<ResponseSizeList> call, @NonNull Response<ResponseSizeList> response) {
+
+                ResponseSizeList responseCall=response.body();
+                List<com.pro.wardrobe.ApiResponse.SizeListResponse.Response> responseList=responseCall.getResponse();
+                com.pro.wardrobe.ApiResponse.SizeListResponse.Response res=responseList.get(0);
+                if (res.getStatus().equals("true")){
+                    List<SizeList> sizests=res.getSizeList();
+                    size=sizests;
+                    for(int i=0;i<size.size();i++){
+                        SizeList siz=size.get(i);
+                        final LinearLayout layout=new LinearLayout(getApplicationContext());
+                        LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT,1);
                /* params.width=40;
             params.height=40;*/
            /* params.setMargins(5,5,5,5);
             layout.setPadding(5,5,5,5);*/
-            layout.setOrientation(LinearLayout.VERTICAL);
-            layout.setLayoutParams(params);
+                        layout.setOrientation(LinearLayout.VERTICAL);
+                        layout.setLayoutParams(params);
 
-            final LinearLayout layout1=new LinearLayout(getApplicationContext());
-            layout.addView(layout1);
-            LinearLayout.LayoutParams params1=new LinearLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                        final LinearLayout layout1=new LinearLayout(getApplicationContext());
+                        layout.addView(layout1);
+                        LinearLayout.LayoutParams params1=new LinearLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
                 /*params1.width=40;
             params1.height=40;*/
 //            params.setMargins(5,5,5,5);
-            layout.setPadding(5,5,5,5);
-            layout1.setOrientation(LinearLayout.VERTICAL);
-            layout1.setLayoutParams(params1);
-            layout1.setBackground(getResources().getDrawable(R.drawable.size_border_dark_gray));
+                        layout.setPadding(5,5,5,5);
+                        layout1.setOrientation(LinearLayout.VERTICAL);
+                        layout1.setLayoutParams(params1);
+                        layout1.setBackground(getResources().getDrawable(R.drawable.size_border_dark_gray));
 
-            final TextView tQty=new TextView(getApplicationContext());
-            LinearLayout.LayoutParams paramstqty=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT,1);
+                        final TextView tQty=new TextView(getApplicationContext());
+                        LinearLayout.LayoutParams paramstqty=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT,1);
 
-            paramstqty.setMargins(20,0,20,10);
-            paramstqty.gravity= Gravity.CENTER;
-            paramstqty.setMargins(5,5,5,5);
-tQty.setGravity(Gravity.CENTER);
-            tQty.setLayoutParams(paramstqty);
-            tQty.setTextColor(Color.BLACK);
-            tQty.setText(size[i]);
-            layout1.addView(tQty);
+                        paramstqty.setMargins(20,0,20,10);
+                        paramstqty.gravity= Gravity.CENTER;
+                        paramstqty.setMargins(5,5,5,5);
+                        tQty.setGravity(Gravity.CENTER);
+                        tQty.setLayoutParams(paramstqty);
+                        tQty.setTextColor(Color.BLACK);
+                        tQty.setText(siz.getSize());
+                        layout1.addView(tQty);
 
-            layout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    layout1.setBackground(getResources().getDrawable(R.drawable.login_facebook_blue_border));
-                    tQty.setTextColor(Color.parseColor("#ffffff"));
+                        layout.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                layout1.setBackground(getResources().getDrawable(R.drawable.login_facebook_blue_border));
+                                tQty.setTextColor(Color.parseColor("#ffffff"));
+                            }
+                        });
+
+                        filter_size_layout.addView(layout);
+                    }
+
                 }
-            });
+                else Toast.makeText(Filter.this, "Something Went wrong..!", Toast.LENGTH_SHORT).show();
+            }
 
-            filter_size_layout.addView(layout);
-        }
+            @Override
+            public void onFailure(@NonNull retrofit2.Call<ResponseSizeList> call, @NonNull Throwable t) {
+
+            }
+        });
+
+
 
 
 
@@ -194,27 +262,58 @@ tQty.setGravity(Gravity.CENTER);
         }*/
 
 
-        seekBar.setSeekBarChangeListener(new RangeSeekBar.SeekBarChangeListener() {
-            @Override
-            public void onStartedSeeking() {
-            }
+        retrofit2.Call<ResponsePriceRange> call1=apiInterface.min_max_price_range(preferences.getString("user_id",""),preferences.getString("token",""));
 
+        call1.enqueue(new Callback<ResponsePriceRange>() {
             @Override
-            public void onStoppedSeeking() {
+            public void onResponse(@NonNull retrofit2.Call<ResponsePriceRange> call, @NonNull Response<ResponsePriceRange> response) {
 
-            }
+                ResponsePriceRange responsePriceRange=response.body();
+                List<com.pro.wardrobe.ApiResponse.PriceRangeResponse.Response> responseList=responsePriceRange.getResponse();
+                com.pro.wardrobe.ApiResponse.PriceRangeResponse.Response response1=responseList.get(0);
+                if (response1.getStatus().equals("true")){
+                    MinMaxPriceRange minMaxPriceRange=response1.getMinMaxPriceRange();
+                    seekBar.setMax(Integer.parseInt(minMaxPriceRange.getMaxPrice()));
+                    seekBar.setMinRange(Integer.parseInt(minMaxPriceRange.getMinPrice()));
 
-            @Override
-            public void onValueChanged(int i, int i1) {
+                    filter_maxRange.setText(minMaxPriceRange.getMaxPrice()+ " QAR");
+                    filter_minRange.setText(minMaxPriceRange.getMinPrice()+ " QAR");
+
+                    Log.e("priceRangeMin",minMaxPriceRange.getMinPrice());
+                    Log.e("priceRangeMax",minMaxPriceRange.getMaxPrice());
+
+                    seekBar.setSeekBarChangeListener(new RangeSeekBar.SeekBarChangeListener() {
+                        @Override
+                        public void onStartedSeeking() {
+                        }
+
+                        @Override
+                        public void onStoppedSeeking() {
+
+                        }
+
+                        @Override
+                        public void onValueChanged(int i, int i1) {
 
 //                minRnage+=i;
 //                maxRnage=maxRnage+i1;
 
-                filter_minRange.setText((i+50) + " QAR");
-                filter_maxRange.setText((i1+50) + " QAR");
+                            filter_minRange.setText((i) + " QAR");
+                            filter_maxRange.setText((i1) + " QAR");
+
+                        }
+                    });
+
+                }
+else Toast.makeText(Filter.this, "Something went WRONG..!", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(@NonNull retrofit2.Call<ResponsePriceRange> call, @NonNull Throwable t) {
 
             }
         });
+
 
         filter_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -228,9 +327,11 @@ tQty.setGravity(Gravity.CENTER);
     class FiltercolorPickerAdapter extends RecyclerView.Adapter<FiltercolorPickerAdapter.ViewHolder> {
 
         Context context;
+        List<ColorList> colorStr;
 
-        public FiltercolorPickerAdapter(Context context) {
+        public FiltercolorPickerAdapter(Context context,List<ColorList> colorStr) {
             this.context = context;
+            this.colorStr=colorStr;
         }
 
         @NonNull
@@ -241,9 +342,10 @@ tQty.setGravity(Gravity.CENTER);
 
         @Override
         public void onBindViewHolder(@NonNull final FiltercolorPickerAdapter.ViewHolder viewHolder, final int i) {
+            ColorList colors=colorStr.get(i);
             RoundRectShape roundRectShape = new RoundRectShape(new float[]{10, 10, 10, 10, 10, 10, 10, 10}, null, new float[]{10, 10, 10, 10, 10, 10, 10, 10});
             ShapeDrawable shapeDrawable = new ShapeDrawable(roundRectShape);
-            shapeDrawable.getPaint().setColor(Color.parseColor(color[i]));
+            shapeDrawable.getPaint().setColor(Color.parseColor(colors.getColorCode()));
 
             if (i == position) {
                 viewHolder.colorpicker_imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_done_black_24dp));
@@ -251,7 +353,7 @@ tQty.setGravity(Gravity.CENTER);
                 viewHolder.colorpicker_imageView.setImageDrawable(null);
             }
             final GradientDrawable gD = new GradientDrawable();
-            gD.setColor(Color.parseColor(color[i]));
+            gD.setColor(Color.parseColor(colors.getColorCode()));
             gD.setShape(GradientDrawable.OVAL);
             gD.setStroke(1, Color.parseColor("#ffffff"));
             gD.setSize(62, 62);
@@ -264,8 +366,8 @@ tQty.setGravity(Gravity.CENTER);
                     position = i;
                     viewHolder.colorpicker_imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_done_black_24dp));
                    /* prodetails_togglelayout.setVisibility(View.GONE);
-                    selectcolor_icon.setImageDrawable(gD);
-                    notifyDataSetChanged();*/
+                    selectcolor_icon.setImageDrawable(gD);*/
+                    notifyDataSetChanged();
                 }
             });
         }
@@ -277,7 +379,7 @@ tQty.setGravity(Gravity.CENTER);
 
         @Override
         public int getItemCount() {
-            return color.length;
+            return colorStr.size();
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder {
@@ -326,5 +428,34 @@ tQty.setGravity(Gravity.CENTER);
                 super(itemView);
             }
         }
+    }
+
+
+    public void colorListToArray(){
+        final SharedPreferences preferences = getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
+        APIInterface apiInterface= APIClient.getClient().create(APIInterface.class);
+        retrofit2.Call<ResponseColorList> call=apiInterface.color_list(preferences.getString("user_id",""),preferences.getString("token",""));
+        call.enqueue(new Callback<ResponseColorList>() {
+            @Override
+            public void onResponse(@NonNull retrofit2.Call<ResponseColorList> call, @NonNull Response<ResponseColorList> response) {
+
+                ResponseColorList responseCall=response.body();
+                List<com.pro.wardrobe.ApiResponse.ColorListResponse.Response> responseList=responseCall.getResponse();
+                com.pro.wardrobe.ApiResponse.ColorListResponse.Response res=responseList.get(0);
+                if (res.getStatus().equals("true")){
+                List<ColorList> colorLists=res.getColorList();
+              colorStr=colorLists;
+                    filter_color_layout.setAdapter(new FiltercolorPickerAdapter(getApplicationContext(),colorLists));
+
+                }
+                else Toast.makeText(Filter.this, "Something Went wrong..!", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(@NonNull retrofit2.Call<ResponseColorList> call, @NonNull Throwable t) {
+
+            }
+        });
+
     }
 }

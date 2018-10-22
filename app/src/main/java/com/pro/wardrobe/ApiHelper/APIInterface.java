@@ -3,6 +3,7 @@ package com.pro.wardrobe.ApiHelper;
 import com.pro.wardrobe.ApiResponse.AddbannerResponse.Addbanner;
 import com.pro.wardrobe.ApiResponse.CateListResponse.CatelistResponse;
 import com.pro.wardrobe.ApiResponse.ChangePassResponse.ChangePassResponse;
+import com.pro.wardrobe.ApiResponse.ColorListResponse.ResponseColorList;
 import com.pro.wardrobe.ApiResponse.ContactUsResponse.ContactUsResponse;
 import com.pro.wardrobe.ApiResponse.CountryResponse.CountryResponse;
 import com.pro.wardrobe.ApiResponse.DesignerCategoryResponse.Designercategory;
@@ -10,11 +11,13 @@ import com.pro.wardrobe.ApiResponse.DesignerListResponse.Designerimages;
 import com.pro.wardrobe.ApiResponse.FavoriteProductListResponse.FavoritieProductListResponse;
 import com.pro.wardrobe.ApiResponse.ForgotPassResponse.ForgotPassResponse;
 import com.pro.wardrobe.ApiResponse.LoginResponse.LoginResponse;
+import com.pro.wardrobe.ApiResponse.PriceRangeResponse.ResponsePriceRange;
 import com.pro.wardrobe.ApiResponse.PrivacyPolicyResponse.PrivacyPolicyResponse;
 import com.pro.wardrobe.ApiResponse.ProductDetailResponse.ProductDetailResponse;
 import com.pro.wardrobe.ApiResponse.ProductListResponse.ProductListResponse;
 import com.pro.wardrobe.ApiResponse.ProfileResponse.ProfileResponse;
 import com.pro.wardrobe.ApiResponse.Signup_Response.SignupResponse;
+import com.pro.wardrobe.ApiResponse.SizeListResponse.ResponseSizeList;
 import com.pro.wardrobe.ApiResponse.TermsResponse.TermsResponse;
 import com.pro.wardrobe.ApiResponse.UpdateDeviceTokenResponse.UpdateDeviceTokenResponse;
 
@@ -167,5 +170,27 @@ public interface APIInterface {
             @Field("product_id") String product_id,
             @Header("Authorization") String token
     );
+
+    @FormUrlEncoded
+    @POST("color_list")
+    Call<ResponseColorList> color_list(
+            @Field("user_id") String user_id,
+            @Header("Authorization") String Authorization
+                      );
+
+
+    @FormUrlEncoded
+    @POST("size_list")
+    Call<ResponseSizeList> size_list(
+            @Field("user_id") String user_id,
+            @Header("Authorization") String Authorization
+                      );
+
+    @FormUrlEncoded
+    @POST("min_max_price_range")
+    Call<ResponsePriceRange> min_max_price_range(
+            @Field("user_id") String user_id,
+            @Header("Authorization") String Authorization
+                      );
 
 }

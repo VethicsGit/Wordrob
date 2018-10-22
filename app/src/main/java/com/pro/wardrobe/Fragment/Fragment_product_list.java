@@ -1,6 +1,7 @@
 package com.pro.wardrobe.Fragment;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,6 +15,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.pro.wardrobe.Activity.Activty_MyBag;
 import com.pro.wardrobe.Activity.Filter;
@@ -100,7 +102,9 @@ public class Fragment_product_list extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), Filter.class);
-                startActivity(i);
+                startActivityForResult(i,1);
+
+
             }
         });
 
@@ -231,5 +235,19 @@ public class Fragment_product_list extends AppCompatActivity {
 
         return view;
     }*/
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK){
+                String result=data.getStringExtra("result");
+                Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
     }
 }

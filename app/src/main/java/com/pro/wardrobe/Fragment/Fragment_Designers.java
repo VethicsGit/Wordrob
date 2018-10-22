@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
@@ -162,7 +163,11 @@ public class Fragment_Designers extends Fragment {
         viewall.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                fatchcategory("");
+//                fatchcategory("");
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                title.setText("Designers");
+//                    ft.addToBackStack("Dashboard");
+                ft.replace(R.id.viewpager, new Fragment_Designers(0,title)).commit();
             }
         });
 

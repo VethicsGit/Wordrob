@@ -131,7 +131,7 @@ public class Product_details extends AppCompatActivity {
         final SharedPreferences preferences = getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
 
 
-        APIInterface apiInterface= APIClient.getClient().create(APIInterface.class);
+            APIInterface apiInterface= APIClient.getClient().create(APIInterface.class);
         Call<ProductDetailResponse>call=apiInterface.product_detail(preferences.getString("user_id",""),product_id,preferences.getString("token",""));
         call.enqueue(new Callback<ProductDetailResponse>() {
             @Override

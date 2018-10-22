@@ -19,6 +19,7 @@
         android:label = "@string/app_name"
         android:roundIcon = "@mipmap/app_icon"
         android:supportsRtl = "true"
+        android:excludeFromRecents="true"
         android:theme = "@style/AppTheme.NoActionBar">
 
         <!-- Firebase Notifications -->
@@ -93,7 +94,7 @@
         <activity android:name = ".Activity.Payment" />
         <activity android:name = ".Activity.Confirm" />
         <activity android:name = ".Activity.OrderPlaced" />
-        <activity android:name = ".Activity.Filter" />
+        <activity android:name = ".Activity.Filter" />  <!--android:theme="@style/Theme.AppCompat.Light.Dialog"-->
         <activity android:name = ".Fragment.Fragment_product_list" />
 
         <meta-data
