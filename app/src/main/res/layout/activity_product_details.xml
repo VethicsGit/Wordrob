@@ -554,7 +554,7 @@ android:id="@+id/prodetails_togglelayout"
                         android:layout_marginTop = "25dp"
                         android:autoSizeTextType = "uniform"
                         android:gravity = "center"
-                        android:text = ""
+                        android:text = "desc"
                         android:textColor = "@color/colorAccent"
                         android:textSize = "10dp" />
                     <!--Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer too-->

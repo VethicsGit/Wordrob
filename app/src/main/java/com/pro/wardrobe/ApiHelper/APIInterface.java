@@ -1,5 +1,6 @@
 package com.pro.wardrobe.ApiHelper;
 
+import com.pro.wardrobe.ApiResponse.AddToFavorite.AddToFavorite;
 import com.pro.wardrobe.ApiResponse.AddbannerResponse.Addbanner;
 import com.pro.wardrobe.ApiResponse.CateListResponse.CatelistResponse;
 import com.pro.wardrobe.ApiResponse.ChangePassResponse.ChangePassResponse;
@@ -16,6 +17,7 @@ import com.pro.wardrobe.ApiResponse.PrivacyPolicyResponse.PrivacyPolicyResponse;
 import com.pro.wardrobe.ApiResponse.ProductDetailResponse.ProductDetailResponse;
 import com.pro.wardrobe.ApiResponse.ProductListResponse.ProductListResponse;
 import com.pro.wardrobe.ApiResponse.ProfileResponse.ProfileResponse;
+import com.pro.wardrobe.ApiResponse.RemoveToFavorite.RemoveToFavorite;
 import com.pro.wardrobe.ApiResponse.Signup_Response.SignupResponse;
 import com.pro.wardrobe.ApiResponse.SizeListResponse.ResponseSizeList;
 import com.pro.wardrobe.ApiResponse.TermsResponse.TermsResponse;
@@ -172,6 +174,7 @@ public interface APIInterface {
     );
 
     @FormUrlEncoded
+<<<<<<< HEAD
     @POST("color_list")
     Call<ResponseColorList> color_list(
             @Field("user_id") String user_id,
@@ -193,4 +196,20 @@ public interface APIInterface {
             @Header("Authorization") String Authorization
                       );
 
+=======
+    @POST("add_to_fav_product")
+    Call<AddToFavorite>add_fav(
+      @Field("user_id")String user_id,
+      @Field("product_id")String product_id,
+      @Header("Authorization") String token
+    );
+
+    @FormUrlEncoded
+    @POST("remove_from_fav_product")
+    Call<RemoveToFavorite>remove_fav(
+    @Field("user_id")String user_id,
+    @Field("product_id")String product_id,
+    @Header("Authorization") String token
+            );
+>>>>>>> 645132a11e935a65fdac44add2b1d599596bd64e
 }
