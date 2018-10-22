@@ -174,7 +174,6 @@ public interface APIInterface {
     );
 
     @FormUrlEncoded
-<<<<<<< HEAD
     @POST("color_list")
     Call<ResponseColorList> color_list(
             @Field("user_id") String user_id,
@@ -196,7 +195,6 @@ public interface APIInterface {
             @Header("Authorization") String Authorization
                       );
 
-=======
     @POST("add_to_fav_product")
     Call<AddToFavorite>add_fav(
       @Field("user_id")String user_id,
@@ -211,5 +209,4 @@ public interface APIInterface {
     @Field("product_id")String product_id,
     @Header("Authorization") String token
             );
->>>>>>> 645132a11e935a65fdac44add2b1d599596bd64e
 }
