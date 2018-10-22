@@ -79,6 +79,10 @@ public class Category_adapter extends RecyclerView.Adapter<Category_adapter.View
                 context.startActivity(i);
             }
         });
+
+
+
+
     }
 
     @Override

@@ -38,13 +38,31 @@ public class Favorite_adapter extends RecyclerView.Adapter<Favorite_adapter.View
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
 
-        FavProductList favProductList=favProductLists.get(i);
+        final FavProductList favProductList=favProductLists.get(i);
         Glide.with(context).load(favProductList.getImage()).into(viewHolder.fav_product_img);
         viewHolder.fav_product_title.setText(favProductList.getTitle());
         viewHolder.fav_product_category.setText(favProductList.getCategoryName());
         viewHolder.fav_product_price.setText(favProductList.getPrice());
+
+
+        viewHolder.fav_delet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+//                favProductLists.get(i);
+
+                favProductLists.remove(i);
+
+                notifyItemRemoved(i);
+
+                notifyItemRangeChanged(i,favProductLists.size());
+
+
+                notifyDataSetChanged();
+            }
+        });
 
 
     }
@@ -56,7 +74,7 @@ public class Favorite_adapter extends RecyclerView.Adapter<Favorite_adapter.View
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView fav_product_img;
+        ImageView fav_product_img,fav_delet;
         TextView fav_product_price,fav_product_category,fav_product_title;
         public ViewHolder(@NonNull View itemView)
         {
@@ -65,8 +83,11 @@ public class Favorite_adapter extends RecyclerView.Adapter<Favorite_adapter.View
             fav_product_category=itemView.findViewById(R.id.fav_product_category);
             fav_product_price=itemView.findViewById(R.id.fav_product_price);
             fav_product_title=itemView.findViewById(R.id.fav_product_title);
+            fav_delet=itemView.findViewById(R.id.fav_delet);
 
         }
+
+
 
 
     }

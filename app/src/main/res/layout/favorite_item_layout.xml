@@ -17,6 +17,7 @@
 
 
         <ImageView
+            android:id="@+id/fav_delet"
             android:layout_width = "100dp"
             android:layout_height = "130dp"
             android:layout_gravity = "center"
