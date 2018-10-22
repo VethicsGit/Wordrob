@@ -335,6 +335,13 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             Log.e("Sign_in_name", acct.getDisplayName());
             Log.e("Profile_Name :", acct.getDisplayName() + "\nEmail : " + acct.getEmail() + "\nFamily Name :" + acct.getFamilyName() + "\n Given Name :" + acct.getGivenName() + "\n ID :" + acct.getId());
 
+            if (acct.getEmail().isEmpty()){
+
+            }
+            else {
+
+            }
+
             Toast.makeText(Login.this, "Google plus Login Name: " + acct.getDisplayName(), Toast.LENGTH_SHORT).show();
             //Similarly you can get the email and photourl using acct.getEmail() and  acct.getPhotoUrl()
 

@@ -93,6 +93,7 @@ this.product_list=product_list;
             }
         });
 
+        viewHolder.prolist_isfav.setText(productList.getIsFav());
         if (Integer.parseInt(productList.getIsFav()) == 0) {
             viewHolder.product_addtofav.setImageDrawable(context.getResources().getDrawable(R.drawable.favourite));
         } else
@@ -103,9 +104,9 @@ this.product_list=product_list;
             public void onClick(View view) {
 
 
-                if (viewHolder.product_addtofav.getDrawable() == context.getResources().getDrawable(R.drawable.favourite)) {
-//                if (Integer.parseInt(productList.getIsFav()) == 0) {
-
+//                if (viewHolder.product_addtofav.getDrawable() == context.getResources().getDrawable(R.drawable.favourite)) {
+                if (Integer.parseInt(viewHolder.prolist_isfav.getText().toString()) == 0) {
+                    viewHolder.prolist_isfav.setText("1");
 
                     viewHolder.product_addtofav.setImageResource(R.drawable.heart_filled);
 
@@ -142,6 +143,7 @@ this.product_list=product_list;
                             }
                         });
                 } else {
+                    viewHolder.prolist_isfav.setText("0");
                     final SharedPreferences preferences = context.getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
 //                    notifyDataSetChanged();
 //                        product_removetofav.setOnClickListener(new View.OnClickListener() {
@@ -185,7 +187,7 @@ this.product_list=product_list;
 
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView item_designers_main_image, product_list_img, product_addtofav, product_removetofav;
-        TextView product_list_title, product_list_category, product_list_price, product_id;
+        TextView product_list_title, product_list_category, product_list_price, product_id,prolist_isfav;
         String str_product_id;
         LinearLayout prolist_linear;
         RelativeLayout prolist_relative;
@@ -208,6 +210,7 @@ this.product_list=product_list;
 
 
             product_addtofav = itemView.findViewById(R.id.product_addtofav);
+            prolist_isfav= itemView.findViewById(R.id.prolist_isfav);
             product_removetofav = itemView.findViewById(R.id.product_removetofav);
 
 
