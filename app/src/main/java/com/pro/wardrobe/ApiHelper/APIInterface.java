@@ -165,6 +165,17 @@ public interface APIInterface {
             @Field("vendor_id") String vendor_id,
             @Header("Authorization") String token);
 
+
+    @FormUrlEncoded
+    @POST("product_list")
+    Call<ProductListResponse> product_list_sorting(
+            @Field("user_id") String user_id,
+            @Field("offset") String offset,
+            @Field("category_id") String category_id,
+            @Field("vendor_id") String vendor_id,
+            @Field("sort_by") String sort_by,
+            @Header("Authorization") String token);
+
     @FormUrlEncoded
     @POST("product_list")
     Call<ProductListResponse> product_list_filter(

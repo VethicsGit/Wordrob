@@ -128,6 +128,7 @@
 
            <TextView android:background="@drawable/square_gray_outline"
                 android:layout_weight="1"
+               android:id="@+id/prolist_sort"
                 android:layout_width = "match_parent"
                 android:layout_height = "match_parent"
                 android:text = "SORT BY"

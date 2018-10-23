@@ -3,12 +3,14 @@ package com.pro.wardrobe.Fragment;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -63,12 +65,24 @@ public class Fragment_product_list extends AppCompatActivity {
 
 
 
+    String[] sorting=new String[]{
+            "New to Old",
+            "Old to New",
+            "Price : High to Low",
+            "Price : Low to High",
+            "Title : A to Z",
+            "Title : Z to A"
+
+    };
+
+TextView prolist_sort;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_product_list);
         designer_filter = findViewById(R.id.product_filter);
         designers_list_filter = findViewById(R.id.product_list_filter);
+        prolist_sort= findViewById(R.id.prolist_sort);
         designers_grid_filter = findViewById(R.id.product_grid_filter);
         prolist_title = findViewById(R.id.prolist_title);
         Typeface facebold = Typeface.createFromAsset(getAssets(),
@@ -125,6 +139,30 @@ public class Fragment_product_list extends AppCompatActivity {
                 Intent i = new Intent(getApplicationContext(), Filter.class);
                 startActivityForResult(i,1);
 
+
+            }
+        });
+
+        prolist_sort.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(Fragment_product_list.this);
+                builder.setTitle("SORT BY");
+                builder.setItems(sorting, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int item) {
+                        // Do something with the selection
+                       apiCllSorting(sorting[item].replace(" : ","_").replace(" ","_"));
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                });
+                AlertDialog alert = builder.create();
+                alert.show();
 
             }
         });
@@ -253,6 +291,49 @@ apiCll();
                         ProductList_Adapter productList_adapter=new ProductList_Adapter(productLists,getApplicationContext(),new Fragment_product_list());
                         prolist_recycler.setAdapter(productList_adapter);
 
+
+                    }
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<ProductListResponse> call, Throwable t) {
+
+            }
+        });
+
+    }
+    public void apiCllSorting(String sorting_str){
+
+
+        Toast.makeText(this, "sort string "+sorting_str, Toast.LENGTH_SHORT).show();
+
+        Call<ProductListResponse> call = apiInterface.product_list_sorting(preferences.getString("user_id", ""), "0",category_id,vendor_id, sorting_str,preferences.getString("token", ""));
+
+
+        call.enqueue(new Callback<ProductListResponse>() {
+            @Override
+            public void onResponse(Call<ProductListResponse> call, Response<ProductListResponse> response) {
+
+                ProductListResponse productListResponse=response.body();
+                List<com.pro.wardrobe.ApiResponse.ProductListResponse.Response>responses=productListResponse.getResponse();
+
+                for (int i=0;i<responses.size();i++)
+                {
+                    com.pro.wardrobe.ApiResponse.ProductListResponse.Response response1=responses.get(i);
+
+
+                    if (response1.getStatus().equals("true"))
+                    {
+                        List<ProductList>productLists=response1.getProductList();
+
+
+                        prolist_recycler.removeAllViews();
+                        ProductList_Adapter productList_adapter=new ProductList_Adapter(productLists,getApplicationContext(),new Fragment_product_list());
+                        prolist_recycler.setAdapter(productList_adapter);
+//productList_adapter.notifyDataSetChanged();
 
                     }
                 }
