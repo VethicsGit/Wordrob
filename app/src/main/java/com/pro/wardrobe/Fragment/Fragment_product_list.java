@@ -105,13 +105,15 @@ TextView prolist_sort;
        prolist_search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
            @Override
            public boolean onQueryTextSubmit(String s) {
-               productList_adapter.getFilter().filter(s);
+//               productList_adapter.getFilter().filter(s);
                return false;
            }
 
            @Override
            public boolean onQueryTextChange(String s) {
-               productList_adapter.getFilter().filter(s);
+              productList_adapter.getFilter().filter(s);
+
+
                return false;
            }
        });
@@ -298,7 +300,7 @@ apiCll();
 
 
 
-                        ProductList_Adapter productList_adapter=new ProductList_Adapter(productLists,getApplicationContext(),new Fragment_product_list());
+                         productList_adapter=new ProductList_Adapter(productLists,getApplicationContext(),new Fragment_product_list());
                         prolist_recycler.setAdapter(productList_adapter);
 
 
@@ -341,7 +343,7 @@ apiCll();
 
 
                         prolist_recycler.removeAllViews();
-                        ProductList_Adapter productList_adapter=new ProductList_Adapter(productLists,getApplicationContext(),new Fragment_product_list());
+                        productList_adapter=new ProductList_Adapter(productLists,getApplicationContext(),new Fragment_product_list());
                         prolist_recycler.setAdapter(productList_adapter);
 //productList_adapter.notifyDataSetChanged();
 

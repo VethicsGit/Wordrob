@@ -186,6 +186,7 @@ this.product_list=product_list;
 //                    }
             }
         });
+
     }
 
     @Override
