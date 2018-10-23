@@ -589,6 +589,7 @@ android:id="@+id/prodetails_togglelayout"
                         android:textSize = "12dp" />
 
                     <TextView
+                        android:id="@+id/prodetails_viewall"
                         android:layout_width = "wrap_content"
                         android:layout_height = "wrap_content"
                         android:layout_alignParentRight = "true"
@@ -599,7 +600,15 @@ android:id="@+id/prodetails_togglelayout"
                         android:textStyle = "bold" />
                 </RelativeLayout>
 
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/prodetails_similar_recycler"
+                    android:layout_width = "match_parent"
+                    android:layout_margin = "15dp"
+                    android:layout_height = "match_parent"/>
+
                 <LinearLayout
+                    android:visibility="gone"
                     android:layout_width = "match_parent"
                     android:layout_height = "wrap_content"
                     android:layout_marginBottom = "20dp"
@@ -641,7 +650,7 @@ android:id="@+id/prodetails_togglelayout"
                                         android:src = "@mipmap/favourite" />
                                     <TextView android:autoSizeTextType="uniform"
                                         android:visibility="gone"
-                                        android:id="@+id/prolist_isfav"
+                                        android:id="@+id/prodetails_isfav"
                                         android:layout_gravity="start"
                                         android:layout_width = "wrap_content"
                                         android:layout_height = "wrap_content"
