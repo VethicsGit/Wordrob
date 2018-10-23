@@ -83,6 +83,8 @@ public class Product_details extends AppCompatActivity {
     String[] color = new String[]{"#F44336", "#E91E63", "#7B1FA2", "#3949AB", "#00897B", "#C0CA33", "#F44336", "#E91E63", "#7B1FA2", "#3949AB", "#00897B", "#C0CA33",};
     TextView prodetails_rating, submit_review;
 
+//    List<Product_details>product_details;
+
     //    ScrollView prodetails_colorlayout_root;
     public Product_details() {
     }
@@ -116,7 +118,7 @@ public class Product_details extends AppCompatActivity {
         product_detail_price=findViewById(R.id.product_detail_price);
         addtofav=findViewById(R.id.addtofav);
         prolist_isfav= findViewById(R.id.prolist_isfav);
-        detail_addtofav=findViewById(R.id.addtofav);
+        detail_addtofav=findViewById(R.id.related_addtofav);
 
         LinearLayoutManager manager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         prodetails_colorlayout.setLayoutManager(manager);
@@ -164,7 +166,7 @@ Log.e("details_status",response1.getStatus());
                             product_detail_category.setText(productDetail.getCategoryName());
                             product_detail_price.setText(productDetail.getPrice());
                             product_detail_desc.setText(productDetail.getDescription());
-                        prodetails_rating.setText(productDetail.getRatingCount());
+                            prodetails_rating.setText(productDetail.getRatingCount());
                         }
                         else Toast.makeText(Product_details.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
 
@@ -184,10 +186,8 @@ Log.e("details_status",response1.getStatus());
 
 
 
-
-/*
-        prolist_isfav.setText(productList.getIsFav());
-        if (Integer.parseInt(productList.getIsFav()) == 0) {
+        prolist_isfav.setText(productDetail.getIsFav());
+        if (Integer.parseInt(product_details.getIsFav()) == 0) {
             addtofav.setImageDrawable(getResources().getDrawable(R.drawable.favourite));
         } else
             addtofav.setImageDrawable(getResources().getDrawable(R.drawable.heart_filled));
@@ -219,10 +219,10 @@ Log.e("details_status",response1.getStatus());
 //                            for (int i=0;i<responses.size();i++){
                                 com.pro.wardrobe.ApiResponse.AddToFavorite.Response response1 = responses.get(0);
                                 Log.e("add", response1.getStatus());
-
-                             *//*   if (response1.getStatus().equals("true")){
-                                    product_list.apiCll();
-                                }*//*
+//
+//                                if (response1.getStatus().equals("true")){
+//                                    product_list.apiCll();
+//                                }
 
                             }
 //                        }
@@ -252,9 +252,9 @@ Log.e("details_status",response1.getStatus());
                                 List<com.pro.wardrobe.ApiResponse.RemoveToFavorite.Response> responses = removeToFavorite.getResponse();
 
                                 com.pro.wardrobe.ApiResponse.RemoveToFavorite.Response response1 = responses.get(0);
-                                       *//* if (response1.getStatus().equals("true")){
-                                            product_list.apiCll();
-                                        }*//*
+//                                        if (response1.getStatus().equals("true")){
+//                                            product_list.apiCll();
+//                                        }
 
                             }
 
@@ -268,7 +268,7 @@ Log.e("details_status",response1.getStatus());
 //                    }
                 }
             }
-        });*/
+        });
 
       /*  HorizontalScrollView sv = new HorizontalScrollView(this);
         sv.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));

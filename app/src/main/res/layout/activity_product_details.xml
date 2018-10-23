@@ -634,7 +634,7 @@ android:id="@+id/prodetails_togglelayout"
                                     android:layout_height = "match_parent">
 
                                     <ImageView
-                                        android:id="@+id/addtofav"
+                                        android:id="@+id/related_addtofav"
                                         android:layout_width = "20dp"
                                         android:layout_height = "20dp"
                                         android:layout_margin = "10dp"
