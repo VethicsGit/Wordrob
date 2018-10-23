@@ -101,6 +101,16 @@ public class Fragment_product_list extends AppCompatActivity {
                return false;
            }
        });
+        SearchView.OnCloseListener onCloseListener=new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                apiCll();
+                return false;
+            }
+        };
+        prolist_search.setOnCloseListener(onCloseListener);
+
+
 
 
 

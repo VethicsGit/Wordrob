@@ -7,7 +7,7 @@ import com.pro.wardrobe.ApiResponse.ProductListResponse.ProductList;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomFillter_productlist extends android.widget.Filter {
+public class CustomFillter_productlist extends Filter {
 
 
     ProductList_Adapter productList_adapter;
@@ -21,7 +21,7 @@ public class CustomFillter_productlist extends android.widget.Filter {
     }
 
     @Override
-    protected FilterResults performFiltering(CharSequence charSequence) {
+    protected android.widget.Filter.FilterResults performFiltering(CharSequence charSequence) {
         android.widget.Filter.FilterResults results=new android.widget.Filter.FilterResults();
 
 
@@ -37,8 +37,8 @@ public class CustomFillter_productlist extends android.widget.Filter {
                     productLists.add(productLists.get(i));
                 }
             }
-            results .count=productLists.size();
-            results.values=productLists;
+            results .count=p.size();
+            results.values=vendorLists;
         }else
         {
             results.count=fillterlist.size();

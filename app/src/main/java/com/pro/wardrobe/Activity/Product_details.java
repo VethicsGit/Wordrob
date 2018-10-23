@@ -116,7 +116,7 @@ public class Product_details extends AppCompatActivity {
         product_detail_title=findViewById(R.id.product_detail_title);
         product_detail_category=findViewById(R.id.product_detail_category);
         product_detail_price=findViewById(R.id.product_detail_price);
-        addtofav=findViewById(R.id.addtofav);
+        addtofav=findViewById(R.id.detail_addtofav);
         prolist_isfav= findViewById(R.id.prolist_isfav);
         detail_addtofav=findViewById(R.id.related_addtofav);
 
