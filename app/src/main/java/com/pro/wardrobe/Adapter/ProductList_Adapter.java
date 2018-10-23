@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -25,11 +26,13 @@ import com.pro.wardrobe.Activity.Product_details;
 import com.pro.wardrobe.ApiHelper.APIClient;
 import com.pro.wardrobe.ApiHelper.APIInterface;
 import com.pro.wardrobe.ApiResponse.AddToFavorite.AddToFavorite;
+import com.pro.wardrobe.ApiResponse.DesignerListResponse.VendorList;
 import com.pro.wardrobe.ApiResponse.ProductListResponse.ProductList;
 import com.pro.wardrobe.ApiResponse.RemoveToFavorite.RemoveToFavorite;
 import com.pro.wardrobe.Fragment.Fragment_product_list;
 import com.pro.wardrobe.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -92,6 +95,11 @@ this.product_list=product_list;
                 context.startActivity(i);
             }
         });
+
+
+
+
+
 
         viewHolder.prolist_isfav.setText(productList.getIsFav());
         if (Integer.parseInt(productList.getIsFav()) == 0) {
@@ -184,6 +192,44 @@ this.product_list=product_list;
     public int getItemCount() {
         return productLists.size();
     }
+
+
+
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String charString = charSequence.toString();
+                if (charString.isEmpty()) {
+                    productLists = productLists;
+                } else {
+                    List<ProductList> filteredList = new ArrayList<>();
+                    for (ProductList row : productLists) {
+
+                        // name match condition. this might differ depending on your requirement
+                        // here we are looking for name or phone number match
+                        if (row.getTitle().toLowerCase().contains(charString.toLowerCase()) ) {
+                            filteredList.add(row);
+                        }
+                    }
+
+                    productLists = filteredList;
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = productLists;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                productLists = (ArrayList<ProductList>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
+
+
 
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView item_designers_main_image, product_list_img, product_addtofav, product_removetofav;

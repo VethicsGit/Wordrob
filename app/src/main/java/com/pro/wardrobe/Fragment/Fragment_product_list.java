@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -46,6 +47,12 @@ public class Fragment_product_list extends AppCompatActivity {
     String vendor_id;
     String category_id;
 
+
+    ProductList_Adapter productList_adapter;
+
+    SearchView prolist_search;
+
+
     public Fragment_product_list() {
     }
 
@@ -69,8 +76,8 @@ public class Fragment_product_list extends AppCompatActivity {
         prolist_title.setTypeface(facebold);
 
         ImageView mybag = findViewById(R.id.prolist_Mybag);
-        ImageView dashboard_search = findViewById(R.id.prolist_search);
         ImageView dashboard_back = findViewById(R.id.prolist_back);
+        prolist_search=findViewById(R.id.prolist_search);
 
         if (getIntent().hasExtra("category_id")){
             category_id=getIntent().getStringExtra("category_id");
@@ -81,12 +88,22 @@ public class Fragment_product_list extends AppCompatActivity {
         }
 
 
-        dashboard_search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+       prolist_search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+           @Override
+           public boolean onQueryTextSubmit(String s) {
+               productList_adapter.getFilter().filter(s);
+               return false;
+           }
 
-            }
-        });
+           @Override
+           public boolean onQueryTextChange(String s) {
+               productList_adapter.getFilter().filter(s);
+               return false;
+           }
+       });
+
+
+
         dashboard_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

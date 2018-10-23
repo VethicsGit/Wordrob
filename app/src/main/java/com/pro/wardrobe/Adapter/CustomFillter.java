@@ -9,7 +9,7 @@ import java.util.List;
 
 class CustomFillter extends Filter {
 
-    Designers_Recyclarview_adapter designers_recyclarview_adapter;
+       Designers_Recyclarview_adapter designers_recyclarview_adapter;
     List<VendorList>fillterlist;
 
 

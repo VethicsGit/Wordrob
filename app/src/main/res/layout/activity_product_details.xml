@@ -212,9 +212,12 @@
 
                             <ImageView
 
+                                android:id="@+id/detail_addtofav"
                                 android:layout_width = "20dp"
                                 android:layout_height = "20dp"
                                 android:layout_margin = "10dp"
+                                android:src="@drawable/favourite"
+
                                 />
                             <!--android:src = "@mipmap/favourite"-->
 
@@ -631,11 +634,23 @@ android:id="@+id/prodetails_togglelayout"
                                     android:layout_height = "match_parent">
 
                                     <ImageView
+                                        android:id="@+id/addtofav"
                                         android:layout_width = "20dp"
                                         android:layout_height = "20dp"
                                         android:layout_margin = "10dp"
                                         android:src = "@mipmap/favourite" />
-
+                                    <TextView android:autoSizeTextType="uniform"
+                                        android:visibility="gone"
+                                        android:id="@+id/prolist_isfav"
+                                        android:layout_gravity="start"
+                                        android:layout_width = "wrap_content"
+                                        android:layout_height = "wrap_content"
+                                        android:layout_centerInParent = "true"
+                                        android:text = "Lipsy Crown T-shirt"
+                                        android:layout_alignParentStart="true"
+                                        android:textColor = "@color/colorAccent"
+                                        android:textSize = "12dp"
+                                        android:textStyle = "bold" />
                                 </RelativeLayout>
 
                             </FrameLayout>
