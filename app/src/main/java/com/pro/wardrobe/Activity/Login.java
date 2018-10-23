@@ -48,6 +48,7 @@ import com.pro.wardrobe.ApiHelper.APIClient;
 import com.pro.wardrobe.ApiHelper.APIInterface;
 import com.pro.wardrobe.ApiResponse.ChangePassResponse.ChangePassResponse;
 import com.pro.wardrobe.ApiResponse.LoginResponse.LoginResponse;
+import com.pro.wardrobe.ApiResponse.SocialSiginResponse.ResponseSocialSignin;
 import com.pro.wardrobe.ApiResponse.UpdateDeviceTokenResponse.UpdateDeviceTokenResponse;
 import com.pro.wardrobe.ForebaseSupportClasses.Config;
 import com.pro.wardrobe.ForebaseSupportClasses.NotificationUtils;
@@ -144,9 +145,10 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                                 if (responsee.getStatus().equals("true")) {
                                     SharedPreferences preferences = getSharedPreferences("LoginStatus", MODE_PRIVATE);
                                     SharedPreferences.Editor editor = preferences.edit();
+                                    editor.putString("type", "internal");
                                     editor.putString("token", responsee.getToken());
                                     editor.putString("screen_code", responsee.getScreenCode());
-                                        editor.putString("user_id", responsee.getUserId());
+                                    editor.putString("user_id", responsee.getUserId());
                                     editor.putString("name", responsee.getName());
                                     editor.putString("pass", login_password.getText().toString());
                                     editor.putString("email", responsee.getEmail()).apply();
@@ -213,6 +215,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             @Override
             public void onClick(View view) {
                 login_fb_button.performClick();
+
             }
         });
         callbackManager = CallbackManager.Factory.create();
@@ -292,7 +295,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     private void getUserProfile(AccessToken currentAccessToken) {
         GraphRequest request = GraphRequest.newMeRequest(currentAccessToken, new GraphRequest.GraphJSONObjectCallback() {
             @Override
-            public void onCompleted(JSONObject object, GraphResponse response) {
+            public void onCompleted(final JSONObject object, GraphResponse response) {
                 try {
                     Log.e("fb_name", object.getString("name"));
                     Toast.makeText(Login.this, "Facebook Login Name: " + object.getString("name"), Toast.LENGTH_SHORT).show();
@@ -303,7 +306,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                     //object.getString(“email”));
                     //object.getString(“id”));
 
-                    if (object.getString("email").isEmpty()){
+                    if (object.getString("email").isEmpty()) {
                         AlertDialog.Builder alertDialog = new AlertDialog.Builder(Login.this);
                         alertDialog.setTitle("Email");
                         alertDialog.setTitle("Enter Email");
@@ -318,9 +321,16 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                         alertDialog.setPositiveButton("YES",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
+                                        try {
+                                            socialSignIn("fb",object.getString("id"),object.getString("name"),input.getText().toString());
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
                                     }
                                 });
-alertDialog.show();
+                        alertDialog.show();
+                    } else {
+                        socialSignIn("fb",object.getString("id"),object.getString("name"),object.getString("email"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -355,7 +365,7 @@ alertDialog.show();
             Log.e("Sign_in_name", acct.getDisplayName());
             Log.e("Profile_Name :", acct.getDisplayName() + "\nEmail : " + acct.getEmail() + "\nFamily Name :" + acct.getFamilyName() + "\n Given Name :" + acct.getGivenName() + "\n ID :" + acct.getId());
 
-
+            socialSignIn("gmail",acct.getId(),acct.getDisplayName(),acct.getEmail());
             Toast.makeText(Login.this, "Google plus Login Name: " + acct.getDisplayName(), Toast.LENGTH_SHORT).show();
             //Similarly you can get the email and photourl using acct.getEmail() and  acct.getPhotoUrl()
 
@@ -394,7 +404,7 @@ alertDialog.show();
 
                         SharedPreferences preferences = getSharedPreferences("LoginStatus", MODE_PRIVATE);
                         SharedPreferences.Editor editor = preferences.edit();
-                        editor.putString("firebase_id",regId).apply();
+                        editor.putString("firebase_id", regId).apply();
 
                         Intent intent = new Intent(getApplicationContext(), Dashboard.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -437,5 +447,72 @@ alertDialog.show();
     protected void onPause() {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
         super.onPause();
+    }
+
+    public void socialSignIn(final String media_type, final String media_id, String name, String email) {
+
+        final ProgressDialog mProgressDialog = new ProgressDialog(Login.this, R.style.AppCompatAlertDialogStyle);
+        mProgressDialog.setIndeterminate(false);
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setMessage("Please wait...");
+        mProgressDialog.show();
+        Call<ResponseSocialSignin> call = apiInterface.social_signin(media_type, media_id, name, email);
+
+        call.enqueue(new Callback<ResponseSocialSignin>() {
+            @Override
+            public void onResponse(Call<ResponseSocialSignin> call, Response<ResponseSocialSignin> response) {
+
+                ResponseSocialSignin responseSocialSignin = response.body();
+                List<com.pro.wardrobe.ApiResponse.SocialSiginResponse.Response> responseList = responseSocialSignin.getResponse();
+                com.pro.wardrobe.ApiResponse.SocialSiginResponse.Response response1 = responseList.get(0);
+
+                if (response1.getStatus().equals("true")) {
+                    SharedPreferences preferences = getSharedPreferences("LoginStatus", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("type", "social");
+                    editor.putString("token", response1.getToken());
+                    editor.putString("screen_code", response1.getScreenCode());
+                    editor.putString("user_id", response1.getUserId());
+                    editor.putString("media_id", media_id);
+                    editor.putString("media_type", media_type);
+                    editor.putString("name", response1.getName());
+                    editor.putString("email", response1.getEmail()).apply();
+
+
+                    mRegistrationBroadcastReceiver = new BroadcastReceiver() {
+                        @Override
+                        public void onReceive(Context context, Intent intent) {
+
+                            // checking for type intent filter
+                            if (intent.getAction().equals(Config.REGISTRATION_COMPLETE)) {
+                                // gcm successfully registered
+                                // now subscribe to `global` topic to receive app wide notifications
+                                FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GLOBAL);
+
+                                displayFirebaseRegId();
+
+                            } else if (intent.getAction().equals(Config.PUSH_NOTIFICATION)) {
+                                // new push notification is received
+
+                                String message = intent.getStringExtra("message");
+
+                                Toast.makeText(getApplicationContext(), "Push notification: " + message, Toast.LENGTH_LONG).show();
+
+                            }
+                        }
+                    };
+
+                    displayFirebaseRegId();
+
+                    mProgressDialog.dismiss();
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseSocialSignin> call, Throwable t) {
+
+            }
+        });
+
     }
 }

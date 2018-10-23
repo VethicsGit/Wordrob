@@ -20,6 +20,7 @@ import com.pro.wardrobe.ApiResponse.ProfileResponse.ProfileResponse;
 import com.pro.wardrobe.ApiResponse.RemoveToFavorite.RemoveToFavorite;
 import com.pro.wardrobe.ApiResponse.Signup_Response.SignupResponse;
 import com.pro.wardrobe.ApiResponse.SizeListResponse.ResponseSizeList;
+import com.pro.wardrobe.ApiResponse.SocialSiginResponse.ResponseSocialSignin;
 import com.pro.wardrobe.ApiResponse.TermsResponse.TermsResponse;
 import com.pro.wardrobe.ApiResponse.UpdateDeviceTokenResponse.UpdateDeviceTokenResponse;
 
@@ -223,4 +224,25 @@ public interface APIInterface {
     @Field("product_id")String product_id,
     @Header("Authorization") String token
             );
+
+
+    @FormUrlEncoded
+    @POST("social_signin")
+    Call<ResponseSocialSignin>social_signin(
+            @Field("media_type")String media_type,
+            @Field("media_id")String media_id,
+            @Field("name")String name,
+            @Field("email")String email
+    );
+
+    @FormUrlEncoded
+    @POST("check_social_id")
+    Call<ResponseSocialSignin>check_social_id(
+            @Field("media_type")String media_type,
+            @Field("media_id")String media_id
+
+    );
+
+
+
 }
