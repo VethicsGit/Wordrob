@@ -302,6 +302,26 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                     //object.getString(“name”);
                     //object.getString(“email”));
                     //object.getString(“id”));
+
+                    if (object.getString("email").isEmpty()){
+                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(Login.this);
+                        alertDialog.setTitle("Email");
+                        alertDialog.setTitle("Enter Email");
+                        final EditText input = new EditText(Login.this);
+                        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                LinearLayout.LayoutParams.MATCH_PARENT);
+                        input.setLayoutParams(lp);
+                        alertDialog.setView(input);
+
+
+                        alertDialog.setPositiveButton("YES",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                    }
+                                });
+alertDialog.show();
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -335,12 +355,6 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             Log.e("Sign_in_name", acct.getDisplayName());
             Log.e("Profile_Name :", acct.getDisplayName() + "\nEmail : " + acct.getEmail() + "\nFamily Name :" + acct.getFamilyName() + "\n Given Name :" + acct.getGivenName() + "\n ID :" + acct.getId());
 
-            if (acct.getEmail().isEmpty()){
-
-            }
-            else {
-
-            }
 
             Toast.makeText(Login.this, "Google plus Login Name: " + acct.getDisplayName(), Toast.LENGTH_SHORT).show();
             //Similarly you can get the email and photourl using acct.getEmail() and  acct.getPhotoUrl()
