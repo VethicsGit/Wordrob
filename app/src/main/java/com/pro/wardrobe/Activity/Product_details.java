@@ -127,11 +127,10 @@ public class Product_details extends AppCompatActivity {
         product_detail_category=findViewById(R.id.product_detail_category);
         product_detail_price=findViewById(R.id.product_detail_price);
         addtofav=findViewById(R.id.detail_addtofav);
-<<<<<<< HEAD
+
         prolist_isfav= findViewById(R.id.prolist_isfav);
-=======
+
         prolist_isfav= findViewById(R.id.prodetails_isfav);
->>>>>>> 209503af6d2f48d26150082142e60f73976235d0
         detail_addtofav=findViewById(R.id.related_addtofav);
 
         prodetails_similar_recycler = findViewById(R.id.prodetails_similar_recycler);
