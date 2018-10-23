@@ -1,13 +1,15 @@
 package com.pro.wardrobe.Adapter;
 
-import com.pro.wardrobe.Activity.Filter;
-import com.pro.wardrobe.ApiResponse.DesignerListResponse.VendorList;
+import android.service.autofill.FillRequest;
+import android.widget.Filter;
+
 import com.pro.wardrobe.ApiResponse.ProductListResponse.ProductList;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomFillter_productlist extends android.widget.Filter {
+public class Product_CustomFillter extends Filter {
+
 
 
     ProductList_Adapter productList_adapter;
@@ -15,16 +17,14 @@ public class CustomFillter_productlist extends android.widget.Filter {
 
 
 
-    public CustomFillter_productlist(List<ProductList> fillterlist, ProductList_Adapter productList_adapter) {
+    public Product_CustomFillter(List<ProductList> fillterlist, ProductList_Adapter productList_adapter) {
         this.productList_adapter = productList_adapter;
         this.fillterlist = fillterlist;
     }
 
     @Override
     protected FilterResults performFiltering(CharSequence charSequence) {
-        android.widget.Filter.FilterResults results=new android.widget.Filter.FilterResults();
-
-
+        FilterResults results=new FilterResults();
         if (charSequence !=null && charSequence.length()>0)
         {
             charSequence=charSequence.toString().toLowerCase();
@@ -48,7 +48,7 @@ public class CustomFillter_productlist extends android.widget.Filter {
     }
 
     @Override
-    protected void publishResults(CharSequence charSequence, android.widget.Filter.FilterResults filterResults) {
+    protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
 
     }
 }

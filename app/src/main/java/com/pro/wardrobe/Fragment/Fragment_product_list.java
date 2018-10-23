@@ -115,6 +115,16 @@ TextView prolist_sort;
                return false;
            }
        });
+        SearchView.OnCloseListener onCloseListener=new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                apiCll();
+                return false;
+            }
+        };
+        prolist_search.setOnCloseListener(onCloseListener);
+
+
 
 
 
