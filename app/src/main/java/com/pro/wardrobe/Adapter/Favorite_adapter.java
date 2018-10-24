@@ -113,7 +113,6 @@ public class Favorite_adapter extends RecyclerView.Adapter<Favorite_adapter.View
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-
         ImageView fav_product_img,fav_delet;
         TextView fav_product_price,fav_product_category,fav_product_title;
         public ViewHolder(@NonNull View itemView)

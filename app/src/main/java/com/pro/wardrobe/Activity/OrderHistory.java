@@ -1,6 +1,8 @@
 package com.pro.wardrobe.Activity;
 
+import android.app.Activity;
 import android.graphics.Typeface;
+import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,17 +16,22 @@ import android.widget.TextView;
 
 import com.pro.wardrobe.R;
 
-public class OrderHistory extends Fragment {
 
-    @Nullable
+public class OrderHistory extends Activity {
+
+
+    TextView title;
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.activity_order_history,container,false);
-        ((Dashboard)getActivity()).toggle(1);
-        return view;
+    public void onCreate( Bundle savedInstanceState,  PersistableBundle persistentState) {
+        super.onCreate(savedInstanceState, persistentState);
+        setContentView(R.layout.activity_order_history);
+
+
+        title.setText("ORDER HISTORY");
     }
 
-   /* @Override
+
+    /* @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_history);

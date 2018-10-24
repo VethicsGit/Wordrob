@@ -91,6 +91,7 @@ public class Product_details extends AppCompatActivity {
 
     String vendor_id;
     String category_id;
+    String offer_id;
 
 //    List<Product_details>product_details;
 
@@ -151,6 +152,9 @@ public class Product_details extends AppCompatActivity {
         if (intent.hasExtra("product_id"))
         product_id=intent.getStringExtra("product_id");
 
+        if (intent.hasExtra("offer_id"))
+            offer_id=intent.getStringExtra("offer_id");
+
 
         final SharedPreferences preferences = getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
 
@@ -203,7 +207,7 @@ Log.e("details_status",response1.getStatus());
 
 
 
-                        Call<ProductListResponse> call1 = apiInterface.product_list(preferences.getString("user_id", ""), "0",category_id,vendor_id, preferences.getString("token", ""));
+                        Call<ProductListResponse> call1 = apiInterface.product_list(preferences.getString("user_id", ""), "0",category_id,vendor_id,offer_id, preferences.getString("token", ""));
 
 
                         call1.enqueue(new Callback<ProductListResponse>() {

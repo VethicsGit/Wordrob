@@ -48,6 +48,7 @@ public class Fragment_product_list extends AppCompatActivity {
     TextView title,prolist_title;
     String vendor_id;
     String category_id;
+    String offer_id;
 
 
     ProductList_Adapter productList_adapter;
@@ -93,12 +94,21 @@ TextView prolist_sort;
         ImageView dashboard_back = findViewById(R.id.prolist_back);
         prolist_search=findViewById(R.id.prolist_search);
 
+       /* ImageView searchIcon = (ImageView)prolist_search.findViewById(android.support.v7.appcompat.R.id.search_mag_icon);
+        searchIcon.setImageResource(R.mipmap.search);*/
+
         if (getIntent().hasExtra("category_id")){
             category_id=getIntent().getStringExtra("category_id");
         }
 
         if (getIntent().hasExtra("vendor_id")){
             vendor_id=getIntent().getStringExtra("vendor_id");
+        }
+
+
+        if (getIntent().hasExtra("offer_id")){
+            offer_id=getIntent().getStringExtra("offer_id");
+
         }
 
 
@@ -279,7 +289,7 @@ apiCll();
 
 
 
-        Call<ProductListResponse> call = apiInterface.product_list(preferences.getString("user_id", ""), "0",category_id,vendor_id, preferences.getString("token", ""));
+        Call<ProductListResponse> call = apiInterface.product_list(preferences.getString("user_id", ""), "0",category_id,vendor_id,offer_id, preferences.getString("token", ""));
 
 
         call.enqueue(new Callback<ProductListResponse>() {

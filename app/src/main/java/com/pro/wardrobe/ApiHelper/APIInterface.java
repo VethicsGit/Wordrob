@@ -12,6 +12,7 @@ import com.pro.wardrobe.ApiResponse.DesignerListResponse.Designerimages;
 import com.pro.wardrobe.ApiResponse.FavoriteProductListResponse.FavoritieProductListResponse;
 import com.pro.wardrobe.ApiResponse.ForgotPassResponse.ForgotPassResponse;
 import com.pro.wardrobe.ApiResponse.LoginResponse.LoginResponse;
+import com.pro.wardrobe.ApiResponse.OfferZoneResponse.OfferZoneResponse;
 import com.pro.wardrobe.ApiResponse.PriceRangeResponse.ResponsePriceRange;
 import com.pro.wardrobe.ApiResponse.PrivacyPolicyResponse.PrivacyPolicyResponse;
 import com.pro.wardrobe.ApiResponse.ProductDetailResponse.ProductDetailResponse;
@@ -163,6 +164,7 @@ public interface APIInterface {
             @Field("offset") String offset,
             @Field("category_id") String category_id,
             @Field("vendor_id") String vendor_id,
+            @Field("offer_zone_id")String offer_zone_id,
             @Header("Authorization") String token);
 
 
@@ -251,6 +253,15 @@ public interface APIInterface {
     Call<ResponseSocialSignin>check_social_id(
             @Field("media_type")String media_type,
             @Field("media_id")String media_id
+
+    );
+
+
+    @FormUrlEncoded
+    @POST("offer_zone_list")
+    Call<OfferZoneResponse>offerZone_list(
+            @Field("user_id")String user_id,
+            @Header("Authorization") String token
 
     );
 

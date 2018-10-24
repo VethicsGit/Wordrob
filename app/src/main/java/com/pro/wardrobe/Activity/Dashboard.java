@@ -255,14 +255,19 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
 //                        ft.replace(R.id.viewpager,new Fragment_Designers(1)).commit();
                         break;
                     case 1:
-                        title.setText("Profile");
-                        ft.addToBackStack("Dashboard");
-                        ft.replace(R.id.viewpager, new Profile()).commit();
+//                        title.setText("Profile");
+//                        ft.addToBackStack("Dashboard");
+//                        ft.replace(R.id.viewpager, new Profile()).commit();
+                        Intent intent=new Intent(getApplicationContext(),Profile_.class);
+                        startActivity(intent);
                         break;
                     case 2:
-                        title.setText("Order History");
-                        ft.addToBackStack("Dashboard");
-                        ft.replace(R.id.viewpager, new OrderHistory()).commit();
+//                        title.setText("Order History");
+//                        ft.addToBackStack("Dashboard");
+//                        ft.replace(R.id.viewpager, new OrderHistory()).commit();
+
+                        Intent intent4=new Intent(getApplicationContext(),OrderHistory.class);
+                        startActivity(intent4);
                         break;
                     case 3:
                         Intent intentbag = new Intent(getApplicationContext(), Activty_MyBag.class);
@@ -277,19 +282,29 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
 //                        ft.replace(R.id.viewpager, new Favorite()).commit();
                         break;
                     case 5:
-                        title.setText("Offers");
-                        ft.addToBackStack("Dashboard");
-                        ft.replace(R.id.viewpager, new Fragment_OfferZone()).commit();
+//                        title.setText("Offers");
+//                        ft.addToBackStack("Dashboard");
+//                        ft.replace(R.id.viewpager, new Fragment_OfferZone()).commit();
+//                        break;
+
+                        Intent intent3=new Intent(getApplicationContext(),OfferZone.class);
+                        startActivity(intent3);
                         break;
                     case 6:
-                        title.setText("Settings");
-                        ft.addToBackStack("Dashboard");
-                        ft.replace(R.id.viewpager, new Fragment_settings(title)).commit();
+//                        title.setText("Settings");
+//                        ft.addToBackStack("Dashboard");
+//                        ft.replace(R.id.viewpager, new Fragment_settings(title)).commit();
+
+                        Intent intent2=new Intent(getApplicationContext(),Setting.class);
+                        startActivity(intent2);
                         break;
                     case 7:
-                        title.setText("Contact Us");
-                        ft.addToBackStack("Dashboard");
-                        ft.replace(R.id.viewpager, new ContactUs()).commit();
+//                        title.setText("Contact Us");
+//                        ft.addToBackStack("Dashboard");
+//                        ft.replace(R.id.viewpager, new ContactUs()).commit();
+
+                        Intent intent1 = new Intent(getApplicationContext(),ContactUs_.class);
+                        startActivity(intent1);
                         break;
                 }
 
@@ -340,7 +355,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 Typeface custom = Typeface.createFromAsset(getAssets(),"Roboto_Medium.ttf");
                 title.setTypeface(custom);
                 title.setText("Category");
-//                    ft.addToBackStack("Dashboard");
+                    ft.addToBackStack("Dashboard");
                 ft.replace(R.id.viewpager, new Fragment_category()).commit();
 
                 bottom_nav_cat_img.setImageDrawable(getResources().getDrawable(R.drawable.categories_gold));
@@ -363,7 +378,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 title.setTypeface(custom1);
 
                 title.setText("Designers");
-//                    ft.addToBackStack("Dashboard");
+                    ft.addToBackStack("Dashboard");
                 ft.replace(R.id.viewpager, new Fragment_Designers(0,title)).commit();
 
                 bottom_nav_cat_img.setImageDrawable(getResources().getDrawable(R.drawable.categories));
@@ -385,7 +400,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 Typeface custom5 =Typeface.createFromAsset(getAssets(),"Philosopher_Regular.ttf");
                 title.setTypeface(custom5);
                 title.setText("The Wardbrobe");
-//                    ft.addToBackStack("Dashboard");
+                    ft.addToBackStack("Dashboard");
 //                    ft.replace(R.id.viewpager, new Fragment_Home(title,dashboard_search)).commit();
                 ft.replace(R.id.viewpager, new Fragment_Designers(1,title)).commit();
 
@@ -410,7 +425,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 title.setTypeface(custom2);
 
                 title.setText("Favorite");
-//                    ft.addToBackStack("Dashboard");
+                    ft.addToBackStack("Dashboard");
                 ft.replace(R.id.viewpager, new Favorite()).commit();
 
                 bottom_nav_cat_img.setImageDrawable(getResources().getDrawable(R.drawable.categories));
@@ -432,7 +447,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                         title.setTypeface(custom3);
 
                         title.setText("Notifications");
-//                    ft.addToBackStack("Dashboard");
+                    ft.addToBackStack("Dashboard");
                         ft.replace(R.id.viewpager, new Fragment_Notification()).commit();
 
                         bottom_nav_cat_img.setImageDrawable(getResources().getDrawable(R.drawable.categories));
