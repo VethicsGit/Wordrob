@@ -44,7 +44,7 @@ public class OfferZone extends AppCompatActivity {
 
 
 
-        title.setText("OFFERS");
+        title.setText("OFFERS ");
 
 
         LinearLayoutManager manager=new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);

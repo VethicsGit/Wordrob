@@ -13,6 +13,7 @@ import com.pro.wardrobe.ApiResponse.DesignerCategoryResponse.Designercategory;
 import com.pro.wardrobe.ApiResponse.DesignerListResponse.Designerimages;
 import com.pro.wardrobe.ApiResponse.FavoriteProductListResponse.FavoritieProductListResponse;
 import com.pro.wardrobe.ApiResponse.ForgotPassResponse.ForgotPassResponse;
+import com.pro.wardrobe.ApiResponse.GiveRatingResponse.GiveRatingResponse;
 import com.pro.wardrobe.ApiResponse.LoginResponse.LoginResponse;
 import com.pro.wardrobe.ApiResponse.OfferZoneResponse.OfferZoneResponse;
 import com.pro.wardrobe.ApiResponse.PriceRangeResponse.ResponsePriceRange;
@@ -269,9 +270,11 @@ public interface APIInterface {
             @Field("product_color_id") String product_color_id,
             @Field("length") String hips,
             @Field("hips") String length,
+            @Field("Authorization")
 
 
             String token);
+    @FormUrlEncoded
     @POST("offer_zone_list")
     Call<OfferZoneResponse>offerZone_list(
             @Field("user_id")String user_id,
@@ -328,6 +331,19 @@ public interface APIInterface {
             @Field("user_id")String user_id,
             @Field("cart_id")String cart_id,
             @Header("Authorization") String token
+    );
+
+
+    @FormUrlEncoded
+    @POST("send_product_rating_review")
+    Call<GiveRatingResponse>give_rating(
+      @Field("user_id")String user_id,
+      @Field("product_id")String product_id,
+      @Field("rating_point")String rating_point,
+      @Field("title")String title,
+      @Field("description")String description,
+      @Field("vendor_id")String vendor_id,
+      @Header("Authorization")String token
     );
 
 

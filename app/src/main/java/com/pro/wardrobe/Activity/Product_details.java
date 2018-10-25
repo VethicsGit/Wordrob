@@ -10,6 +10,7 @@ import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RoundRectShape;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatRatingBar;
@@ -37,6 +38,7 @@ import com.pro.wardrobe.ApiHelper.APIClient;
 import com.pro.wardrobe.ApiHelper.APIInterface;
 import com.pro.wardrobe.ApiResponse.AddToCartResponse.ResponseAddToCart;
 import com.pro.wardrobe.ApiResponse.AddToFavorite.AddToFavorite;
+import com.pro.wardrobe.ApiResponse.GiveRatingResponse.GiveRatingResponse;
 import com.pro.wardrobe.ApiResponse.ProductDetailResponse.ProductColorDetail;
 import com.pro.wardrobe.ApiResponse.ProductDetailResponse.ProductDetail;
 import com.pro.wardrobe.ApiResponse.ProductDetailResponse.ProductDetailResponse;
@@ -166,6 +168,83 @@ public class Product_details extends AppCompatActivity {
             offer_id=intent.getStringExtra("offer_id");
 
 
+        prodetails_giverating.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                 final AlertDialog.Builder builder=new AlertDialog.Builder(Product_details.this);
+                LayoutInflater inflater =Product_details.this.getLayoutInflater();
+                View dailgo=inflater.inflate(R.layout.submit_review_dialog,null);
+                builder.setView(dailgo);
+
+
+
+                final AlertDialog dialog=builder.create();
+
+
+                Button button=dailgo.findViewById(R.id.dialog_btn_submit);
+                final EditText description=dailgo.findViewById(R.id.description);
+                final EditText review_text=dailgo.findViewById(R.id.review_title);
+
+                dialog.show();
+
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+
+
+
+                        final SharedPreferences preferences = getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
+                        APIInterface apiInterface=APIClient.getClient().create(APIInterface.class);
+                        Call<GiveRatingResponse>call=apiInterface.give_rating(preferences.getString("user_id",""),product_id,"5",review_text.getText().toString(),description.getText().toString(),vendor_id,preferences.getString("token",""));
+                        call.enqueue(new Callback<GiveRatingResponse>() {
+                            @Override
+                            public void onResponse(Call<GiveRatingResponse> call, Response<GiveRatingResponse> response) {
+                                GiveRatingResponse giveRatingResponse=response.body();
+                                List<com.pro.wardrobe.ApiResponse.GiveRatingResponse.Response>responses1=giveRatingResponse.getResponse();
+
+                                for (int i = 0;i<responses1.size();i++){
+
+                                    com.pro.wardrobe.ApiResponse.GiveRatingResponse.Response response2=responses1.get(i);
+                                    Log.e("messge",""+response2.getStatus());
+
+                                    if (response2.getStatus().equals("true")) {
+
+
+                                            dialog.dismiss();
+//                                        Toast.makeText(getApplicationContext(), ""+response2.getResponseMsg(), Toast.LENGTH_SHORT).show();
+
+                                    }
+
+
+
+
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<GiveRatingResponse> call, Throwable t) {
+
+                            }
+                        });
+
+
+
+                    }
+                });
+
+
+
+
+
+
+            }
+        });
+
+
+
+
         final SharedPreferences preferences = getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
 
 
@@ -183,7 +262,7 @@ public class Product_details extends AppCompatActivity {
                 List<com.pro.wardrobe.ApiResponse.ProductDetailResponse.Response> responses = productDetailResponse.getResponse();
 
 
-                com.pro.wardrobe.ApiResponse.ProductDetailResponse.Response response1 = responses.get(0);
+                final com.pro.wardrobe.ApiResponse.ProductDetailResponse.Response response1 = responses.get(0);
                 Log.e("details_status", response1.getStatus());
                 if (response1.getStatus().equals("true")) {
                     List<ProductDetail> productDetails = response1.getProductDetails();
@@ -272,6 +351,10 @@ public class Product_details extends AppCompatActivity {
 
                         prodetails_sizerecycler.addView(layout);
                     }
+
+
+
+
 
                     prodetails_addtobag.setOnClickListener(new View.OnClickListener() {
                         @Override

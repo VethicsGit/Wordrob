@@ -587,7 +587,7 @@ android:id="@+id/prodetail_ratngbar"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/login_btn_round_corner"
-                        android:text="GIVE RATING"
+                        android:text="WRITE REVIEW"
                         android:textColor="#FFFFFF"
                         android:textSize="18dp" />
 
