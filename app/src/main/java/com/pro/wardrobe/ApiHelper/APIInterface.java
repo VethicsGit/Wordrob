@@ -1,7 +1,9 @@
 package com.pro.wardrobe.ApiHelper;
 
+import com.pro.wardrobe.ApiResponse.AddToCartResponse.ResponseAddToCart;
 import com.pro.wardrobe.ApiResponse.AddToFavorite.AddToFavorite;
 import com.pro.wardrobe.ApiResponse.AddbannerResponse.Addbanner;
+import com.pro.wardrobe.ApiResponse.CartListResponse.ResponseCartList;
 import com.pro.wardrobe.ApiResponse.CateListResponse.CatelistResponse;
 import com.pro.wardrobe.ApiResponse.ChangePassResponse.ChangePassResponse;
 import com.pro.wardrobe.ApiResponse.ColorListResponse.ResponseColorList;
@@ -253,6 +255,73 @@ public interface APIInterface {
             @Field("media_id")String media_id
 
     );
+
+
+    @FormUrlEncoded
+    @POST("add_to_cart")
+    Call<ResponseAddToCart>add_to_cart(
+            @Field("user_id")String user_id,
+            @Field("product_id")String product_id,
+            @Field("quantity")String quantity,
+            @Field("product_size_id")String product_size_id,
+            @Field("product_color_id")String product_color_id,
+            @Field("length")String hips,
+            @Field("hips")String length,
+            @Header("Authorization") String token
+
+    );
+
+    @FormUrlEncoded
+    @POST("add_to_cart")
+    Call<ResponseAddToCart>add_to_cart_size(
+            @Field("user_id")String user_id,
+            @Field("product_id")String product_id,
+            @Field("quantity")String quantity,
+            @Field("product_size_id")String product_size_id,
+            @Field("length")String hips,
+            @Field("hips")String length,
+            @Header("Authorization") String token
+
+    );
+    @FormUrlEncoded
+    @POST("add_to_cart")
+    Call<ResponseAddToCart>add_to_cart_color(
+            @Field("user_id")String user_id,
+            @Field("product_id")String product_id,
+            @Field("quantity")String quantity,
+            @Field("product_color_id")String product_color_id,
+            @Field("length")String hips,
+            @Field("hips")String length,
+            @Header("Authorization") String token
+
+    );
+
+
+    @FormUrlEncoded
+    @POST("cart_list")
+    Call<ResponseCartList>cart_list(
+            @Field("user_id")String user_id,
+            @Header("Authorization") String token
+
+    );
+
+    @FormUrlEncoded
+    @POST("update_cart_quantity")
+    Call<ResponseAddToCart>update_cart_quantity(
+            @Field("user_id")String user_id,
+            @Field("cart_id")String cart_id,
+            @Field("quantity")String quantity,
+            @Header("Authorization") String token
+    );
+
+    @FormUrlEncoded
+    @POST("remove_from_cart")
+    Call<ResponseAddToCart>remove_from_cart(
+            @Field("user_id")String user_id,
+            @Field("cart_id")String cart_id,
+            @Header("Authorization") String token
+    );
+
 
 
 

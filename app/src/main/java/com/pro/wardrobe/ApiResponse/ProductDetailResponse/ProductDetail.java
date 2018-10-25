@@ -10,6 +10,12 @@ public class ProductDetail {
     @SerializedName("product_id")
     @Expose
     private String productId;
+    @SerializedName("delivery_instruction")
+    @Expose
+    private String delivery_instruction;
+    @SerializedName("special_instruction")
+    @Expose
+    private String special_instruction;
     @SerializedName("title")
     @Expose
     private String title;
@@ -55,6 +61,22 @@ public class ProductDetail {
     @SerializedName("is_purchased")
     @Expose
     private String isPurchased;
+
+    public String getDelivery_instruction() {
+        return delivery_instruction;
+    }
+
+    public void setDelivery_instruction(String delivery_instruction) {
+        this.delivery_instruction = delivery_instruction;
+    }
+
+    public String getSpecial_instruction() {
+        return special_instruction;
+    }
+
+    public void setSpecial_instruction(String special_instruction) {
+        this.special_instruction = special_instruction;
+    }
 
     public String getProductId() {
         return productId;

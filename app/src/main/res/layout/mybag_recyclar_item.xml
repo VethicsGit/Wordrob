@@ -28,6 +28,7 @@
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 android:gravity="end"
+                android:id="@+id/cartitem_fav"
                 android:layout_width = "match_parent"
                 android:layout_height = "match_parent" >
                 <ImageView
@@ -40,6 +41,7 @@
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 android:gravity="center"
+                android:id="@+id/cartitem_delete"
                 android:layout_width = "match_parent"
                 android:layout_height = "match_parent" >
                 <ImageView
@@ -81,8 +83,10 @@
                     app:cardCornerRadius = "10dp">
 
                     <ImageView
+                        android:id="@+id/cartitem_image"
                         android:layout_width = "match_parent"
-                        android:layout_height = "match_parent"
+                        android:layout_height = "100dp"
+                        android:layout_gravity="center"
                         android:scaleType="centerCrop"
                         android:src = "@drawable/order_detail" />
 
@@ -104,6 +108,7 @@
                     android:orientation = "vertical">
 
                     <TextView android:autoSizeTextType="uniform"
+                        android:id="@+id/cartitem_title"
                         android:layout_width = "wrap_content"
                         android:layout_height = "wrap_content"
                         android:layout_centerInParent = "true"
@@ -114,6 +119,7 @@
                         android:textStyle = "bold" />
 
                     <TextView android:autoSizeTextType="uniform"
+                        android:id="@+id/cartitem_category"
                         android:layout_width = "wrap_content"
                         android:layout_height = "wrap_content"
                         android:layout_centerInParent = "true"
@@ -124,6 +130,7 @@
 
                     <TextView android:autoSizeTextType="uniform"
                         android:layout_width = "wrap_content"
+                        android:id="@+id/cartitem_price"
                         android:layout_height = "wrap_content"
                         android:layout_centerInParent = "true"
                         android:layout_gravity = "start"
@@ -166,6 +173,7 @@
                     android:orientation = "vertical">
 
                     <ImageView
+                        android:id="@+id/cartitem_plus"
                         android:layout_width = "30dp"
                         android:layout_height = "30dp"
                         android:layout_gravity = "center"
@@ -185,6 +193,7 @@
                         android:padding = "5dp">
 
                         <TextView
+                            android:id="@+id/cartitem_qty"
                             android:layout_width = "wrap_content"
                             android:layout_height = "wrap_content"
                             android:layout_weight = "1"
@@ -199,6 +208,7 @@
                     </LinearLayout>
 
                     <ImageView
+                        android:id="@+id/cartitem_minus"
                         android:layout_width = "30dp"
                         android:layout_height = "30dp"
                         android:layout_gravity = "center"
