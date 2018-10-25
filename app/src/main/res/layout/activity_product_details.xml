@@ -579,6 +579,18 @@ android:id="@+id/prodetail_ratngbar"
                         android:textAllCaps = "true"
                         android:textColor = "@color/colorPrimary"
                         android:textSize = "@dimen/Login_btn_size" />
+
+
+                    <Button
+                        android:id="@+id/prodetails_giverating"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/login_btn_round_corner"
+                        android:text="GIVE RATING"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18dp" />
+
                 </LinearLayout>
 
                 <RelativeLayout

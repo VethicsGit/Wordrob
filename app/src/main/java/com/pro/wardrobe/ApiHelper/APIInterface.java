@@ -260,26 +260,25 @@ public interface APIInterface {
 
 
     @FormUrlEncoded
-<<<<<<< HEAD
     @POST("add_to_cart")
     Call<ResponseAddToCart>add_to_cart(
-            @Field("user_id")String user_id,
-            @Field("product_id")String product_id,
-            @Field("quantity")String quantity,
-            @Field("product_size_id")String product_size_id,
-            @Field("product_color_id")String product_color_id,
-            @Field("length")String hips,
-            @Field("hips")String length,
-=======
+            @Field("user_id") String user_id,
+            @Field("product_id") String product_id,
+            @Field("quantity") String quantity,
+            @Field("product_size_id") String product_size_id,
+            @Field("product_color_id") String product_color_id,
+            @Field("length") String hips,
+            @Field("hips") String length,
+
+
+            String token);
     @POST("offer_zone_list")
     Call<OfferZoneResponse>offerZone_list(
             @Field("user_id")String user_id,
->>>>>>> 11dbfcbef7d0f90747cf9c4e5390dd53d2d034eb
             @Header("Authorization") String token
 
     );
 
-<<<<<<< HEAD
     @FormUrlEncoded
     @POST("add_to_cart")
     Call<ResponseAddToCart>add_to_cart_size(
@@ -332,8 +331,6 @@ public interface APIInterface {
     );
 
 
-=======
->>>>>>> 11dbfcbef7d0f90747cf9c4e5390dd53d2d034eb
 
 
 }

@@ -61,7 +61,7 @@ import retrofit2.Response;
 
 public class Product_details extends AppCompatActivity {
 
-    Button prodetails_addtobag;
+    Button prodetails_addtobag,prodetails_giverating;
     ImageView prodetails_Mybag, prodetails_back, addtofav, detail_addtofav;
     TextView prodetails_title;
     EditText prodetails_length;
@@ -91,11 +91,8 @@ public class Product_details extends AppCompatActivity {
 
     String vendor_id;
     String category_id;
-<<<<<<< HEAD
     TextView prodetails_specialinst, prodetails_deliveryinst;
-=======
     String offer_id;
->>>>>>> 11dbfcbef7d0f90747cf9c4e5390dd53d2d034eb
 
 //    List<Product_details>product_details;
 
@@ -158,6 +155,7 @@ public class Product_details extends AppCompatActivity {
         prodetails_selectsize_icon = findViewById(R.id.prodetails_selectsize_icon);
         prodetails_selectcolor_icon = findViewById(R.id.prodetails_selectcolor_icon);
         selectcolor_icon = findViewById(R.id.selectcolor_icon);
+        prodetails_giverating=findViewById(R.id.prodetails_giverating);
 
 
         Intent intent = getIntent();
@@ -322,12 +320,9 @@ Log.e("addToCartResponse", String.valueOf(response));
                                             Toast.makeText(Product_details.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                                     }
 
-<<<<<<< HEAD
                                     @Override
                                     public void onFailure(Call<ResponseAddToCart> call, Throwable t) {
-=======
                         Call<ProductListResponse> call1 = apiInterface.product_list(preferences.getString("user_id", ""), "0",category_id,vendor_id,offer_id, preferences.getString("token", ""));
->>>>>>> 11dbfcbef7d0f90747cf9c4e5390dd53d2d034eb
 
                                     }
                                 });
@@ -385,7 +380,7 @@ Log.e("addToCartResponse", String.valueOf(response));
                         prodetails_specialinst.setVisibility(View.GONE);
                     } else prodetails_specialinst.setText(productDetail.getSpecial_instruction());
 
-                    Call<ProductListResponse> call1 = apiInterface.product_list(preferences.getString("user_id", ""), "0", category_id, vendor_id, preferences.getString("token", ""));
+                    Call<ProductListResponse> call1 = apiInterface.product_list(preferences.getString("user_id", ""), "0", category_id, vendor_id,offer_id,preferences.getString("token", ""));
 
 
                     call1.enqueue(new Callback<ProductListResponse>() {
