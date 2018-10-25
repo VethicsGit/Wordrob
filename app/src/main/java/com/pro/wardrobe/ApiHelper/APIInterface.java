@@ -14,6 +14,7 @@ import com.pro.wardrobe.ApiResponse.DesignerListResponse.Designerimages;
 import com.pro.wardrobe.ApiResponse.FavoriteProductListResponse.FavoritieProductListResponse;
 import com.pro.wardrobe.ApiResponse.ForgotPassResponse.ForgotPassResponse;
 import com.pro.wardrobe.ApiResponse.LoginResponse.LoginResponse;
+import com.pro.wardrobe.ApiResponse.OfferZoneResponse.OfferZoneResponse;
 import com.pro.wardrobe.ApiResponse.PriceRangeResponse.ResponsePriceRange;
 import com.pro.wardrobe.ApiResponse.PrivacyPolicyResponse.PrivacyPolicyResponse;
 import com.pro.wardrobe.ApiResponse.ProductDetailResponse.ProductDetailResponse;
@@ -165,6 +166,7 @@ public interface APIInterface {
             @Field("offset") String offset,
             @Field("category_id") String category_id,
             @Field("vendor_id") String vendor_id,
+            @Field("offer_zone_id")String offer_zone_id,
             @Header("Authorization") String token);
 
 
@@ -258,6 +260,7 @@ public interface APIInterface {
 
 
     @FormUrlEncoded
+<<<<<<< HEAD
     @POST("add_to_cart")
     Call<ResponseAddToCart>add_to_cart(
             @Field("user_id")String user_id,
@@ -267,10 +270,16 @@ public interface APIInterface {
             @Field("product_color_id")String product_color_id,
             @Field("length")String hips,
             @Field("hips")String length,
+=======
+    @POST("offer_zone_list")
+    Call<OfferZoneResponse>offerZone_list(
+            @Field("user_id")String user_id,
+>>>>>>> 11dbfcbef7d0f90747cf9c4e5390dd53d2d034eb
             @Header("Authorization") String token
 
     );
 
+<<<<<<< HEAD
     @FormUrlEncoded
     @POST("add_to_cart")
     Call<ResponseAddToCart>add_to_cart_size(
@@ -323,6 +332,8 @@ public interface APIInterface {
     );
 
 
+=======
+>>>>>>> 11dbfcbef7d0f90747cf9c4e5390dd53d2d034eb
 
 
 }

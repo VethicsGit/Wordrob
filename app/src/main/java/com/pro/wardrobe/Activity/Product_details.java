@@ -91,7 +91,11 @@ public class Product_details extends AppCompatActivity {
 
     String vendor_id;
     String category_id;
+<<<<<<< HEAD
     TextView prodetails_specialinst, prodetails_deliveryinst;
+=======
+    String offer_id;
+>>>>>>> 11dbfcbef7d0f90747cf9c4e5390dd53d2d034eb
 
 //    List<Product_details>product_details;
 
@@ -159,6 +163,9 @@ public class Product_details extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent.hasExtra("product_id"))
             product_id = intent.getStringExtra("product_id");
+
+        if (intent.hasExtra("offer_id"))
+            offer_id=intent.getStringExtra("offer_id");
 
 
         final SharedPreferences preferences = getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
@@ -315,8 +322,12 @@ Log.e("addToCartResponse", String.valueOf(response));
                                             Toast.makeText(Product_details.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                                     }
 
+<<<<<<< HEAD
                                     @Override
                                     public void onFailure(Call<ResponseAddToCart> call, Throwable t) {
+=======
+                        Call<ProductListResponse> call1 = apiInterface.product_list(preferences.getString("user_id", ""), "0",category_id,vendor_id,offer_id, preferences.getString("token", ""));
+>>>>>>> 11dbfcbef7d0f90747cf9c4e5390dd53d2d034eb
 
                                     }
                                 });

@@ -84,9 +84,10 @@
 
                     <android.support.v7.widget.SearchView
                         android:id="@+id/prolist_search"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:background="#FFFFFF"
+                        app:searchIcon="@drawable/searchpng"
                         >
 
                     </android.support.v7.widget.SearchView>
