@@ -16,10 +16,11 @@ android:paddingBottom="15dp"
         android:layout_height = "wrap_content">
 <de.hdodenhof.circleimageview.CircleImageView
     android:id="@+id/rating_profile"
-    android:layout_width = "30dp"
+    android:layout_width = "40dp"
+    android:scaleType="centerCrop"
     android:layout_gravity="center"
     android:src="@drawable/user"
-    android:layout_height = "50dp" />
+    android:layout_height = "40dp" />
 
         <TextView
             android:id="@+id/rating_username"
@@ -32,7 +33,7 @@ android:paddingBottom="15dp"
             android:layout_height = "wrap_content" />
 
         <RatingBar
-            android:id="@+id/rating_star"
+                android:id="@+id/rating_star"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -55,6 +56,7 @@ android:paddingBottom="15dp"
     </RelativeLayout>
 
     <TextView
+        android:id="@+id/rating_title"
         android:layout_width = "wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
@@ -64,8 +66,10 @@ android:paddingBottom="15dp"
         android:textColor="@color/colorAccent"
         android:layout_height = "wrap_content" />
     <TextView
+        android:id="@+id/rating_description"
         android:layout_width = "wrap_content"
         android:layout_marginStart="5dp"
+        android:textColor="#000000"
         android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
         android:textSize="10dp"
         android:layout_height = "wrap_content" />
@@ -84,11 +88,12 @@ android:paddingBottom="15dp"
             android:layout_gravity="center"
             android:src="@drawable/time"/>
         <TextView
+            android:id="@+id/rating_time"
             android:layout_width = "wrap_content"
             android:layout_gravity="center"
             android:text="17 May, 2017"
-            android:textStyle="bold"
-            android:textSize="8dp"
+
+            android:textSize="10dp"
             android:textColor="@color/colorAccent"
 
             android:layout_height = "wrap_content" />
@@ -99,17 +104,35 @@ android:paddingBottom="15dp"
             android:layout_width = "match_parent"
             android:layout_height = "match_parent">
 
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:id="@+id/review_id"/>
+
+            <TextView
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/review_status"/>
+
             <LinearLayout
                 android:layout_alignParentEnd="true"
                 android:layout_width = "wrap_content"
                 android:layout_height = "match_parent">
+
+
                 <ImageView
-                android:layout_width = "20dp"
-                android:layout_height = "20dp"
-                android:layout_gravity="center"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/thumbs_down"/>
+                    android:id="@+id/thumbdown"
+                    android:layout_width = "20dp"
+                    android:layout_height = "20dp"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/thumbs_up"/>
+
                 <TextView
+                    android:id="@+id/rating_unlike"
                     android:layout_width = "wrap_content"
                     android:layout_gravity="center"
                     android:text="15"
@@ -117,13 +140,16 @@ android:paddingBottom="15dp"
                     android:textColor="@color/colorAccent"
 android:layout_marginRight="15dp"
                     android:layout_height = "wrap_content" />
+
                 <ImageView
+                    android:id="@+id/thumbup"
                     android:layout_width = "20dp"
                     android:layout_height = "20dp"
                     android:layout_gravity="center"
                     android:layout_marginRight="10dp"
-                    android:src="@drawable/thumbs_up"/>
+                    android:src="@drawable/thumbs_down"/>
                 <TextView
+                    android:id="@+id/rating_like"
                     android:layout_width = "wrap_content"
                     android:layout_gravity="center"
                     android:text="23"

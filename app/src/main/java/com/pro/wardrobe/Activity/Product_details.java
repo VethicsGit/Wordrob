@@ -4,12 +4,15 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RoundRectShape;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -160,7 +163,7 @@ public class Product_details extends AppCompatActivity {
         prodetails_giverating = findViewById(R.id.prodetails_giverating);
 
 
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         if (intent.hasExtra("product_id"))
             product_id = intent.getStringExtra("product_id");
 
@@ -192,6 +195,10 @@ public class Product_details extends AppCompatActivity {
                 review_statr.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
                     @Override
                     public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            review_statr.setProgressTintList(ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(),R.color.colorseleced)));
+                        }
                         review_statr.getRating();
                     }
                 });
@@ -276,6 +283,15 @@ public class Product_details extends AppCompatActivity {
 
                     vendor_id = productDetail.getVendorId();
                     product_id = productDetail.getProductId();
+
+                    prodetails_rating.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intentbag = new Intent(getApplicationContext(), Reviews.class);
+                            intentbag.putExtra("product_id",productDetail.getProductId());
+                            startActivity(intentbag);
+                        }
+                    });
 
                     TextView prodetails_viewall = findViewById(R.id.prodetails_viewall);
 
@@ -741,13 +757,7 @@ layout.setFitsSystemWindows(true);
 
         prodetails_title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
 
-        prodetails_rating.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intentbag = new Intent(getApplicationContext(), Reviews.class);
-                startActivity(intentbag);
-            }
-        });
+
 
 
         prodetails_Mybag.setOnClickListener(new View.OnClickListener() {
