@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +47,9 @@ public class Activty_MyBag extends AppCompatActivity {
     EditText mybag_promo_edit;
     RecyclerView mybag_recycler;
     TextView mybag_totalprice;
+    TextView cartemptytext;
+    LinearLayout cartrootlayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +63,11 @@ public class Activty_MyBag extends AppCompatActivity {
 
         mybag_back = findViewById(R.id.mybag_back);
         mybag_totalprice= findViewById(R.id.mybag_totalprice);
+        cartemptytext= findViewById(R.id.cartemptytext);
         mybag_recycler = findViewById(R.id.mybag_recycler);
         mybag_checkout = findViewById(R.id.mybag_checkout);
         mybag_promo_edit = findViewById(R.id.mybag_promo_edit);
+        cartrootlayout= findViewById(R.id.cartrootlayout);
         mybag_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -103,8 +109,16 @@ myBagApiCall();
                     Toast.makeText(Activty_MyBag.this, "cart list size ", Toast.LENGTH_SHORT).show();
                     if (response1.getStatus().equals("true")) {
                         List<CartList> cartList = response1.getCartList();
-                        mybag_list_Adapter mybag_list_adapter = new mybag_list_Adapter(getApplicationContext(), cartList,mybag_recycler,mybag_totalprice);
-                        mybag_recycler.setAdapter(mybag_list_adapter);
+
+                        if (cartList.size()>0) {
+                            cartemptytext.setVisibility(View.GONE);
+cartrootlayout.setVisibility(View.VISIBLE);
+                            mybag_list_Adapter mybag_list_adapter = new mybag_list_Adapter(getApplicationContext(), cartList, mybag_recycler, mybag_totalprice);
+                            mybag_recycler.setAdapter(mybag_list_adapter);
+                        }else {
+                            cartemptytext.setVisibility(View.VISIBLE);
+                            cartrootlayout.setVisibility(View.GONE);
+                        }
                     } else {
                         Toast.makeText(Activty_MyBag.this, "Oops, No result found..!", Toast.LENGTH_SHORT).show();
                     }

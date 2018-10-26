@@ -272,7 +272,7 @@ public interface APIInterface {
             @Field("hips") String length,
             @Field("Authorization")
 
-
+            @Header("Authorization")
             String token);
     @FormUrlEncoded
     @POST("offer_zone_list")
