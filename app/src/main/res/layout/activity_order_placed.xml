@@ -63,7 +63,7 @@
             android:layout_margin = "20dp"
             android:orientation = "vertical">
         <ImageView
-            android:layout_width = "match_parent"
+            android:layout_width = "wrap_content"
             android:layout_height = "wrap_content"
             android:layout_gravity="center_horizontal"
             android:minWidth="220dp"
@@ -88,6 +88,7 @@
                 android:layout_gravity="center"
                 android:layout_width = "wrap_content"
                 android:layout_height = "wrap_content"
+               android:id="@+id/placedOrder_txt"
                 android:gravity = "center"
                 android:text = "Congratulations your order placed successfully\nyour order code is #XD4532"
 
@@ -105,6 +106,7 @@
                     android:layout_width = "match_parent"
                     android:layout_height = "wrap_content"
                     android:layout_marginTop = "15dp"
+                    android:layout_marginBottom = "15dp"
                     android:background = "@drawable/login_btn_round_corner"
                     android:text = "continue shopping"
                     android:textColor = "@color/colorPrimary"

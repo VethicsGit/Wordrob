@@ -15,15 +15,20 @@ public class OrderPlaced extends AppCompatActivity {
 
     Button orderplaced_btn_continue;
     ImageView placeorder_back;
-    TextView orderplaced_title;
+    TextView orderplaced_title,placedOrder_txt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_placed);
 
+
         orderplaced_btn_continue=findViewById(R.id.orderplaced_btn_continue);
         orderplaced_title=findViewById(R.id.orderplaced_title);
+        placedOrder_txt=findViewById(R.id.placedOrder_txt);
+
+        placedOrder_txt.setText("Congratulations your order placed successfully\\nyour order code is #"+getIntent().getStringExtra("orderId~"));
+
 
         Typeface facebold = Typeface.createFromAsset(getAssets(), "Roboto_Bold.ttf");
         orderplaced_title.setTypeface(facebold);

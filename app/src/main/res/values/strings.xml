@@ -17,7 +17,8 @@
         <item>Region</item>
     </array>
     <array name="payment">
-        <item>credit Card</item>
+        <item>Cash on Delivery</item>
+        <item>credit Card / Debit Card</item>
     </array>
     <array name="category">
         <item>Kaftans &amp; Abayas</item>

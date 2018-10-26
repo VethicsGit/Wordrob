@@ -64,7 +64,7 @@ import retrofit2.Response;
 
 public class Product_details extends AppCompatActivity {
 
-    Button prodetails_addtobag,prodetails_giverating;
+    Button prodetails_addtobag, prodetails_giverating;
     ImageView prodetails_Mybag, prodetails_back, addtofav, detail_addtofav;
     TextView prodetails_title;
     EditText prodetails_length;
@@ -108,7 +108,6 @@ public class Product_details extends AppCompatActivity {
         this.title = title;
     }
 
-    Call<ResponseAddToCart> callcart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,7 +157,7 @@ public class Product_details extends AppCompatActivity {
         prodetails_selectsize_icon = findViewById(R.id.prodetails_selectsize_icon);
         prodetails_selectcolor_icon = findViewById(R.id.prodetails_selectcolor_icon);
         selectcolor_icon = findViewById(R.id.selectcolor_icon);
-        prodetails_giverating=findViewById(R.id.prodetails_giverating);
+        prodetails_giverating = findViewById(R.id.prodetails_giverating);
 
 
         Intent intent = getIntent();
@@ -166,30 +165,28 @@ public class Product_details extends AppCompatActivity {
             product_id = intent.getStringExtra("product_id");
 
         if (intent.hasExtra("offer_id"))
-            offer_id=intent.getStringExtra("offer_id");
+            offer_id = intent.getStringExtra("offer_id");
 
 
         prodetails_giverating.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                 final AlertDialog.Builder builder=new AlertDialog.Builder(Product_details.this);
-                LayoutInflater inflater =Product_details.this.getLayoutInflater();
-                View dailgo=inflater.inflate(R.layout.submit_review_dialog,null);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(Product_details.this);
+                LayoutInflater inflater = Product_details.this.getLayoutInflater();
+                View dailgo = inflater.inflate(R.layout.submit_review_dialog, null);
                 builder.setView(dailgo);
 
 
+                final AlertDialog dialog = builder.create();
 
-                final AlertDialog dialog=builder.create();
 
-
-                Button button=dailgo.findViewById(R.id.dialog_btn_submit);
-                final EditText description=dailgo.findViewById(R.id.description);
-                final EditText review_text=dailgo.findViewById(R.id.review_title);
-                final RatingBar review_statr=dailgo.findViewById(R.id.detail_reviewstar);
+                Button button = dailgo.findViewById(R.id.dialog_btn_submit);
+                final EditText description = dailgo.findViewById(R.id.description);
+                final EditText review_text = dailgo.findViewById(R.id.review_title);
+                final RatingBar review_statr = dailgo.findViewById(R.id.detail_reviewstar);
 
                 dialog.show();
-
 
 
                 review_statr.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
@@ -203,34 +200,27 @@ public class Product_details extends AppCompatActivity {
                     public void onClick(View view) {
 
 
-
-
                         final SharedPreferences preferences = getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
-                        APIInterface apiInterface=APIClient.getClient().create(APIInterface.class);
-                        Call<GiveRatingResponse>call=apiInterface.give_rating(preferences.getString("user_id",""),product_id, String.valueOf(review_statr.getRating()),review_text.getText().toString(),description.getText().toString(),vendor_id,preferences.getString("token",""));
+                        APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
+                        Call<GiveRatingResponse> call = apiInterface.give_rating(preferences.getString("user_id", ""), product_id, String.valueOf(review_statr.getRating()), review_text.getText().toString(), description.getText().toString(), vendor_id, preferences.getString("token", ""));
                         call.enqueue(new Callback<GiveRatingResponse>() {
                             @Override
                             public void onResponse(Call<GiveRatingResponse> call, Response<GiveRatingResponse> response) {
-                                GiveRatingResponse giveRatingResponse=response.body();
-                                List<com.pro.wardrobe.ApiResponse.GiveRatingResponse.Response>responses1=giveRatingResponse.getResponse();
+                                GiveRatingResponse giveRatingResponse = response.body();
+                                List<com.pro.wardrobe.ApiResponse.GiveRatingResponse.Response> responses1 = giveRatingResponse.getResponse();
 
-                                for (int i = 0;i<responses1.size();i++){
+                                for (int i = 0; i < responses1.size(); i++) {
 
-                                    com.pro.wardrobe.ApiResponse.GiveRatingResponse.Response response2=responses1.get(i);
-                                    Log.e("messge",""+response2.getStatus());
+                                    com.pro.wardrobe.ApiResponse.GiveRatingResponse.Response response2 = responses1.get(i);
+                                    Log.e("messge", "" + response2.getStatus());
 
                                     if (response2.getStatus().equals("true")) {
 
 
-
-
-
-                                            dialog.dismiss();
+                                        dialog.dismiss();
 //                                        Toast.makeText(getApplicationContext(), ""+response2.getResponseMsg(), Toast.LENGTH_SHORT).show();
 
                                     }
-
-
 
 
                                 }
@@ -243,19 +233,12 @@ public class Product_details extends AppCompatActivity {
                         });
 
 
-
                     }
                 });
 
 
-
-
-
-
             }
         });
-
-
 
 
         final SharedPreferences preferences = getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
@@ -308,12 +291,12 @@ public class Product_details extends AppCompatActivity {
 
                     prodetail_ratngbar.setRating(Float.parseFloat(productDetail.getRatingAvg()));
                     colorDetails = productDetail.getProductColorDetails();
-                    if (colorDetails.size()==0){
+                    if (colorDetails.size() == 0) {
                         prodetails_colorlayout.setVisibility(View.GONE);
                         prodetails_selectcolor.setClickable(false);
-                        fil_color="";
+                        fil_color = "";
                         prodetails_selectcolor.setFocusable(false);
-                    }else {
+                    } else {
                         prodetails_colorlayout.setAdapter(new colorPickerAdapter(getApplicationContext(), colorDetails));
                     }
                     final List<ProductSizeDetail> size = productDetail.getProductSizeDetails();
@@ -366,9 +349,6 @@ public class Product_details extends AppCompatActivity {
                     }
 
 
-
-
-
                     prodetails_addtobag.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -378,7 +358,7 @@ public class Product_details extends AppCompatActivity {
                                 Toast.makeText(Product_details.this, "PLease select color first", Toast.LENGTH_SHORT).show();
                             } else {
 
-                                Log.e("user id",preferences.getString("user_id", ""));
+                                Log.e("user id", preferences.getString("user_id", ""));
                                 Log.e("product id", productDetail.getProductId());
                                 Log.e("Qty", "1");
                                 Log.e("size iD", fil_size);
@@ -386,24 +366,100 @@ public class Product_details extends AppCompatActivity {
                                 Log.e("length", prodetails_length.getText().toString());
                                 Log.e("hips", prodetails_hips.getText().toString());
 
-                                if (fil_color.equals("")) {
-                                    callcart = apiInterface.add_to_cart_size(preferences.getString("user_id", ""),
+//                                if (fil_color.equals("")) {
+                                if (colorDetails.size() == 0 && size.size() > 0) {
+                                    Call<ResponseAddToCart>   callcartsize = apiInterface.add_to_cart_size(preferences.getString("user_id", ""),
                                             productDetail.getProductId(), "1", fil_size
                                             , prodetails_length.getText().toString(), prodetails_hips.getText().toString(), preferences.getString("token", ""));
-                                }
-                                else if (fil_size.equals("")){
-                                    callcart = apiInterface.add_to_cart_size(preferences.getString("user_id", ""),
+
+                                    callcartsize.enqueue(new Callback<ResponseAddToCart>() {
+                                        @Override
+                                        public void onResponse(@NonNull Call<ResponseAddToCart> call, @NonNull Response<ResponseAddToCart> response) {
+                                            Gson gson = new GsonBuilder().create();
+                                            String myCustomArray = gson.toJson(response.body()).toString();
+                                            Log.e("addToCartResponse", String.valueOf(response));
+                                            ResponseAddToCart addToCart = response.body();
+
+                                            List<com.pro.wardrobe.ApiResponse.AddToCartResponse.Response> reslist = addToCart.getResponse();
+                                            com.pro.wardrobe.ApiResponse.AddToCartResponse.Response response2 = reslist.get(0);
+                                            if (response2.getStatus().equals("true")) {
+                                                Intent intentbag = new Intent(getApplicationContext(), Activty_MyBag.class);
+                                                startActivity(intentbag);
+                                                Toast.makeText(Product_details.this, "Added to cart", Toast.LENGTH_SHORT).show();
+                                            } else
+                                                Toast.makeText(Product_details.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<ResponseAddToCart> call, Throwable t) {
+                                            Call<ProductListResponse> call1 = apiInterface.product_list(preferences.getString("user_id", ""), "0", category_id, vendor_id, offer_id, preferences.getString("token", ""));
+
+                                        }
+                                    });
+                                } else if (size.size() == 0 && colorDetails.size() > 0) {
+                                    Call<ResponseAddToCart>   callcartcolor = apiInterface.add_to_cart_color(preferences.getString("user_id", ""),
                                             productDetail.getProductId(), "1", fil_color
                                             , prodetails_length.getText().toString(), prodetails_hips.getText().toString(), preferences.getString("token", ""));
-                                }else callcart = apiInterface.add_to_cart(preferences.getString("user_id", ""),
-                                        productDetail.getProductId(), "1", fil_size,fil_color
-                                        , prodetails_length.getText().toString(), prodetails_hips.getText().toString(), preferences.getString("token", ""));
-                                callcart.enqueue(new Callback<ResponseAddToCart>() {
+
+                                    callcartcolor.enqueue(new Callback<ResponseAddToCart>() {
+                                        @Override
+                                        public void onResponse(@NonNull Call<ResponseAddToCart> call, @NonNull Response<ResponseAddToCart> response) {
+                                            Gson gson = new GsonBuilder().create();
+                                            String myCustomArray = gson.toJson(response.body()).toString();
+                                            Log.e("addToCartResponse", String.valueOf(response));
+                                            ResponseAddToCart addToCart = response.body();
+
+                                            List<com.pro.wardrobe.ApiResponse.AddToCartResponse.Response> reslist = addToCart.getResponse();
+                                            com.pro.wardrobe.ApiResponse.AddToCartResponse.Response response2 = reslist.get(0);
+                                            if (response2.getStatus().equals("true")) {
+                                                Intent intentbag = new Intent(getApplicationContext(), Activty_MyBag.class);
+                                                startActivity(intentbag);
+                                                Toast.makeText(Product_details.this, "Added to cart", Toast.LENGTH_SHORT).show();
+                                            } else
+                                                Toast.makeText(Product_details.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<ResponseAddToCart> call, Throwable t) {
+                                            Call<ProductListResponse> call1 = apiInterface.product_list(preferences.getString("user_id", ""), "0", category_id, vendor_id, offer_id, preferences.getString("token", ""));
+
+                                        }
+                                    });
+                                } else if (size.size() > 0 && colorDetails.size() > 0) {
+                                    Call<ResponseAddToCart>   callcart = apiInterface.add_to_cart(preferences.getString("user_id", ""),
+                                            productDetail.getProductId(), "1", fil_size, fil_color
+                                            , prodetails_hips.getText().toString(), prodetails_length.getText().toString(), preferences.getString("token", ""));
+                                    callcart.enqueue(new Callback<ResponseAddToCart>() {
+                                        @Override
+                                        public void onResponse(@NonNull Call<ResponseAddToCart> call, @NonNull Response<ResponseAddToCart> response) {
+                                            Gson gson = new GsonBuilder().create();
+                                            String myCustomArray = gson.toJson(response.body()).toString();
+                                            Log.e("addToCartResponse", String.valueOf(response));
+                                            ResponseAddToCart addToCart = response.body();
+
+                                            List<com.pro.wardrobe.ApiResponse.AddToCartResponse.Response> reslist = addToCart.getResponse();
+                                            com.pro.wardrobe.ApiResponse.AddToCartResponse.Response response2 = reslist.get(0);
+                                            if (response2.getStatus().equals("true")) {
+                                                Intent intentbag = new Intent(getApplicationContext(), Activty_MyBag.class);
+                                                startActivity(intentbag);
+                                                Toast.makeText(Product_details.this, "Added to cart", Toast.LENGTH_SHORT).show();
+                                            } else
+                                                Toast.makeText(Product_details.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<ResponseAddToCart> call, Throwable t) {
+                                            Call<ProductListResponse> call1 = apiInterface.product_list(preferences.getString("user_id", ""), "0", category_id, vendor_id, offer_id, preferences.getString("token", ""));
+
+                                        }
+                                    });
+                                }
+                                /*callcart.enqueue(new Callback<ResponseAddToCart>() {
                                     @Override
                                     public void onResponse(@NonNull Call<ResponseAddToCart> call, @NonNull Response<ResponseAddToCart> response) {
                                         Gson gson = new GsonBuilder().create();
                                         String myCustomArray = gson.toJson(response.body()).toString();
-Log.e("addToCartResponse", String.valueOf(response));
+                                        Log.e("addToCartResponse", String.valueOf(response));
                                         ResponseAddToCart addToCart = response.body();
 
                                         List<com.pro.wardrobe.ApiResponse.AddToCartResponse.Response> reslist = addToCart.getResponse();
@@ -418,10 +474,10 @@ Log.e("addToCartResponse", String.valueOf(response));
 
                                     @Override
                                     public void onFailure(Call<ResponseAddToCart> call, Throwable t) {
-                        Call<ProductListResponse> call1 = apiInterface.product_list(preferences.getString("user_id", ""), "0",category_id,vendor_id,offer_id, preferences.getString("token", ""));
+                                        Call<ProductListResponse> call1 = apiInterface.product_list(preferences.getString("user_id", ""), "0", category_id, vendor_id, offer_id, preferences.getString("token", ""));
 
                                     }
-                                });
+                                });*/
 
 
 
@@ -476,7 +532,7 @@ Log.e("addToCartResponse", String.valueOf(response));
                         prodetails_specialinst.setVisibility(View.GONE);
                     } else prodetails_specialinst.setText(productDetail.getSpecial_instruction());
 
-                    Call<ProductListResponse> call1 = apiInterface.product_list(preferences.getString("user_id", ""), "0", category_id, vendor_id,offer_id,preferences.getString("token", ""));
+                    Call<ProductListResponse> call1 = apiInterface.product_list(preferences.getString("user_id", ""), "0", category_id, vendor_id, offer_id, preferences.getString("token", ""));
 
 
                     call1.enqueue(new Callback<ProductListResponse>() {

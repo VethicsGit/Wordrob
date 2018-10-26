@@ -9,6 +9,8 @@ import com.pro.wardrobe.ApiResponse.ChangePassResponse.ChangePassResponse;
 import com.pro.wardrobe.ApiResponse.ColorListResponse.ResponseColorList;
 import com.pro.wardrobe.ApiResponse.ContactUsResponse.ContactUsResponse;
 import com.pro.wardrobe.ApiResponse.CountryResponse.CountryResponse;
+import com.pro.wardrobe.ApiResponse.CoupanCodeValidResponse.ResponseCoupanCodeValid;
+import com.pro.wardrobe.ApiResponse.CreateOrderResponse.ResponseCreateOrder;
 import com.pro.wardrobe.ApiResponse.DesignerCategoryResponse.Designercategory;
 import com.pro.wardrobe.ApiResponse.DesignerListResponse.Designerimages;
 import com.pro.wardrobe.ApiResponse.FavoriteProductListResponse.FavoritieProductListResponse;
@@ -270,7 +272,6 @@ public interface APIInterface {
             @Field("product_color_id") String product_color_id,
             @Field("length") String hips,
             @Field("hips") String length,
-            @Field("Authorization")
 
             @Header("Authorization")
             String token);
@@ -346,6 +347,27 @@ public interface APIInterface {
       @Header("Authorization")String token
     );
 
+
+    @FormUrlEncoded
+    @POST("check_coupon_code_valid")
+    Call<ResponseCoupanCodeValid> check_coupon_code_valid(
+            @Field("user_id")String user_id,
+            @Field("coupon_code")String coupon_code,
+            @Header("Authorization")String token
+    );
+
+    @FormUrlEncoded
+    @POST("create_order")
+    Call<ResponseCreateOrder> create_order(
+            @Field("user_id")String user_id,
+            @Field("shipping_address")String shipping_address,
+            @Field("billing_address")String billing_address,
+            @Field("subtotal")String subtotal,
+            @Field("shipping_amount")String shipping_amount,
+            @Field("total")String total,
+            @Field("payment_method")String payment_method,
+            @Header("Authorization")String token
+    );
 
 
 

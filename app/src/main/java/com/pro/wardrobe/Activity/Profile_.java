@@ -90,6 +90,8 @@ public class Profile_ extends AppCompatActivity {
     int country_selected_position=-1;
     TextView title;
 
+    Context c;
+
     private static File getOutputMediaFile(int type) {
 
         // External sdcard location
@@ -120,6 +122,8 @@ public class Profile_ extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+
+        c=this;
 //        ((Dashboard)getApplicationContext()).toggle(2);
 //        profile_back = view.findViewById(R.id.profile_back);
         profile_image = findViewById(R.id.profile_image);
@@ -147,7 +151,7 @@ public class Profile_ extends AppCompatActivity {
         profile_country.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final ProgressDialog mProgressDialog = new ProgressDialog(getApplicationContext(), R.style.AppCompatAlertDialogStyle);
+                final ProgressDialog mProgressDialog = new ProgressDialog(c, R.style.AppCompatAlertDialogStyle);
                 mProgressDialog.setIndeterminate(false);
                 mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                 mProgressDialog.setCancelable(false);
@@ -171,7 +175,7 @@ public class Profile_ extends AppCompatActivity {
 
 
 
-                            dialog=    new MaterialDialog.Builder(getApplicationContext()).title("Country List").items(country).itemsCallback(new MaterialDialog.ListCallback() {
+                            dialog=    new MaterialDialog.Builder(c).title("Country List").items(country).itemsCallback(new MaterialDialog.ListCallback() {
                                 @Override
                                 public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
                                     String countryId=countryList.get(which).getCountriesId();

@@ -1,10 +1,12 @@
 package com.pro.wardrobe.Activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -48,14 +50,15 @@ public class Activty_MyBag extends AppCompatActivity {
     RecyclerView mybag_recycler;
     TextView mybag_totalprice;
     TextView cartemptytext;
-    LinearLayout cartrootlayout;
+    NestedScrollView cartrootlayout;
 
-
+Context c;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activty__my_bag);
 
+        c=this;
         TextView mybag_title = findViewById(R.id.mybag_title);
         Typeface facebold = Typeface.createFromAsset(getAssets(),
                 "Philosopher_Bold.ttf");
@@ -93,6 +96,12 @@ myBagApiCall();
     }
 
     public void myBagApiCall() throws NumberFormatException{
+        final ProgressDialog mProgressDialog = new ProgressDialog(c, R.style.AppCompatAlertDialogStyle);
+        mProgressDialog.setIndeterminate(false);
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setMessage("Please wait...");
+        mProgressDialog.show();
         final SharedPreferences preferences = getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
         final APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
         Call<ResponseCartList> call = apiInterface.cart_list(preferences.getString("user_id", ""), preferences.getString("token", ""));
@@ -100,15 +109,18 @@ myBagApiCall();
             @Override
             public void onResponse(@NonNull Call<ResponseCartList> call, @NonNull Response<ResponseCartList> response) {
                 try {
+                    mProgressDialog.dismiss();
                     Gson gson = new GsonBuilder().create();
                     String myCustomArray = gson.toJson(response).toString();
                     Log.e("BagResponse", myCustomArray);
                     ResponseCartList res = response.body();
                     List<com.pro.wardrobe.ApiResponse.CartListResponse.Response> resList = res.getResponse();
                     com.pro.wardrobe.ApiResponse.CartListResponse.Response response1 = resList.get(0);
-                    Toast.makeText(Activty_MyBag.this, "cart list size ", Toast.LENGTH_SHORT).show();
                     if (response1.getStatus().equals("true")) {
+                        cartemptytext.setVisibility(View.GONE);
+                        cartrootlayout.setVisibility(View.VISIBLE);
                         List<CartList> cartList = response1.getCartList();
+                        Toast.makeText(Activty_MyBag.this, "cart list size "+cartList.size(), Toast.LENGTH_SHORT).show();
 
                         if (cartList.size()>0) {
                             cartemptytext.setVisibility(View.GONE);
@@ -120,6 +132,8 @@ cartrootlayout.setVisibility(View.VISIBLE);
                             cartrootlayout.setVisibility(View.GONE);
                         }
                     } else {
+                        cartemptytext.setVisibility(View.VISIBLE);
+                        cartrootlayout.setVisibility(View.GONE);
                         Toast.makeText(Activty_MyBag.this, "Oops, No result found..!", Toast.LENGTH_SHORT).show();
                     }
                 } catch (NumberFormatException ignored) {

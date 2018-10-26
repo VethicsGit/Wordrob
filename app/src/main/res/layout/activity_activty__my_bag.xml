@@ -3,18 +3,8 @@
 <FrameLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <TextView
-        android:id="@+id/cartemptytext"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:textSize="25dp"
-        android:textColor="#000000"
-        android:gravity="center"
-        android:text="Oops..! Sorry Bag is empty"
-        />
 
-    <LinearLayout android:id="@+id/cartrootlayout"
+    <LinearLayout
          xmlns:android = "http://schemas.android.com/apk/res/android"
         android:layout_width = "match_parent"
         android:layout_height = "match_parent"
@@ -65,12 +55,14 @@
 
         <android.support.v4.widget.NestedScrollView
             android:background="#ffffff"
+            android:id="@+id/cartrootlayout"
             xmlns:app = "http://schemas.android.com/apk/res-auto"
             xmlns:tools = "http://schemas.android.com/tools"
             android:layout_width = "match_parent"
             android:layout_height = "match_parent"
             tools:context = ".Activity.Activty_MyBag">
             <LinearLayout
+
                 android:layout_width = "match_parent"
                 android:layout_height = "match_parent"
                 android:layout_margin = "10dp"
@@ -1324,5 +1316,18 @@
 
 
         </android.support.v4.widget.NestedScrollView>
+        <TextView
+            android:id="@+id/cartemptytext"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:textSize="25dp"
+            android:textColor="#000000"
+            android:visibility="gone"
+            android:gravity="center"
+            android:text="Oops..! Sorry Bag is empty"
+            />
     </LinearLayout>
+
+
 </FrameLayout>

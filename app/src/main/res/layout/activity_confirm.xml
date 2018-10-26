@@ -97,7 +97,7 @@
                         android:text = "Booking Details"
                         android:textColor = "@color/colorAccent"
                         android:textSize = "12dp" />
-
+<!--
                     <RelativeLayout
                         android:layout_width = "match_parent"
                         android:layout_height = "wrap_content"
@@ -180,7 +180,12 @@
                             android:textSize = "12dp"
                             android:textStyle = "bold" />
 
-                    </RelativeLayout>
+                    </RelativeLayout>-->
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/confirm_item_recycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 
                     <View
                         android:layout_width = "match_parent"
@@ -209,7 +214,20 @@
                             android:layout_alignParentRight = "true"
                             android:layout_gravity = "start"
                             android:autoSizeTextType = "uniform"
-                            android:text = "213 QAR"
+                            android:id="@+id/confirm_subtotal"
+                            android:text = "00"
+                            android:layout_marginEnd="30dp"
+                            android:textColor = "@color/colorAccent"
+                            android:textSize = "12dp"
+                            android:textStyle = "bold" />
+
+                        <TextView
+                            android:layout_width = "wrap_content"
+                            android:layout_height = "wrap_content"
+                            android:layout_alignParentRight = "true"
+                            android:layout_gravity = "start"
+                            android:autoSizeTextType = "uniform"
+                            android:text = "QAR"
                             android:textColor = "@color/colorAccent"
                             android:textSize = "12dp"
                             android:textStyle = "bold" />
@@ -271,7 +289,34 @@
                             android:layout_alignParentRight = "true"
                             android:layout_gravity = "start"
                             android:autoSizeTextType = "uniform"
-                            android:text = "213 QAR"
+                            android:text = "00"
+                            android:layout_marginEnd="30dp"
+                            android:id="@+id/confirm_total"
+                            android:textColor = "@color/colorAccent"
+                            android:textSize = "12dp"
+                            android:textStyle = "bold" />
+
+                        <TextView
+                            android:layout_width = "wrap_content"
+                            android:layout_height = "wrap_content"
+                            android:layout_alignParentRight = "true"
+                            android:layout_gravity = "start"
+                            android:autoSizeTextType = "uniform"
+                            android:text = "00"
+                            android:layout_marginEnd="30dp"
+                            android:id="@+id/confirm_dummy"
+                            android:visibility="gone"
+                            android:textColor = "@color/colorAccent"
+                            android:textSize = "12dp"
+                            android:textStyle = "bold" />
+
+                        <TextView
+                            android:layout_width = "wrap_content"
+                            android:layout_height = "wrap_content"
+                            android:layout_alignParentRight = "true"
+                            android:layout_gravity = "start"
+                            android:autoSizeTextType = "uniform"
+                            android:text = "QAR"
                             android:textColor = "@color/colorAccent"
                             android:textSize = "12dp"
                             android:textStyle = "bold" />
@@ -356,6 +401,7 @@
                         <TextView
                             android:layout_width = "wrap_content"
                             android:layout_height = "wrap_content"
+                            android:id="@+id/confirm_billing_address"
                             android:layout_gravity = "start"
                             android:layout_marginStart = "5dp"
                             android:autoSizeTextType = "uniform"
@@ -414,6 +460,7 @@
                             android:layout_width = "wrap_content"
                             android:layout_height = "wrap_content"
                             android:layout_gravity = "start"
+                            android:id="@+id/confirm_shipping_address"
                             android:layout_marginStart = "5dp"
                             android:autoSizeTextType = "uniform"
                             android:text = "PO Box : 00000\nphone: +91745265 4455\nEmail: ancv@email.com"
