@@ -20,8 +20,10 @@ import com.pro.wardrobe.ApiResponse.PriceRangeResponse.ResponsePriceRange;
 import com.pro.wardrobe.ApiResponse.PrivacyPolicyResponse.PrivacyPolicyResponse;
 import com.pro.wardrobe.ApiResponse.ProductDetailResponse.ProductDetailResponse;
 import com.pro.wardrobe.ApiResponse.ProductListResponse.ProductListResponse;
+import com.pro.wardrobe.ApiResponse.ProductRatingListResponse.ProductListRatingResponse;
 import com.pro.wardrobe.ApiResponse.ProfileResponse.ProfileResponse;
 import com.pro.wardrobe.ApiResponse.RemoveToFavorite.RemoveToFavorite;
+import com.pro.wardrobe.ApiResponse.SendRatingLikeUnlike.SendRatingResponse;
 import com.pro.wardrobe.ApiResponse.Signup_Response.SignupResponse;
 import com.pro.wardrobe.ApiResponse.SizeListResponse.ResponseSizeList;
 import com.pro.wardrobe.ApiResponse.SocialSiginResponse.ResponseSocialSignin;
@@ -346,6 +348,24 @@ public interface APIInterface {
       @Header("Authorization")String token
     );
 
+    @FormUrlEncoded
+    @POST("product_rating_list")
+    Call<ProductListRatingResponse>product_ratinglist(
+       @Field("user_id")String user_id,
+       @Field("product_id")String product_id,
+       @Field("sort_by")String sort_by,
+       @Field("offset")String offset,
+       @Header("Authorization")String token
+    );
+
+    @FormUrlEncoded
+    @POST("send_rating_review_like_unlike")
+    Call<SendRatingResponse>rating_likes(
+            @Field("user_id")String user_id,
+            @Field("rating_review_id")String rating_review_id,
+            @Field("like_unlike_status")String like_unlike_status,
+            @Header("Authorization")String token
+    );
 
 
 

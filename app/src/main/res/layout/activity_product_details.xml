@@ -480,6 +480,7 @@ android:id="@+id/prodetails_togglelayout"
                     android:id="@+id/prodetail_ratngbar"
                     android:scaleX = "0.5"
                     android:scaleY = "0.5"
+                    android:progressTint="#F9CB13"
                     android:theme = "@style/RatingBar" />
 
                 <TextView
