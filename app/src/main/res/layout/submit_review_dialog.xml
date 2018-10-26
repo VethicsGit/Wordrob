@@ -88,41 +88,59 @@ app:elevation="5dp"
 
             <LinearLayout
 
-                android:layout_width = "match_parent"
-                android:layout_height = "wrap_content"
-                android:background = "#ffffff"
-                android:gravity = "center"
-                android:paddingBottom="60dp"
-                android:orientation = "vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:background="#ffffff"
                 android:focusableInTouchMode="true"
-                android:paddingTop = "15dp"
-                android:paddingStart = "15dp"
-                android:paddingRight = "15dp"
-                >
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingBottom="60dp"
+                android:paddingRight="15dp"
+                android:paddingStart="15dp"
+                android:paddingTop="15dp">
 
                 <EditText
-                    android:id="@+id/contactus_number"
-                    android:layout_width = "match_parent"
-                    android:layout_height = "40dp"
-                    android:padding="5dp"
-                    android:hint = "Title (Optional)"
-                    android:inputType = "text"
+                    android:id="@+id/review_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
                     android:background="@drawable/edittext_gray_border"
-                    android:singleLine = "true"
-                    android:textSize = "@dimen/Login_text_size" />
-                <EditText
-                    android:id="@+id/contactus_number"
-                    android:layout_width = "match_parent"
-                    android:layout_height = "120dp"
+                    android:hint="Title (Optional)"
+                    android:inputType="text"
                     android:padding="5dp"
-                    android:layout_marginTop="15dp"
-                    android:hint = "Review The product"
-                    android:inputType = "text"
-                    android:gravity="top"
-android:background="@drawable/edittext_gray_border"
-                    android:maxLines="10"
+                    android:singleLine="true"
+                    android:textSize="@dimen/Login_text_size" />
 
-                    android:textSize = "@dimen/Login_text_size" />
+                <EditText
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/edittext_gray_border"
+                    android:gravity="top"
+                    android:hint="Review The product"
+                    android:inputType="text"
+                    android:maxLines="10"
+                    android:padding="5dp"
+
+                    android:textSize="@dimen/Login_text_size" />
+
+
+                <Button
+                    android:id="@+id/dialog_btn_submit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/dialog_reviewform"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/login_btn_round_corner"
+                    android:elevation="15dp"
+                    android:paddingEnd="50dp"
+                    android:paddingStart="50dp"
+                    android:text="Submit"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/Login_btn_size" />
             </LinearLayout>
 
         </RelativeLayout>
@@ -130,18 +148,5 @@ android:background="@drawable/edittext_gray_border"
     </LinearLayout>
 
     </android.support.v7.widget.CardView>
-    <Button
-        android:layout_below="@+id/dialog_reviewform"
-        android:id = "@+id/dialog_btn_submit"
-        android:layout_width = "wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_height = "wrap_content"
-        android:layout_marginTop = "-25dp"
-        android:background = "@drawable/login_btn_round_corner"
-        android:elevation="15dp"
-        android:text = "Submit"
-        android:paddingStart="50dp"
-        android:paddingEnd="50dp"
-        android:textColor = "@color/colorPrimary"
-        android:textSize = "@dimen/Login_btn_size" />
+
 </RelativeLayout>
