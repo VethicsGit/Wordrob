@@ -26,6 +26,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -185,9 +186,18 @@ public class Product_details extends AppCompatActivity {
                 Button button=dailgo.findViewById(R.id.dialog_btn_submit);
                 final EditText description=dailgo.findViewById(R.id.description);
                 final EditText review_text=dailgo.findViewById(R.id.review_title);
+                final RatingBar review_statr=dailgo.findViewById(R.id.detail_reviewstar);
 
                 dialog.show();
 
+
+
+                review_statr.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+                    @Override
+                    public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+                        review_statr.getRating();
+                    }
+                });
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -197,7 +207,7 @@ public class Product_details extends AppCompatActivity {
 
                         final SharedPreferences preferences = getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
                         APIInterface apiInterface=APIClient.getClient().create(APIInterface.class);
-                        Call<GiveRatingResponse>call=apiInterface.give_rating(preferences.getString("user_id",""),product_id,"5",review_text.getText().toString(),description.getText().toString(),vendor_id,preferences.getString("token",""));
+                        Call<GiveRatingResponse>call=apiInterface.give_rating(preferences.getString("user_id",""),product_id, String.valueOf(review_statr.getRating()),review_text.getText().toString(),description.getText().toString(),vendor_id,preferences.getString("token",""));
                         call.enqueue(new Callback<GiveRatingResponse>() {
                             @Override
                             public void onResponse(Call<GiveRatingResponse> call, Response<GiveRatingResponse> response) {
@@ -210,6 +220,9 @@ public class Product_details extends AppCompatActivity {
                                     Log.e("messge",""+response2.getStatus());
 
                                     if (response2.getStatus().equals("true")) {
+
+
+
 
 
                                             dialog.dismiss();

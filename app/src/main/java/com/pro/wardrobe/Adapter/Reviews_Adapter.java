@@ -7,11 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.pro.wardrobe.ApiResponse.ProductRatingListResponse.ProductRatingList;
 import com.pro.wardrobe.R;
+
+import java.util.List;
 
 public class Reviews_Adapter extends RecyclerView.Adapter<Reviews_Adapter.ViewHolder> {
 
     Context context;
+    List<ProductRatingList>productRatingLists;
 
     public Reviews_Adapter(Context context) {
         this.context = context;
@@ -26,6 +30,8 @@ public class Reviews_Adapter extends RecyclerView.Adapter<Reviews_Adapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
 
+        ProductRatingList productRatingList=productRatingLists.get(i);
+
     }
 
     @Override
@@ -34,6 +40,8 @@ public class Reviews_Adapter extends RecyclerView.Adapter<Reviews_Adapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
+
+
 
     public ViewHolder(@NonNull View itemView) {
         super(itemView);

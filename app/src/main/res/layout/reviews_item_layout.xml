@@ -15,12 +15,14 @@ android:paddingBottom="15dp"
         android:orientation="horizontal"
         android:layout_height = "wrap_content">
 <de.hdodenhof.circleimageview.CircleImageView
+    android:id="@+id/rating_profile"
     android:layout_width = "30dp"
     android:layout_gravity="center"
     android:src="@drawable/user"
     android:layout_height = "50dp" />
 
         <TextView
+            android:id="@+id/rating_username"
             android:layout_width = "wrap_content"
             android:layout_marginStart="10dp"
             android:text="User Name"
@@ -30,23 +32,24 @@ android:paddingBottom="15dp"
             android:layout_height = "wrap_content" />
 
         <RatingBar
-            android:layout_width = "wrap_content"
-            android:layout_height = "wrap_content"
-            android:layout_gravity = "end"
-            android:isIndicator = "true"
-            android:numStars = "5"
-
-            android:layout_marginStart="-40dp"
-            android:layout_marginRight="-40dp"
-            android:layout_marginTop="-10dp"
+            android:id="@+id/rating_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true"
+            android:layout_gravity="end"
+
             android:layout_marginBottom="-10dp"
-            android:rating = "3.5"
-            android:scaleX = "0.5"
-            android:scaleY = "0.5"
+            android:layout_marginRight="-40dp"
+            android:layout_marginStart="-40dp"
+            android:layout_marginTop="-10dp"
+            android:isIndicator="true"
+            android:numStars="5"
             android:progressTint="#F9CB13"
-            android:theme = "@style/RatingBar" />
+            android:rating="3.5"
+            android:scaleX="0.5"
+            android:scaleY="0.5"
+            android:theme="@style/RatingBar" />
     </LinearLayout>
 
     </RelativeLayout>
