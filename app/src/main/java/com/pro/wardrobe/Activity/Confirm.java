@@ -166,9 +166,16 @@ public class Confirm extends AppCompatActivity {
                       Log.e("confirm ", "1");
                       Log.e("confirm ", preferences.getString("token",""));
 
+                final ProgressDialog mProgressDialog = new ProgressDialog(c, R.style.AppCompatAlertDialogStyle);
+                mProgressDialog.setIndeterminate(false);
+                mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                mProgressDialog.setCancelable(false);
+                mProgressDialog.setMessage("Please wait...");
+                mProgressDialog.show();
                 call.enqueue(new Callback<ResponseCreateOrder>() {
                     @Override
                     public void onResponse(@NonNull Call<ResponseCreateOrder> call, @NonNull Response<ResponseCreateOrder> response) {
+                        mProgressDialog.dismiss();
                         ResponseCreateOrder responseCreateOrder=response.body();
                         List<com.pro.wardrobe.ApiResponse.CreateOrderResponse.Response> resList=responseCreateOrder.getResponse();
                         com.pro.wardrobe.ApiResponse.CreateOrderResponse.Response res=resList.get(0);

@@ -38,8 +38,10 @@ public class Shipping extends AppCompatActivity {
     ImageView shipping_back;
     Button shipping_btn_next;
     TextView shipping_title;
-    TextView shipping_country_spn, shipping_region_spn, shipping_country_spn_id, shipping_ship_country_spn_id;
-    TextView shipping_ship_country_spn, shipping_ship_region_spn;
+    TextView shipping_country_spn, shipping_country_spn_id, shipping_ship_country_spn_id;
+    TextView shipping_ship_country_spn;
+    EditText shipping_ship_region_spn;
+    EditText shipping_region_spn;
 
     EditText shipping_firstname;
     EditText shipping_lastname;

@@ -5,13 +5,9 @@
     xmlns:tools = "http://schemas.android.com/tools"
     android:layout_width = "match_parent"
     android:layout_height = "match_parent"
-<<<<<<< HEAD
     android:background = "@drawable/white_pattern"
     android:orientation = "vertical">
-=======
-    tools:context = ".Activity.Profile">
 
->>>>>>> 4918dc700907c66a2c5862c95f13c8127ba78621
 
 
     <android.support.design.widget.AppBarLayout

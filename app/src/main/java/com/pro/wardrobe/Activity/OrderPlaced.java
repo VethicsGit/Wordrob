@@ -27,7 +27,7 @@ public class OrderPlaced extends AppCompatActivity {
         orderplaced_title=findViewById(R.id.orderplaced_title);
         placedOrder_txt=findViewById(R.id.placedOrder_txt);
 
-        placedOrder_txt.setText("Congratulations your order placed successfully\\nyour order code is #"+getIntent().getStringExtra("orderId~"));
+        placedOrder_txt.setText("Congratulations your order placed successfully\\nyour order code is #"+getIntent().getStringExtra("orderId"));
 
 
         Typeface facebold = Typeface.createFromAsset(getAssets(), "Roboto_Bold.ttf");
