@@ -270,7 +270,7 @@ public interface APIInterface {
             @Field("length") String hips,
             @Field("hips") String length,
 
-
+            @Header("Authorization")
             String token);
     @POST("offer_zone_list")
     Call<OfferZoneResponse>offerZone_list(
