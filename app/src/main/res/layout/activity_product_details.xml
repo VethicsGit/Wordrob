@@ -60,7 +60,7 @@
                         android:layout_height = "25dp"
                         android:layout_marginRight = "3dp"
                         android:layout_weight = "1"
-                        android:src = "@mipmap/search" />
+                         />
 
                     <ImageView
                         android:id = "@+id/prodetails_Mybag"

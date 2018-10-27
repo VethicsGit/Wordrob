@@ -439,12 +439,13 @@ android:padding="30dp"
         </LinearLayout>-->
         <LinearLayout
             android:id="@+id/top_layout"
-            android:layout_width = "match_parent"
+            android:layout_width = "wrap_content"
             android:layout_height = "wrap_content">
         <android.support.v7.widget.SearchView
             android:id="@+id/search"
             android:layout_width = "wrap_content"
-            android:layout_marginTop="10dp"
+            app:searchIcon="@drawable/topsearchwithshadow1"
+            android:layout_marginTop="5dp"
             android:layout_height = "wrap_content">
 
         </android.support.v7.widget.SearchView>

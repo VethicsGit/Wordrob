@@ -114,9 +114,15 @@ public class Reviews extends AppCompatActivity {
                     if (response1.getStatus().equals("true")){
                         List<ProductRatingList>productRatingLists=response1.getProductRatingList();
 
-                        Reviews_Adapter reviews_adapter1=new Reviews_Adapter(productRatingLists,getApplicationContext());
+                        Reviews_Adapter reviews_adapter1=new Reviews_Adapter(productRatingLists,getApplicationContext(),reviews_list);
                         reviews_list.setAdapter(reviews_adapter1);
+
+
+
+
                     }
+
+
 
                 }
 
@@ -126,6 +132,7 @@ public class Reviews extends AppCompatActivity {
             public void onFailure(Call<ProductListRatingResponse> call, Throwable t) {
 
             }
+
         });
 
 

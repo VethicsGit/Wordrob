@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.telecom.Call;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +18,10 @@ import com.bumptech.glide.Glide;
 import com.pro.wardrobe.ApiHelper.APIClient;
 import com.pro.wardrobe.ApiHelper.APIInterface;
 import com.pro.wardrobe.ApiResponse.ProductRatingListResponse.MyLikeUnlike;
+import com.pro.wardrobe.ApiResponse.ProductRatingListResponse.ProductListRatingResponse;
 import com.pro.wardrobe.ApiResponse.ProductRatingListResponse.ProductRatingList;
 import com.pro.wardrobe.ApiResponse.SendRatingLikeUnlike.SendRatingResponse;
+import com.pro.wardrobe.Fragment.Reviews;
 import com.pro.wardrobe.R;
 
 import java.text.DateFormat;
@@ -34,15 +37,25 @@ public class Reviews_Adapter extends RecyclerView.Adapter<Reviews_Adapter.ViewHo
 
     Context context;
     List<ProductRatingList>productRatingLists;
-
+    RecyclerView reviews_list;
 //    public Reviews_Adapter(Context context) {
 //        this.context = context;
 //    }
 
-    public Reviews_Adapter(List<ProductRatingList> productRatingLists, Context applicationContext) {
+    Reviews reviews;
+    public Reviews_Adapter(List<ProductRatingList> productRatingLists, Context applicationContext, RecyclerView reviews) {
 
         this.context=applicationContext;
         this.productRatingLists=productRatingLists;
+        this.reviews_list=reviews;
+    }
+
+
+
+    public void   setData (List<ProductRatingList>productRatingLists1){
+        this.productRatingLists.clear();
+        productRatingLists.addAll(productRatingLists1);
+
     }
 
     @NonNull
@@ -54,7 +67,7 @@ public class Reviews_Adapter extends RecyclerView.Adapter<Reviews_Adapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
 
-        ProductRatingList productRatingList=productRatingLists.get(i);
+        final ProductRatingList productRatingList=productRatingLists.get(i);
 
         Glide.with(context).load(productRatingList.getProfilePic()).into(viewHolder.rating_profile);
         viewHolder.rating_username.setText(productRatingList.getName());
@@ -128,7 +141,7 @@ public class Reviews_Adapter extends RecyclerView.Adapter<Reviews_Adapter.ViewHo
 
 
                 APIInterface apiInterface= APIClient.getClient().create(APIInterface.class);
-                retrofit2.Call<SendRatingResponse>call=apiInterface.rating_likes(preferences.getString("user_id",""),viewHolder.review_id.getText().toString(),viewHolder.review_status.getText().toString(),preferences.getString("token",""));
+                retrofit2.Call<SendRatingResponse>call=apiInterface.rating_likes(preferences.getString("user_id",""),viewHolder.review_id.getText().toString(),"0",preferences.getString("token",""));
                 call.enqueue(new Callback<SendRatingResponse>() {
                     @Override
                     public void onResponse(retrofit2.Call<SendRatingResponse> call, Response<SendRatingResponse> response) {
@@ -140,7 +153,54 @@ public class Reviews_Adapter extends RecyclerView.Adapter<Reviews_Adapter.ViewHo
                             com.pro.wardrobe.ApiResponse.SendRatingLikeUnlike.Response response1 =responses.get(i);
 
                             if (response1.getStatus().equals("true")){
-                                Toast.makeText(context, ""+response1.getResponseMsg(), Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(context, ""+response1.getResponseMsg(), Toast.LENGTH_SHORT).show();
+
+
+
+
+
+                                    final SharedPreferences preferences = context.getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
+                                    final  APIInterface apiInterface= APIClient.getClient().create(APIInterface.class);
+                                    retrofit2.Call<ProductListRatingResponse> call2=apiInterface.product_ratinglist(preferences.getString("user_id",""),productRatingList.getProductId(),"new_to_old","0",preferences.getString("token", ""));
+                                    Log.e("moo",""+preferences.getString("token",""));
+                                    call2.enqueue(new Callback<ProductListRatingResponse>() {
+
+
+                                        @Override
+                                        public void onResponse(retrofit2.Call<ProductListRatingResponse> call, Response<ProductListRatingResponse> response) {
+
+                                            Log.e("pass",""+response);
+                                            ProductListRatingResponse productRatingList=response.body();
+                                            List<com.pro.wardrobe.ApiResponse.ProductRatingListResponse.Response>responses=productRatingList.getResponse();
+
+                                            for (int i=0;i<responses.size();i++){
+
+                                                com.pro.wardrobe.ApiResponse.ProductRatingListResponse.Response response1=responses.get(i);
+                                                Log.e("review","massge"+response1.getStatus());
+                                                if (response1.getStatus().equals("true")){
+                                                    List<ProductRatingList>productRatingLists=response1.getProductRatingList();
+
+                                                    Reviews_Adapter reviews_adapter1=new Reviews_Adapter(productRatingLists,context,reviews_list);
+                                                    reviews_list.setAdapter(reviews_adapter1);
+
+
+
+
+                                                }
+
+
+
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onFailure(retrofit2.Call<ProductListRatingResponse> call, Throwable t) {
+
+                                        }
+
+                                    });
+
                             }
                         }
                     }
@@ -166,7 +226,7 @@ public class Reviews_Adapter extends RecyclerView.Adapter<Reviews_Adapter.ViewHo
 
 
                 APIInterface apiInterface= APIClient.getClient().create(APIInterface.class);
-                retrofit2.Call<SendRatingResponse>call=apiInterface.rating_likes(preferences.getString("user_id",""),viewHolder.review_id.getText().toString(),viewHolder.review_status.getText().toString(),preferences.getString("token",""));
+                retrofit2.Call<SendRatingResponse>call=apiInterface.rating_likes(preferences.getString("user_id",""),viewHolder.review_id.getText().toString(),"1",preferences.getString("token",""));
                 call.enqueue(new Callback<SendRatingResponse>() {
                     @Override
                     public void onResponse(retrofit2.Call<SendRatingResponse> call, Response<SendRatingResponse> response) {
@@ -178,7 +238,52 @@ public class Reviews_Adapter extends RecyclerView.Adapter<Reviews_Adapter.ViewHo
                             com.pro.wardrobe.ApiResponse.SendRatingLikeUnlike.Response response1 =responses.get(i);
 
                             if (response1.getStatus().equals("true")){
-                                Toast.makeText(context, ""+response1.getResponseMsg(), Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(context, ""+response1.getResponseMsg(), Toast.LENGTH_SHORT).show();
+
+
+                                final SharedPreferences preferences = context.getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
+                                final  APIInterface apiInterface= APIClient.getClient().create(APIInterface.class);
+                                retrofit2.Call<ProductListRatingResponse> call2=apiInterface.product_ratinglist(preferences.getString("user_id",""),productRatingList.getProductId(),"new_to_old","0",preferences.getString("token", ""));
+                                Log.e("moo",""+preferences.getString("token",""));
+                                call2.enqueue(new Callback<ProductListRatingResponse>() {
+
+
+                                    @Override
+                                    public void onResponse(retrofit2.Call<ProductListRatingResponse> call, Response<ProductListRatingResponse> response) {
+
+                                        Log.e("pass",""+response);
+                                        ProductListRatingResponse productRatingList=response.body();
+                                        List<com.pro.wardrobe.ApiResponse.ProductRatingListResponse.Response>responses=productRatingList.getResponse();
+
+                                        for (int i=0;i<responses.size();i++){
+
+                                            com.pro.wardrobe.ApiResponse.ProductRatingListResponse.Response response1=responses.get(i);
+                                            Log.e("review","massge"+response1.getStatus());
+                                            if (response1.getStatus().equals("true")){
+                                                List<ProductRatingList>productRatingLists=response1.getProductRatingList();
+
+                                                Reviews_Adapter reviews_adapter1=new Reviews_Adapter(productRatingLists,context,reviews_list);
+                                                reviews_list.setAdapter(reviews_adapter1);
+
+
+
+
+                                            }
+
+
+
+                                        }
+
+                                    }
+
+                                    @Override
+                                    public void onFailure(retrofit2.Call<ProductListRatingResponse> call, Throwable t) {
+
+                                    }
+
+                                });
+
+
                             }
                         }
                     }
@@ -190,6 +295,7 @@ public class Reviews_Adapter extends RecyclerView.Adapter<Reviews_Adapter.ViewHo
                 });
             }
         });
+
 
 
     }
@@ -231,4 +337,15 @@ public class Reviews_Adapter extends RecyclerView.Adapter<Reviews_Adapter.ViewHo
 
     }
 }
+
+
+
+
+
+
+
+
+
+
 }
+

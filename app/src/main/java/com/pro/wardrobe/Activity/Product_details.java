@@ -198,8 +198,10 @@ public class Product_details extends AppCompatActivity {
 
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                             review_statr.setProgressTintList(ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(),R.color.colorseleced)));
+                            review_statr.getRating();
                         }
-                        review_statr.getRating();
+
+
                     }
                 });
                 button.setOnClickListener(new View.OnClickListener() {

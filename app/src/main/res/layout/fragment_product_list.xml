@@ -87,7 +87,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="#FFFFFF"
-                        app:searchIcon="@drawable/searchpng"
+                        app:searchIcon="@drawable/search30"
                         >
 
                     </android.support.v7.widget.SearchView>

@@ -21,6 +21,8 @@ public class ReviewhorizontalScrollAdapter extends RecyclerView.Adapter<Reviewho
 
     List<String> categories;
     Context context;
+    private int row_index;
+
 
     public ReviewhorizontalScrollAdapter(List<String> categories, Context context) {
         this.categories = categories;
@@ -34,7 +36,7 @@ public class ReviewhorizontalScrollAdapter extends RecyclerView.Adapter<Reviewho
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
 
 
 
@@ -44,12 +46,28 @@ public class ReviewhorizontalScrollAdapter extends RecyclerView.Adapter<Reviewho
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View view) {
+
+                row_index=i;
                 notifyDataSetChanged();
                 viewHolder.home_cate_txt.setTextColor(Color.parseColor("#ffffff"));
                 viewHolder.home_cate_layout.setBackgroundResource(R.drawable.accent_selected_background);
 
             }
         });
+
+
+
+
+        if (row_index==i){
+
+            viewHolder.home_cate_txt.setTextColor(Color.parseColor("#ffffff"));
+            viewHolder.home_cate_layout.setBackgroundResource(R.drawable.accent_selected_background);
+
+        }else {
+            viewHolder.home_cate_txt.setTextColor(Color.parseColor("#ffffff"));
+            viewHolder.home_cate_layout.setBackgroundColor(Color.parseColor("#FFFFFF"));
+
+        }
     }
 
     @Override
@@ -68,5 +86,11 @@ public class ReviewhorizontalScrollAdapter extends RecyclerView.Adapter<Reviewho
             home_search=itemView.findViewById(R.id.home_search);
             home_cate_layout=itemView.findViewById(R.id.home_cate_layout);
         }
+    }
+
+
+    public void fetch(){
+
+        
     }
 }
