@@ -3,6 +3,7 @@ package com.pro.wardrobe.ApiHelper;
 import com.pro.wardrobe.ApiResponse.AddToCartResponse.ResponseAddToCart;
 import com.pro.wardrobe.ApiResponse.AddToFavorite.AddToFavorite;
 import com.pro.wardrobe.ApiResponse.AddbannerResponse.Addbanner;
+import com.pro.wardrobe.ApiResponse.CLientTokenResponse.ResponseClientToken;
 import com.pro.wardrobe.ApiResponse.CartListResponse.ResponseCartList;
 import com.pro.wardrobe.ApiResponse.CateListResponse.CatelistResponse;
 import com.pro.wardrobe.ApiResponse.ChangePassResponse.ChangePassResponse;
@@ -17,7 +18,9 @@ import com.pro.wardrobe.ApiResponse.FavoriteProductListResponse.FavoritieProduct
 import com.pro.wardrobe.ApiResponse.ForgotPassResponse.ForgotPassResponse;
 import com.pro.wardrobe.ApiResponse.GiveRatingResponse.GiveRatingResponse;
 import com.pro.wardrobe.ApiResponse.LoginResponse.LoginResponse;
+import com.pro.wardrobe.ApiResponse.NotificationReponse.ResponseNotification;
 import com.pro.wardrobe.ApiResponse.OfferZoneResponse.OfferZoneResponse;
+import com.pro.wardrobe.ApiResponse.OrderHistoryResponse.ResponseOrderHistory;
 import com.pro.wardrobe.ApiResponse.PriceRangeResponse.ResponsePriceRange;
 import com.pro.wardrobe.ApiResponse.PrivacyPolicyResponse.PrivacyPolicyResponse;
 import com.pro.wardrobe.ApiResponse.ProductDetailResponse.ProductDetailResponse;
@@ -390,5 +393,49 @@ public interface APIInterface {
     );
 
 
+    @FormUrlEncoded
+    @POST("braintree_create_order")
+    Call<ResponseCreateOrder> braintree_create_order(
+            @Field("user_id")String user_id,
+            @Field("shipping_address")String shipping_address,
+            @Field("billing_address")String billing_address,
+            @Field("subtotal")String subtotal,
+            @Field("shipping_amount")String shipping_amount,
+            @Field("total")String total,
+            @Field("payment_method")String payment_method,
+            @Field("paymentMethodNonce")String paymentMethodNonce,
+            @Header("Authorization")String token
+    );
+
+
+    @FormUrlEncoded
+    @POST("get_client_token")
+    Call<ResponseClientToken> get_client_token(
+            @Field("user_id") String user_id,
+            @Header("Authorization")String token
+
+
+    );
+
+    @FormUrlEncoded
+    @POST("activity_list")
+    Call<ResponseNotification> activity_list(
+            @Field("user_id") String user_id,
+            @Field("offset") String offset,
+            @Header("Authorization")String token
+
+
+    );
+
+
+    @FormUrlEncoded
+    @POST("my_order_list")
+    Call<ResponseOrderHistory> my_order_list(
+            @Field("user_id") String user_id,
+            @Field("offset") String offset,
+            @Header("Authorization")String token
+
+
+    );
 
 }

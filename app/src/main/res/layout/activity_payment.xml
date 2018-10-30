@@ -346,6 +346,7 @@
                         android:textStyle = "bold" />
 
                     <Spinner
+                        android:id="@+id/payment_option"
                         style = "@style/mySpinnerItemStyle"
                         android:layout_width = "match_parent"
                         android:layout_height = "wrap_content"

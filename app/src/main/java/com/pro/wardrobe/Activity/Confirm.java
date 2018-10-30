@@ -1,5 +1,6 @@
 package com.pro.wardrobe.Activity;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -17,16 +18,28 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Header;
+
+import com.braintreepayments.api.BraintreeFragment;
+import com.braintreepayments.api.PayPal;
+import com.braintreepayments.api.dropin.DropInActivity;
+import com.braintreepayments.api.dropin.DropInRequest;
+import com.braintreepayments.api.dropin.DropInResult;
+import com.braintreepayments.api.models.PayPalAccountNonce;
+import com.braintreepayments.api.models.PaymentMethodNonce;
+import com.braintreepayments.api.models.PostalAddress;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.pro.wardrobe.Adapter.Payment_item_list_Adapter;
 import com.pro.wardrobe.ApiHelper.APIClient;
 import com.pro.wardrobe.ApiHelper.APIInterface;
+import com.pro.wardrobe.ApiResponse.CLientTokenResponse.ResponseClientToken;
 import com.pro.wardrobe.ApiResponse.CartListResponse.CartList;
 import com.pro.wardrobe.ApiResponse.CartListResponse.ResponseCartList;
 import com.pro.wardrobe.ApiResponse.CreateOrderResponse.ResponseCreateOrder;
 import com.pro.wardrobe.R;
 
+import org.apache.http.client.HttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -55,39 +68,48 @@ public class Confirm extends AppCompatActivity {
     APIInterface apiInterface;
 
 
+    JSONArray billingary;
+    JSONArray shippingary;
+
+    TextView confirm_payment_option;
+
+    //    BraintreeFragment   mBraintreeFragment;
+//Authorization mAuthorization;
     Context c;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm);
 
-        c=this;
+        c = this;
 
         preferences = getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
         apiInterface = APIClient.getClient().create(APIInterface.class);
 
 
-        confirm_total= findViewById(R.id.confirm_total);
+        confirm_total = findViewById(R.id.confirm_total);
+        confirm_payment_option= findViewById(R.id.confirm_payment_option);
         confirm_subtotal = findViewById(R.id.confirm_subtotal);
-        confirm_dummy= findViewById(R.id.confirm_dummy);
-        confirm_billing_address= findViewById(R.id.confirm_billing_address);
-        confirm_shipping_address= findViewById(R.id.confirm_shipping_address);
+        confirm_dummy = findViewById(R.id.confirm_dummy);
+        confirm_billing_address = findViewById(R.id.confirm_billing_address);
+        confirm_shipping_address = findViewById(R.id.confirm_shipping_address);
         SharedPreferences billingPref = getSharedPreferences("billingadd", MODE_PRIVATE);
-        String billing_ad=billingPref.getString("firstname","")+" "+billingPref.getString("lastname","")+",\n" +
-                billingPref.getString("address","")+",\n"+billingPref.getString("city","")+", "+billingPref.getString("region","")+",\n"+
-                billingPref.getString("country","")+",\n"+billingPref.getString("phone","");
+        String billing_ad = billingPref.getString("firstname", "") + " " + billingPref.getString("lastname", "") + ",\n" +
+                billingPref.getString("address", "") + ",\n" + billingPref.getString("city", "") + ", " + billingPref.getString("region", "") + ",\n" +
+                billingPref.getString("country", "") + ",\n" + billingPref.getString("phone", "");
         confirm_billing_address.setText(billing_ad);
 
 
-                SharedPreferences shippingPref = getSharedPreferences("shippingadd", MODE_PRIVATE);
-        String shipping_ad=shippingPref.getString("firstname","")+" "+shippingPref.getString("lastname","")+",\n" +
-                shippingPref.getString("address","")+",\n"+shippingPref.getString("city","")+", "+shippingPref.getString("region","")+",\n"+
-                shippingPref.getString("country","")+",\n"+shippingPref.getString("phone","");
+        SharedPreferences shippingPref = getSharedPreferences("shippingadd", MODE_PRIVATE);
+        String shipping_ad = shippingPref.getString("firstname", "") + " " + shippingPref.getString("lastname", "") + ",\n" +
+                shippingPref.getString("address", "") + ",\n" + shippingPref.getString("city", "") + ", " + shippingPref.getString("region", "") + ",\n" +
+                shippingPref.getString("country", "") + ",\n" + shippingPref.getString("phone", "");
         confirm_shipping_address.setText(shipping_ad);
 
 
 //        SharedPreferences billingPref = getSharedPreferences("billingadd", MODE_PRIVATE);
-        final JSONArray billingary = new JSONArray();
+        billingary = new JSONArray();
         JSONObject billingObj = new JSONObject();
 
         try {
@@ -107,7 +129,7 @@ public class Confirm extends AppCompatActivity {
 
 
 //        SharedPreferences shippingPref = getSharedPreferences("shippingadd", MODE_PRIVATE);
-        final JSONArray shippingary = new JSONArray();
+        shippingary = new JSONArray();
         JSONObject shippingObj = new JSONObject();
 
         try {
@@ -140,62 +162,106 @@ public class Confirm extends AppCompatActivity {
         confirm_title.setTypeface(facebold);
 
 
+        confirm_payment_option.setText(getIntent().getStringExtra("paymentoption"));
+
         confirm_back = findViewById(R.id.confirm_back);
         confirm_btn_placeorder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Call<ResponseCreateOrder> call = apiInterface.create_order(
-                        preferences.getString("user_id", ""),
-                        shippingary.toString(),
-                        billingary.toString(),
-                        confirm_subtotal.getText().toString(),
-                        confirm_total.getText().toString(),
-                        confirm_total.getText().toString(),
-                        "1",
-                        preferences.getString("token","")
-                );
+                if (getIntent().getStringExtra("paymentoption").equals("Cash on Delivery")) {
+
+                    Toast.makeText(c, "if condition", Toast.LENGTH_SHORT).show();
+                    Call<ResponseCreateOrder> call = apiInterface.create_order(
+                            preferences.getString("user_id", ""),
+                            shippingary.toString(),
+                            billingary.toString(),
+                            confirm_subtotal.getText().toString(),
+                            confirm_total.getText().toString(),
+                            confirm_total.getText().toString(),
+                            "1",
+                            preferences.getString("token", "")
+                    );
 
 
-                      Log.e("confirm ", preferences.getString("user_id", ""));
-                      Log.e("confirm ", shippingary.toString());
-                      Log.e("confirm ", billingary.toString());
-                      Log.e("confirm ", confirm_subtotal.getText().toString());
-                      Log.e("confirm ", confirm_total.getText().toString());
-                      Log.e("confirm ", confirm_total.getText().toString());
-                      Log.e("confirm ", "1");
-                      Log.e("confirm ", preferences.getString("token",""));
+                    Log.e("confirm ", preferences.getString("user_id", ""));
+                    Log.e("confirm ", shippingary.toString());
+                    Log.e("confirm ", billingary.toString());
+                    Log.e("confirm ", confirm_subtotal.getText().toString());
+                    Log.e("confirm ", confirm_total.getText().toString());
+                    Log.e("confirm ", confirm_total.getText().toString());
+                    Log.e("confirm ", "1");
+                    Log.e("confirm ", preferences.getString("token", ""));
 
-                final ProgressDialog mProgressDialog = new ProgressDialog(c, R.style.AppCompatAlertDialogStyle);
-                mProgressDialog.setIndeterminate(false);
-                mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                mProgressDialog.setCancelable(false);
-                mProgressDialog.setMessage("Please wait...");
-                mProgressDialog.show();
-                call.enqueue(new Callback<ResponseCreateOrder>() {
-                    @Override
-                    public void onResponse(@NonNull Call<ResponseCreateOrder> call, @NonNull Response<ResponseCreateOrder> response) {
-                        mProgressDialog.dismiss();
-                        ResponseCreateOrder responseCreateOrder=response.body();
-                        List<com.pro.wardrobe.ApiResponse.CreateOrderResponse.Response> resList=responseCreateOrder.getResponse();
-                        com.pro.wardrobe.ApiResponse.CreateOrderResponse.Response res=resList.get(0);
-                        if (res.getStatus().equals("true")){
+                    final ProgressDialog mProgressDialog = new ProgressDialog(c, R.style.AppCompatAlertDialogStyle);
+                    mProgressDialog.setIndeterminate(false);
+                    mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    mProgressDialog.setCancelable(false);
+                    mProgressDialog.setMessage("Please wait...");
+                    mProgressDialog.show();
+                    call.enqueue(new Callback<ResponseCreateOrder>() {
+                        @Override
+                        public void onResponse(@NonNull Call<ResponseCreateOrder> call, @NonNull Response<ResponseCreateOrder> response) {
+                            mProgressDialog.dismiss();
+                            ResponseCreateOrder responseCreateOrder = response.body();
+                            List<com.pro.wardrobe.ApiResponse.CreateOrderResponse.Response> resList = responseCreateOrder.getResponse();
+                            com.pro.wardrobe.ApiResponse.CreateOrderResponse.Response res = resList.get(0);
+                            if (res.getStatus().equals("true")) {
 
-                            Intent intent = new Intent(getApplicationContext(), OrderPlaced.class);
-                            intent.putExtra("orderId",res.getOrderId());
-                            startActivity(intent);
-                        }else {
-                            Toast.makeText(Confirm.this, "Something went wrong..!", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getApplicationContext(), OrderPlaced.class);
+                                intent.putExtra("orderId", res.getOrderId());
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(Confirm.this, "Something went wrong..!", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(Call<ResponseCreateOrder> call, Throwable t) {
+                        @Override
+                        public void onFailure(Call<ResponseCreateOrder> call, Throwable t) {
 
-                    }
-                });
+                        }
+                    });
+
+                } else  if (getIntent().getStringExtra("paymentoption").equals("credit Card / Debit Card")) {
+
+                    Toast.makeText(c, "else condition", Toast.LENGTH_SHORT).show();
+
+                    final ProgressDialog mProgressDialog = new ProgressDialog(c, R.style.AppCompatAlertDialogStyle);
+                    mProgressDialog.setIndeterminate(false);
+                    mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    mProgressDialog.setCancelable(false);
+                    mProgressDialog.setMessage("Please wait...");
+                    mProgressDialog.show();
+                    Call<ResponseClientToken> callClientToen = apiInterface.get_client_token(
+                            preferences.getString("user_id", ""),
+                            preferences.getString("token", "")
+                    );
+                    callClientToen.enqueue(new Callback<ResponseClientToken>() {
+                        @Override
+                        public void onResponse(@NonNull Call<ResponseClientToken> call, @NonNull Response<ResponseClientToken> response) {
+                            mProgressDialog.dismiss();
+                            ResponseClientToken responseClientToken = response.body();
+                            List<com.pro.wardrobe.ApiResponse.CLientTokenResponse.Response> resList = responseClientToken.getResponse();
+                            com.pro.wardrobe.ApiResponse.CLientTokenResponse.Response res = resList.get(0);
+                            if (res.getStatus().equals("true")) {
 
 
+                                DropInRequest dropInRequest = new DropInRequest()
+                                        .clientToken(res.getClientToken());
+                                startActivityForResult(dropInRequest.getIntent(getApplicationContext()), 100);
+                            } else {
+                                Toast.makeText(c, "Something went wrong..!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseClientToken> call, Throwable t) {
+
+                        }
+                    });
+
+
+                }
             }
         });
 
@@ -248,5 +314,84 @@ public class Confirm extends AppCompatActivity {
                 Log.e("BagError", t.getMessage());
             }
         });
+    }
+
+    /*   @Override
+       public void onConfigurationFetched(Configuration configuration) {
+
+       }
+   */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 100) {
+            if (resultCode == Activity.RESULT_OK) {
+                DropInResult result = data.getParcelableExtra(DropInResult.EXTRA_DROP_IN_RESULT);
+                PaymentMethodNonce nonce = result.getPaymentMethodNonce();
+                String nonStr = nonce.getNonce();
+
+                Toast.makeText(c, "nonce " + nonStr, Toast.LENGTH_SHORT).show();
+
+                Call<ResponseCreateOrder> call = apiInterface.braintree_create_order(
+                        preferences.getString("user_id", ""),
+                        shippingary.toString(),
+                        billingary.toString(),
+                        confirm_subtotal.getText().toString(),
+                        confirm_total.getText().toString(),
+                        confirm_total.getText().toString(),
+                        "2",
+                        nonStr,
+                        preferences.getString("token", "")
+                );
+
+
+                Log.e("confirm ", preferences.getString("user_id", ""));
+                Log.e("confirm ", shippingary.toString());
+                Log.e("confirm ", billingary.toString());
+                Log.e("confirm ", confirm_subtotal.getText().toString());
+                Log.e("confirm ", confirm_total.getText().toString());
+                Log.e("confirm ", confirm_total.getText().toString());
+                Log.e("confirm ", "2");
+                Log.e("confirm ", preferences.getString("token", ""));
+
+                final ProgressDialog mProgressDialog = new ProgressDialog(c, R.style.AppCompatAlertDialogStyle);
+                mProgressDialog.setIndeterminate(false);
+                mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                mProgressDialog.setCancelable(false);
+                mProgressDialog.setMessage("Please wait...");
+                mProgressDialog.show();
+                call.enqueue(new Callback<ResponseCreateOrder>() {
+                    @Override
+                    public void onResponse(@NonNull Call<ResponseCreateOrder> call, @NonNull Response<ResponseCreateOrder> response) {
+                        mProgressDialog.dismiss();
+                        ResponseCreateOrder responseCreateOrder = response.body();
+                        List<com.pro.wardrobe.ApiResponse.CreateOrderResponse.Response> resList = responseCreateOrder.getResponse();
+                        com.pro.wardrobe.ApiResponse.CreateOrderResponse.Response res = resList.get(0);
+                        if (res.getStatus().equals("true")) {
+
+                            Intent intent = new Intent(getApplicationContext(), OrderPlaced.class);
+                            intent.putExtra("orderId", res.getOrderId());
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(Confirm.this, "Something went wrong..!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseCreateOrder> call, Throwable t) {
+
+                    }
+                });
+
+
+                // use the result to update your UI and send the payment method nonce to your server
+            } else if (resultCode == Activity.RESULT_CANCELED) {
+                // the user canceled
+                Toast.makeText(c, "User Cancelled process", Toast.LENGTH_SHORT).show();
+            } else {
+                // handle errors here, an exception may be available in
+                Exception error = (Exception) data.getSerializableExtra(DropInActivity.EXTRA_ERROR);
+                Log.e("Payment_error", error.toString());
+            }
+        }
     }
 }

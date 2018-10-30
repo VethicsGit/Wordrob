@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android = "http://schemas.android.com/apk/res/android"
-    xmlns:app = "http://schemas.android.com/apk/res-auto"
-    xmlns:tools = "http://schemas.android.com/tools"
+
+<LinearLayout
     android:layout_width = "match_parent"
     android:layout_height = "match_parent"
-    tools:context = ".Fragment.Favorite">
-
-
-
-
-
+    android:focusable = "true"
+    xmlns:android = "http://schemas.android.com/apk/res/android"
+    xmlns:app = "http://schemas.android.com/apk/res-auto"
+    xmlns:tools = "http://schemas.android.com/tools"
+    android:focusableInTouchMode = "true"
+    android:orientation = "vertical">
     <android.support.design.widget.AppBarLayout
         android:id = "@+id/appbar"
 
@@ -140,41 +139,35 @@
 
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
+<!--<ScrollView
+    android:layout_width = "match_parent"
+    android:layout_height = "match_parent"
+    tools:context = ".Fragment.Favorite">-->
 
 
 
 
-    <LinearLayout
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/order_history"
+        android:layout_margin="15dp"
+        android:background="#ffffff"
+        xmlns:android = "http://schemas.android.com/apk/res/android"
+        android:layout_width = "match_parent" android:layout_height = "match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+
+
+
+  <!--  <LinearLayout
         android:layout_width = "match_parent"
         android:layout_height = "match_parent"
         android:focusable = "true"
         android:focusableInTouchMode = "true"
         android:orientation = "vertical">
 
-<!--        <RelativeLayout
-            android:layout_width = "match_parent"
-            android:layout_height = "wrap_content"
-            android:layout_margin = "20dp">
 
-            <ImageView
-                android:id = "@+id/orderhistory_back"
-                android:layout_width = "20dp"
-                android:layout_height = "20dp"
-                android:src = "@mipmap/arrow_left" />
-
-           <TextView android:autoSizeTextType="uniform"
-                android:id = "@+id/orderhistory_title"
-               android:layout_width = "match_parent"
-               android:gravity="center"
-                android:layout_height = "wrap_content"
-                android:layout_centerInParent = "true"
-                android:text = "Order History"
-                android:textAllCaps = "true"
-                android:textColor = "@color/colorAccent"
-               android:autoSizeMinTextSize="15dp"
-                android:textStyle = "bold" />
-
-        </RelativeLayout>-->
 
         <android.support.v7.widget.CardView
             android:layout_width = "match_parent"
@@ -675,6 +668,7 @@
         </android.support.v7.widget.CardView>
 
 
-    </LinearLayout>
-</ScrollView>
+    </LinearLayout>-->
+<!--</ScrollView>-->
 
+</LinearLayout>

@@ -439,35 +439,35 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 bottom_nav_fav_text.setTextColor(Color.parseColor("#cfaa42"));
                 bottom_nav_not_text.setTextColor(Color.parseColor("#383051"));
 
-                bottom_nav_notification.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                        Typeface custom3 = Typeface.createFromAsset(getAssets(),"Roboto_Medium.ttf");
-                        title.setTypeface(custom3);
-
-                        title.setText("Notifications");
-                    ft.addToBackStack("Dashboard");
-                        ft.replace(R.id.viewpager, new Fragment_Notification()).commit();
-
-                        bottom_nav_cat_img.setImageDrawable(getResources().getDrawable(R.drawable.categories));
-                        bottom_nav_des_img.setImageDrawable(getResources().getDrawable(R.drawable.designers));
-                        bottom_nav_hom_img.setImageDrawable(getResources().getDrawable(R.drawable.home));
-                        bottom_nav_not_img.setImageDrawable(getResources().getDrawable(R.drawable.notification_gold));
-                        bottom_nav_fav_img.setImageDrawable(getResources().getDrawable(R.drawable.favourite));
-
-                        bottom_nav_cat_text.setTextColor(Color.parseColor("#383051"));
-                        bottom_nav_des_text.setTextColor(Color.parseColor("#383051"));
-                        bottom_nav_fav_text.setTextColor(Color.parseColor("#383051"));
-                        bottom_nav_not_text.setTextColor(Color.parseColor("#cfaa42"));
-
-
-                    }
-                });
 
             }
         });
 
+        bottom_nav_notification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                Typeface custom3 = Typeface.createFromAsset(getAssets(),"Roboto_Medium.ttf");
+                title.setTypeface(custom3);
+
+                title.setText("Notifications");
+                ft.addToBackStack("Dashboard");
+                ft.replace(R.id.viewpager, new Fragment_Notification()).commit();
+
+                bottom_nav_cat_img.setImageDrawable(getResources().getDrawable(R.drawable.categories));
+                bottom_nav_des_img.setImageDrawable(getResources().getDrawable(R.drawable.designers));
+                bottom_nav_hom_img.setImageDrawable(getResources().getDrawable(R.drawable.home));
+                bottom_nav_not_img.setImageDrawable(getResources().getDrawable(R.drawable.notification_gold));
+                bottom_nav_fav_img.setImageDrawable(getResources().getDrawable(R.drawable.favourite));
+
+                bottom_nav_cat_text.setTextColor(Color.parseColor("#383051"));
+                bottom_nav_des_text.setTextColor(Color.parseColor("#383051"));
+                bottom_nav_fav_text.setTextColor(Color.parseColor("#383051"));
+                bottom_nav_not_text.setTextColor(Color.parseColor("#cfaa42"));
+
+
+            }
+        });
 
       /*  bottomify_nav.setOnNavigationItemChangedListener(new OnNavigationItemChangeListener() {
             @Override

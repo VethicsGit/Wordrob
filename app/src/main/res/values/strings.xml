@@ -18,6 +18,7 @@
     </array>
     <array name="payment">
         <item>Cash on Delivery</item>
+        <item>PayPal</item>
         <item>credit Card / Debit Card</item>
     </array>
     <array name="category">

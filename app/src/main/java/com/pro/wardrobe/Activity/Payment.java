@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,6 +62,8 @@ public class Payment extends AppCompatActivity {
 
     Context c;
 
+    Spinner payment_option;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +75,7 @@ public class Payment extends AppCompatActivity {
         payment_title = findViewById(R.id.payment_title);
         payment_total = findViewById(R.id.payment_total);
         payment_subtotal = findViewById(R.id.payment_subtotal);
+        payment_option= findViewById(R.id.payment_option);
 
 
         payment_promo_edit = findViewById(R.id.payment_promo_edit);
@@ -199,9 +203,12 @@ shippingary.toString(),
                         com.pro.wardrobe.ApiResponse.CreateOrderResponse.Response res=resList.get(0);
                         if (res.getStatus().equals("true")){
 */
+
+                Toast.makeText(c, "payment option "+payment_option.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), Confirm.class);
                 intent.putExtra("subtotal", payment_subtotal.getText().toString());
                 intent.putExtra("total", payment_total.getText().toString());
+                intent.putExtra("paymentoption",payment_option.getSelectedItem().toString() );
                 startActivity(intent);
                      /*   }else {
                             Toast.makeText(Payment.this, "Something went wrong..!", Toast.LENGTH_SHORT).show();

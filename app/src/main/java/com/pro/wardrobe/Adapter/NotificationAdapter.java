@@ -12,15 +12,36 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.pro.wardrobe.ApiResponse.NotificationReponse.ActivityList;
 import com.pro.wardrobe.R;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ViewHolder>{
 
     Context context;
+    List<ActivityList> list;
 
-    public NotificationAdapter( Context context) {
+    public NotificationAdapter( Context context,List<ActivityList> list) {
         this.context = context;
+        this.list=list;
+    }
+
+    public void add(ActivityList activityList){
+        list.add(activityList);
+        notifyDataSetChanged();
+    }
+
+    public void clear(){
+        list.clear();
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -32,17 +53,61 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
 
+        ActivityList activityList=list.get(i);
+        viewHolder.notification_txt.setText(activityList.getDisplayMsg());
+
+        Calendar c = Calendar.getInstance();
+
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String formattedDate = df.format(c.getTime());
+
+
+        Date date = null;
+        Date currdate = null;
+        try {
+            date = df.parse(activityList.getCreatedAt());
+            currdate =df.parse(formattedDate);
+
+            if (date.getYear()<currdate.getYear()){
+                viewHolder.notification_time.setText("A year ago");
+            }
+            if (date.getMonth()<currdate.getMonth() && date.getYear()== currdate.getYear()){
+                viewHolder.notification_time.setText("A month ago");
+            }
+            if (date.getMonth()==currdate.getMonth() && date.getYear()== currdate.getYear()){
+                int diffhour=currdate.getHours()-date.getHours();
+                int diffminutes=currdate.getMinutes()-date.getMinutes();
+
+                if (diffhour>0){
+                    viewHolder.notification_time.setText(diffhour+" hour ago");
+                }if (diffhour==0){
+                    viewHolder.notification_time.setText(diffminutes+" minutes ago");
+                }
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
+
     }
 
     @Override
     public int getItemCount() {
-        return 15;
+        return list.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
+        TextView notification_txt;
+        TextView notification_time;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            notification_time=itemView.findViewById(R.id.notification_time);
+            notification_txt=itemView.findViewById(R.id.notification_txt);
         }
     }
 }

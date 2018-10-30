@@ -11,6 +11,7 @@
         android:layout_marginTop = "15dp"
         android:gravity = "start"
         android:paddingEnd = "20dp"
+        android:id="@+id/notification_txt"
         android:paddingStart = "20dp"
         android:text = "Congratulations! You confirm the email verification"
         android:textColor = "@color/colorAccent"
@@ -26,7 +27,8 @@
         android:paddingEnd = "20dp"
         android:paddingStart = "20dp"
         android:text = "20 minutes ago."
-        android:textColor = "@color/colorAccent"
+        android:textColor = "#cdcdcd"
+        android:id="@+id/notification_time"
         android:textSize = "13dp" />
 
     <View

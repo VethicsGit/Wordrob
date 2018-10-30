@@ -131,5 +131,8 @@ dependencies {
     }*/
 
     implementation'com.android.volley:volley:1.1.0'
+//    implementation 'com.braintreepayments.api:braintree:2.17.0'
+    implementation 'com.braintreepayments.api:drop-in:3.+'
+    implementation 'com.google.code.gson:gson:2.8.5'
 }
 apply plugin: 'com.google.gms.google-services'

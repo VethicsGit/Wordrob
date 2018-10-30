@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:focusable="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    android:background="#ffffff"
+   >
+
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        android:layout_marginBottom = "20dp"
+        android:padding = "15dp"
+        android:background="#ffffff"
+        android:layout_margin="15dp"
+        app:cardCornerRadius = "10dp"
+        app:cardElevation = "5dp">
+
+        <LinearLayout
+            android:layout_width = "match_parent"
+            android:layout_height = "match_parent"
+            android:padding = "10dp"
+            android:background="#ffffff"
+            android:orientation = "vertical">
+
+            <RelativeLayout
+                android:layout_width = "match_parent"
+                android:background="#ffffff"
+                android:layout_height = "match_parent"
+                android:orientation = "horizontal">
+
+                <LinearLayout
+                    android:layout_margin="10dp"
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content">
+
+                    <TextView android:autoSizeTextType="uniform"
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_centerInParent = "true"
+                        android:layout_gravity = "start"
+                        android:text = "Order Id :"
+                        android:textColor = "@color/colorAccent"
+                        android:textSize = "12dp"
+                        android:textStyle = "bold" />
+
+                    <TextView android:autoSizeTextType="uniform"
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:id="@+id/order_id"
+                        android:layout_centerInParent = "true"
+                        android:layout_gravity = "start"
+                        android:layout_marginStart = "10dp"
+                        android:text = "#3421XC000"
+                        android:textColor = "@color/colorAccent"
+                        android:textSize = "12dp" />
+                </LinearLayout>
+
+                <TextView android:autoSizeTextType="uniform"
+                    android:layout_width = "wrap_content"
+                    android:layout_height = "wrap_content"
+                    android:layout_alignParentRight = "true"
+                    android:layout_centerInParent = "true"
+                    android:layout_gravity = "start"
+                    android:layout_marginRight = "10dp"
+                    android:text = "Processing"
+                    android:textColor = "@color/colorgreen"
+                    android:textSize = "12dp"
+                    android:textStyle = "bold" />
+
+
+            </RelativeLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:id="@+id/order_items_recycler"
+                android:layout_height="wrap_content"/>
+
+
+
+
+
+            <View
+                android:layout_width = "match_parent"
+                android:layout_height = "1dp"
+                android:layout_marginBottom = "10dp"
+                android:layout_marginTop = "10dp"
+                android:background = "#cdcdcd" />
+
+
+            <RelativeLayout
+                android:gravity="center"
+                android:background="#ffffff"
+                android:layout_gravity="center_vertical"
+                android:layout_width = "match_parent"
+                android:layout_height = "wrap_content"
+                android:orientation = "horizontal">
+
+                <TextView
+                    android:layout_weight="1"
+android:id="@+id/order_updatedat"
+                    android:layout_width = "match_parent"
+                    android:layout_height = "wrap_content"
+                    android:layout_gravity = "center_vertical"
+                    android:gravity="center_vertical"
+                    android:layout_centerInParent="true"
+                    android:text = "15 February 2018 10:15 am"
+                    android:textColor = "#000000"
+                    android:textSize = "12dp" />
+
+
+                <Button
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/order_checkout"
+                    android:layout_width = "100dp"
+                    android:layout_height = "30dp"
+                    android:layout_gravity = "center_vertical"
+                    android:background = "@drawable/login_btn_round_corner"
+                    android:text = "Checkout"
+                    android:textColor = "@color/colorPrimary"
+                    android:textSize = "12dp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+
+</LinearLayout>
