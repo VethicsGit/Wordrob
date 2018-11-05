@@ -129,7 +129,7 @@ public class Fragment_Notification extends Fragment {
         });
     }
 
-    public abstract class PaginationScrollListener extends RecyclerView.OnScrollListener {
+    public abstract static class PaginationScrollListener extends RecyclerView.OnScrollListener {
 
         LinearLayoutManager layoutManager;
 

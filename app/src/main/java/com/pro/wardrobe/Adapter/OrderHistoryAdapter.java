@@ -4,16 +4,21 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.pro.wardrobe.ApiResponse.OrderHistoryResponse.MyOrderList;
 import com.pro.wardrobe.ApiResponse.OrderHistoryResponse.OrderDetail;
 import com.pro.wardrobe.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapter.ViewHolder> {
@@ -22,14 +27,14 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
     Context context;
 
     List<MyOrderList> myOrderList;
+    String[] months=new String[]{"January","February","March","April","May","June","July","August","September","October","November","December"};
 
-
-    public void add(MyOrderList myOrder){
+    public void add(MyOrderList myOrder) {
         myOrderList.add(myOrder);
         notifyDataSetChanged();
     }
 
-    public void clear(){
+    public void clear() {
         myOrderList.clear();
     }
 
@@ -48,10 +53,28 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
 
         MyOrderList myOrder = myOrderList.get(i);
-        viewHolder.order_id.setText(myOrder.getOrderId());
-        viewHolder.order_updatedat.setText(myOrder.getCreatedAt());
+        viewHolder.order_id.setText("#"+myOrder.getWardrobeOrderId());
+
 
         List<OrderDetail> orderDetailList = myOrder.getOrderDetails();
+
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm k");
+
+        Date date = null;
+        try {
+            date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(myOrder.getCreatedAt());
+            if (date.getHours()>12)
+            viewHolder.order_updatedat.setText((date.getDate()) + " "+months[date.getMonth()] + " "+(date.getYear()+1900) +" "+ (date.getHours()-12) +":"+ date.getMinutes()+" pm");
+            else
+            viewHolder.order_updatedat.setText((date.getDate())+ " "+months[date.getMonth()] + " "+(date.getYear()+1900) +" "+ date.getHours() +":"+ date.getMinutes()+" pm");
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+            Toast.makeText(context, "aksasaj", Toast.LENGTH_SHORT).show();
+        }
+//        String datef = df.format(date);
+
+
 
 
         OrderHistoryItemAdapter orderHistoryItemAdapter = new OrderHistoryItemAdapter(context, orderDetailList);

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.pro.wardrobe.R;
 
@@ -16,6 +17,16 @@ public class OrderPlaced extends AppCompatActivity {
     Button orderplaced_btn_continue;
     ImageView placeorder_back;
     TextView orderplaced_title,placedOrder_txt;
+
+    int orderId;
+
+    public OrderPlaced(int orderId) {
+        this.orderId = orderId;
+    }
+
+
+    public OrderPlaced() {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +38,9 @@ public class OrderPlaced extends AppCompatActivity {
         orderplaced_title=findViewById(R.id.orderplaced_title);
         placedOrder_txt=findViewById(R.id.placedOrder_txt);
 
-        placedOrder_txt.setText("Congratulations your order placed successfully\\nyour order code is #"+getIntent().getStringExtra("orderId"));
+//            Toast.makeText(this, "order id "+getIntent().getIntExtra("orderId",0), Toast.LENGTH_SHORT).show();
+
+        placedOrder_txt.setText("Congratulations your order placed successfully\\nyour order code is #"+getIntent().getIntExtra("orderId",0));
 
 
         Typeface facebold = Typeface.createFromAsset(getAssets(), "Roboto_Bold.ttf");

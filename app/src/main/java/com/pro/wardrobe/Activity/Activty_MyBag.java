@@ -61,7 +61,7 @@ Context c;
         c=this;
         TextView mybag_title = findViewById(R.id.mybag_title);
         Typeface facebold = Typeface.createFromAsset(getAssets(),
-                "Philosopher_Bold.ttf");
+                "Roboto_Regular.ttf");
         mybag_title.setTypeface(facebold);
 
         mybag_back = findViewById(R.id.mybag_back);
@@ -120,12 +120,12 @@ myBagApiCall();
                         cartemptytext.setVisibility(View.GONE);
                         cartrootlayout.setVisibility(View.VISIBLE);
                         List<CartList> cartList = response1.getCartList();
-                        Toast.makeText(Activty_MyBag.this, "cart list size "+cartList.size(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(Activty_MyBag.this, "cart list size "+cartList.size(), Toast.LENGTH_SHORT).show();
 
                         if (cartList.size()>0) {
                             cartemptytext.setVisibility(View.GONE);
 cartrootlayout.setVisibility(View.VISIBLE);
-                            mybag_list_Adapter mybag_list_adapter = new mybag_list_Adapter(getApplicationContext(), cartList, mybag_recycler, mybag_totalprice);
+                            mybag_list_Adapter mybag_list_adapter = new mybag_list_Adapter(getApplicationContext(), cartList, mybag_recycler, mybag_totalprice,cartrootlayout,cartemptytext);
                             mybag_recycler.setAdapter(mybag_list_adapter);
                         }else {
                             cartemptytext.setVisibility(View.VISIBLE);
@@ -142,7 +142,7 @@ cartrootlayout.setVisibility(View.VISIBLE);
 
             @Override
             public void onFailure(@NonNull Call<ResponseCartList> call, @NonNull Throwable t) throws NumberFormatException {
-                Toast.makeText(Activty_MyBag.this, "error ", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(Activty_MyBag.this, "error ", Toast.LENGTH_SHORT).show();
                 Log.e("BagError", t.getMessage());
             }
         });

@@ -1,6 +1,7 @@
 package com.pro.wardrobe.Activity;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -42,6 +43,8 @@ import com.pro.wardrobe.ApiHelper.APIClient;
 import com.pro.wardrobe.ApiHelper.APIInterface;
 import com.pro.wardrobe.ApiResponse.AddToCartResponse.ResponseAddToCart;
 import com.pro.wardrobe.ApiResponse.AddToFavorite.AddToFavorite;
+import com.pro.wardrobe.ApiResponse.CartListResponse.CartList;
+import com.pro.wardrobe.ApiResponse.CartListResponse.ResponseCartList;
 import com.pro.wardrobe.ApiResponse.GiveRatingResponse.GiveRatingResponse;
 import com.pro.wardrobe.ApiResponse.ProductDetailResponse.ProductColorDetail;
 import com.pro.wardrobe.ApiResponse.ProductDetailResponse.ProductDetail;
@@ -50,11 +53,13 @@ import com.pro.wardrobe.ApiResponse.ProductDetailResponse.ProductSizeDetail;
 import com.pro.wardrobe.ApiResponse.ProductListResponse.ProductList;
 import com.pro.wardrobe.ApiResponse.ProductListResponse.ProductListResponse;
 import com.pro.wardrobe.ApiResponse.RemoveToFavorite.RemoveToFavorite;
+import com.pro.wardrobe.ApiResponse.SizeListResponse.SizeList;
 import com.pro.wardrobe.Fragment.Fragment_product_list;
 import com.pro.wardrobe.Fragment.Reviews;
 import com.pro.wardrobe.R;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.MediaType;
@@ -74,7 +79,7 @@ public class Product_details extends AppCompatActivity {
     EditText prodetails_hips;
     APIInterface apiInterface;
     String product_id;
-    TextView product_detail_title, product_detail_category, product_detail_price, product_detail_desc;
+    TextView product_detail_title, product_detail_category, product_detail_price, product_detail_desc,prodetails_size_txt,prodetails_size_txt_id;
     ImageView product_detail_img;
     AppCompatRatingBar prodetail_ratngbar;
     //Spinner prodetails_selectcolor;
@@ -85,7 +90,7 @@ public class Product_details extends AppCompatActivity {
 
     LinearLayout prodetails_togglelayout, prodetails_selectcolor, prodetails_sizelayout;
     RecyclerView prodetails_colorlayout;
-    LinearLayout prodetails_sizerecycler;
+    RecyclerView prodetails_sizerecycler;
     ImageView prodetails_selectsize_icon, prodetails_selectcolor_icon;
     ImageView selectcolor_icon;
     //    String[] color = new String[]{"#F44336", "#E91E63", "#7B1FA2", "#3949AB", "#00897B", "#C0CA33", "#F44336", "#E91E63", "#7B1FA2", "#3949AB", "#00897B", "#C0CA33",};
@@ -99,6 +104,8 @@ public class Product_details extends AppCompatActivity {
     String category_id;
     TextView prodetails_specialinst, prodetails_deliveryinst;
     String offer_id;
+    TextView prodetails_washinginst;
+    TextView prodetails_materialinst;
 
 //    List<Product_details>product_details;
 
@@ -106,11 +113,21 @@ public class Product_details extends AppCompatActivity {
     public Product_details() {
     }
 
+    TextView bag_product_count;
+
     @SuppressLint("ValidFragment")
     public Product_details(TextView title) {
         this.title = title;
     }
 
+    LinearLayout washing_inst_layout,material_inst_layout,special_inst_layout,delivery_inst_layout;
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        myBagApiCall();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,18 +136,38 @@ public class Product_details extends AppCompatActivity {
         preferences = getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
 //        apiInterface = APIClient.getClient().create(APIInterface.class);
         prodetails_Mybag = findViewById(R.id.prodetails_Mybag);
+        bag_product_count = findViewById(R.id.bag_product_count);
+        prodetails_washinginst= findViewById(R.id.prodetails_washinginst);
+        prodetails_materialinst= findViewById(R.id.prodetails_materialinst);
         prodetails_addtobag = findViewById(R.id.prodetails_addtobag);
         prodetails_back = findViewById(R.id.prodetails_back);
         prodetails_title = findViewById(R.id.prodetails_title);
         prodetails_length = findViewById(R.id.prodetails_length);
         prodetails_hips = findViewById(R.id.prodetails_hips);
         prodetails_rating = findViewById(R.id.prodetails_rating);
+
+prodetails_title.setText(getIntent().getStringExtra("product_name"));
+
+
+        delivery_inst_layout= findViewById(R.id.delivery_inst_layout);
+        washing_inst_layout= findViewById(R.id.washing_inst_layout);
+        material_inst_layout= findViewById(R.id.material_inst_layout);
+        special_inst_layout= findViewById(R.id.special_inst_layout);
+
+
+
+
+
 //        submit_review = findViewById(R.id.submit_review);
         prodetails_togglelayout = findViewById(R.id.prodetails_togglelayout);
         prodetails_selectcolor = findViewById(R.id.prodetails_selectcolor);
         prodetails_colorlayout = findViewById(R.id.prodetails_colorlayout);
         prodetails_sizerecycler = findViewById(R.id.prodetails_sizerecycler);
+        LinearLayoutManager manager111=new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false);
+        prodetails_sizerecycler .setLayoutManager(manager111);
         product_detail_desc = findViewById(R.id.product_detail_desc);
+        prodetails_size_txt= findViewById(R.id.prodetails_size_txt);
+        prodetails_size_txt_id= findViewById(R.id.prodetails_size_txt_id);
 
         prodetails_specialinst = findViewById(R.id.prodetails_specialinst);
         prodetails_deliveryinst = findViewById(R.id.prodetails_deliveryinst);
@@ -169,6 +206,7 @@ public class Product_details extends AppCompatActivity {
 
         if (intent.hasExtra("offer_id"))
             offer_id = intent.getStringExtra("offer_id");
+
 
 
         prodetails_giverating.setOnClickListener(new View.OnClickListener() {
@@ -251,14 +289,19 @@ public class Product_details extends AppCompatActivity {
 
 
         final SharedPreferences preferences = getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
-
+        final ProgressDialog mProgressDialog = new ProgressDialog(this, R.style.AppCompatAlertDialogStyle);
+        mProgressDialog.setIndeterminate(false);
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setMessage("Please wait...");
+        mProgressDialog.show();
 
         final APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
         Call<ProductDetailResponse> call = apiInterface.product_detail(preferences.getString("user_id", ""), product_id, preferences.getString("token", ""));
         call.enqueue(new Callback<ProductDetailResponse>() {
             @Override
             public void onResponse(@NonNull Call<ProductDetailResponse> call, @NonNull Response<ProductDetailResponse> response) {
-
+mProgressDialog.dismiss();
                 Gson gson = new GsonBuilder().create();
                 String myCustomArray = gson.toJson(response).toString();
 //                String obj=new JsonObject().get(response.toString()).getAsString();
@@ -270,7 +313,7 @@ public class Product_details extends AppCompatActivity {
                 final com.pro.wardrobe.ApiResponse.ProductDetailResponse.Response response1 = responses.get(0);
                 Log.e("details_status", response1.getStatus());
                 if (response1.getStatus().equals("true")) {
-                    List<ProductDetail> productDetails = response1.getProductDetails();
+                    final List<ProductDetail> productDetails = response1.getProductDetails();
 //                        Toast.makeText(getApplicationContext(), "product id" + product_id, Toast.LENGTH_SHORT).show();
 
                     final ProductDetail productDetail = productDetails.get(0);
@@ -278,15 +321,35 @@ public class Product_details extends AppCompatActivity {
 
                     product_detail_title.setText(productDetail.getTitle());
                     product_detail_category.setText(productDetail.getCategoryName());
-                    product_detail_price.setText(productDetail.getPrice());
+                    product_detail_price.setText(productDetail.getPrice() +" QAR");
                     product_detail_desc.setText(productDetail.getDescription());
-                    prodetails_rating.setText(productDetail.getRatingCount());
+                    prodetails_rating.setText(productDetail.getRatingCount() + " Reviews");
+
+                    if (productDetail.getMaterial().equals("")) {
+                        material_inst_layout.setVisibility(View.GONE);
+                    } else {
+                        material_inst_layout.setVisibility(View.VISIBLE);
+                        prodetails_materialinst.setText(productDetail.getMaterial());
+                    }
+
+                    if (productDetail.getWashing_instruction().equals("")) {
+                        washing_inst_layout.setVisibility(View.GONE);
+                    } else {
+                        washing_inst_layout.setVisibility(View.VISIBLE);
+                        prodetails_washinginst.setText(productDetail.getWashing_instruction());
+                    }
+
+
+
+
 
 
                     vendor_id = productDetail.getVendorId();
                     product_id = productDetail.getProductId();
 
-                    prodetails_rating.setOnClickListener(new View.OnClickListener() {
+                    prodetail_ratngbar.setClickable(true);
+                    prodetail_ratngbar.setFocusable(true);
+                    prodetail_ratngbar.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             Intent intentbag = new Intent(getApplicationContext(), Reviews.class);
@@ -319,22 +382,24 @@ public class Product_details extends AppCompatActivity {
                     }
                     final List<ProductSizeDetail> size = productDetail.getProductSizeDetails();
 
-                    for (int i = 0; i < size.size(); i++) {
+                    FilterSizePickerAdapter adapter=new FilterSizePickerAdapter(size);
+                    prodetails_sizerecycler.setAdapter(adapter);
+                    /*for (int i = 0; i < size.size(); i++) {
                         ProductSizeDetail siz = size.get(i);
                         final LinearLayout layout = new LinearLayout(getApplicationContext());
                         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT, 1);
-               /* params.width=40;
-            params.height=40;*/
-           /* params.setMargins(5,5,5,5);
-            layout.setPadding(5,5,5,5);*/
+               *//* params.width=40;
+            params.height=40;*//*
+           *//* params.setMargins(5,5,5,5);
+            layout.setPadding(5,5,5,5);*//*
                         layout.setOrientation(LinearLayout.VERTICAL);
                         layout.setLayoutParams(params);
 
                         final LinearLayout layout1 = new LinearLayout(getApplicationContext());
                         layout.addView(layout1);
                         LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                /*params1.width=40;
-            params1.height=40;*/
+                *//*params1.width=40;
+            params1.height=40;*//*
 //            params.setMargins(5,5,5,5);
                         layout.setPadding(5, 5, 5, 5);
                         layout1.setOrientation(LinearLayout.VERTICAL);
@@ -360,12 +425,69 @@ public class Product_details extends AppCompatActivity {
                                 layout1.setBackground(getResources().getDrawable(R.drawable.login_facebook_blue_border));
                                 tQty.setTextColor(Color.parseColor("#ffffff"));
                                 fil_size = tQty.getTag().toString();
+                                prodetails_togglelayout.setVisibility(View.GONE);
                             }
                         });
 
                         prodetails_sizerecycler.addView(layout);
-                    }
+                    }*/
 
+                    prodetails_sizelayout = findViewById(R.id.prodetails_sizelayout);
+                    prodetails_selectsizelayout = findViewById(R.id.prodetails_selectsizelayout);
+                    prodetails_selectcolor.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if (colorDetails.size()==0){
+                                Toast.makeText(Product_details.this, "No Color Available", Toast.LENGTH_SHORT).show();
+                            }
+//               if (x == 0) {
+              /* prodetails_togglelayout.setVisibility(View.VISIBLE);
+               prodetails_sizelayout.setVisibility(View.GONE);
+               prodetails_colorlayout.setVisibility(View.VISIBLE);*/
+                            if (prodetails_togglelayout.getVisibility() == View.VISIBLE) {
+                                prodetails_togglelayout.setVisibility(View.GONE);
+                  /*  prodetails_sizelayout.setVisibility(View.GONE);
+                    prodetails_colorlayout.setVisibility(View.GONE);*/
+                                prodetails_selectsize_icon.setImageDrawable(getResources().getDrawable(R.drawable.ic_expand_less_black_24dp));
+                                prodetails_selectcolor_icon.setImageDrawable(getResources().getDrawable(R.drawable.ic_expand_less_black_24dp));
+                            }
+
+                            else if (prodetails_togglelayout.getVisibility() == View.GONE) {
+                                prodetails_selectsize_icon.setImageDrawable(getResources().getDrawable(R.drawable.ic_expand_less_black_24dp));
+                                prodetails_selectcolor_icon.setImageDrawable(getResources().getDrawable(R.drawable.ic_expand_more_black_24dp));
+                                prodetails_togglelayout.setVisibility(View.VISIBLE);
+                                prodetails_sizerecycler.setVisibility(View.GONE);
+                                prodetails_colorlayout.setVisibility(View.VISIBLE);
+                            }
+                        }
+                    });
+                    prodetails_selectsizelayout.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if (size.size()==0){
+                                Toast.makeText(Product_details.this, "No Size Available", Toast.LENGTH_SHORT).show();
+                            }
+//               if (x == 0) {
+//                   x = 1;
+                 /*  prodetails_togglelayout.setVisibility(View.VISIBLE);
+                   prodetails_sizelayout.setVisibility(View.VISIBLE);
+                   prodetails_colorlayout.setVisibility(View.GONE);*/
+                            if (prodetails_togglelayout.getVisibility() == View.VISIBLE) {
+                                prodetails_togglelayout.setVisibility(View.GONE);
+                    /*prodetails_sizelayout.setVisibility(View.GONE);
+                    prodetails_colorlayout.setVisibility(View.GONE);*/
+                                prodetails_selectsize_icon.setImageDrawable(getResources().getDrawable(R.drawable.ic_expand_less_black_24dp));
+                                prodetails_selectcolor_icon.setImageDrawable(getResources().getDrawable(R.drawable.ic_expand_less_black_24dp));
+                            }
+                            else if (prodetails_togglelayout.getVisibility() == View.GONE) {
+                                prodetails_selectsize_icon.setImageDrawable(getResources().getDrawable(R.drawable.ic_expand_more_black_24dp));
+                                prodetails_selectcolor_icon.setImageDrawable(getResources().getDrawable(R.drawable.ic_expand_less_black_24dp));
+                                prodetails_togglelayout.setVisibility(View.VISIBLE);
+                                prodetails_sizerecycler.setVisibility(View.VISIBLE);
+                                prodetails_colorlayout.setVisibility(View.GONE);
+                            }
+                        }
+                    });
 
                     prodetails_addtobag.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -542,16 +664,25 @@ public class Product_details extends AppCompatActivity {
                         }
                     });
                     if (productDetail.getDelivery_instruction().equals("")) {
-                        prodetails_deliveryinst.setVisibility(View.GONE);
-                    } else prodetails_deliveryinst.setText(productDetail.getDelivery_instruction());
-
+                        delivery_inst_layout.setVisibility(View.GONE);
+                    } else {
+                        delivery_inst_layout.setVisibility(View.GONE);
+                        prodetails_deliveryinst.setText(productDetail.getDelivery_instruction());
+                    }
 
                     if (productDetail.getSpecial_instruction().equals("")) {
-                        prodetails_specialinst.setVisibility(View.GONE);
-                    } else prodetails_specialinst.setText(productDetail.getSpecial_instruction());
-
-                    Call<ProductListResponse> call1 = apiInterface.product_list(preferences.getString("user_id", ""), "0", category_id, vendor_id, offer_id, preferences.getString("token", ""));
-
+                        special_inst_layout.setVisibility(View.GONE);
+                    } else {
+                     special_inst_layout.setVisibility(View.VISIBLE);
+                        prodetails_specialinst.setText(productDetail.getSpecial_instruction());
+                    }
+                    Call<ProductListResponse> call1 = apiInterface.product_list(preferences.getString("user_id", ""), "0", category_id, "", offer_id, preferences.getString("token", ""));
+                    final ProgressDialog mProgressDialog = new ProgressDialog(Product_details.this, R.style.AppCompatAlertDialogStyle);
+                    mProgressDialog.setIndeterminate(false);
+                    mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    mProgressDialog.setCancelable(false);
+                    mProgressDialog.setMessage("Please wait...");
+                    mProgressDialog.show();
 
                     call1.enqueue(new Callback<ProductListResponse>() {
                         @Override
@@ -567,9 +698,17 @@ public class Product_details extends AppCompatActivity {
                                 if (response1.getStatus().equals("true")) {
                                     List<ProductList> productLists = response1.getProductList();
 
+                                    List<ProductList> prolist=new ArrayList<>();
+                                    for (int x=0;x<productLists.size();x++){
+                                        if (Integer.parseInt(productDetail.getProductId())!=Integer.parseInt(productLists.get(x).getProductId())){
+                                            prolist.add(productLists.get(x));
+                                        }
+                                    }
 
-                                    ProductList_Adapter productList_adapter = new ProductList_Adapter(productLists, getApplicationContext(), new Fragment_product_list());
+mProgressDialog.dismiss();
+                                    ProductList_Adapter productList_adapter = new ProductList_Adapter(productLists, getApplicationContext(), new Fragment_product_list(),-1,0);
                                     prodetails_similar_recycler.setAdapter(productList_adapter);
+//                                    productList_adapter.notifyItemRemoved(0);
 
 
                                 }
@@ -796,61 +935,52 @@ layout.setFitsSystemWindows(true);
             }
         });*/
 
-        prodetails_sizelayout = findViewById(R.id.prodetails_sizelayout);
-        prodetails_selectsizelayout = findViewById(R.id.prodetails_selectsizelayout);
-        prodetails_selectcolor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//               if (x == 0) {
-              /* prodetails_togglelayout.setVisibility(View.VISIBLE);
-               prodetails_sizelayout.setVisibility(View.GONE);
-               prodetails_colorlayout.setVisibility(View.VISIBLE);*/
-                if (prodetails_colorlayout.getVisibility() == View.VISIBLE) {
-                    prodetails_togglelayout.setVisibility(View.GONE);
-                  /*  prodetails_sizelayout.setVisibility(View.GONE);
-                    prodetails_colorlayout.setVisibility(View.GONE);*/
-                    prodetails_selectsize_icon.setImageDrawable(getResources().getDrawable(R.drawable.ic_expand_less_black_24dp));
-                    prodetails_selectcolor_icon.setImageDrawable(getResources().getDrawable(R.drawable.ic_expand_less_black_24dp));
-                }
-
-                if (prodetails_colorlayout.getVisibility() == View.GONE) {
-                    prodetails_selectsize_icon.setImageDrawable(getResources().getDrawable(R.drawable.ic_expand_less_black_24dp));
-                    prodetails_selectcolor_icon.setImageDrawable(getResources().getDrawable(R.drawable.ic_expand_more_black_24dp));
-                    prodetails_togglelayout.setVisibility(View.VISIBLE);
-                    prodetails_sizerecycler.setVisibility(View.GONE);
-                    prodetails_colorlayout.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-        prodetails_selectsizelayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//               if (x == 0) {
-//                   x = 1;
-                 /*  prodetails_togglelayout.setVisibility(View.VISIBLE);
-                   prodetails_sizelayout.setVisibility(View.VISIBLE);
-                   prodetails_colorlayout.setVisibility(View.GONE);*/
-                if (prodetails_sizerecycler.getVisibility() == View.VISIBLE) {
-                    prodetails_togglelayout.setVisibility(View.GONE);
-                    /*prodetails_sizelayout.setVisibility(View.GONE);
-                    prodetails_colorlayout.setVisibility(View.GONE);*/
-                    prodetails_selectsize_icon.setImageDrawable(getResources().getDrawable(R.drawable.ic_expand_less_black_24dp));
-                    prodetails_selectcolor_icon.setImageDrawable(getResources().getDrawable(R.drawable.ic_expand_less_black_24dp));
-                }
-                if (prodetails_sizerecycler.getVisibility() == View.GONE) {
-                    prodetails_selectsize_icon.setImageDrawable(getResources().getDrawable(R.drawable.ic_expand_more_black_24dp));
-                    prodetails_selectcolor_icon.setImageDrawable(getResources().getDrawable(R.drawable.ic_expand_less_black_24dp));
-                    prodetails_togglelayout.setVisibility(View.VISIBLE);
-                    prodetails_sizerecycler.setVisibility(View.VISIBLE);
-                    prodetails_colorlayout.setVisibility(View.GONE);
-                }
-            }
-        });
+      
 
         /* colorPickerAdapter colorPickerAdapter=new colorPickerAdapter(getApplicationContext());
         prodetails_selectcolor.setAdapter(colorPickerAdapter);*/
     }
 
+
+    public void myBagApiCall() throws NumberFormatException {
+        final ProgressDialog mProgressDialog = new ProgressDialog(Product_details.this, R.style.AppCompatAlertDialogStyle);
+        mProgressDialog.setIndeterminate(false);
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setMessage("Please wait...");
+        mProgressDialog.show();
+        final SharedPreferences preferences = getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
+        final APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
+        Call<ResponseCartList> call = apiInterface.cart_list(preferences.getString("user_id", ""), preferences.getString("token", ""));
+        call.enqueue(new Callback<ResponseCartList>() {
+            @Override
+            public void onResponse(@NonNull Call<ResponseCartList> call, @NonNull Response<ResponseCartList> response) {
+                try {
+                    mProgressDialog.dismiss();
+                    Gson gson = new GsonBuilder().create();
+                    String myCustomArray = gson.toJson(response).toString();
+                    Log.e("BagResponse", myCustomArray);
+                    ResponseCartList res = response.body();
+                    List<com.pro.wardrobe.ApiResponse.CartListResponse.Response> resList = res.getResponse();
+                    com.pro.wardrobe.ApiResponse.CartListResponse.Response response1 = resList.get(0);
+                    if (response1.getStatus().equals("true")) {
+                        List<CartList> cartList = response1.getCartList();
+                        bag_product_count.setText(String.valueOf(cartList.size()));
+
+                    } else {
+//                        Toast.makeText(getApplicationContext(), "Oops, No result found..!", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (NumberFormatException ignored) {
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ResponseCartList> call, @NonNull Throwable t) throws NumberFormatException {
+//                Toast.makeText(getApplicationContext(), "error ", Toast.LENGTH_SHORT).show();
+                Log.e("BagError", t.getMessage());
+            }
+        });
+    }
     class colorPickerAdapter extends RecyclerView.Adapter<colorPickerAdapter.ViewHolder> {
 
         Context context;
@@ -930,6 +1060,74 @@ layout.setFitsSystemWindows(true);
     public void apiCll() {
 
 
+    }
+    int pos=-1;
+    class FilterSizePickerAdapter extends RecyclerView.Adapter<FilterSizePickerAdapter.ViewHolder> {
+
+        List<ProductSizeDetail> sizests;
+
+        public FilterSizePickerAdapter(List<ProductSizeDetail> sizests) {
+            this.sizests = sizests;
+        }
+
+        @NonNull
+        @Override
+        public FilterSizePickerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+            return new FilterSizePickerAdapter.ViewHolder(LayoutInflater.from(getApplicationContext()).inflate(R.layout.filter_size_layout, viewGroup, false));
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull final FilterSizePickerAdapter.ViewHolder viewHolder, final int i) {
+            ProductSizeDetail sizeList = sizests.get(i);
+            viewHolder.filter_size_txt.setText(sizeList.getSize());
+            viewHolder.filter_size_txt_id.setText(sizeList.getProductSizeId());
+
+        /*    if (i==0){
+                fil_size= viewHolder.filter_size_txt_id.getText().toString();
+            }*/
+
+            if (i==pos){
+//                fil_size = viewHolder.filter_size_txt_id.getText().toString();
+                viewHolder.filter_size_txt.setTextColor(Color.parseColor("#ffffff"));
+                viewHolder.filter_size_layout.setBackground(getResources().getDrawable(R.drawable.login_facebook_blue_border));
+            }else {
+                viewHolder.filter_size_layout.setBackground(getResources().getDrawable(R.drawable.size_border_dark_gray));
+                viewHolder.filter_size_txt.setTextColor(Color.parseColor("#000000"));
+            }
+            viewHolder.filter_size_layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    pos=-1;
+                    pos=i;
+                    viewHolder.filter_size_txt.setTextColor(Color.parseColor("#ffffff"));
+                    fil_size = viewHolder.filter_size_txt_id.getText().toString();
+                    viewHolder.filter_size_layout.setBackground(getResources().getDrawable(R.drawable.login_facebook_blue_border));
+                    prodetails_togglelayout.setVisibility(View.GONE);
+                    prodetails_size_txt.setText(viewHolder.filter_size_txt.getText().toString());
+                    prodetails_size_txt_id.setText(viewHolder.filter_size_txt_id.getText().toString());
+                    notifyDataSetChanged();
+                }
+            });
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return sizests.size();
+        }
+
+        class ViewHolder extends RecyclerView.ViewHolder {
+            LinearLayout filter_size_layout;
+            TextView filter_size_txt;
+            TextView filter_size_txt_id;
+
+            public ViewHolder(@NonNull View itemView) {
+                super(itemView);
+                filter_size_layout = itemView.findViewById(R.id.filter_size_layout);
+                filter_size_txt = itemView.findViewById(R.id.filter_size_txt);
+                filter_size_txt_id = itemView.findViewById(R.id.filter_size_txt_id);
+            }
+        }
     }
 
 }

@@ -10,6 +10,30 @@ public class ProductDetail {
     @SerializedName("product_id")
     @Expose
     private String productId;
+
+    @SerializedName("washing_instruction")
+    @Expose
+    private String washing_instruction;
+
+    public String getWashing_instruction() {
+        return washing_instruction;
+    }
+
+    public void setWashing_instruction(String washing_instruction) {
+        this.washing_instruction = washing_instruction;
+    }
+
+    public String getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(String material) {
+        this.material = material;
+    }
+
+    @SerializedName("material")
+    @Expose
+    private String material;
     @SerializedName("delivery_instruction")
     @Expose
     private String delivery_instruction;

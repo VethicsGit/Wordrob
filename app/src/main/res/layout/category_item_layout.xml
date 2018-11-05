@@ -19,7 +19,7 @@
             <ImageView
                 android:layout_width = "match_parent"
                 android:layout_height = "match_parent"
-                android:scaleType = "centerCrop"
+                android:scaleType = "fitCenter"
                 android:src = "@drawable/wardrobe_category1" />
 
             <LinearLayout
@@ -80,7 +80,7 @@
             <ImageView
                 android:layout_width = "match_parent"
                 android:layout_height = "160dp"
-                android:scaleType = "centerCrop"
+                android:scaleType = "fitCenter"
                 android:src = "@drawable/wardrobe_category2" />
 
             <LinearLayout

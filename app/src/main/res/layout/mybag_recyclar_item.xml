@@ -32,6 +32,7 @@
                 android:layout_width = "match_parent"
                 android:layout_height = "match_parent" >
                 <ImageView
+                    android:id="@+id/cart_fav_img"
                     android:layout_gravity="center_vertical"
                     android:src="@drawable/heart_white120"
                     android:layout_width = "30dp"
@@ -87,7 +88,7 @@
                         android:layout_width = "match_parent"
                         android:layout_height = "100dp"
                         android:layout_gravity="center"
-                        android:scaleType="centerCrop"
+                        android:scaleType="fitCenter"
                         android:src = "@drawable/order_detail" />
 
                 </android.support.v7.widget.CardView>
@@ -95,12 +96,15 @@
 
             </LinearLayout>
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width = "match_parent"
                 android:layout_height = "match_parent"
                 android:layout_weight = "3">
 
                 <LinearLayout
+                    android:id="@+id/mybag_xxx"
+                    android:layout_weight="2"
+                    android:layout_marginRight="60dp"
                     android:layout_width = "match_parent"
                     android:layout_height = "match_parent"
                     android:layout_marginStart = "10dp"
@@ -114,6 +118,7 @@
                         android:layout_centerInParent = "true"
                         android:layout_gravity = "start"
                         android:text = "Lipsy Crown T-shirt"
+                        android:singleLine="true"
                         android:textColor = "@color/colorAccent"
                         android:textSize = "15dp"
                         android:textStyle = "bold" />
@@ -128,16 +133,29 @@
                         android:textColor = "#cdcdcd"
                         android:textSize = "12dp" />
 
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
                     <TextView android:autoSizeTextType="uniform"
                         android:layout_width = "wrap_content"
                         android:id="@+id/cartitem_price"
                         android:layout_height = "wrap_content"
                         android:layout_centerInParent = "true"
                         android:layout_gravity = "start"
-                        android:text = "84 QAR"
+                        android:text = "84"
                         android:textColor = "@color/colorAccent"
                         android:textSize = "15dp"
                         android:textStyle = "bold" />
+                    <TextView android:autoSizeTextType="uniform"
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_centerInParent = "true"
+                        android:layout_gravity = "start"
+                        android:text = " QAR"
+                        android:textColor = "@color/colorAccent"
+                        android:textSize = "15dp"
+                        android:textStyle = "bold" />
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width = "wrap_content"
@@ -194,16 +212,16 @@
 
                         <TextView
                             android:id="@+id/cartitem_qty"
-                            android:layout_width = "wrap_content"
-                            android:layout_height = "wrap_content"
+                            android:layout_width = "30dp"
+                            android:layout_height = "30dp"
                             android:layout_weight = "1"
                             android:autoSizeTextType = "uniform"
                             android:background = "@drawable/blue_round_background"
                             android:gravity = "center"
                             android:padding = "7dp"
                             android:text = "02"
+                            android:layout_gravity="center"
                             android:textColor = "@color/colorPrimary"
-                            android:textSize = "15dp"
                             android:textStyle = "bold" />
                     </LinearLayout>
 
@@ -219,7 +237,7 @@
 
                 </LinearLayout>
 
-            </RelativeLayout>
+            </LinearLayout>
 
 
         </LinearLayout>

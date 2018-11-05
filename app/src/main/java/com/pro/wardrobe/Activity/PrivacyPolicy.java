@@ -1,5 +1,6 @@
 package com.pro.wardrobe.Activity;
 
+import android.app.ProgressDialog;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,9 @@ import com.pro.wardrobe.ApiResponse.PrivacyPolicyResponse.PrivacyPolicyResponse;
 import com.pro.wardrobe.ApiResponse.TermsResponse.TermsResponse;
 import com.pro.wardrobe.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -24,16 +28,19 @@ public class PrivacyPolicy extends AppCompatActivity {
 
     WebView privacy_text;
     ImageView privacy_back;
+    TextView privacy_policy_lastreviseddate;
+    String[] months=new String[]{"January","February","March","April","May","June","July","August","September","October","November","December"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_privacy_policy);
-        Typeface facebold = Typeface.createFromAsset(getAssets(),
-                "Philosopher_Bold.ttf");
+//        Typeface facebold = Typeface.createFromAsset(getAssets(),"Philosopher_Bold.ttf");
+        Typeface facebold = Typeface.createFromAsset(getAssets(),"Roboto_Regular.ttf");
         ((TextView)findViewById(R.id.privacy_title)).setTypeface(facebold);
         privacy_text=findViewById(R.id.privacy_text);
         privacy_back=findViewById(R.id.privacy_back);
+        privacy_policy_lastreviseddate=findViewById(R.id.privacy_policy_lastreviseddate);
 
 //        privacy_text.setText(dummy);
 
@@ -44,7 +51,12 @@ public class PrivacyPolicy extends AppCompatActivity {
             }
         });
 
-
+        final ProgressDialog mProgressDialog = new ProgressDialog(this, R.style.AppCompatAlertDialogStyle);
+        mProgressDialog.setIndeterminate(false);
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setMessage("Please wait...");
+        mProgressDialog.show();
         APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
         Call<PrivacyPolicyResponse> call=apiInterface.privacy_policy();
 
@@ -53,7 +65,7 @@ public class PrivacyPolicy extends AppCompatActivity {
             public void onResponse(Call<PrivacyPolicyResponse> call, Response<PrivacyPolicyResponse> response) {
                 PrivacyPolicyResponse termsofuse=response.body();
                 List<com.pro.wardrobe.ApiResponse.PrivacyPolicyResponse.Response> list=termsofuse.getResponse();
-
+mProgressDialog.dismiss();
                 for (int i = 0; i < list.size(); i++) {
 
                     com.pro.wardrobe.ApiResponse.PrivacyPolicyResponse.Response response1=list.get(i);
@@ -62,6 +74,13 @@ public class PrivacyPolicy extends AppCompatActivity {
                         String text = "<html><body style=\"text-align:justify;\">";
                         text += response1.getPrivacyPolicy();
                         text += "</body></html>";
+
+                        try {
+                            Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(response1.getUpdatedAt());
+                            privacy_policy_lastreviseddate.setText("Last Revised - "+months[date.getMonth()]+ " "+date.getDay()+ ","+(date.getYear()+1900));
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
 
 
                         privacy_text.loadData(text, "text/html", null);

@@ -1,5 +1,6 @@
 package com.pro.wardrobe.Fragment;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Canvas;
@@ -17,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pro.wardrobe.Activity.Dashboard;
@@ -39,15 +41,17 @@ public class Favorite extends Fragment {
 
     ImageView fav_back;
     RecyclerView favorite_recyclar;
+    TextView favemptytext;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.activity_favorite,container,false);
-        ((Dashboard)getActivity()).toggle(0);
-        ((Dashboard)getActivity()).setFrament(4);
+        View view = inflater.inflate(R.layout.activity_favorite, container, false);
+        ((Dashboard) getActivity()).toggle(0);
+        ((Dashboard) getActivity()).setFrament(4);
 //        fav_back=view.findViewById(R.id.fav_back);
-        favorite_recyclar=view.findViewById(R.id.favorite_recyclar);
+        favorite_recyclar = view.findViewById(R.id.favorite_recyclar);
+        favemptytext = view.findViewById(R.id.favemptytext);
 
         final LinearLayoutManager manager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         favorite_recyclar.setLayoutManager(manager);
@@ -72,13 +76,18 @@ public class Favorite extends Fragment {
         });*/
         final SharedPreferences preferences = getActivity().getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
 
-
-        APIInterface apiInterface= APIClient.getClient().create(APIInterface.class);
-        Call<FavoritieProductListResponse>call=apiInterface.fav_product_list(preferences.getString("user_id",""),preferences.getString("token",""));
+        final ProgressDialog mProgressDialog = new ProgressDialog(getContext(), R.style.AppCompatAlertDialogStyle);
+        mProgressDialog.setIndeterminate(false);
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setMessage("Please wait...");
+        mProgressDialog.show();
+        APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
+        Call<FavoritieProductListResponse> call = apiInterface.fav_product_list(preferences.getString("user_id", ""), preferences.getString("token", ""));
         call.enqueue(new Callback<FavoritieProductListResponse>() {
             @Override
             public void onResponse(Call<FavoritieProductListResponse> call, Response<FavoritieProductListResponse> response) {
-
+                mProgressDialog.dismiss();
                 FavoritieProductListResponse favoritieProductListResponse = response.body();
                 List<com.pro.wardrobe.ApiResponse.FavoriteProductListResponse.Response> responses = favoritieProductListResponse.getResponse();
 
@@ -86,25 +95,33 @@ public class Favorite extends Fragment {
                 for (int i = 0; i < responses.size(); i++) {
                     com.pro.wardrobe.ApiResponse.FavoriteProductListResponse.Response response1 = responses.get(i);
 
+
                     if (response1.getStatus().equals("true")) {
                         List<FavProductList> favProductLists = response1.getFavProductList();
 
-                        Favorite_adapter favorite_adapter = new Favorite_adapter(favProductLists, getContext());
-                        favorite_recyclar.setAdapter(favorite_adapter);
-
+                        Toast.makeText(getContext(), "favorite size "+favProductLists.size(), Toast.LENGTH_SHORT).show();
+                        if (favProductLists.size() == 0) {
+                            favemptytext.setVisibility(View.VISIBLE);
+                            favorite_recyclar.setVisibility(View.GONE);
+                        } else {
+                            favemptytext.setVisibility(View.GONE);
+                            favorite_recyclar.setVisibility(View.VISIBLE);
+                            Favorite_adapter favorite_adapter = new Favorite_adapter(favProductLists, getContext());
+                            favorite_recyclar.setAdapter(favorite_adapter);
+                        }
+                    }
+                    else {
+                        favemptytext.setVisibility(View.VISIBLE);
+                        favorite_recyclar.setVisibility(View.GONE);
                     }
                 }
             }
+
             @Override
             public void onFailure(Call<FavoritieProductListResponse> call, Throwable t) {
 
             }
         });
-
-
-
-
-
 
 
         return view;

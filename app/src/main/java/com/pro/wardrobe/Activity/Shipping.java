@@ -152,7 +152,7 @@ public class Shipping extends AppCompatActivity {
                                 public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
                                     String countryId = countryList.get(which).getCountriesId();
                                     bill_country = countryId;
-                                    Toast.makeText(Shipping.this, "country id " + countryId, Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(Shipping.this, "country id " + countryId, Toast.LENGTH_SHORT).show();
                                     shipping_country_spn_id.setText(countryId);
 //                                    country_selected_position=which;
                                     shipping_country_spn.setText(text);
@@ -215,7 +215,7 @@ public class Shipping extends AppCompatActivity {
                                 @Override
                                 public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
                                     String countryId = countryList.get(which).getCountriesId();
-                                    Toast.makeText(Shipping.this, "country id " + countryId, Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(Shipping.this, "country id " + countryId, Toast.LENGTH_SHORT).show();
                                     ship_country = countryId;
                                     shipping_ship_country_spn_id.setText(countryId);
 //                                    country_selected_position=which;

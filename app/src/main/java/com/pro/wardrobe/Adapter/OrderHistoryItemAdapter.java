@@ -42,7 +42,7 @@ public class OrderHistoryItemAdapter extends RecyclerView.Adapter<OrderHistoryIt
         viewHolder.order_history_item_title.setText(orderDetail.getTitle());
         viewHolder.order_history_item_catename.setText(orderDetail.getCategoryName());
         viewHolder.order_history_item_qty.setText(orderDetail.getQuantity());
-        viewHolder.order_history_item_price .setText(orderDetail.getPrice());
+        viewHolder.order_history_item_price .setText(orderDetail.getPrice()+" QAR");
 
     }
 

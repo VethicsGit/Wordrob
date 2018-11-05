@@ -1,5 +1,6 @@
 package com.pro.wardrobe.Activity;
 
+import android.app.ProgressDialog;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +14,9 @@ import com.pro.wardrobe.ApiHelper.APIInterface;
 import com.pro.wardrobe.ApiResponse.TermsResponse.TermsResponse;
 import com.pro.wardrobe.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -22,7 +26,10 @@ import retrofit2.Response;
 public class TermsAndCondition extends AppCompatActivity {
 
     WebView tnc_text;
+    TextView terms_and_condition_lastreviseddate;
     ImageView tnc_back;
+
+    String[] months=new String[]{"January","February","March","April","May","June","July","August","September","October","November","December"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +37,13 @@ public class TermsAndCondition extends AppCompatActivity {
         setContentView(R.layout.activity_terms_and_condition);
 
 
-        Typeface facebold = Typeface.createFromAsset(getAssets(),
-                "Philosopher_Bold.ttf");
+//        Typeface facebold = Typeface.createFromAsset(getAssets(),"Philosopher_Bold.ttf");
+        Typeface facebold = Typeface.createFromAsset(getAssets(),"Roboto_Regular.ttf");
         ((TextView)findViewById(R.id.terms_title)).setTypeface(facebold);
 
 
         tnc_text=findViewById(R.id.tnc_text);
+        terms_and_condition_lastreviseddate=findViewById(R.id.terms_and_condition_lastreviseddate);
         tnc_back=findViewById(R.id.tnc_back);
 //        tnc_text.setText(dummy);
 
@@ -46,6 +54,12 @@ public class TermsAndCondition extends AppCompatActivity {
             }
         });
 
+        final ProgressDialog mProgressDialog = new ProgressDialog(this, R.style.AppCompatAlertDialogStyle);
+        mProgressDialog.setIndeterminate(false);
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setMessage("Please wait...");
+        mProgressDialog.show();
        APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
         Call<TermsResponse> call=apiInterface.Terms_and_condition();
 
@@ -54,7 +68,7 @@ public class TermsAndCondition extends AppCompatActivity {
             public void onResponse(Call<TermsResponse> call, Response<TermsResponse> response) {
                 TermsResponse termsofuse=response.body();
                 List<com.pro.wardrobe.ApiResponse.TermsResponse.Response> list=termsofuse.getResponse();
-
+mProgressDialog.dismiss();
                 for (int i = 0; i < list.size(); i++) {
 
                     com.pro.wardrobe.ApiResponse.TermsResponse.Response response1=list.get(i);
@@ -63,6 +77,13 @@ public class TermsAndCondition extends AppCompatActivity {
                         String text = "<html><body style=\"text-align:justify;\">";
                         text += response1.getTermsAndCondition();
                         text += "</body></html>";
+
+                        try {
+                            Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(response1.getUpdatedAt());
+                            terms_and_condition_lastreviseddate.setText("Last Revised - "+months[date.getMonth()]+ " "+date.getDay()+ ","+(date.getYear()+1900));
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
 
 
                         tnc_text.loadData(text, "text/html", null);

@@ -167,7 +167,7 @@ public class Fragment_Designers extends Fragment {
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 title.setText("Designers");
 //                    ft.addToBackStack("Dashboard");
-                ft.replace(R.id.viewpager, new Fragment_Designers(0,title)).commit();
+                ft.replace(R.id.viewpager, new Fragment_Designers(1,title)).commit();
             }
         });
 

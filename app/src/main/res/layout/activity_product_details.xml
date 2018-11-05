@@ -5,21 +5,24 @@
     xmlns:app = "http://schemas.android.com/apk/res-auto"
     android:layout_width = "match_parent"
     android:layout_height = "wrap_content"
-    android:focusable = "true"
-    android:focusableInTouchMode = "true"
     android:orientation = "vertical">
 
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width = "match_parent"
-        android:layout_height = "?attr/actionBarSize"
-        app:elevation = "0dp">
 
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/drop_shadow"
+
+        android:elevation="5dp">
         <android.support.v7.widget.Toolbar
             android:id = "@+id/toolbar"
-            android:layout_width = "match_parent"
-            android:layout_height = "?attr/actionBarSize"
-            android:background = "?attr/colorPrimary">
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_gravity="center"
+            android:background="?attr/colorPrimary"
+            android:gravity="center">
 
             <RelativeLayout
                 android:layout_width = "match_parent"
@@ -43,6 +46,7 @@
                     android:autoSizeTextType = "uniform"
                     android:gravity = "center"
                     android:text = ""
+                    android:layout_marginStart="110dp"
                     android:textAllCaps = "true"
                     android:textColor = "@color/colorAccent"
                     android:textStyle = "bold" />
@@ -62,6 +66,11 @@
                         android:layout_weight = "1"
                          />
 
+                    <RelativeLayout
+                        android:layout_width="35dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:gravity="center">
                     <ImageView
                         android:id = "@+id/prodetails_Mybag"
                         android:layout_width = "25dp"
@@ -70,6 +79,17 @@
                         android:layout_weight = "1"
                         android:src = "@mipmap/bag" />
 
+                        <TextView
+                            android:id="@+id/bag_product_count"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:textSize="10dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentBottom="true"
+                            android:background="@drawable/purple_round"
+                            android:gravity="center"
+                            android:textColor="#ffffff" />
+                    </RelativeLayout>
 
                 </LinearLayout>
             </RelativeLayout>
@@ -164,6 +184,7 @@
         xmlns:app = "http://schemas.android.com/apk/res-auto"
         xmlns:card_view = "http://schemas.android.com/tools"
         android:layout_width = "match_parent"
+        android:layout_marginTop="5dp"
         android:layout_height = "match_parent"
         android:background = "@drawable/white_pattern">
 
@@ -203,8 +224,8 @@
                             android:id="@+id/product_detail_img"
                             android:layout_width = "match_parent"
                             android:layout_height = "170dp"
-                            android:scaleType = "centerCrop"
-                            android:src = "@drawable/wardrobe_detail" />
+                            android:scaleType = "fitCenter"
+                             />
 
                         <RelativeLayout
                             android:layout_width = "match_parent"
@@ -283,6 +304,34 @@
                             android:layout_width = "match_parent"
                             android:layout_weight="1"
                             android:layout_height = "match_parent">
+                            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                android:layout_width="wrap_content"
+                                android:id="@+id/filter_size_layout"
+                                android:layout_margin="5dp"
+                                android:gravity="center"
+                                android:background="@drawable/size_border_dark_gray"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:id="@+id/prodetails_size_txt"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=""
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:padding="5dp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/prodetails_size_txt_id"
+                                    android:visibility="gone"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=""
+                                    android:padding="5dp"
+                                    />
+
+                            </LinearLayout>
                         <TextView
                             android:id="@+id/prodetails_selectsizelayout"
                             style = "@style/mySpinnerItemStyle"
@@ -323,14 +372,21 @@ android:id="@+id/prodetails_togglelayout"
                             android:layout_width = "match_parent"
                             android:layout_height = "wrap_content"
                             android:orientation = "horizontal"
-                            android:padding = "15dp"/>
-                        <LinearLayout
-                            android:visibility="gone"
+                           android:padding = "15dp"/>
+                        <!--     <LinearLayout
+                                android:visibility="gone"
+                                android:id="@+id/prodetails_sizerecycler"
+                                android:layout_width = "match_parent"
+                                android:layout_height = "wrap_content"
+                                android:orientation = "horizontal"
+                                />-->
+
+                        <android.support.v7.widget.RecyclerView
+                            android:padding = "15dp"
                             android:id="@+id/prodetails_sizerecycler"
                             android:layout_width = "match_parent"
                             android:layout_height = "wrap_content"
-                            android:orientation = "horizontal"
-                            android:padding = "15dp"/>
+                            android:orientation = "horizontal"/>
                         <!--</ScrollView>-->
 
 
@@ -428,6 +484,7 @@ android:id="@+id/prodetails_togglelayout"
                     android:layout_gravity = "center"
                     android:autoSizeTextType = "uniform"
                     android:text = ""
+                    android:textAlignment="center"
                     android:textColor = "@color/colorAccent"
                     android:textSize = "18dp"
                     android:textStyle = "bold" />
@@ -473,7 +530,6 @@ android:id="@+id/prodetails_togglelayout"
                     android:layout_height = "40dp"
                     android:layout_gravity = "center"
                     android:layout_marginBottom = "-10dp"
-                    android:layout_marginTop = "-10dp"
                     android:isIndicator = "true"
                     android:numStars = "5"
                     android:rating = "3.5"
@@ -491,58 +547,25 @@ android:id="@+id/prodetails_togglelayout"
                     android:layout_gravity = "center"
                     android:autoSizeTextType = "uniform"
                     android:text = ""
+                    android:layout_marginTop="10dp"
                     android:textColor = "#cdcdcd"
                     android:textSize = "12dp" />
                 <!--36 Reviews-->
 
+                <View
+                    android:layout_width = "match_parent"
+                    android:layout_height = "1dp"
+                    android:layout_marginTop = "5dp"
+                    android:background = "#D3D5DD" />
                 <LinearLayout
 
                     android:layout_width = "match_parent"
                     android:layout_height = "wrap_content"
                     android:layout_marginEnd = "30dp"
                     android:layout_marginStart = "30dp"
-                    android:layout_marginTop = "20dp"
                     android:orientation = "vertical">
 
-                    <View
-                        android:layout_width = "match_parent"
-                        android:layout_height = "1dp"
-                        android:layout_marginTop = "5dp"
-                        android:background = "#D3D5DD" />
 
-                    <TextView
-                        android:id = "@+id/prodetails_deliveryinst"
-                        android:layout_width = "wrap_content"
-                        android:layout_height = "wrap_content"
-                        android:layout_centerInParent = "true"
-                        android:layout_gravity = "center"
-                        android:layout_margin = "10dp"
-                        android:autoSizeTextType = "uniform"
-                        android:text = "Usually delivered in 7-8 days"
-                        android:textColor = "@color/colorAccent"
-                        android:textSize = "15dp" />
-                    <!--Usually delivered in 7-8 days-->
-                    <View
-                        android:layout_width = "match_parent"
-                        android:layout_height = "1dp"
-                        android:background = "#D3D5DD" />
-
-                    <TextView
-                        android:id="@+id/prodetails_specialinst"
-                        android:layout_width = "wrap_content"
-                        android:layout_height = "wrap_content"
-                        android:layout_centerInParent = "true"
-                        android:layout_gravity = "center"
-                        android:layout_margin = "10dp"
-                        android:autoSizeTextType = "uniform"
-                        android:text = "Extra cost for delivery within 3 days"
-                        android:textColor = "@color/colorAccent"
-                        android:textSize = "15dp" />
-                    <!--Extra cost for delivery within 3 days-->
-                    <View
-                        android:layout_width = "match_parent"
-                        android:layout_height = "1dp"
-                        android:background = "#D3D5DD" />
 
                     <TextView
                         android:layout_width = "wrap_content"
@@ -566,9 +589,158 @@ android:id="@+id/prodetails_togglelayout"
                         android:layout_marginTop = "25dp"
                         android:autoSizeTextType = "uniform"
                         android:gravity = "center"
+                        android:textAlignment="center"
                         android:text = "desc"
                         android:textColor = "@color/colorAccent"
                         android:textSize = "10dp" />
+
+                    <View
+                        android:layout_width = "match_parent"
+                        android:layout_height = "1dp"
+                        android:layout_marginTop = "5dp"
+                        android:background = "#D3D5DD" />
+
+                    <LinearLayout
+                        android:id="@+id/delivery_inst_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                    <TextView
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_centerInParent = "true"
+                        android:layout_gravity = "center"
+                        android:layout_marginTop = "25dp"
+                        android:autoSizeTextType = "uniform"
+                        android:text = "Delivery instructions"
+                        android:textAllCaps = "true"
+                        android:textColor = "@color/colorAccent"
+                        android:textSize = "18dp"
+                        android:textStyle = "bold" />
+                    <TextView
+                        android:id = "@+id/prodetails_deliveryinst"
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_centerInParent = "true"
+                        android:layout_gravity = "center"
+                        android:layout_margin = "10dp"
+                        android:textAlignment="center"
+                        android:autoSizeTextType = "uniform"
+                        android:text = "Usually delivered in 7-8 days"
+                        android:textColor = "@color/colorAccent"
+                        android:textSize = "15dp" />
+                    <!--Usually delivered in 7-8 days-->
+                    <View
+                        android:layout_width = "match_parent"
+                        android:layout_height = "1dp"
+                        android:background = "#D3D5DD" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/special_inst_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                    <TextView
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_centerInParent = "true"
+                        android:layout_gravity = "center"
+                        android:layout_marginTop = "25dp"
+                        android:autoSizeTextType = "uniform"
+                        android:text = "Special Instructions"
+                        android:textAllCaps = "true"
+                        android:textColor = "@color/colorAccent"
+                        android:textSize = "18dp"
+                        android:textStyle = "bold" />
+                    <TextView
+                        android:id="@+id/prodetails_specialinst"
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_centerInParent = "true"
+                        android:layout_gravity = "center"
+                        android:layout_margin = "10dp"
+                        android:textAlignment="center"
+                        android:autoSizeTextType = "uniform"
+                        android:text = "Extra cost for delivery within 3 days"
+                        android:textColor = "@color/colorAccent"
+                        android:textSize = "15dp" />
+                    <!--Extra cost for delivery within 3 days-->
+                    <View
+                        android:layout_width = "match_parent"
+                        android:layout_height = "1dp"
+                        android:background = "#D3D5DD" />
+
+                    </LinearLayout>
+                  <!--  <View
+                        android:layout_width = "match_parent"
+                        android:layout_height = "1dp"
+                        android:background = "#D3D5DD" />-->
+                    <LinearLayout
+                        android:id="@+id/material_inst_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                    <TextView
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_centerInParent = "true"
+                        android:layout_gravity = "center"
+                        android:layout_marginTop = "25dp"
+                        android:autoSizeTextType = "uniform"
+                        android:text = "Material"
+                        android:textAllCaps = "true"
+                        android:textColor = "@color/colorAccent"
+                        android:textSize = "18dp"
+                        android:textStyle = "bold" />
+                    <TextView
+                        android:id="@+id/prodetails_materialinst"
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_centerInParent = "true"
+                        android:layout_gravity = "center"
+                        android:layout_margin = "10dp"
+                        android:autoSizeTextType = "uniform"
+                        android:textAlignment="center"
+                        android:text = "Extra cost for delivery within 3 days"
+                        android:textColor = "@color/colorAccent"
+                        android:textSize = "15dp" />
+
+                    <View
+                        android:layout_width = "match_parent"
+                        android:layout_height = "1dp"
+                        android:background = "#D3D5DD" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/washing_inst_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                    <TextView
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_centerInParent = "true"
+                        android:layout_gravity = "center"
+                        android:layout_marginTop = "25dp"
+                        android:autoSizeTextType = "uniform"
+                        android:text = "Washing Instructions"
+                        android:textAllCaps = "true"
+                        android:textColor = "@color/colorAccent"
+                        android:textSize = "18dp"
+                        android:textStyle = "bold" />
+                    <TextView
+                        android:id="@+id/prodetails_washinginst"
+                        android:layout_width = "wrap_content"
+                        android:layout_height = "wrap_content"
+                        android:layout_centerInParent = "true"
+                        android:layout_gravity = "center"
+                        android:layout_margin = "10dp"
+                        android:textAlignment="center"
+                        android:autoSizeTextType = "uniform"
+                        android:text = "Extra cost for delivery within 3 days"
+                        android:textColor = "@color/colorAccent"
+                        android:textSize = "15dp" />
+
+                    </LinearLayout>
                     <!--Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer too-->
                     <Button
                         android:id = "@+id/prodetails_addtobag"
@@ -621,12 +793,22 @@ android:id="@+id/prodetails_togglelayout"
                         android:textStyle = "bold" />
                 </RelativeLayout>
 
-
+<!--
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/prodetails_similar_recycler"
                     android:layout_width = "match_parent"
                     android:layout_margin = "15dp"
-                    android:layout_height = "match_parent"/>
+                    android:visibility="gone"
+                    android:layout_height = "match_parent"/>-->
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/prodetails_similar_recycler"
+                    android:layout_width="match_parent"
+                    android:visibility="visible"
+                    android:layout_gravity="center"
+                    android:layout_height="match_parent"
+                    android:layout_margin="15dp" />
 
                 <LinearLayout
                     android:visibility="gone"
@@ -656,7 +838,7 @@ android:id="@+id/prodetails_togglelayout"
                                 <ImageView
                                     android:layout_width = "match_parent"
                                     android:layout_height = "170dp"
-                                    android:scaleType = "centerCrop"
+                                    android:scaleType = "fitCenter"
                                     android:src = "@drawable/product_thumb" />
 
                                 <RelativeLayout
@@ -740,7 +922,7 @@ android:id="@+id/prodetails_togglelayout"
                                 <ImageView
                                     android:layout_width = "match_parent"
                                     android:layout_height = "170dp"
-                                    android:scaleType = "centerCrop"
+                                    android:scaleType = "fitCenter"
                                     android:src = "@drawable/wardrobe_listing" />
 
                                 <RelativeLayout

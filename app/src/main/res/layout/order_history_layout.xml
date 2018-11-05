@@ -68,6 +68,7 @@
                     android:layout_alignParentRight = "true"
                     android:layout_centerInParent = "true"
                     android:layout_gravity = "start"
+                    android:visibility="gone"
                     android:layout_marginRight = "10dp"
                     android:text = "Processing"
                     android:textColor = "@color/colorgreen"
@@ -110,7 +111,7 @@ android:id="@+id/order_updatedat"
                     android:layout_gravity = "center_vertical"
                     android:gravity="center_vertical"
                     android:layout_centerInParent="true"
-                    android:text = "15 February 2018 10:15 am"
+                    android:text = ""
                     android:textColor = "#000000"
                     android:textSize = "12dp" />
 

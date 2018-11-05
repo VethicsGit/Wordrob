@@ -1,5 +1,6 @@
 package com.pro.wardrobe.Activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,6 +10,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.telecom.Call;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pro.wardrobe.Adapter.OfferZone_adapter;
@@ -32,6 +35,7 @@ public class OfferZone extends AppCompatActivity {
     OfferZone_adapter offerZone_adapter;
     TextView title;
 
+    ImageView bottomnav_toolbar_back;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,7 +45,14 @@ public class OfferZone extends AppCompatActivity {
 
         offer=findViewById(R.id.offer);
         title=findViewById(R.id.title);
+        bottomnav_toolbar_back=findViewById(R.id.bottomnav_toolbar_back);
 
+        bottomnav_toolbar_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
 
         title.setText("OFFERS ");
@@ -53,13 +64,19 @@ public class OfferZone extends AppCompatActivity {
 
 
         final SharedPreferences preferences = getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
-
+        final ProgressDialog mProgressDialog = new ProgressDialog(this, R.style.AppCompatAlertDialogStyle);
+        mProgressDialog.setIndeterminate(false);
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setMessage("Please wait...");
+        mProgressDialog.show();
         APIInterface apiInterface= APIClient.getClient().create(APIInterface.class);
         retrofit2.Call<OfferZoneResponse>call=apiInterface.offerZone_list(preferences.getString("user_id",""),preferences.getString("token",""));
         call.enqueue(new Callback<OfferZoneResponse>() {
             @Override
             public void onResponse(retrofit2.Call<OfferZoneResponse> call, Response<OfferZoneResponse> response) {
 
+                mProgressDialog.dismiss();
                 Log.e("response","offer_zone"+response.body().toString());
                 OfferZoneResponse offerZoneResponse=response.body();
                 List<com.pro.wardrobe.ApiResponse.OfferZoneResponse.Response>responses=offerZoneResponse.getResponse();

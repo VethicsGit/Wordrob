@@ -83,6 +83,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.ContactUs"
+            android:theme="@style/Theme.AppCompat"
             android:screenOrientation="portrait" />
         <activity android:name=".Activity.New" />
         <activity

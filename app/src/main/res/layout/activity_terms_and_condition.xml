@@ -86,12 +86,14 @@ android:layout_gravity="center"
                    <TextView android:autoSizeTextType="uniform"
                         android:layout_width = "wrap_content"
                         android:layout_height = "wrap_content"
-                        android:text="Last revised - February 13,2018"
+
                         android:textSize="13dp"
+                       android:id="@+id/terms_and_condition_lastreviseddate"
                         android:layout_gravity="center"
 
                         android:textColor="@color/colorPrimary"
                         />
+                    <!--android:text="Last revised - February 13,2018"-->
                 </LinearLayout>
 
             </RelativeLayout>

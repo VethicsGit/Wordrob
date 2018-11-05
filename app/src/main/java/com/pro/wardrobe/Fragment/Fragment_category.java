@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -39,6 +40,8 @@ public class Fragment_category  extends Fragment {
     RecyclerView category_recycler;
 //    String categories[]=new String[]{"Whats new", "Designers"," Clothing","Abayas"};
 
+    TextView cateemptytext;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -46,6 +49,7 @@ public class Fragment_category  extends Fragment {
         ((Dashboard)getActivity()).toggle(0);
         ((Dashboard)getActivity()).setFrament(0);
         category_recycler=view.findViewById(R.id.category_recycler);
+        cateemptytext=view.findViewById(R.id.cateemptytext);
         final LinearLayoutManager manager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         category_recycler.setLayoutManager(manager);
 
@@ -83,6 +87,8 @@ Log.e("category_response",res);
                     category_recycler.setAdapter(category_adapter);
 
                 } else {
+                    cateemptytext.setVisibility(View.VISIBLE);
+                    category_recycler.setVisibility(View.GONE);
                     mProgressDialog.dismiss();
                     Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
                 }

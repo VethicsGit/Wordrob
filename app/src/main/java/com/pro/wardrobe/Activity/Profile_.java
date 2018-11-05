@@ -23,6 +23,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -90,6 +91,8 @@ public class Profile_ extends AppCompatActivity {
     int country_selected_position=-1;
     TextView title;
 
+    ImageView back;
+
     Context c;
 
     private static File getOutputMediaFile(int type) {
@@ -133,6 +136,7 @@ public class Profile_ extends AppCompatActivity {
         profile_phone = findViewById(R.id.profile_phone);
         profile_email = findViewById(R.id.profile_email);
         profile_country = findViewById(R.id.profile_country);
+        back= findViewById(R.id.bottomnav_toolbar_back);
         profile_country_id = findViewById(R.id.profile_country_id);
         profile_region = findViewById(R.id.profile_region);
         profile_btn_save = findViewById(R.id.profile_btn_save);
@@ -144,6 +148,15 @@ public class Profile_ extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 selectImage();
+            }
+        });
+
+
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
 
@@ -238,6 +251,7 @@ public class Profile_ extends AppCompatActivity {
                     profile_email.setText(profile.getEmail());
                     profile_region.setText(profile.getRegion());
                     profile_country.setText(profile.getCountryName());
+                    profile_country_id.setText(profile.getCountriesId());
                     Glide.with(getApplicationContext()).load(profile.getProfilePicThumb()).apply(requestOptions).into(profile_image);
 
                 } else {
@@ -263,11 +277,11 @@ public class Profile_ extends AppCompatActivity {
                 else if (profile_phone.getText().toString().equals("")){profile_phone.setError("Please fill something");}
                 else if (profile_country.getText().toString().equals("")){profile_country.setError("Please fill something");}
                 else if (profile_country_id.getText().toString().equals("")){profile_country.setError("Please fill something");}
-                else if (profile_region.getText().toString().equals("")){profile_region.setError("Please fill something");}
+//                else if (profile_region.getText().toString().equals("")){profile_region.setError("Please fill something");}
                 else if (!Patterns.PHONE.matcher(profile_phone.getText().toString()).matches()){profile_phone.setError("Enter valid phone number");}
                 else {
 
-                    final ProgressDialog mProgressDialog = new ProgressDialog(getApplicationContext(), R.style.AppCompatAlertDialogStyle);
+                    final ProgressDialog mProgressDialog = new ProgressDialog(Profile_.this, R.style.AppCompatAlertDialogStyle);
                     mProgressDialog.setIndeterminate(false);
                     mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                     mProgressDialog.setCancelable(false);
@@ -291,6 +305,9 @@ public class Profile_ extends AppCompatActivity {
                                 profile_email.setText(profile.getEmail());
                                 profile_region.setText(profile.getRegion());
                                 profile_country.setText(profile.getCountryName());
+
+
+
 
                             } else {
                                 mProgressDialog.dismiss();

@@ -85,7 +85,7 @@
                     android:layout_width = "35dp"
                     android:layout_height = "35dp"
                     android:padding = "10dp"
-                    android:src = "@mipmap/username" />
+                    android:src = "@mipmap/mail" />
 
 
                 <EditText
@@ -93,7 +93,7 @@
                     android:layout_width = "match_parent"
                     android:layout_height = "40dp"
                     android:backgroundTint = "@color/colorTransparent"
-                    android:hint = "User Name"
+                    android:hint = "Email"
                     android:inputType = "textEmailAddress"
                     android:singleLine = "true"
                     android:textSize = "@dimen/Login_text_size" />

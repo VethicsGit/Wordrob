@@ -298,7 +298,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             public void onCompleted(final JSONObject object, GraphResponse response) {
                 try {
                     Log.e("fb_name", object.getString("name"));
-                    Toast.makeText(Login.this, "Facebook Login Name: " + object.getString("name"), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(Login.this, "Facebook Login Name: " + object.getString("name"), Toast.LENGTH_SHORT).show();
                     //You can fetch user info like this…
                     //object.getJSONObject(“picture”).
 //                            getJSONObject("data").getString("url");
@@ -366,7 +366,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             Log.e("Profile_Name :", acct.getDisplayName() + "\nEmail : " + acct.getEmail() + "\nFamily Name :" + acct.getFamilyName() + "\n Given Name :" + acct.getGivenName() + "\n ID :" + acct.getId());
 
             socialSignIn("gmail",acct.getId(),acct.getDisplayName(),acct.getEmail());
-            Toast.makeText(Login.this, "Google plus Login Name: " + acct.getDisplayName(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(Login.this, "Google plus Login Name: " + acct.getDisplayName(), Toast.LENGTH_SHORT).show();
             //Similarly you can get the email and photourl using acct.getEmail() and  acct.getPhotoUrl()
 
             /*  Picasso.with(SignInActivity.this)
@@ -377,7 +377,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
             updateUI(true);*/
         } else {
-            Toast.makeText(this, "SUCESS IS FALSE", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Login Unsucessful", Toast.LENGTH_SHORT).show();
             // Signed out, show unauthenticated UI.
 //            updateUI(false);
         }

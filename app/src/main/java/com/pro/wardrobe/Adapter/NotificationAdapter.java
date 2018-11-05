@@ -29,6 +29,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     Context context;
     List<ActivityList> list;
 
+
+    String[] months=new String[]{"January","February","March","April","May","June","July","August","September","October","November","December"};
     public NotificationAdapter( Context context,List<ActivityList> list) {
         this.context = context;
         this.list=list;
@@ -63,6 +65,16 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
 
         Date date = null;
+        try {
+            date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(activityList.getCreatedAt());
+            viewHolder.notification_time.setText(months[date.getMonth()]+ " "+date.getDay()+ ","+(date.getYear()+1900));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+
+      /*  Date date = null;
         Date currdate = null;
         try {
             date = df.parse(activityList.getCreatedAt());
@@ -87,7 +99,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
+*/
 
 
 

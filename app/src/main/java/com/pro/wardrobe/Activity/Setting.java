@@ -5,12 +5,14 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,15 +43,19 @@ public class Setting extends AppCompatActivity {
 
     TextView title;
 
+    ImageView dashboard_toolbar_back;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_settings);
 
-
-//        title.setText("Settings");
+title=findViewById(R.id.title);
+        title.setText("Settings");
+        Typeface facebold = Typeface.createFromAsset(getAssets(),"Roboto_Regular.ttf");
+        title.setTypeface(facebold);
         setting_profile=findViewById(R.id.setting_profile);
+        dashboard_toolbar_back=findViewById(R.id.dashboard_toolbar_back);
         setting_change_pwd=findViewById(R.id.setting_change_pwd);
         setting_help=findViewById(R.id.setting_help);
         setting_terms=findViewById(R.id.setting_terms);
@@ -57,6 +63,13 @@ public class Setting extends AppCompatActivity {
         setting_switch_push=findViewById(R.id.setting_switch_push);
         setting_switch_backinstock=findViewById(R.id.setting_switch_backinstock);
         setting_switch_promotions=findViewById(R.id.setting_switch_promotions);
+
+        dashboard_toolbar_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         setting_profile.setOnClickListener(new View.OnClickListener() {
             @Override

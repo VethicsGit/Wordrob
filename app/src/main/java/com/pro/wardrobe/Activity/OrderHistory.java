@@ -1,6 +1,7 @@
 package com.pro.wardrobe.Activity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
@@ -41,7 +42,6 @@ public class OrderHistory extends Activity {
     RecyclerView order_history;
 
 
-
     SharedPreferences preferences;
     APIInterface apiInterface;
 
@@ -53,17 +53,27 @@ public class OrderHistory extends Activity {
 
     OrderHistoryAdapter orderHistoryAdapter;
 
+    ImageView back;
 
 
     @Override
-    public void onCreate( Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_history);
 
 
         c = this;
-        order_history=findViewById(R.id.order_history);
-        title=findViewById(R.id.title);
+        order_history = findViewById(R.id.order_history);
+        title = findViewById(R.id.title);
+        back = findViewById(R.id.bottomnav_toolbar_back);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
         preferences = getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
         apiInterface = APIClient.getClient().create(APIInterface.class);
         final LinearLayoutManager manager = new LinearLayoutManager(c, LinearLayoutManager.VERTICAL, false);
@@ -97,40 +107,42 @@ public class OrderHistory extends Activity {
         });
 
 
-
-
         title.setText("ORDER HISTORY");
     }
 
 
-    public void apiCall(){
+    public void apiCall() {
 
-        retrofit2.Call<ResponseOrderHistory> call=apiInterface.my_order_list(preferences.getString("user_id", ""), String.valueOf(offset), preferences.getString("token", ""));
-
+        retrofit2.Call<ResponseOrderHistory> call = apiInterface.my_order_list(preferences.getString("user_id", ""), String.valueOf(offset), preferences.getString("token", ""));
+        final ProgressDialog mProgressDialog = new ProgressDialog(this, R.style.AppCompatAlertDialogStyle);
+        mProgressDialog.setIndeterminate(false);
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setMessage("Please wait...");
+        mProgressDialog.show();
         call.enqueue(
                 new Callback<ResponseOrderHistory>() {
                     @Override
                     public void onResponse(retrofit2.Call<ResponseOrderHistory> call, Response<ResponseOrderHistory> response) {
-                        ResponseOrderHistory responseOrderHistory=response.body();
-                        List<com.pro.wardrobe.ApiResponse.OrderHistoryResponse.Response> reslist=responseOrderHistory.getResponse();
+                        ResponseOrderHistory responseOrderHistory = response.body();
+                        List<com.pro.wardrobe.ApiResponse.OrderHistoryResponse.Response> reslist = responseOrderHistory.getResponse();
+                        mProgressDialog.dismiss();
+                        com.pro.wardrobe.ApiResponse.OrderHistoryResponse.Response resorder = reslist.get(0);
 
-                        com.pro.wardrobe.ApiResponse.OrderHistoryResponse.Response resorder=reslist.get(0);
+                        if (resorder.getStatus().equals("true")) {
+                            List<MyOrderList> myOrderList = resorder.getMyOrderList();
 
-                        if (resorder.getStatus().equals("true")){
-                            List<MyOrderList> myOrderList=resorder.getMyOrderList();
-
-                            if (offset==0){
-                                orderHistoryAdapter=new OrderHistoryAdapter(getApplicationContext(),myOrderList);
+                            if (offset == 0) {
+                                orderHistoryAdapter = new OrderHistoryAdapter(getApplicationContext(), myOrderList);
                                 order_history.setAdapter(orderHistoryAdapter);
-                            }
-                            else {
-                                for (int i=0;i<resorder.getMyOrderList().size();i++)
-                                orderHistoryAdapter.add(resorder.getMyOrderList().get(i));
+                            } else {
+                                for (int i = 0; i < resorder.getMyOrderList().size(); i++)
+                                    orderHistoryAdapter.add(resorder.getMyOrderList().get(i));
                             }
 
-                            offset=resorder.getOffset();
+                            offset = resorder.getOffset();
 
-                        }else {
+                        } else {
                             Toast.makeText(OrderHistory.this, "Oops, no results found!", Toast.LENGTH_SHORT).show();
                         }
 
@@ -146,7 +158,7 @@ public class OrderHistory extends Activity {
 
     }
 
-    public abstract class PaginationScrollListener extends RecyclerView.OnScrollListener {
+    public static abstract class PaginationScrollListener extends RecyclerView.OnScrollListener {
 
         LinearLayoutManager layoutManager;
 

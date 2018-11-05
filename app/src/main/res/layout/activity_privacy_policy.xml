@@ -89,7 +89,7 @@
                         android:text="Last revised - February 13,2018"
                         android:textSize="13dp"
                         android:layout_gravity="center"
-
+android:id="@+id/privacy_policy_lastreviseddate"
                         android:textColor="@color/colorPrimary"
                         />
                 </LinearLayout>

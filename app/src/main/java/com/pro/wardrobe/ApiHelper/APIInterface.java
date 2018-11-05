@@ -5,6 +5,7 @@ import com.pro.wardrobe.ApiResponse.AddToFavorite.AddToFavorite;
 import com.pro.wardrobe.ApiResponse.AddbannerResponse.Addbanner;
 import com.pro.wardrobe.ApiResponse.CLientTokenResponse.ResponseClientToken;
 import com.pro.wardrobe.ApiResponse.CartListResponse.ResponseCartList;
+import com.pro.wardrobe.ApiResponse.CateByAlphabeticResponse.ResponseCatebyalphabetic;
 import com.pro.wardrobe.ApiResponse.CateListResponse.CatelistResponse;
 import com.pro.wardrobe.ApiResponse.ChangePassResponse.ChangePassResponse;
 import com.pro.wardrobe.ApiResponse.ColorListResponse.ResponseColorList;
@@ -14,6 +15,7 @@ import com.pro.wardrobe.ApiResponse.CoupanCodeValidResponse.ResponseCoupanCodeVa
 import com.pro.wardrobe.ApiResponse.CreateOrderResponse.ResponseCreateOrder;
 import com.pro.wardrobe.ApiResponse.DesignerCategoryResponse.Designercategory;
 import com.pro.wardrobe.ApiResponse.DesignerListResponse.Designerimages;
+import com.pro.wardrobe.ApiResponse.FAQResponse.ResponseFaq;
 import com.pro.wardrobe.ApiResponse.FavoriteProductListResponse.FavoritieProductListResponse;
 import com.pro.wardrobe.ApiResponse.ForgotPassResponse.ForgotPassResponse;
 import com.pro.wardrobe.ApiResponse.GiveRatingResponse.GiveRatingResponse;
@@ -433,6 +435,25 @@ public interface APIInterface {
     Call<ResponseOrderHistory> my_order_list(
             @Field("user_id") String user_id,
             @Field("offset") String offset,
+            @Header("Authorization")String token
+
+
+    );
+
+    @FormUrlEncoded
+    @POST("category_list_by_alphabetic")
+    Call<ResponseCatebyalphabetic> category_list_by_alphabetic(
+            @Field("user_id") String user_id,
+            @Header("Authorization")String token
+
+
+    );
+
+
+    @FormUrlEncoded
+    @POST("faq_list")
+    Call<ResponseFaq> faq_list(
+            @Field("user_id") String user_id,
             @Header("Authorization")String token
 
 

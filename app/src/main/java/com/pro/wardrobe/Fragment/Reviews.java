@@ -1,5 +1,6 @@
 package com.pro.wardrobe.Fragment;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -39,20 +40,23 @@ public class Reviews extends AppCompatActivity {
 
     TextView prodetails_title;
     TextView title;
-    ImageView prodetails_Mybag,prodetails_back;
+    ImageView prodetails_Mybag, prodetails_back;
 
     String product_id;
+    TextView reviewaemptytext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reviews);
 
 
-        prodetails_title=findViewById(R.id.prodetails_title);
-        prodetails_back=findViewById(R.id.prodetails_back);
-        prodetails_Mybag=findViewById(R.id.prodetails_Mybag);
+        prodetails_title = findViewById(R.id.prodetails_title);
+        prodetails_back = findViewById(R.id.prodetails_back);
+        prodetails_Mybag = findViewById(R.id.prodetails_Mybag);
+        reviewaemptytext = findViewById(R.id.reviewaemptytext);
 
-        prodetails_title.setTextSize(TypedValue.COMPLEX_UNIT_SP,15);
+        prodetails_title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
 
         prodetails_Mybag.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,15 +64,16 @@ public class Reviews extends AppCompatActivity {
                 Intent intentbag = new Intent(getApplicationContext(), Activty_MyBag.class);
                 startActivity(intentbag);
             }
-        }); prodetails_back.setOnClickListener(new View.OnClickListener() {
+        });
+        prodetails_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();
             }
         });
 
-        reviews_horizontal_view=findViewById(R.id.reviews_horizontal_view);
-        reviews_list=findViewById(R.id.reviews_list);
+        reviews_horizontal_view = findViewById(R.id.reviews_horizontal_view);
+        reviews_list = findViewById(R.id.reviews_list);
 
 
         cates.add("New to Old");
@@ -78,50 +83,60 @@ public class Reviews extends AppCompatActivity {
         cates.add("Most Helpful");
 
 
-
-        ReviewhorizontalScrollAdapter adapter1=new ReviewhorizontalScrollAdapter(cates,getApplicationContext());
+        ReviewhorizontalScrollAdapter adapter1 = new ReviewhorizontalScrollAdapter(cates, getApplicationContext());
         reviews_horizontal_view.setAdapter(adapter1);
 //        Reviews_Adapter reviews_adapter=new Reviews_Adapter(getApplicationContext());
 //        reviews_list.setAdapter(reviews_adapter);
-        LinearLayoutManager manager1=new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false);
+        LinearLayoutManager manager1 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         reviews_horizontal_view.setLayoutManager(manager1);
 
-        LinearLayoutManager manager2=new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);
+        LinearLayoutManager manager2 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         reviews_list.setLayoutManager(manager2);
 
-        Intent intent1=getIntent();
-        product_id= intent1.getStringExtra("product_id");
+        Intent intent1 = getIntent();
+        product_id = intent1.getStringExtra("product_id");
 
-
+        final ProgressDialog mProgressDialog = new ProgressDialog(this, R.style.AppCompatAlertDialogStyle);
+        mProgressDialog.setIndeterminate(false);
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setMessage("Please wait...");
+        mProgressDialog.show();
         final SharedPreferences preferences = getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
-        final  APIInterface apiInterface= APIClient.getClient().create(APIInterface.class);
-        Call<ProductListRatingResponse>call=apiInterface.product_ratinglist(preferences.getString("user_id",""),product_id,"new_to_old","0",preferences.getString("token", ""));
-            Log.e("moo",""+preferences.getString("token",""));
+        final APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
+        Call<ProductListRatingResponse> call = apiInterface.product_ratinglist(preferences.getString("user_id", ""), product_id, "new_to_old", "0", preferences.getString("token", ""));
+        Log.e("moo", "" + preferences.getString("token", ""));
         call.enqueue(new Callback<ProductListRatingResponse>() {
 
 
             @Override
             public void onResponse(Call<ProductListRatingResponse> call, Response<ProductListRatingResponse> response) {
+                mProgressDialog.dismiss();
+                Log.e("pass", "" + response);
+                ProductListRatingResponse productRatingList = response.body();
+                List<com.pro.wardrobe.ApiResponse.ProductRatingListResponse.Response> responses = productRatingList.getResponse();
 
-                Log.e("pass",""+response);
-                ProductListRatingResponse productRatingList=response.body();
-                List<com.pro.wardrobe.ApiResponse.ProductRatingListResponse.Response>responses=productRatingList.getResponse();
+                for (int i = 0; i < responses.size(); i++) {
 
-                for (int i=0;i<responses.size();i++){
+                    com.pro.wardrobe.ApiResponse.ProductRatingListResponse.Response response1 = responses.get(i);
+                    Log.e("review", "massge" + response1.getStatus());
+                    if (response1.getStatus().equals("true")) {
 
-                    com.pro.wardrobe.ApiResponse.ProductRatingListResponse.Response response1=responses.get(i);
-                    Log.e("review","massge"+response1.getStatus());
-                    if (response1.getStatus().equals("true")){
-                        List<ProductRatingList>productRatingLists=response1.getProductRatingList();
+                        reviewaemptytext.setVisibility(View.GONE);
+                        reviews_list.setVisibility(View.VISIBLE);
 
-                        Reviews_Adapter reviews_adapter1=new Reviews_Adapter(productRatingLists,getApplicationContext(),reviews_list);
+
+                        List<ProductRatingList> productRatingLists = response1.getProductRatingList();
+
+                        Reviews_Adapter reviews_adapter1 = new Reviews_Adapter(productRatingLists, getApplicationContext(), reviews_list);
                         reviews_list.setAdapter(reviews_adapter1);
 
 
+                    } else {
 
-
+                        reviewaemptytext.setVisibility(View.VISIBLE);
+                        reviews_list.setVisibility(View.GONE);
                     }
-
 
 
                 }
@@ -136,23 +151,13 @@ public class Reviews extends AppCompatActivity {
         });
 
 
-
-
-
-
-
-
-
-
-
-
     }
 
-    RecyclerView reviews_horizontal_view,reviews_list;
+    RecyclerView reviews_horizontal_view, reviews_list;
 
 //    String[] cates=new String[]{"Most Helpful","Positive","Negative","Most Recent"};
 
-    List<String> cates=new ArrayList<>();
+    List<String> cates = new ArrayList<>();
 
 
 
@@ -177,9 +182,6 @@ public class Reviews extends AppCompatActivity {
 
         return view;
     }*/
-
-
-
 
 
 }

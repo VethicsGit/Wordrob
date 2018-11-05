@@ -32,7 +32,7 @@ public class ReviewhorizontalScrollAdapter extends RecyclerView.Adapter<Reviewho
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.home_category_layout,null));
+        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.home_category_layout,viewGroup,false));
     }
 
     @Override
@@ -48,9 +48,9 @@ public class ReviewhorizontalScrollAdapter extends RecyclerView.Adapter<Reviewho
             public void onClick(View view) {
 
                 row_index=i;
-                notifyDataSetChanged();
                 viewHolder.home_cate_txt.setTextColor(Color.parseColor("#ffffff"));
                 viewHolder.home_cate_layout.setBackgroundResource(R.drawable.accent_selected_background);
+                notifyDataSetChanged();
 
             }
         });
@@ -86,11 +86,5 @@ public class ReviewhorizontalScrollAdapter extends RecyclerView.Adapter<Reviewho
             home_search=itemView.findViewById(R.id.home_search);
             home_cate_layout=itemView.findViewById(R.id.home_cate_layout);
         }
-    }
-
-
-    public void fetch(){
-
-        
     }
 }

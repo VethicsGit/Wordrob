@@ -44,7 +44,7 @@ public class horizontalScrollAdapter extends RecyclerView.Adapter<horizontalScro
     List<ProductTypeList> productTypeLists;
 
     private AdapterView.OnItemClickListener listener;
-    private int row_index;
+    private int row_index=-1;
 
 
 /*

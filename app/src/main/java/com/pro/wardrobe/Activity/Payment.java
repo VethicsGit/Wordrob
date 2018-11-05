@@ -204,7 +204,7 @@ shippingary.toString(),
                         if (res.getStatus().equals("true")){
 */
 
-                Toast.makeText(c, "payment option "+payment_option.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(c, "payment option "+payment_option.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), Confirm.class);
                 intent.putExtra("subtotal", payment_subtotal.getText().toString());
                 intent.putExtra("total", payment_total.getText().toString());
@@ -247,7 +247,7 @@ shippingary.toString(),
                     ResponseCartList res = response.body();
                     List<com.pro.wardrobe.ApiResponse.CartListResponse.Response> resList = res.getResponse();
                     com.pro.wardrobe.ApiResponse.CartListResponse.Response response1 = resList.get(0);
-                    Toast.makeText(Payment.this, "cart list size ", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(Payment.this, "cart list size ", Toast.LENGTH_SHORT).show();
                     if (response1.getStatus().equals("true")) {
                         List<CartList> cartList = response1.getCartList();
 
@@ -262,7 +262,7 @@ shippingary.toString(),
 
             @Override
             public void onFailure(@NonNull Call<ResponseCartList> call, @NonNull Throwable t) throws NumberFormatException {
-                Toast.makeText(Payment.this, "error ", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(Payment.this, "error ", Toast.LENGTH_SHORT).show();
                 Log.e("BagError", t.getMessage());
             }
         });

@@ -1,537 +1,535 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android = "http://schemas.android.com/apk/res/android"
-    xmlns:app = "http://schemas.android.com/apk/res-auto"
-    android:layout_width = "match_parent"
-    android:layout_height = "match_parent"
-    android:fillViewport = "true">
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
     <LinearLayout
-        android:layout_width = "match_parent"
-        android:layout_height = "wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
 
-        android:orientation = "vertical">
+        android:orientation="vertical">
 
         <LinearLayout
             android:visibility="gone"
-            android:layout_width = "match_parent"
-            android:layout_height = "30dp"
-            android:orientation = "horizontal"
-            >
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
 
             <TextView
-                android:layout_width = "match_parent"
-                android:layout_height = "match_parent"
-                android:layout_weight = "1"
-                android:gravity = "center"
-                android:text = "SORT BY"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="SORT BY"
                 android:background="@drawable/square_gray_outline"
-                android:textAllCaps = "true"
-                android:textColor = "@color/colorgraytxt"
-                android:textSize = "12dp" />
+                android:textAllCaps="true"
+                android:textColor="@color/colorgraytxt"
+                android:textSize="12dp" />
 
             <TextView
                 android:background="@drawable/square_gray_outline"
-                android:id = "@+id/designer_filter"
-                android:layout_width = "match_parent"
-                android:layout_height = "match_parent"
-                android:layout_weight = "1"
-                android:gravity = "center"
-                android:text = "Filter"
-                android:textAllCaps = "true"
-                android:textColor = "@color/colorgraytxt"
-                android:textSize = "12dp" />
+                android:id="@+id/designer_filter"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Filter"
+                android:textAllCaps="true"
+                android:textColor="@color/colorgraytxt"
+                android:textSize="12dp" />
 
             <LinearLayout
-                android:layout_width = "match_parent"
-                android:layout_height = "wrap_content"
-                android:layout_weight = "1"
-                android:gravity = "center">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
 
                 <ImageView
                     android:background="@drawable/square_gray_outline"
                     android:id="@+id/designers_grid_filter"
-                    android:layout_width = "match_parent"
-                    android:layout_height = "match_parent"
-                    android:layout_weight = "1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:padding="8dp"
-                    android:src = "@mipmap/menu_toggle" />
+                    android:src="@mipmap/menu_toggle" />
 
                 <ImageView
                     android:background="@drawable/square_gray_outline"
                     android:padding="8dp"
                     android:id="@+id/designers_list_filter"
-                    android:layout_width = "match_parent"
-                    android:layout_height = "match_parent"
-                    android:layout_weight = "1"
-                    android:src = "@mipmap/list" />
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@mipmap/list" />
 
 
             </LinearLayout>
 
         </LinearLayout>
 
-       <!-- <LinearLayout
-            android:layout_width = "match_parent"
-            android:layout_height = "match_parent"
-            android:orientation = "vertical">
+        <!-- <LinearLayout
+             android:layout_width = "match_parent"
+             android:layout_height = "match_parent"
+             android:orientation = "vertical">
 
-            <LinearLayout
+             <LinearLayout
 
-                android:layout_width = "match_parent"
-                android:layout_height = "wrap_content">
-
-                <LinearLayout
-                    android:layout_width = "match_parent"
-                    android:layout_height = "wrap_content"
-                    android:layout_weight = "1"
-                    android:orientation = "vertical">
-
-                    <android.support.v7.widget.CardView
-                        android:layout_width = "match_parent"
-                        android:layout_height = "wrap_content"
-                        android:layout_margin = "5dp"
-                        app:cardCornerRadius = "10dp"
-                        app:elevation = "5dp">
-
-                        <FrameLayout
-                            android:layout_width = "match_parent"
-                            android:layout_height = "match_parent">
-
-                            <ImageView
-                                android:layout_width = "match_parent"
-                                android:layout_height = "170dp"
-android:padding="30dp"
-                                android:src = "@drawable/gucci" />
-
-                            <RelativeLayout
-                                android:layout_width = "match_parent"
-                                android:layout_height = "match_parent">
+                 android:layout_width = "match_parent"
+                 android:layout_height = "wrap_content">
+
+                 <LinearLayout
+                     android:layout_width = "match_parent"
+                     android:layout_height = "wrap_content"
+                     android:layout_weight = "1"
+                     android:orientation = "vertical">
+
+                     <android.support.v7.widget.CardView
+                         android:layout_width = "match_parent"
+                         android:layout_height = "wrap_content"
+                         android:layout_margin = "5dp"
+                         app:cardCornerRadius = "10dp"
+                         app:elevation = "5dp">
+
+                         <FrameLayout
+                             android:layout_width = "match_parent"
+                             android:layout_height = "match_parent">
+
+                             <ImageView
+                                 android:layout_width = "match_parent"
+                                 android:layout_height = "170dp"
+ android:padding="30dp"
+                                 android:src = "@drawable/gucci" />
+
+                             <RelativeLayout
+                                 android:layout_width = "match_parent"
+                                 android:layout_height = "match_parent">
 
-                                <ImageView
-                                    android:layout_width = "20dp"
-                                    android:layout_height = "20dp"
-                                    android:layout_margin = "10dp"
-                                    android:src = "@mipmap/favourite" />
+                                 <ImageView
+                                     android:layout_width = "20dp"
+                                     android:layout_height = "20dp"
+                                     android:layout_margin = "10dp"
+                                     android:src = "@mipmap/favourite" />
 
-                            </RelativeLayout>
+                             </RelativeLayout>
 
-                        </FrameLayout>
+                         </FrameLayout>
 
-                    </android.support.v7.widget.CardView>
+                     </android.support.v7.widget.CardView>
 
 
-                </LinearLayout>
+                 </LinearLayout>
 
 
-                <LinearLayout
-                    android:layout_width = "match_parent"
-                    android:layout_height = "wrap_content"
-                    android:layout_weight = "1"
-                    android:orientation = "vertical">
-
-                    <android.support.v7.widget.CardView
-                        android:layout_width = "match_parent"
-                        android:layout_height = "wrap_content"
-                        android:layout_margin = "5dp"
-                        android:layout_weight = "1"
-                        app:cardCornerRadius = "10dp"
-                        app:elevation = "5dp">
+                 <LinearLayout
+                     android:layout_width = "match_parent"
+                     android:layout_height = "wrap_content"
+                     android:layout_weight = "1"
+                     android:orientation = "vertical">
+
+                     <android.support.v7.widget.CardView
+                         android:layout_width = "match_parent"
+                         android:layout_height = "wrap_content"
+                         android:layout_margin = "5dp"
+                         android:layout_weight = "1"
+                         app:cardCornerRadius = "10dp"
+                         app:elevation = "5dp">
 
-                        <FrameLayout
-                            android:layout_width = "match_parent"
-                            android:layout_height = "match_parent">
+                         <FrameLayout
+                             android:layout_width = "match_parent"
+                             android:layout_height = "match_parent">
 
-                            <ImageView
-                                android:layout_width = "match_parent"
-                                android:layout_height = "170dp"
-                                android:src = "@drawable/prada" />
-
-                            <RelativeLayout
-                                android:layout_width = "match_parent"
-                                android:layout_height = "match_parent">
+                             <ImageView
+                                 android:layout_width = "match_parent"
+                                 android:layout_height = "170dp"
+                                 android:src = "@drawable/prada" />
+
+                             <RelativeLayout
+                                 android:layout_width = "match_parent"
+                                 android:layout_height = "match_parent">
 
-                                <ImageView
-                                    android:layout_width = "20dp"
-                                    android:layout_height = "20dp"
-                                    android:layout_margin = "10dp"
-                                    android:src = "@mipmap/favourite" />
-                            </RelativeLayout>
+                                 <ImageView
+                                     android:layout_width = "20dp"
+                                     android:layout_height = "20dp"
+                                     android:layout_margin = "10dp"
+                                     android:src = "@mipmap/favourite" />
+                             </RelativeLayout>
 
-                        </FrameLayout>
+                         </FrameLayout>
 
-                    </android.support.v7.widget.CardView>
+                     </android.support.v7.widget.CardView>
 
-                </LinearLayout>
-            </LinearLayout>
+                 </LinearLayout>
+             </LinearLayout>
 
-            <LinearLayout
+             <LinearLayout
 
-                android:layout_width = "match_parent"
-                android:layout_height = "wrap_content">
+                 android:layout_width = "match_parent"
+                 android:layout_height = "wrap_content">
 
-                <LinearLayout
-                    android:layout_width = "match_parent"
-                    android:layout_height = "wrap_content"
-                    android:layout_weight = "1"
-                    android:orientation = "vertical">
-
-                    <android.support.v7.widget.CardView
-                        android:layout_width = "match_parent"
-                        android:layout_height = "wrap_content"
-                        android:layout_margin = "5dp"
-                        app:cardCornerRadius = "10dp"
-                        app:elevation = "5dp">
-
-                        <FrameLayout
-                            android:layout_width = "match_parent"
-                            android:layout_height = "match_parent">
-
-                            <ImageView
-                                android:layout_width = "match_parent"
-                                android:layout_height = "170dp"
-                                android:scaleType = "centerCrop"
-                                android:src = "@drawable/prada" />
-
-                            <RelativeLayout
-                                android:layout_width = "match_parent"
-                                android:layout_height = "match_parent">
-
-                                <ImageView
-                                    android:layout_width = "20dp"
-                                    android:layout_height = "20dp"
-                                    android:layout_margin = "10dp"
-                                    android:src = "@mipmap/favourite" />
-
-                            </RelativeLayout>
-
-                        </FrameLayout>
+                 <LinearLayout
+                     android:layout_width = "match_parent"
+                     android:layout_height = "wrap_content"
+                     android:layout_weight = "1"
+                     android:orientation = "vertical">
+
+                     <android.support.v7.widget.CardView
+                         android:layout_width = "match_parent"
+                         android:layout_height = "wrap_content"
+                         android:layout_margin = "5dp"
+                         app:cardCornerRadius = "10dp"
+                         app:elevation = "5dp">
+
+                         <FrameLayout
+                             android:layout_width = "match_parent"
+                             android:layout_height = "match_parent">
+
+                             <ImageView
+                                 android:layout_width = "match_parent"
+                                 android:layout_height = "170dp"
+                                 android:scaleType = "centerCrop"
+                                 android:src = "@drawable/prada" />
+
+                             <RelativeLayout
+                                 android:layout_width = "match_parent"
+                                 android:layout_height = "match_parent">
+
+                                 <ImageView
+                                     android:layout_width = "20dp"
+                                     android:layout_height = "20dp"
+                                     android:layout_margin = "10dp"
+                                     android:src = "@mipmap/favourite" />
+
+                             </RelativeLayout>
+
+                         </FrameLayout>
 
-                    </android.support.v7.widget.CardView>
+                     </android.support.v7.widget.CardView>
 
-                </LinearLayout>
+                 </LinearLayout>
 
 
-                <LinearLayout
-                    android:layout_width = "match_parent"
-                    android:layout_height = "wrap_content"
-                    android:layout_weight = "1"
-                    android:orientation = "vertical">
+                 <LinearLayout
+                     android:layout_width = "match_parent"
+                     android:layout_height = "wrap_content"
+                     android:layout_weight = "1"
+                     android:orientation = "vertical">
 
-                    <android.support.v7.widget.CardView
-                        android:layout_width = "match_parent"
-                        android:layout_height = "wrap_content"
-                        android:layout_margin = "5dp"
-                        android:layout_weight = "1"
-                        app:cardCornerRadius = "10dp"
-                        app:elevation = "5dp">
+                     <android.support.v7.widget.CardView
+                         android:layout_width = "match_parent"
+                         android:layout_height = "wrap_content"
+                         android:layout_margin = "5dp"
+                         android:layout_weight = "1"
+                         app:cardCornerRadius = "10dp"
+                         app:elevation = "5dp">
 
-                        <FrameLayout
-                            android:layout_width = "match_parent"
-                            android:layout_height = "match_parent">
+                         <FrameLayout
+                             android:layout_width = "match_parent"
+                             android:layout_height = "match_parent">
 
-                            <ImageView
-                                android:layout_width = "match_parent"
-                                android:layout_height = "170dp"
+                             <ImageView
+                                 android:layout_width = "match_parent"
+                                 android:layout_height = "170dp"
 
-                                android:src = "@drawable/zara" />
+                                 android:src = "@drawable/zara" />
 
-                            <RelativeLayout
-                                android:layout_width = "match_parent"
-                                android:layout_height = "match_parent">
+                             <RelativeLayout
+                                 android:layout_width = "match_parent"
+                                 android:layout_height = "match_parent">
 
-                                <ImageView
-                                    android:layout_width = "20dp"
-                                    android:layout_height = "20dp"
-                                    android:layout_margin = "10dp"
-                                    android:src = "@mipmap/favourite" />
-                            </RelativeLayout>
+                                 <ImageView
+                                     android:layout_width = "20dp"
+                                     android:layout_height = "20dp"
+                                     android:layout_margin = "10dp"
+                                     android:src = "@mipmap/favourite" />
+                             </RelativeLayout>
 
-                        </FrameLayout>
+                         </FrameLayout>
 
-                    </android.support.v7.widget.CardView>
-                </LinearLayout>
-            </LinearLayout>
+                     </android.support.v7.widget.CardView>
+                 </LinearLayout>
+             </LinearLayout>
 
-        </LinearLayout>
+         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width = "match_parent"
-            android:layout_height = "match_parent"
-            android:layout_marginBottom = "20dp"
-            android:orientation = "vertical">
+         <LinearLayout
+             android:layout_width = "match_parent"
+             android:layout_height = "match_parent"
+             android:layout_marginBottom = "20dp"
+             android:orientation = "vertical">
 
-            <LinearLayout
+             <LinearLayout
 
-                android:layout_width = "match_parent"
-                android:layout_height = "wrap_content">
+                 android:layout_width = "match_parent"
+                 android:layout_height = "wrap_content">
 
-                <LinearLayout
-                    android:layout_width = "match_parent"
-                    android:layout_height = "wrap_content"
-                    android:layout_weight = "1"
-                    android:orientation = "vertical">
+                 <LinearLayout
+                     android:layout_width = "match_parent"
+                     android:layout_height = "wrap_content"
+                     android:layout_weight = "1"
+                     android:orientation = "vertical">
 
-                    <android.support.v7.widget.CardView
-                        android:layout_width = "match_parent"
-                        android:layout_height = "wrap_content"
-                        android:layout_margin = "5dp"
-                        app:cardCornerRadius = "10dp"
-                        app:elevation = "5dp">
+                     <android.support.v7.widget.CardView
+                         android:layout_width = "match_parent"
+                         android:layout_height = "wrap_content"
+                         android:layout_margin = "5dp"
+                         app:cardCornerRadius = "10dp"
+                         app:elevation = "5dp">
 
-                        <FrameLayout
-                            android:layout_width = "match_parent"
-                            android:layout_height = "match_parent">
+                         <FrameLayout
+                             android:layout_width = "match_parent"
+                             android:layout_height = "match_parent">
 
-                            <ImageView
-                                android:layout_width = "match_parent"
-                                android:layout_height = "170dp"
-
-                                android:src = "@drawable/gucci" />
-
-                            <RelativeLayout
-                                android:layout_width = "match_parent"
-                                android:layout_height = "match_parent">
+                             <ImageView
+                                 android:layout_width = "match_parent"
+                                 android:layout_height = "170dp"
+
+                                 android:src = "@drawable/gucci" />
+
+                             <RelativeLayout
+                                 android:layout_width = "match_parent"
+                                 android:layout_height = "match_parent">
 
-                                <ImageView
-                                    android:layout_width = "20dp"
-                                    android:layout_height = "20dp"
-                                    android:layout_margin = "10dp"
-                                    android:src = "@mipmap/favourite" />
+                                 <ImageView
+                                     android:layout_width = "20dp"
+                                     android:layout_height = "20dp"
+                                     android:layout_margin = "10dp"
+                                     android:src = "@mipmap/favourite" />
 
-                            </RelativeLayout>
+                             </RelativeLayout>
 
-                        </FrameLayout>
+                         </FrameLayout>
 
-                    </android.support.v7.widget.CardView>
+                     </android.support.v7.widget.CardView>
 
 
-                </LinearLayout>
+                 </LinearLayout>
 
 
-                <LinearLayout
-                    android:layout_width = "match_parent"
-                    android:layout_height = "wrap_content"
-                    android:layout_weight = "1"
-                    android:orientation = "vertical">
+                 <LinearLayout
+                     android:layout_width = "match_parent"
+                     android:layout_height = "wrap_content"
+                     android:layout_weight = "1"
+                     android:orientation = "vertical">
 
-                    <android.support.v7.widget.CardView
-                        android:layout_width = "match_parent"
-                        android:layout_height = "wrap_content"
-                        android:layout_margin = "5dp"
-                        android:layout_weight = "1"
-                        app:cardCornerRadius = "10dp"
-                        app:elevation = "5dp">
+                     <android.support.v7.widget.CardView
+                         android:layout_width = "match_parent"
+                         android:layout_height = "wrap_content"
+                         android:layout_margin = "5dp"
+                         android:layout_weight = "1"
+                         app:cardCornerRadius = "10dp"
+                         app:elevation = "5dp">
 
-                        <FrameLayout
-                            android:layout_width = "match_parent"
-                            android:layout_height = "match_parent">
+                         <FrameLayout
+                             android:layout_width = "match_parent"
+                             android:layout_height = "match_parent">
 
-                            <ImageView
-                                android:layout_width = "match_parent"
-                                android:layout_height = "170dp"
-                                android:scaleType = "centerCrop"
-                                android:src = "@drawable/prada" />
-
-                            <RelativeLayout
-                                android:layout_width = "match_parent"
-                                android:layout_height = "match_parent">
-
-                                <ImageView
-                                    android:layout_width = "20dp"
-                                    android:layout_height = "20dp"
-                                    android:layout_margin = "10dp"
-                                    android:src = "@mipmap/favourite" />
-                            </RelativeLayout>
+                             <ImageView
+                                 android:layout_width = "match_parent"
+                                 android:layout_height = "170dp"
+                                 android:scaleType = "centerCrop"
+                                 android:src = "@drawable/prada" />
+
+                             <RelativeLayout
+                                 android:layout_width = "match_parent"
+                                 android:layout_height = "match_parent">
+
+                                 <ImageView
+                                     android:layout_width = "20dp"
+                                     android:layout_height = "20dp"
+                                     android:layout_margin = "10dp"
+                                     android:src = "@mipmap/favourite" />
+                             </RelativeLayout>
 
-                        </FrameLayout>
+                         </FrameLayout>
 
-                    </android.support.v7.widget.CardView>
+                     </android.support.v7.widget.CardView>
 
-                </LinearLayout>
-            </LinearLayout>
+                 </LinearLayout>
+             </LinearLayout>
 
-            <LinearLayout
+             <LinearLayout
 
-                android:layout_width = "match_parent"
-                android:layout_height = "wrap_content">
+                 android:layout_width = "match_parent"
+                 android:layout_height = "wrap_content">
 
-                <LinearLayout
-                    android:layout_width = "match_parent"
-                    android:layout_height = "wrap_content"
-                    android:layout_weight = "1"
-                    android:orientation = "vertical">
+                 <LinearLayout
+                     android:layout_width = "match_parent"
+                     android:layout_height = "wrap_content"
+                     android:layout_weight = "1"
+                     android:orientation = "vertical">
 
-                    <android.support.v7.widget.CardView
-                        android:layout_width = "match_parent"
-                        android:layout_height = "wrap_content"
-                        android:layout_margin = "5dp"
-                        app:cardCornerRadius = "10dp"
-                        app:elevation = "5dp">
+                     <android.support.v7.widget.CardView
+                         android:layout_width = "match_parent"
+                         android:layout_height = "wrap_content"
+                         android:layout_margin = "5dp"
+                         app:cardCornerRadius = "10dp"
+                         app:elevation = "5dp">
 
-                        <FrameLayout
-                            android:layout_width = "match_parent"
-                            android:layout_height = "match_parent">
+                         <FrameLayout
+                             android:layout_width = "match_parent"
+                             android:layout_height = "match_parent">
 
-                            <ImageView
-                                android:layout_width = "match_parent"
-                                android:layout_height = "170dp"
-                                android:src = "@drawable/zara" />
+                             <ImageView
+                                 android:layout_width = "match_parent"
+                                 android:layout_height = "170dp"
+                                 android:src = "@drawable/zara" />
 
-                            <RelativeLayout
-                                android:layout_width = "match_parent"
-                                android:layout_height = "match_parent">
+                             <RelativeLayout
+                                 android:layout_width = "match_parent"
+                                 android:layout_height = "match_parent">
 
-                                <ImageView
-                                    android:layout_width = "20dp"
-                                    android:layout_height = "20dp"
-                                    android:layout_margin = "10dp"
-                                    android:src = "@mipmap/favourite" />
+                                 <ImageView
+                                     android:layout_width = "20dp"
+                                     android:layout_height = "20dp"
+                                     android:layout_margin = "10dp"
+                                     android:src = "@mipmap/favourite" />
 
-                            </RelativeLayout>
+                             </RelativeLayout>
 
-                        </FrameLayout>
+                         </FrameLayout>
 
-                    </android.support.v7.widget.CardView>
+                     </android.support.v7.widget.CardView>
 
-                </LinearLayout>
+                 </LinearLayout>
 
 
-                <LinearLayout
-                    android:layout_width = "match_parent"
-                    android:layout_height = "wrap_content"
-                    android:layout_weight = "1"
-                    android:orientation = "vertical">
+                 <LinearLayout
+                     android:layout_width = "match_parent"
+                     android:layout_height = "wrap_content"
+                     android:layout_weight = "1"
+                     android:orientation = "vertical">
 
-                    <android.support.v7.widget.CardView
-                        android:layout_width = "match_parent"
-                        android:layout_height = "wrap_content"
-                        android:layout_margin = "5dp"
-                        android:layout_weight = "1"
-                        app:cardCornerRadius = "10dp"
-                        app:elevation = "5dp">
+                     <android.support.v7.widget.CardView
+                         android:layout_width = "match_parent"
+                         android:layout_height = "wrap_content"
+                         android:layout_margin = "5dp"
+                         android:layout_weight = "1"
+                         app:cardCornerRadius = "10dp"
+                         app:elevation = "5dp">
 
-                        <FrameLayout
-                            android:layout_width = "match_parent"
-                            android:layout_height = "match_parent">
+                         <FrameLayout
+                             android:layout_width = "match_parent"
+                             android:layout_height = "match_parent">
 
-                            <ImageView
-                                android:layout_width = "match_parent"
-                                android:layout_height = "170dp"
-                                android:src = "@drawable/gucci" />
+                             <ImageView
+                                 android:layout_width = "match_parent"
+                                 android:layout_height = "170dp"
+                                 android:src = "@drawable/gucci" />
 
-                            <RelativeLayout
-                                android:layout_width = "match_parent"
-                                android:layout_height = "match_parent">
+                             <RelativeLayout
+                                 android:layout_width = "match_parent"
+                                 android:layout_height = "match_parent">
 
-                                <ImageView
-                                    android:layout_width = "20dp"
-                                    android:layout_height = "20dp"
-                                    android:layout_margin = "10dp"
-                                    android:src = "@mipmap/favourite" />
-                            </RelativeLayout>
+                                 <ImageView
+                                     android:layout_width = "20dp"
+                                     android:layout_height = "20dp"
+                                     android:layout_margin = "10dp"
+                                     android:src = "@mipmap/favourite" />
+                             </RelativeLayout>
 
-                        </FrameLayout>
+                         </FrameLayout>
 
-                    </android.support.v7.widget.CardView>
-                </LinearLayout>
-            </LinearLayout>
+                     </android.support.v7.widget.CardView>
+                 </LinearLayout>
+             </LinearLayout>
 
-        </LinearLayout>-->
+         </LinearLayout>-->
         <LinearLayout
             android:id="@+id/top_layout"
-            android:layout_width = "wrap_content"
-            android:layout_height = "wrap_content">
-        <android.support.v7.widget.SearchView
-            android:id="@+id/search"
-            android:layout_width = "wrap_content"
-            app:searchIcon="@drawable/topsearchwithshadow1"
-            android:layout_marginTop="5dp"
-            android:layout_height = "wrap_content">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-        </android.support.v7.widget.SearchView>
+            <android.support.v7.widget.SearchView
+                android:id="@+id/search"
+                android:layout_width="wrap_content"
+                app:searchIcon="@drawable/topsearchwithshadow1"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/designer_horizontal_view"
-            android:layout_marginBottom="10dp"
-            android:layout_margin="15dp"
+            </android.support.v7.widget.SearchView>
 
-            android:layout_width = "match_parent"
-            android:layout_height = "30dp"/>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/designer_horizontal_view"
+                android:layout_marginBottom="10dp"
+                android:layout_margin="15dp"
+
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
 
         </LinearLayout>
 
 
-                <ImageView
-                    android:id="@+id/designer_banner"
-                    android:layout_width = "wrap_content"
-                    android:layout_height = "180dp"
-                    android:scaleType="fitXY"
-                    android:layout_gravity="center"
-
-
-                    />
-
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_margin="15dp"
-    android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/designer"
+        <ImageView
+            android:id="@+id/designer_banner"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="Designer"/>
+            android:layout_height="180dp"
+            android:scaleType="fitXY"
+            android:layout_gravity="center"
 
-        <TextView
-            android:id="@+id/view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:textStyle="bold"
-            android:layout_alignParentRight="true"
-             android:text="View All"/>
 
-</RelativeLayout>
+            />
 
-              <!--  <RelativeLayout
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_margin="15dp"
+            android:layout_height="wrap_content">
 
-                    android:layout_width = "match_parent"
-                    android:layout_height = "match_parent"
+            <TextView
+                android:id="@+id/designer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="Designers" />
 
-                   >
+            <TextView
+                android:id="@+id/view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_alignParentRight="true"
+                android:text="View All" />
+
+        </RelativeLayout>
+
+        <!--  <RelativeLayout
+
+              android:layout_width = "match_parent"
+              android:layout_height = "match_parent"
+
+             >
 
 <TextView
-    android:layout_width = "wrap_content"
-    android:layout_height = "wrap_content"
-    android:text="50%"
-    android:textStyle="bold"
-    android:visibility="gone"
-    android:textColor="#ffffff"
-    android:layout_marginBottom="25dp"
-    android:layout_alignParentBottom="true"
+android:layout_width = "wrap_content"
+android:layout_height = "wrap_content"
+android:text="50%"
+android:textStyle="bold"
+android:visibility="gone"
+android:textColor="#ffffff"
+android:layout_marginBottom="25dp"
+android:layout_alignParentBottom="true"
 
-    android:textSize="45dp"/>
-                    <TextView
-    android:layout_width = "wrap_content"
-    android:layout_height = "wrap_content"
-    android:text="OFF ON KAFTANS"
-    android:textStyle="bold"
-                        android:visibility="gone"
-    android:textColor="#ffffff"
-    android:layout_alignParentBottom="true"
+android:textSize="45dp"/>
+              <TextView
+android:layout_width = "wrap_content"
+android:layout_height = "wrap_content"
+android:text="OFF ON KAFTANS"
+android:textStyle="bold"
+                  android:visibility="gone"
+android:textColor="#ffffff"
+android:layout_alignParentBottom="true"
 android:layout_marginBottom="20dp"
-    android:textSize="10dp"/>
-                </RelativeLayout>
+android:textSize="10dp"/>
+          </RelativeLayout>
 -->
-
-
 
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/designers_recyclarview"
-            android:layout_width = "match_parent"
-            android:layout_margin = "15dp"
-            android:layout_height = "match_parent"/>
+            android:layout_width="match_parent"
+            android:layout_margin="15dp"
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 

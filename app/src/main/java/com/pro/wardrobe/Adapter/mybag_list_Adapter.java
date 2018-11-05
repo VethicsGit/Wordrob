@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -40,12 +41,17 @@ public class mybag_list_Adapter extends RecyclerView.Adapter<mybag_list_Adapter.
     Context context;
     RecyclerView recyclerView;
     TextView mybag_totalprice;
+    TextView cartemptytext;
+    NestedScrollView cartrootlayout;
+
 
     int total_price=0;
-    public mybag_list_Adapter(Context context, List<CartList> cartList,RecyclerView recyclerView,TextView mybag_totalprice) {
+    public mybag_list_Adapter(Context context, List<CartList> cartList,RecyclerView recyclerView,TextView mybag_totalprice,NestedScrollView cartrootlayout,TextView cartemptytext) {
         this.context = context; this.cartList=cartList;
         this.recyclerView=recyclerView;
         this.mybag_totalprice=mybag_totalprice;
+        this.cartemptytext=cartemptytext;
+        this.cartrootlayout=cartrootlayout;
     }
 
     @NonNull
@@ -61,7 +67,7 @@ public class mybag_list_Adapter extends RecyclerView.Adapter<mybag_list_Adapter.
         Glide.with(context).load(cart.getImage()).into(viewHolder.cartitem_image);
         viewHolder.cartitem_title.setText(cart.getTitle());
         viewHolder.cartitem_category.setText(cart.getCategoryName());
-        viewHolder.cartitem_price.setText(cart.getPrice());
+        viewHolder.cartitem_price.setText(String.valueOf(Integer.parseInt(cart.getPrice())* Integer.parseInt(cart.getQuantity())));
         viewHolder.cartitem_qty.setText(cart.getQuantity());
         mybag_totalprice.setText(String.valueOf(Integer.parseInt(mybag_totalprice.getText().toString())+cart.getTotalPrice()));
 
@@ -71,6 +77,9 @@ public class mybag_list_Adapter extends RecyclerView.Adapter<mybag_list_Adapter.
             public void onClick(View v) {
                 UpdateQty(cart.getCartId(),Integer.parseInt(viewHolder.cartitem_qty.getText().toString())+1);
                 viewHolder.cartitem_qty.setText(String.valueOf(Integer.valueOf(viewHolder.cartitem_qty.getText().toString())+1));
+                viewHolder.cartitem_price.setText(String.valueOf(Integer.parseInt(cart.getPrice())* Integer.parseInt(cart.getQuantity())));
+                mybag_totalprice.setText("0");
+                myBagApiCall();
             }
         });
         viewHolder.cartitem_minus.setOnClickListener(new View.OnClickListener() {
@@ -79,8 +88,9 @@ public class mybag_list_Adapter extends RecyclerView.Adapter<mybag_list_Adapter.
                 if(Integer.parseInt(viewHolder.cartitem_qty.getText().toString())>1){
                 UpdateQty(cart.getCartId(),Integer.parseInt(viewHolder.cartitem_qty.getText().toString())-1);
                 viewHolder.cartitem_qty.setText(String.valueOf(Integer.valueOf(viewHolder.cartitem_qty.getText().toString())-1));
-
-
+                    mybag_totalprice.setText("0");
+                    viewHolder.cartitem_price.setText(String.valueOf(Integer.parseInt(cart.getPrice())* Integer.parseInt(cart.getQuantity())));
+                    myBagApiCall();
                 }
 
 
@@ -97,7 +107,7 @@ RemoveItem(cart.getCartId(),i);
         viewHolder.cartitem_fav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addToFav(cart.getProductId());
+                addToFav(cart.getProductId(),viewHolder);
             }
         });
 
@@ -118,6 +128,7 @@ RemoveItem(cart.getCartId(),i);
         TextView cartitem_qty;
         LinearLayout cartitem_delete;
         LinearLayout cartitem_fav;
+        ImageView cart_fav_img;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -130,6 +141,7 @@ RemoveItem(cart.getCartId(),i);
             cartitem_qty=itemView.findViewById(R.id.cartitem_qty);
             cartitem_delete=itemView.findViewById(R.id.cartitem_delete);
             cartitem_fav=itemView.findViewById(R.id.cartitem_fav);
+            cart_fav_img=itemView.findViewById(R.id.cart_fav_img);
         }
     }
 
@@ -227,11 +239,21 @@ RemoveItem(cart.getCartId(),i);
                     if (response1.getStatus().equals("true")) {
 
                         List<CartList> cartList = response1.getCartList();
-                        mybag_list_Adapter mybag_list_adapter = new mybag_list_Adapter(context, cartList,recyclerView,mybag_totalprice);
-                        recyclerView.setAdapter(mybag_list_adapter);
-                        notifyDataSetChanged();
+                        if (cartList.size()>0) {
+                            cartemptytext.setVisibility(View.GONE);
+                            cartrootlayout.setVisibility(View.VISIBLE);
+                            mybag_list_Adapter mybag_list_adapter = new mybag_list_Adapter(context, cartList, recyclerView, mybag_totalprice, cartrootlayout, cartemptytext);
+                            recyclerView.setAdapter(mybag_list_adapter);
+                            notifyDataSetChanged();
+                        } else {
+                        cartemptytext.setVisibility(View.VISIBLE);
+                        cartrootlayout.setVisibility(View.GONE);
+                    }
                     } else {
                         Toast.makeText(context, "Oops, No result found..!", Toast.LENGTH_SHORT).show();
+                        cartemptytext.setVisibility(View.VISIBLE);
+                        cartrootlayout.setVisibility(View.GONE);
+
                     }
                 } catch (NumberFormatException ignored) {
                 }
@@ -239,13 +261,13 @@ RemoveItem(cart.getCartId(),i);
 
             @Override
             public void onFailure(@NonNull Call<ResponseCartList> call, @NonNull Throwable t) throws NumberFormatException {
-                Toast.makeText(context, "error ", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "error ", Toast.LENGTH_SHORT).show();
                 Log.e("BagError", t.getMessage());
             }
         });
     }
 
-    public void addToFav(String product_id){
+    public void addToFav(String product_id, final ViewHolder viewHolder){
         final SharedPreferences preferences = context.getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
         APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
         Call<AddToFavorite> call = apiInterface.add_fav(preferences.getString("user_id", ""), product_id, preferences.getString("token", ""));
@@ -263,9 +285,9 @@ RemoveItem(cart.getCartId(),i);
                 com.pro.wardrobe.ApiResponse.AddToFavorite.Response response1 = responses.get(0);
                 Log.e("add", response1.getStatus());
 //
-//                                if (response1.getStatus().equals("true")){
-//                                    product_list.apiCll();
-//                                }
+                                if (response1.getStatus().equals("true")){
+                                 viewHolder.cart_fav_img.setImageDrawable(context.getResources().getDrawable(R.drawable.heart_white120_filled));
+                                }
 
             }
 //                        }

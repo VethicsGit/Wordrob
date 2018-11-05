@@ -122,6 +122,8 @@ int country_selected_position=-1;
         return mediaFile;
     }
 
+    ImageView back;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -130,6 +132,7 @@ int country_selected_position=-1;
         ((Dashboard) getActivity()).toggle(2);
 //        profile_back = view.findViewById(R.id.profile_back);
         profile_image = view.findViewById(R.id.profile_image);
+        back= view.findViewById(R.id.bottomnav_toolbar_back);
         profile_person_name = view.findViewById(R.id.profile_person_name);
         profile_firstname = view.findViewById(R.id.profile_firstname);
         profile_lastname = view.findViewById(R.id.profile_lastname);
@@ -148,6 +151,13 @@ selectImage();
             }
         });
 
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().onBackPressed();
+            }
+        });
 
         profile_country.setOnClickListener(new View.OnClickListener() {
             @Override

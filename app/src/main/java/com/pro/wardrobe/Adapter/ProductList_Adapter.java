@@ -42,8 +42,9 @@ import retrofit2.Response;
 public class ProductList_Adapter extends RecyclerView.Adapter<ProductList_Adapter.ViewHolder> {
 
     Context context;
-    List<ProductList> productLists;
+    public List<ProductList> productLists;
     int formation;
+    int lastid=-1;
 
 
    /* public ProductList_Adapter(Context context,int formation) {
@@ -51,19 +52,25 @@ public class ProductList_Adapter extends RecyclerView.Adapter<ProductList_Adapte
         this.formation=formation;
     }*/
 
-   Fragment_product_list product_list;
-    public ProductList_Adapter(List<ProductList> productLists, Context applicationContext,Fragment_product_list product_list) {
-this.product_list=product_list;
+   public void add(ProductList productList){
+       productLists.add(productList);
+       notifyDataSetChanged();
+   }
 
+   Fragment_product_list product_list;
+    public ProductList_Adapter(List<ProductList> productLists, Context applicationContext,Fragment_product_list product_list,int lastid,int formation) {
+this.product_list=product_list;
+this.formation=formation;
         this.context = applicationContext;
         this.productLists = productLists;
+        this.lastid=lastid;
     }
 
     @NonNull
     @Override
     public ProductList_Adapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
-        return new ProductList_Adapter.ViewHolder(LayoutInflater.from(context).inflate(R.layout.product_list_layout, null));
+        return new ProductList_Adapter.ViewHolder(LayoutInflater.from(context).inflate(R.layout.product_list_layout, viewGroup,false));
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -71,8 +78,11 @@ this.product_list=product_list;
     @Override
     public void onBindViewHolder(@NonNull final ProductList_Adapter.ViewHolder viewHolder, int i) {
 
-
         final ProductList productList = productLists.get(i);
+        if (lastid != Integer.parseInt(productList.getProductId())) {
+
+
+
         Glide.with(context).load(productList.getImage()).into(viewHolder.product_list_img);
         viewHolder.product_list_title.setText(productList.getTitle());
         viewHolder.product_list_category.setText(productList.getCategoryName());
@@ -82,7 +92,9 @@ this.product_list=product_list;
 
         if (formation == 0) {
             viewHolder.prolist_relative.setVisibility(View.GONE);
+            viewHolder.prolist_linear.setVisibility(View.VISIBLE);
         } else {
+            viewHolder.prolist_relative.setVisibility(View.VISIBLE);
             viewHolder.prolist_linear.setVisibility(View.GONE);
         }
 
@@ -91,14 +103,11 @@ this.product_list=product_list;
             public void onClick(View view) {
                 Intent i = new Intent(context, Product_details.class);
                 i.putExtra("product_id", viewHolder.product_id.getText().toString());
+                i.putExtra("product_name", viewHolder.product_list_title.getText().toString());
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(i);
             }
         });
-
-
-
-
 
 
         viewHolder.prolist_isfav.setText(productList.getIsFav());
@@ -120,36 +129,36 @@ this.product_list=product_list;
 
 //                    notifyDataSetChanged();
 
-                    Toast.makeText(context, "add", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context, "add", Toast.LENGTH_SHORT).show();
                     final SharedPreferences preferences = context.getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
-                        APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
-                        Call<AddToFavorite> call = apiInterface.add_fav(preferences.getString("user_id", ""), productList.getProductId(), preferences.getString("token", ""));
-                        call.enqueue(new Callback<AddToFavorite>() {
-                            @Override
-                            public void onResponse(Call<AddToFavorite> call, Response<AddToFavorite> response) {
+                    APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
+                    Call<AddToFavorite> call = apiInterface.add_fav(preferences.getString("user_id", ""), productList.getProductId(), preferences.getString("token", ""));
+                    call.enqueue(new Callback<AddToFavorite>() {
+                        @Override
+                        public void onResponse(Call<AddToFavorite> call, Response<AddToFavorite> response) {
 
 
-                                Gson gson = new GsonBuilder().create();
-                                String myCustomArray = gson.toJson(response).toString();
-                                AddToFavorite addToFavorite = response.body();
-                                List<com.pro.wardrobe.ApiResponse.AddToFavorite.Response> responses = addToFavorite.getResponse();
+                            Gson gson = new GsonBuilder().create();
+                            String myCustomArray = gson.toJson(response).toString();
+                            AddToFavorite addToFavorite = response.body();
+                            List<com.pro.wardrobe.ApiResponse.AddToFavorite.Response> responses = addToFavorite.getResponse();
 
 //                            for (int i=0;i<responses.size();i++){
-                                com.pro.wardrobe.ApiResponse.AddToFavorite.Response response1 = responses.get(0);
-                                Log.e("add", response1.getStatus());
+                            com.pro.wardrobe.ApiResponse.AddToFavorite.Response response1 = responses.get(0);
+                            Log.e("add", response1.getStatus());
 
                              /*   if (response1.getStatus().equals("true")){
                                     product_list.apiCll();
                                 }*/
 
-                            }
+                        }
 //                        }
 
-                            @Override
-                            public void onFailure(Call<AddToFavorite> call, Throwable t) {
+                        @Override
+                        public void onFailure(Call<AddToFavorite> call, Throwable t) {
 
-                            }
-                        });
+                        }
+                    });
                 } else {
                     viewHolder.prolist_isfav.setText("0");
                     final SharedPreferences preferences = context.getSharedPreferences("LoginStatus", Context.MODE_PRIVATE);
@@ -158,35 +167,36 @@ this.product_list=product_list;
 //                            @Override
 //                            public void onClick(View view) {
                     viewHolder.product_addtofav.setImageResource(R.drawable.favourite);
-                    Toast.makeText(context, "remove", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context, "remove", Toast.LENGTH_SHORT).show();
 
 
-                                APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
-                                Call<RemoveToFavorite> call = apiInterface.remove_fav(preferences.getString("user_id", ""), productList.getProductId(), preferences.getString("token", ""));
-                                call.enqueue(new Callback<RemoveToFavorite>() {
-                                    @Override
-                                    public void onResponse(Call<RemoveToFavorite> call, Response<RemoveToFavorite> response) {
-                                        RemoveToFavorite removeToFavorite = response.body();
-                                        List<com.pro.wardrobe.ApiResponse.RemoveToFavorite.Response> responses = removeToFavorite.getResponse();
+                    APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
+                    Call<RemoveToFavorite> call = apiInterface.remove_fav(preferences.getString("user_id", ""), productList.getProductId(), preferences.getString("token", ""));
+                    call.enqueue(new Callback<RemoveToFavorite>() {
+                        @Override
+                        public void onResponse(Call<RemoveToFavorite> call, Response<RemoveToFavorite> response) {
+                            RemoveToFavorite removeToFavorite = response.body();
+                            List<com.pro.wardrobe.ApiResponse.RemoveToFavorite.Response> responses = removeToFavorite.getResponse();
 
-                                        com.pro.wardrobe.ApiResponse.RemoveToFavorite.Response response1 = responses.get(0);
+                            com.pro.wardrobe.ApiResponse.RemoveToFavorite.Response response1 = responses.get(0);
                                        /* if (response1.getStatus().equals("true")){
                                             product_list.apiCll();
                                         }*/
 
-                                    }
+                        }
 
-                                    @Override
-                                    public void onFailure(Call<RemoveToFavorite> call, Throwable t) {
+                        @Override
+                        public void onFailure(Call<RemoveToFavorite> call, Throwable t) {
 
-                                    }
-                                });
+                        }
+                    });
                 }
 //                        });
 //                    }
             }
         });
-
+    }
+//notifyDataSetChanged();
     }
 
     @Override

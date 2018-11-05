@@ -171,7 +171,7 @@ public class Confirm extends AppCompatActivity {
 
                 if (getIntent().getStringExtra("paymentoption").equals("Cash on Delivery")) {
 
-                    Toast.makeText(c, "if condition", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(c, "if condition", Toast.LENGTH_SHORT).show();
                     Call<ResponseCreateOrder> call = apiInterface.create_order(
                             preferences.getString("user_id", ""),
                             shippingary.toString(),
@@ -208,7 +208,9 @@ public class Confirm extends AppCompatActivity {
                             com.pro.wardrobe.ApiResponse.CreateOrderResponse.Response res = resList.get(0);
                             if (res.getStatus().equals("true")) {
 
-                                Intent intent = new Intent(getApplicationContext(), OrderPlaced.class);
+                                OrderPlaced orderPlaced=new OrderPlaced(res.getOrderId());
+//                                Toast.makeText(getApplicationContext(), "order id "+res.getOrderId(), Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getApplicationContext(), orderPlaced.getClass());
                                 intent.putExtra("orderId", res.getOrderId());
                                 startActivity(intent);
                             } else {
@@ -224,7 +226,7 @@ public class Confirm extends AppCompatActivity {
 
                 } else  if (getIntent().getStringExtra("paymentoption").equals("credit Card / Debit Card")) {
 
-                    Toast.makeText(c, "else condition", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(c, "else condition", Toast.LENGTH_SHORT).show();
 
                     final ProgressDialog mProgressDialog = new ProgressDialog(c, R.style.AppCompatAlertDialogStyle);
                     mProgressDialog.setIndeterminate(false);
@@ -292,7 +294,7 @@ public class Confirm extends AppCompatActivity {
                     ResponseCartList res = response.body();
                     List<com.pro.wardrobe.ApiResponse.CartListResponse.Response> resList = res.getResponse();
                     com.pro.wardrobe.ApiResponse.CartListResponse.Response response1 = resList.get(0);
-                    Toast.makeText(Confirm.this, "cart list size ", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(Confirm.this, "cart list size ", Toast.LENGTH_SHORT).show();
                     if (response1.getStatus().equals("true")) {
                         List<CartList> cartList = response1.getCartList();
 
@@ -310,7 +312,7 @@ public class Confirm extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<ResponseCartList> call, @NonNull Throwable t) throws NumberFormatException {
-                Toast.makeText(Confirm.this, "error ", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(Confirm.this, "error ", Toast.LENGTH_SHORT).show();
                 Log.e("BagError", t.getMessage());
             }
         });
@@ -329,7 +331,7 @@ public class Confirm extends AppCompatActivity {
                 PaymentMethodNonce nonce = result.getPaymentMethodNonce();
                 String nonStr = nonce.getNonce();
 
-                Toast.makeText(c, "nonce " + nonStr, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(c, "nonce " + nonStr, Toast.LENGTH_SHORT).show();
 
                 Call<ResponseCreateOrder> call = apiInterface.braintree_create_order(
                         preferences.getString("user_id", ""),
